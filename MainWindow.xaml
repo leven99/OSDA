@@ -5,8 +5,137 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSerialPort"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="OSrtialPort - Open source serial port" WindowStartupLocation="CenterScreen" Icon="icon/128x128.ico">
+    <Viewbox x:Name="RootViewbox" Margin="0" Stretch="Fill">
+        <DockPanel x:Name="RootDockPanel" LastChildFill="False" Margin="0">
+            <!--菜单栏-->
+            <Menu x:Name="Menu" DockPanel.Dock="Top">
+                <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Margin="0" Padding="6,3"/>
+                <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Padding="6,3"/>
+                <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Padding="6,3"/>
+                <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Padding="6,3"/>
+            </Menu>
+            <!--状态栏-->
+            <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
+                <StatusBarItem x:Name="InfoStatusBraItem" Content="串行端口调试助手" HorizontalAlignment="Left"/>
+                <StatusBarItem x:Name="TimeStatusBraItem" Content="System Time" HorizontalAlignment="Right"/>
+            </StatusBar>
+            <!--串口配置、数据发送与接收-->
+            <Grid x:Name="Grid" Margin="0" Width="628.26">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="DataGrid" Grid.Column="0">
+                    <!--两行一列（分别是接受区、发送区），高度比例为17:8-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="ReceDataGroupBox" Header="接收区：已接收0字节，接收自动保存[以停止]" Grid.Row="0" Margin="10,0,5,0" BorderBrush="#FF007ACD">
+                        <TextBox x:Name="ReceTextBox" TextWrapping="Wrap" BorderBrush="#FF0078D7" Margin="0,3,0,0"/>
+                    </GroupBox>
+                    <GroupBox x:Name="SendDataGroupBox" Grid.Row="1" Margin="10,0,5,5" BorderBrush="#FF007ACD" Header="发送区：已发送0字节">
+                        <Grid x:Name="SendDataGrid" Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="280"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="SendTextBox" TextWrapping="Wrap" BorderBrush="#FF0078D7" Grid.RowSpan="2" Margin="0,3,5,0"/>
+                            <Button x:Name="SendsButton" Margin="0,3" Width="96" Content="多项发送" Background="White" HorizontalAlignment="Right" Grid.Column="1"/>
+                            <Button x:Name="SenfButton" Margin="0,3,0,0" Width="96" Content="发送" Background="White" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid x:Name="SerialPortGrid" Grid.Column="1">
+                    <!--两行一列（分别是串口配置、辅助）-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="115*"/>
+                        <RowDefinition Height="64*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="ConfigGroupPort" Grid.Row="0" BorderBrush="#FF007ACD" Margin="5,0,10,0" Header="串口配置">
+                        <Grid x:Name="SPConfGrid" Margin="0" Width="187.485">
+                            <!--七行两列（分别是端口、数据位、波特率、数据位、停止位、校验位和串口状态）-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="58*"/>
+                                <ColumnDefinition Width="129*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="ComTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="端口：" Grid.Row="0" Margin="3,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center" BorderBrush="White"/>
+                            <ComboBox x:Name="ComCombobox"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,3.25" Width="120" VerticalContentAlignment="Center" Height="25"/>
+                            <TextBox x:Name="BaudTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="波特率：" Grid.Row="1" Margin="3,0,0,0" Width="54"  Height="17.24" VerticalAlignment="Center" BorderBrush="White"/>
+                            <ComboBox x:Name="BaudComboBox" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Width="120" Margin="0,3.25" Height="25" VerticalContentAlignment="Center">
+                                <ComboBoxItem Content="1200"/>
+                                <ComboBoxItem Content="2400"/>
+                                <ComboBoxItem Content="4800"/>
+                                <ComboBoxItem IsSelected="True" Content="9600"/>
+                                <ComboBoxItem Content="14400"/>
+                                <ComboBoxItem Content="19200"/>
+                                <ComboBoxItem Content="38400"/>
+                                <ComboBoxItem Content="57600"/>
+                                <ComboBoxItem Content="115200"/>
+                            </ComboBox>
+                            <TextBox x:Name="DataTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="数据位：" Grid.Row="2" Margin="3,0,0,0" Width="54" Background="White" BorderBrush="White" Height="17.24" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="DataComboBox" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="0,3.25" Width="120" Height="25" VerticalContentAlignment="Center">
+                                <ComboBoxItem IsSelected="True" Content="8"/>
+                                <ComboBoxItem Content="7"/>
+                                <ComboBoxItem Content="6"/>
+                                <ComboBoxItem Content="5"/>
+                            </ComboBox>
+                            <TextBox x:Name="StopTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="停止位：" Grid.Row="3" Margin="3,0,0,0" Width="54" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="17.24"/>
+                            <ComboBox x:Name="StopConboBox" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="0,3.249,0,3.25" Width="120" VerticalContentAlignment="Center" Height="25">
+                                <ComboBoxItem IsSelected="True" Content="1"/>
+                                <ComboBoxItem Content="1.5"/>
+                                <ComboBoxItem Content="2"/>
+                            </ComboBox>
+                            <TextBox x:Name="ParityTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="校验位：" Grid.Row="4" Margin="3,0,0,0" Width="54" Background="White" BorderBrush="White" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="ParityComboBox" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Margin="0,3.25" Width="120" Height="25" VerticalContentAlignment="Center">
+                                <ComboBoxItem Tag="None" IsSelected="True" Content="None"/>
+                                <ComboBoxItem Tag="Even" Content="Even"/>
+                                <ComboBoxItem Tag="Odd" Content="Odd"/>
+                            </ComboBox>
+                            <Image x:Name="OnOffImage" HorizontalAlignment="Center" Grid.Row="5" Source="images/off.png" Margin="0" Width="26" Height="26"/>
+                            <Button x:Name="OnOffButton" HorizontalAlignment="Center" Content="打开串口" Grid.Row="5" Grid.Column="1" Padding="6,1" Width="120" Height="25" Background="White" Margin="0,3.25,0,0"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="1" Margin="5,0,10,5" BorderBrush="#FF007ACD">
+                        <Grid x:Name="AssistGrid">
+                            <!--五行两列（分别是Hex、自动发送、保存接收、清空发送接收区、清空计数）-->
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Margin="0,3,5,5"/>
+                            <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Column="1" Margin="5,3,0,5"/>
+                            <CheckBox x:Name="AutoCheckBox" Content="自动发送(ms)" Grid.Row="1" Margin="0,0,5,5" VerticalAlignment="Center"/>
+                            <TextBox x:Name="AutoNumTextBox" TextWrapping="Wrap" Text="1000" Grid.Row="1" Grid.Column="1" Margin="5,0,0,5" BorderBrush="Black" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLines="4"/>
+                            <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Margin="0,0,5,5" VerticalAlignment="Center"/>
+                            <Button x:Name="SaveReceButton" Content="路径选择" BorderBrush="Black" Background="White" Height="25" Margin="5,0,0,5" Grid.Row="2" Grid.Column="1"/>
+                            <Button x:Name="ClearReceButton" Content="清接收区" Background="White" Height="25" Margin="0,0,5,5" Grid.Row="3"/>
+                            <Button x:Name="ClearSendButton" Content="清发送区" Background="White" Grid.Column="1" Height="25" Margin="5,0,0,5" Grid.Row="3"/>
+                            <Button x:Name="ClearCountButton" Content="清空计数" Background="White" Grid.ColumnSpan="2" Margin="0" Height="25" Grid.Row="4"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Viewbox>
 </Window>
