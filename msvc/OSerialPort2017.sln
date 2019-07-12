@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSerialPort", "VS2017\OSerialPort.csproj", "{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|x64.ActiveCfg = Debug|x64
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|x64.Build.0 = Debug|x64
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|x86.ActiveCfg = Debug|x86
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Debug|x86.Build.0 = Debug|x86
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|x64.ActiveCfg = Release|x64
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|x64.Build.0 = Release|x64
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|x86.ActiveCfg = Release|x86
+		{71C6AC13-4E18-44E7-AFBC-97BED2BDAB7E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD1BD510-5EED-4292-9402-2FD84F6B951D}
+	EndGlobalSection
+EndGlobal
