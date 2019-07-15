@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSerialPort.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 
@@ -12,16 +13,13 @@ namespace OSerialPort.ViewModels
         /// <summary>
         /// 串口配置
         /// </summary>
-        public ObservableCollection<SerialPortVM> SerialPorts { get; set; }
+        public ObservableCollection<SerialPortVM> VMSerialPortVM { get; set; }
 
         /// <summary>
         /// 接收区数据
         /// </summary>
         public string ReceData { get; set; }
 
-        /// <summary>
-        /// 清空接收区数据
-        /// </summary>
         public void ClarReceData()
         {
             ReceData = string.Empty;
@@ -33,27 +31,25 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public string SendData { get; set; }
 
-        /// <summary>
-        /// 清空发送区数据
-        /// </summary>
         public void ClearSendData()
         {
             SendData = string.Empty;
         }
 
         /// <summary>
-        /// 接收自动保存（已停止、保存中）
+        /// 接收区
         /// </summary>
-        public string AutoSave { get; set; }
+        public string ReceHeadrt { get; set; }
 
-        /// <summary>
-        /// 接收区数据字节计数
-        /// </summary>
         public UInt32 ReceDataCount { get; set; }
 
+        public string ReceAutoSave { get; set; }
+
         /// <summary>
-        /// 发送区数据字节计数
+        /// 发送区
         /// </summary>
+        public string SendHeader { get; set; }
+
         public UInt32 SendDataCount { get; set; }
 
         /// <summary>
@@ -82,10 +78,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        /// <summary>
-        /// 打开串口
-        /// </summary>
-        /// <returns></returns>
         public bool OpenSP()
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
@@ -116,10 +108,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        /// <summary>
-        /// 关闭串口
-        /// </summary>
-        /// <returns></returns>
         public bool CloseSP()
         {
             try
@@ -148,13 +136,10 @@ namespace OSerialPort.ViewModels
         }
 
         /// <summary>
-        /// 16进制接收
+        /// 16进制接收/发送
         /// </summary>
         public bool HexRece { get; set; }
 
-        /// <summary>
-        /// 16进制发送
-        /// </summary>
         public bool HexSend { get; set; }
 
         /// <summary>
@@ -162,9 +147,6 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public bool AutoSend { get; set; }
 
-        /// <summary>
-        /// 自动发送间隔时间（单位：ms）
-        /// </summary>
         public UInt32 _AutoSendNum;
         public UInt32 AutoSendNum
         {
@@ -197,9 +179,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        /// <summary>
-        /// 多项发送
-        /// </summary>
         public void Sends()
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
@@ -220,9 +199,6 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public bool SaveRece { get; set; }
 
-        /// <summary>
-        /// 保存接收的数据路径选择
-        /// </summary>
         public void SaveRecePath()
         {
             if (SaveRece)
@@ -275,9 +251,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        /// <summary>
-        /// 系统时间
-        /// </summary>
         public void SystemTimeData()
         {
             DateTime systemTime = DateTime.Now;
@@ -291,15 +264,26 @@ namespace OSerialPort.ViewModels
                 systemTime.Second.ToString("00"));
         }
 
+        /// <summary>
+        /// UI初始化
+        /// </summary>
         public MainWindowVM()
         {
-            SerialPorts = new ObservableCollection<SerialPortVM>
+            /* 串口资源 - 串口、波特率、数据位、停止位和校验位 */
+            VMSerialPortVM = new ObservableCollection<SerialPortVM>
             {
 
             };
-            RaisePropertyChanged("SerialPorts");
+            RaisePropertyChanged("SPSerialPortVM");
 
             OpenCloseSP = "打开串口";
+
+            ReceDataCount = 0;
+            ReceAutoSave = "已停止";
+            SendDataCount = 0;
+
+            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            SendHeader = "发送区：已发送" + SendDataCount + "字节";
 
             AutoSendNum = 1000;
 
