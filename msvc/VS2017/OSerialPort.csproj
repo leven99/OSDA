@@ -99,11 +99,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\ViewModels\MainWindow.cs">
-      <Link>ViewModels\MainWindow.cs</Link>
+    <Compile Include="..\..\ViewModels\MainWindowVM.cs">
+      <Link>ViewModels\MainWindowVM.cs</Link>
     </Compile>
-    <Compile Include="..\..\Models\Timer.cs">
-	  <Link>Models\Timer.cs</Link>
+    <Compile Include="..\..\Models\TimerM.cs">
+      <Link>Models\TimerM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\SerialPortM.cs">
+	  <Link>Models\SerialPortM.cs</Link>
+	</Compile>
+    <Compile Include="..\..\ViewModels\MainWindowBase.cs">
+	  <Link>ViewModels\MainWindowBase.cs</Link>
+	</Compile>
+    <Compile Include="..\..\ViewModels\SerialPortVM.cs">
+	  <Link>ViewModels\SerialPortVM.cs</Link>
 	</Compile>
     <Page Include="..\..\Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
