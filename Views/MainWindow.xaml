@@ -93,10 +93,10 @@
                             </ComboBox>
                             <TextBox x:Name="DataTextBox" TextWrapping="Wrap" Text="数据位：" Grid.Row="2" Style="{StaticResource SPTextBox}"/>
                             <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}">
-                                <ComboBoxItem Content="8" IsSelected="True"/>
-                                <ComboBoxItem Content="7"/>
-                                <ComboBoxItem Content="6"/>
                                 <ComboBoxItem Content="5"/>
+                                <ComboBoxItem Content="6"/>
+                                <ComboBoxItem Content="7"/>
+                                <ComboBoxItem Content="8" IsSelected="True"/>
                             </ComboBox>
                             <TextBox x:Name="StopTextBox" TextWrapping="Wrap" Text="停止位：" Grid.Row="3" Style="{StaticResource SPTextBox}"/>
                             <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}">

@@ -29,7 +29,6 @@
                 <Setter Property="BorderBrush" Value="White"/>
             </Style>
             <Style TargetType="ComboBox" x:Key="SPComboBox">
-                <Setter Property="IsEnabled" Value="False"/>
                 <Setter Property="Margin" Value="0,3.25,0,3.25"/>
                 <Setter Property="Width" Value="120"/>
                 <Setter Property="Height" Value="25"/>

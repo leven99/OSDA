@@ -12,7 +12,7 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public void SPFindPort()
         {
-            //SerialPort.GetPortNames();
+            SerialPort.GetPortNames();
         }
     }
 }

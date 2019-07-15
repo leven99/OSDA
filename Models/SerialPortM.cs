@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using OSerialPort.ViewModels;
+using System.IO.Ports;
 
 namespace OSerialPort.Models
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSerialPort.ViewModels;
+using System;
 using System.Windows.Threading;
 
 namespace OSerialPort.Models
@@ -10,7 +11,7 @@ namespace OSerialPort.Models
         /// <summary>
         /// 定时器 - 用于更新状态栏系统时间
         /// </summary>
-        private void InitSystemClockTimer()
+        public void InitSystemClockTimer()
         {
             SDispatcherTimer.Interval = new TimeSpan(0, 0, 1);   /* 秒 */
             SDispatcherTimer.IsEnabled = true;
@@ -20,7 +21,7 @@ namespace OSerialPort.Models
 
         private void DispatcherTimer_STick(object sender, EventArgs e)
         {
-            
+
         }
 
         DispatcherTimer ADispatcherTimer = new DispatcherTimer();
@@ -28,7 +29,7 @@ namespace OSerialPort.Models
         /// <summary>
         /// 定时器 - 用于自动发送
         /// </summary>
-        private void InitAutoClockTimer()
+        public void InitAutoClockTimer()
         {
             ADispatcherTimer.IsEnabled = false;
             ADispatcherTimer.Tick += DispatcherTimer_ATick;
@@ -40,14 +41,14 @@ namespace OSerialPort.Models
             
         }
 
-        private void StartAutoSendDataTimer(int interval)
+        public void StartAutoSendDataTimer(int interval)
         {
             ADispatcherTimer.IsEnabled = true;
             ADispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);   /* 毫秒 */
             ADispatcherTimer.Start();
         }
 
-        private void StopAutoSendDataTimer()
+        public void StopAutoSendDataTimer()
         {
             ADispatcherTimer.IsEnabled = false;
             ADispatcherTimer.Stop();
