@@ -34,11 +34,11 @@
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
                     <!--接收区-->
-                    <GroupBox x:Name="ReceDataGroupBox" Header="接收区：已接收0字节，接收自动保存[已停止]" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
-                        <RichTextBox x:Name="ReceRichTextBox" BorderBrush="#FF0078D7" Margin="0,3,0,0"/>
+                    <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeadrt}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
+                        <RichTextBox x:Name="ReceRichTextBox" Style="{StaticResource RSRichTextBox}"/>
                     </GroupBox>
                     <!--发送区-->
-                    <GroupBox x:Name="SendDataGroupBox" Header="发送区：已发送0字节" Grid.Row="1" Margin="5,0,2,2" BorderBrush="#FF007ACD">
+                    <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendHeader}" Grid.Row="1" Margin="5,0,2,2" BorderBrush="#FF007ACD">
                         <Grid x:Name="SendDataGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -48,11 +48,9 @@
                                 <ColumnDefinition Width="Auto" MinWidth="290"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <RichTextBox x:Name="SendRichTextBox" Grid.RowSpan="2" Margin="0,3,0,0" BorderBrush="#FF0078D7"/>
-                            <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1" Margin="3,3,0,3" 
-                                    Style="{StaticResource SendButton}" Click="Sends"/>
-                            <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1" Margin="3,3,0,0" 
-                                    Style="{StaticResource SendButton}" Click="Send"/>
+                            <RichTextBox x:Name="SendRichTextBox" Grid.RowSpan="2" Style="{StaticResource RSRichTextBox}"/>
+                            <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1" Margin="3,3,0,3" Style="{StaticResource SendButton}" Click="Sends"/>
+                            <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1" Margin="3,3,0,0" Style="{StaticResource SendButton}" Click="Send"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -78,23 +76,17 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBox x:Name="ComTextBox" TextWrapping="Wrap" Text="端口：" Grid.Row="0" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SPPort}" SelectedIndex="0"/>
+                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPPort}" SelectedIndex="0"/>
                             <TextBox x:Name="BaudTextBox" TextWrapping="Wrap" Text="波特率：" Grid.Row="1" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SPBaudRate}" SelectedIndex="3"/>
+                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPBaudRate}" SelectedIndex="3"/>
                             <TextBox x:Name="DataTextBox" TextWrapping="Wrap" Text="数据位：" Grid.Row="2" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SPDataBits}" SelectedIndex="3"/>
+                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPDataBits}" SelectedIndex="3"/>
                             <TextBox x:Name="StopTextBox" TextWrapping="Wrap" Text="停止位：" Grid.Row="3" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SPStopbit}" SelectedIndex="0"/>
+                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPStopbit}" SelectedIndex="0"/>
                             <TextBox x:Name="ParityTextBox" TextWrapping="Wrap" Text="校验位：" Grid.Row="4" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SPParity}" SelectedIndex="0"/>
+                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPParity}" SelectedIndex="0"/>
                             <Ellipse x:Name="OnOffElipse" Fill="Red" Grid.Row="5" Grid.RowSpan="2" Margin="0" Width="28" Height="28"/>
-                            <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Margin="0,3.25,0,0"
-                                    Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>
+                            <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Margin="0,3.25,0,0" Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="1" Margin="2,0,5,2" BorderBrush="#FF007ACD">
@@ -114,17 +106,12 @@
                             <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0" Margin="0,3,5,5"/>
                             <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1" Margin="5,3,0,5"/>
                             <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" VerticalAlignment="Center"/>
-                            <TextBox x:Name="AutoSendNumTextBox" Text="{Binding AutoSendNum}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,5" 
-                                     Style="{DynamicResource AutoSendNumTextBox}"/>
+                            <TextBox x:Name="AutoSendNumTextBox" Text="{Binding AutoSendNum}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,5"  Style="{DynamicResource AutoSendNumTextBox}"/>
                             <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" VerticalAlignment="Center"/>
-                            <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1" Margin="5,0,0,5" 
-                                    Style="{StaticResource AssistButton}" Click="SaveRecePath"/>
-                            <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0" Margin="0,0,5,5"
-                                    Style="{StaticResource AssistButton}" Click="ClarReceData"/>
-                            <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1" Margin="5,0,0,5"
-                                    Style="{StaticResource AssistButton}" Click="ClearSendData"/>
-                            <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,0,0"
-                                    Style="{StaticResource AssistButton}" Click="ClearCount"/>
+                            <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1" Margin="5,0,0,5"  Style="{StaticResource AssistButton}" Click="SaveRecePath"/>
+                            <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0" Margin="0,0,5,5" Style="{StaticResource AssistButton}" Click="ClarReceData"/>
+                            <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1" Margin="5,0,0,5" Style="{StaticResource AssistButton}" Click="ClearSendData"/>
+                            <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,0,0" Style="{StaticResource AssistButton}" Click="ClearCount"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

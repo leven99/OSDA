@@ -14,10 +14,10 @@ namespace OSerialPort.ViewModels
         /// 串口配置
         /// </summary>
         public string[] SPPort { get; set; }
-        public List<int> SPBaudRate { get; set; }
-        public List<int> SPDataBits { get; set; }
-        public List<int> SPStopbit { get; set; }
-        public List<string> SPParity { get; set; }
+        public int[] SPBaudRate { get; set; }
+        public int[] SPDataBits { get; set; }
+        public List<StopBits> SPStopbit { get; set; }
+        public List<Parity> SPParity { get; set; }
 
         /// <summary>
         /// 接收区数据
@@ -65,6 +65,34 @@ namespace OSerialPort.ViewModels
             SendDataCount = 0;
         }
 
+        #region 停止位和校验位计算
+        public static StopBits GetStopBits(string emp)
+        {
+            StopBits bits = StopBits.None;
+            switch (emp)
+            {
+                case "One": bits = StopBits.One; break;
+                case "Two": bits = StopBits.Two; break;
+                case "OnePointFive": bits = StopBits.OnePointFive; break;
+            }
+            return bits;
+        }
+
+        public static Parity GetParity(string emp)
+        {
+            Parity parity = Parity.None;
+            switch (emp)
+            {
+                case "None": parity = Parity.None; break;
+                case "Even": parity = Parity.Even; break;
+                case "Mark": parity = Parity.Mark; break;
+                case "Odd": parity = Parity.Odd; break;
+                case "Space": parity = Parity.Space; break;
+            }
+            return parity;
+        }
+        #endregion
+
         /// <summary>
         /// 打开串口/发送串口
         /// </summary>
@@ -94,10 +122,25 @@ namespace OSerialPort.ViewModels
 
             try
             {
+                SPserialPort = new SerialPort
+                {
+                    PortName = SPPort.ToString(),
+                    BaudRate = int.Parse(SPBaudRate.ToString()),
+                    DataBits = int.Parse(SPDataBits.ToString()),
+                    StopBits = GetStopBits(SPStopbit.ToString()),
+                    Parity   = GetParity(SPParity.ToString())
+                };
+
+                SPserialPort.Open();
+                SPserialPort.DiscardInBuffer();   /* 串口必须打开，才能清除缓冲区数据 */
+                SPserialPort.DiscardOutBuffer();
+
                 if (SPserialPort.IsOpen)
                 {
                     OpenCloseSP = "关闭串口";
-                    DepictInfo = "串行端口打开成功";
+                    DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}", SPserialPort.PortName,
+                    SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
+                    SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
 
                     return true;
                 }
@@ -298,10 +341,10 @@ namespace OSerialPort.ViewModels
         public MainWindowVM()
         {
             SPPort = SerialPort.GetPortNames();
-            SPBaudRate = new List<int> { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
-            SPDataBits = new List<int> { 5, 6, 7, 8 };
-            SPStopbit = new List<int> { 1, 2 };
-            SPParity = new List<string> { "None", "Even", "Odd", "Mark", "Space" };
+            SPBaudRate = new int[] { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
+            SPDataBits = new int[] { 5, 6, 7, 8 };
+            SPStopbit = new List<StopBits> { StopBits.One, StopBits.OnePointFive, StopBits.Two };
+            SPParity = new List<Parity> { Parity.None, Parity.Even, Parity.Odd };
 
             OpenCloseSP = "打开串口";
 

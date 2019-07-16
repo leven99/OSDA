@@ -12,6 +12,11 @@
             <Style TargetType="StatusBarItem" x:Key="SBStatusBarItem">
                 <Setter Property="Foreground" Value="White"/>
             </Style>
+            <!--接收区发送区样式-->
+            <Style TargetType="RichTextBox" x:Key="RSRichTextBox">
+                <Setter Property="Margin" Value="0,3,0,0"/>
+                <Setter Property="BorderBrush" Value="#FF0078D7"/>
+            </Style>
             <!--发送、多项发送样式-->
             <Style TargetType="Button" x:Key="SendButton">
                 <Setter Property="Width" Value="86"/>
