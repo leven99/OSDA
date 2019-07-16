@@ -286,6 +286,24 @@ namespace OSerialPort.ViewModels
             }
         }
 
+        #region 计时器初始化 - 用于系统时间显示
+        public void InitSystemClockTimer()
+        {
+            DispatcherTimer SDispatcherTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 1),   /* 秒 */
+                IsEnabled = true
+            };
+            SDispatcherTimer.Tick += DispatcherTimer_STick;
+            SDispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_STick(object sender, EventArgs e)
+        {
+            SystemTimeData();
+        }
+        #endregion
+
         /// <summary>
         /// 系统时间
         /// </summary>
@@ -304,22 +322,6 @@ namespace OSerialPort.ViewModels
                     RaisePropertyChanged("SystemTime");
                 }
             }
-        }
-
-        public void InitSystemClockTimer()
-        {
-            DispatcherTimer SDispatcherTimer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 1),   /* 秒 */
-                IsEnabled = true
-            };
-            SDispatcherTimer.Tick += DispatcherTimer_STick;
-            SDispatcherTimer.Start();
-        }
-
-        private void DispatcherTimer_STick(object sender, EventArgs e)
-        {
-            SystemTimeData();
         }
 
         public void SystemTimeData()

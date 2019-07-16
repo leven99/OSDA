@@ -154,22 +154,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="..\..\icon\128x128.ico">
-      <Link>icon\128x128.ico</Link>
-    </Resource>
-    <Resource Include="..\..\icon\512x512.png">
-      <Link>icon\512x512.png</Link>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="..\..\images\off.png">
-      <Link>images\off.png</Link>
-    </Resource>
-    <Resource Include="..\..\images\on.png">
-      <Link>images\on.png</Link>
-    </Resource>
+    <Resource Include="..\..\icon\favicon.ico">
+	  <Link>icon\favicon.ico</Link>
+	</Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
