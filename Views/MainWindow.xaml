@@ -78,40 +78,20 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBox x:Name="ComTextBox" TextWrapping="Wrap" Text="端口：" Grid.Row="0" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}"/>
+                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}"
+                                      ItemsSource="{Binding SPPort}" SelectedIndex="0"/>
                             <TextBox x:Name="BaudTextBox" TextWrapping="Wrap" Text="波特率：" Grid.Row="1" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}">
-                                <ComboBoxItem Content="1200"/>
-                                <ComboBoxItem Content="2400"/>
-                                <ComboBoxItem Content="4800"/>
-                                <ComboBoxItem Content="9600" IsSelected="True"/>
-                                <ComboBoxItem Content="14400"/>
-                                <ComboBoxItem Content="19200"/>
-                                <ComboBoxItem Content="38400"/>
-                                <ComboBoxItem Content="57600"/>
-                                <ComboBoxItem Content="115200"/>
-                            </ComboBox>
+                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}"
+                                      ItemsSource="{Binding SPBaudRate}" SelectedIndex="3"/>
                             <TextBox x:Name="DataTextBox" TextWrapping="Wrap" Text="数据位：" Grid.Row="2" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}">
-                                <ComboBoxItem Content="5"/>
-                                <ComboBoxItem Content="6"/>
-                                <ComboBoxItem Content="7"/>
-                                <ComboBoxItem Content="8" IsSelected="True"/>
-                            </ComboBox>
+                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}"
+                                      ItemsSource="{Binding SPDataBits}" SelectedIndex="3"/>
                             <TextBox x:Name="StopTextBox" TextWrapping="Wrap" Text="停止位：" Grid.Row="3" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}">
-                                <ComboBoxItem Content="1" IsSelected="True"/>
-                                <ComboBoxItem Content="1.5"/>
-                                <ComboBoxItem Content="2"/>
-                            </ComboBox>
+                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}"
+                                      ItemsSource="{Binding SPStopbit}" SelectedIndex="0"/>
                             <TextBox x:Name="ParityTextBox" TextWrapping="Wrap" Text="校验位：" Grid.Row="4" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}">
-                                <ComboBoxItem Tag="None" Content="None" IsSelected="True"/>
-                                <ComboBoxItem Tag="Even" Content="Even"/>
-                                <ComboBoxItem Tag="Odd" Content="Odd"/>
-                                <ComboBoxItem Tag="Mark" Content="Mark"/>
-                                <ComboBoxItem Tag="Space" Content="Space"/>
-                            </ComboBox>
+                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}"
+                                      ItemsSource="{Binding SPParity}" SelectedIndex="0"/>
                             <Ellipse x:Name="OnOffElipse" Fill="Red" Grid.Row="5" Grid.RowSpan="2" Margin="0" Width="28" Height="28"/>
                             <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Margin="0,3.25,0,0"
                                     Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>

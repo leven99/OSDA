@@ -1,6 +1,6 @@
 ﻿using OSerialPort.Models;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Threading;
 
@@ -13,7 +13,11 @@ namespace OSerialPort.ViewModels
         /// <summary>
         /// 串口配置
         /// </summary>
-        public ObservableCollection<SerialPortVM> VMSerialPortVM { get; set; }
+        public string[] SPPort { get; set; }
+        public List<int> SPBaudRate { get; set; }
+        public List<int> SPDataBits { get; set; }
+        public List<int> SPStopbit { get; set; }
+        public List<string> SPParity { get; set; }
 
         /// <summary>
         /// 接收区数据
@@ -73,8 +77,11 @@ namespace OSerialPort.ViewModels
             }
             set
             {
-                _OpenCloseSP = value;
-                RaisePropertyChanged("OpenCloseSP");
+                if(_OpenCloseSP != value)
+                {
+                    _OpenCloseSP = value;
+                    RaisePropertyChanged("OpenCloseSP");
+                }
             }
         }
 
@@ -158,8 +165,11 @@ namespace OSerialPort.ViewModels
             }
             set
             {
-                _AutoSendNum = value;
-                RaisePropertyChanged("AutoSendNum.ToString()");
+                if(_AutoSendNum != value)
+                {
+                    _AutoSendNum = value;
+                    RaisePropertyChanged("AutoSendNum.ToString()");
+                }
             }
         }
 
@@ -287,12 +297,11 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public MainWindowVM()
         {
-            /* 串口资源 - 串口、波特率、数据位、停止位和校验位 */
-            VMSerialPortVM = new ObservableCollection<SerialPortVM>
-            {
-
-            };
-            RaisePropertyChanged("SPSerialPortVM");
+            SPPort = SerialPort.GetPortNames();
+            SPBaudRate = new List<int> { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
+            SPDataBits = new List<int> { 5, 6, 7, 8 };
+            SPStopbit = new List<int> { 1, 2 };
+            SPParity = new List<string> { "None", "Even", "Odd", "Mark", "Space" };
 
             OpenCloseSP = "打开串口";
 
@@ -307,7 +316,7 @@ namespace OSerialPort.ViewModels
 
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
-            InitSystemClockTimer();
+            InitSystemClockTimer();   /* 实时显示系统时间 */
         }
     }
 }
