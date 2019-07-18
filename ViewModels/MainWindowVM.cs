@@ -148,21 +148,126 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 接收区
-        public string ReceHeadrt { get; set; }
+        public string _ReceHeadrt;
+        public string ReceHeadrt
+        {
+            get
+            {
+                return _ReceHeadrt;
+            }
+            set
+            {
+                if(_ReceHeadrt != value)
+                {
+                    _ReceHeadrt = value;
+                    RaisePropertyChanged("ReceHeadrt");
+                }
+            }
+        }
 
-        public UInt32 ReceDataCount { get; set; }
+        public UInt32 _ReceDataCount;
+        public UInt32 ReceDataCount
+        {
+            get
+            {
+                return _ReceDataCount;
+            }
+            set
+            {
+                if (_ReceDataCount != value)
+                {
+                    _ReceDataCount = value;
+                    RaisePropertyChanged("ReceDataCount");
+                }
+            }
+        }
 
-        public string ReceAutoSave { get; set; }
+        public string _ReceAutoSave;
+        public string ReceAutoSave
+        {
+            get
+            {
+                return _ReceAutoSave;
+            }
+            set
+            {
+                if (_ReceAutoSave != value)
+                {
+                    _ReceAutoSave = value;
+                    RaisePropertyChanged("ReceAutoSave");
+                }
+            }
+        }
 
-        public string ReceData { get; set; }
+        public string _ReceData;
+        public string ReceData
+        {
+            get
+            {
+                return _ReceData;
+            }
+            set
+            {
+                if (_ReceData != value)
+                {
+                    _ReceData = value;
+                    RaisePropertyChanged("ReceData");
+                }
+            }
+        }
         #endregion
 
         #region 发送区
-        public string SendHeader { get; set; }
+        public string _SendHeader;
+        public string SendHeader
+        {
+            get
+            {
+                return _SendHeader;
+            }
+            set
+            {
+                if (_SendHeader != value)
+                {
+                    _SendHeader = value;
+                    RaisePropertyChanged("SendHeader");
+                }
+            }
+        }
 
-        public UInt32 SendDataCount { get; set; }
+        public UInt32 _SendDataCount;
+        public UInt32 SendDataCount
+        {
+            get
+            {
+                return _SendDataCount;
+            }
+            set
+            {
+                if (_SendDataCount != value)
+                {
+                    _SendDataCount = value;
+                    RaisePropertyChanged("SendDataCount");
+                }
+            }
+        }
 
-        public string SendData { get; set; }
+        public string _SendData;
+        public string SendData
+        {
+            get
+            {
+                return _SendData;
+            }
+            set
+            {
+                if (_SendData != value)
+                {
+                    _SendData = value;
+                    RaisePropertyChanged("SendData");
+                }
+            }
+        }
         #endregion
 
         #region 辅助

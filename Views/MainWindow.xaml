@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="OSrtialPort" WindowStartupLocation="CenterScreen" Width="768" Height="535">
+        Title="OSrtialPort" WindowStartupLocation="CenterScreen"
+        Icon="/OSerialPort;component/icon/favicon.ico">
     <Viewbox x:Name="RootViewbox" Stretch="Fill">
-        <DockPanel x:Name="RootDockPanel" LastChildFill="False">
+        <DockPanel x:Name="RootDockPanel">
             <!--菜单栏-->
             <Menu x:Name="Menu" DockPanel.Dock="Top">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
@@ -43,7 +44,7 @@
                     </Grid.RowDefinitions>
                     <!--接收区-->
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeadrt}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
-                        <RichTextBox x:Name="ReceRichTextBox" Style="{StaticResource RSRichTextBox}"/>
+                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" Text="{Binding ReceData}"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendHeader}" Grid.Row="1" Margin="5,0,2,2" BorderBrush="#FF007ACD">
@@ -56,8 +57,8 @@
                                 <ColumnDefinition Width="Auto" MinWidth="290"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <RichTextBox x:Name="SendRichTextBox" Grid.RowSpan="2" Style="{StaticResource RSRichTextBox}"/>
-                            <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1" Margin="3,3,0,3" Style="{StaticResource SendButton}" Click="Sends"/>
+                            <TextBox x:Name="SendTextBox" Grid.RowSpan="2" Style="{StaticResource RSTextBox}" Text="{Binding SendData}"/>
+                            <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1" Margin="3,3,0,0" Style="{StaticResource SendButton}" Click="Sends"/>
                             <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1" Margin="3,3,0,0" Style="{StaticResource SendButton}" Click="Send"/>
                         </Grid>
                     </GroupBox>
