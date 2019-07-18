@@ -16,10 +16,8 @@
             </Menu>
             <!--状态栏-->
             <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
-                <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}" 
-                               HorizontalAlignment="Left" Style="{StaticResource SBStatusBarItem}"/>
-                <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding SystemTime}" 
-                               HorizontalAlignment="Right" Style="{StaticResource SBStatusBarItem}"/>
+                <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}" HorizontalAlignment="Left" Style="{StaticResource SBStatusBarItem}"/>
+                <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding SystemTime}" HorizontalAlignment="Right" Style="{StaticResource SBStatusBarItem}"/>
             </StatusBar>
             <!--数据发送区与接收区、串口配置与辅助-->
             <Grid x:Name="Grid">
@@ -76,16 +74,16 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBox x:Name="ComTextBox" TextWrapping="Wrap" Text="端口：" Grid.Row="0" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPPort}" SelectedIndex="0"/>
+                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPPort}" SelectedItem="{Binding SPPort}"/>
                             <TextBox x:Name="BaudTextBox" TextWrapping="Wrap" Text="波特率：" Grid.Row="1" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPBaudRate}" SelectedIndex="3"/>
+                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPBaudRate}" SelectedItem="{Binding SPBaudRate}"/>
                             <TextBox x:Name="DataTextBox" TextWrapping="Wrap" Text="数据位：" Grid.Row="2" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPDataBits}" SelectedIndex="3"/>
+                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPDataBits}" SelectedItem="{Binding SPDataBits}"/>
                             <TextBox x:Name="StopTextBox" TextWrapping="Wrap" Text="停止位：" Grid.Row="3" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPStopbit}" SelectedIndex="0"/>
+                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPStopbits}" SelectedItem="{Binding SPStopbits}"/>
                             <TextBox x:Name="ParityTextBox" TextWrapping="Wrap" Text="校验位：" Grid.Row="4" Style="{StaticResource SPTextBox}"/>
-                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding SPParity}" SelectedIndex="0"/>
-                            <Ellipse x:Name="OnOffElipse" Fill="Red" Grid.Row="5" Grid.RowSpan="2" Margin="0" Width="28" Height="28"/>
+                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPParity}" SelectedItem="{Binding SPParity}"/>
+                            <Ellipse x:Name="OnOffElipse" Fill="{Binding SPBrush}" Grid.Row="5" Grid.RowSpan="2" Margin="0" Width="28" Height="28"/>
                             <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Margin="0,3.25,0,0" Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>
                         </Grid>
                     </GroupBox>
