@@ -14,7 +14,6 @@
             </Style>
             <!--接收区发送区样式-->
             <Style TargetType="TextBox" x:Key="RSTextBox">
-                <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="AcceptsReturn" Value="True"/>
                 <Setter Property="Margin" Value="0,3,0,0"/>
                 <Setter Property="BorderBrush" Value="#FF0078D7"/>
@@ -51,7 +50,6 @@
             </Style>
             <!--辅助样式-->
             <Style TargetType="TextBox" x:Key="AutoSendNumTextBox">
-                <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="Width" Value="85"/>
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
