@@ -75,8 +75,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -156,8 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\..\icon\favicon.ico">
-	  <Link>icon\favicon.ico</Link>
-	</Resource>
+      <Link>icon\favicon.ico</Link>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

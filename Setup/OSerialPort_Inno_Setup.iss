@@ -45,7 +45,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
-Source: ".\favicon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
