@@ -9,10 +9,20 @@
         <DockPanel x:Name="RootDockPanel" LastChildFill="False">
             <!--菜单栏-->
             <Menu x:Name="Menu" DockPanel.Dock="Top">
-                <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}"/>
-                <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}"/>
+                <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="ExitMenuItem" Header="退出(_X)" Click="ExitMenuItem_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
+                </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
-                <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}"/>
+                <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="VerMenuItem" Header="{Binding VerInfo}" IsEnabled="False"/>
+                    <MenuItem x:Name="VerUpMenuItem" Header="{Binding VerUpInfo}" Click="VerUpMenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="RPMenuItem" Header="{Binding ObjRP}" Click="RPMenuItem_Click"/>
+                    <MenuItem x:Name="IssueMenuItem" Header="{Binding ObjIssue}" Click="IssueMenuItem_Click"/>
+                </MenuItem>
             </Menu>
             <!--状态栏-->
             <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">

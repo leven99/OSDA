@@ -9,7 +9,14 @@ namespace OSerialPort.ViewModels
 {
     class MainWindowVM : MainWindowBase
     {
-        private SerialPort SPserialPort = null;
+        public SerialPort SPserialPort = null;
+
+        #region 菜单栏
+        public string VerInfo { get; set; }
+        public string VerUpInfo { get; set; }
+        public string ObjRP { get; set; }
+        public string ObjIssue { get; set; }
+        #endregion
 
         #region 串口集
         public string[] LSPPort { get; set; }
@@ -430,8 +437,14 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
+        #region UI初始化
         public MainWindowVM()
         {
+            VerInfo = "OSerialPort v1.0.0";
+            VerUpInfo = "检查更新";
+            ObjRP = "Gitee存储库";
+            ObjIssue = "报告问题";
+
             LSPPort = SerialPort.GetPortNames();
             LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
             LSPDataBits = new int[] { 5, 6, 7, 8 };
@@ -454,5 +467,6 @@ namespace OSerialPort.ViewModels
             SystemTime = "2019年06月09日 12:13:15";
             InitSystemClockTimer();   /* 实时显示系统时间 */
         }
+        #endregion
     }
 }
