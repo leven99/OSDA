@@ -164,8 +164,8 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public UInt32 _ReceDataCount;
-        public UInt32 ReceDataCount
+        public int _ReceDataCount;
+        public int ReceDataCount
         {
             get
             {
@@ -234,8 +234,8 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public UInt32 _SendDataCount;
-        public UInt32 SendDataCount
+        public int _SendDataCount;
+        public int SendDataCount
         {
             get
             {
@@ -505,22 +505,35 @@ namespace OSerialPort.ViewModels
         #region 接收
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if(HexRece)
+            if (sender is SerialPort sp)
             {
-                if(SaveRece)
+                int bytesToRead = SPserialPort.BytesToRead;
+                byte[] ReadBuffer = new byte[bytesToRead];
+
+                SPserialPort.Read(ReadBuffer, 0, bytesToRead);
+
+                if (HexRece)
                 {
-                    ReceAutoSave = "保存中";
-                    ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+                    
                 }
-            }
-            /* 字符串接收 */
-            else
-            {
+                /* 字符串接收 */
+                else
+                {
+
+                }
+
+                ReceDataCount += bytesToRead;
+
                 if (SaveRece)
                 {
                     ReceAutoSave = "保存中";
-                    ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
                 }
+                else
+                {
+                    ReceAutoSave = "已停止";
+                }
+
+                ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
             }
         }
         #endregion
@@ -540,6 +553,8 @@ namespace OSerialPort.ViewModels
 
                 }
             }
+
+            SendHeader = "发送区：已发送" + SendDataCount + "字节";
         }
 
         public void Sends()
@@ -555,6 +570,8 @@ namespace OSerialPort.ViewModels
                 {
 
                 }
+
+                SendHeader = "发送区：已发送" + SendDataCount + "字节";
             }
         }
         #endregion
@@ -640,7 +657,7 @@ namespace OSerialPort.ViewModels
 
             /* 串口配置 */
             LSPPort = SerialPort.GetPortNames();
-            LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
+            LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600};
             LSPDataBits = new int[] { 5, 6, 7, 8 };
             LSPStopBits = new string[] { "One", "Two", "OnePointFive" };
             LSPParity = new string[] { "None", "Odd", "Even", "Mark", "Space" };
@@ -653,11 +670,13 @@ namespace OSerialPort.ViewModels
             OpenCloseSP = "打开串口";
 
             /* 接收区 */
+            ReceData = "";
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
             ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
 
             /* 发送区 */
+            SendData = "";
             SendDataCount = 0;
             SendHeader = "发送区：已发送" + SendDataCount + "字节";
 
