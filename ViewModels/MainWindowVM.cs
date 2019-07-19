@@ -270,11 +270,56 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 辅助
-        public bool HexRece { get; set; }
+        public bool _HexRece;
+        public bool HexRece
+        {
+            get
+            {
+                return _HexRece;
+            }
+            set
+            {
+                if(_HexRece != value)
+                {
+                    _HexRece = value;
+                    RaisePropertyChanged("HexRece");
+                }
+            }
+        }
 
-        public bool HexSend { get; set; }
+        public bool _HexSend;
+        public bool HexSend
+        {
+            get
+            {
+                return _HexSend;
+            }
+            set
+            {
+                if(_HexSend != value)
+                {
+                    _HexSend = value;
+                    RaisePropertyChanged("HexSend");
+                }
+            }
+        }
 
-        public bool AutoSend { get; set; }
+        public bool _AutoSend;
+        public bool AutoSend
+        {
+            get
+            {
+                return _AutoSend;
+            }
+            set
+            {
+                if(_AutoSend != value)
+                {
+                    _AutoSend = value;
+                    RaisePropertyChanged("AutoSend");
+                }
+            }
+        }
 
         public UInt32 _AutoSendNum;
         public UInt32 AutoSendNum
@@ -293,7 +338,22 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public bool SaveRece { get; set; }
+        public bool _SaveRece;
+        public bool SaveRece
+        {
+            get
+            {
+                return _SaveRece;
+            }
+            set
+            {
+                if(_SaveRece != value)
+                {
+                    _SaveRece = value;
+                    RaisePropertyChanged("SaveRece");
+                }
+            }
+        }
 
         /// <summary>
         /// 路径选择 - 用于修改接收接收时保存数据的路径
@@ -380,6 +440,7 @@ namespace OSerialPort.ViewModels
                     Parity = GetParity(SPParity.ToString())
                 };
 
+                SPserialPort.DataReceived += SerialPort_DataReceived;
                 SPserialPort.Open();
                 SPserialPort.DiscardInBuffer();   /* 串口必须打开，才能清除缓冲区数据 */
                 SPserialPort.DiscardOutBuffer();
@@ -439,6 +500,27 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
+        #region 接收
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if(HexRece)
+            {
+                if(SaveRece)
+                {
+
+                }
+            }
+            /* 字符串接收 */
+            else
+            {
+                if (SaveRece)
+                {
+
+                }
+            }
+        }
+        #endregion
+
         #region 发送/多项发送
         public void Send()
         {
@@ -448,6 +530,7 @@ namespace OSerialPort.ViewModels
                 {
 
                 }
+                /* 字符串发送 */
                 else
                 {
 
@@ -463,6 +546,7 @@ namespace OSerialPort.ViewModels
                 {
 
                 }
+                /* 字符串发送 */
                 else
                 {
 
@@ -544,11 +628,13 @@ namespace OSerialPort.ViewModels
         #region UI初始化
         public MainWindowVM()
         {
+            /* 菜单栏 */
             VerInfo = "OSerialPort v1.0.0";
             VerUpInfo = "检查更新";
             ObjRP = "Gitee存储库";
             ObjIssue = "报告问题";
 
+            /* 串口配置 */
             LSPPort = SerialPort.GetPortNames();
             LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
             LSPDataBits = new int[] { 5, 6, 7, 8 };
@@ -562,15 +648,23 @@ namespace OSerialPort.ViewModels
             SPBrush = Brushes.Red;
             OpenCloseSP = "打开串口";
 
+            /* 接收区 */
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
-            SendDataCount = 0;
-
             ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+
+            /* 发送区 */
+            SendDataCount = 0;
             SendHeader = "发送区：已发送" + SendDataCount + "字节";
 
+            /* 辅助 */
+            HexRece = false;
+            HexSend = false;
+            AutoSend = false;
+            SaveRece = false;
             AutoSendNum = 1000;
 
+            /* 状态栏 */
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
             InitSystemClockTimer();   /* 实时显示系统时间 */

@@ -112,11 +112,11 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0" Margin="0,3,5,5"/>
-                            <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1" Margin="5,3,0,5"/>
-                            <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0" Margin="0,3,5,5" IsChecked="{Binding HexRece}"/>
+                            <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1" Margin="5,3,0,5" IsChecked="{Binding HexSend}"/>
+                            <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" IsChecked="{Binding AutoSend}" VerticalAlignment="Center"/>
                             <TextBox x:Name="AutoSendNumTextBox" Text="{Binding AutoSendNum}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,5"  Style="{DynamicResource AutoSendNumTextBox}"/>
-                            <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" IsChecked="{Binding SaveRece}" VerticalAlignment="Center"/>
                             <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1" Margin="5,0,0,5"  Style="{StaticResource AssistButton}" Click="SaveRecePath"/>
                             <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0" Margin="0,0,5,5" Style="{StaticResource AssistButton}" Click="ClarReceData"/>
                             <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1" Margin="5,0,0,5" Style="{StaticResource AssistButton}" Click="ClearSendData"/>
