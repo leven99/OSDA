@@ -44,7 +44,7 @@
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
                     <!--接收区-->
-                    <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeadrt}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
+                    <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeader}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
                         <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" Text="{Binding ReceData}"/>
                     </GroupBox>
                     <!--发送区-->

@@ -152,7 +152,7 @@ namespace OSerialPort.ViewModels
 
         #region 接收区
         public string _ReceHeadrt;
-        public string ReceHeadrt
+        public string ReceHeader
         {
             get
             {
@@ -383,7 +383,7 @@ namespace OSerialPort.ViewModels
         {
             ReceDataCount = 0;
             SendDataCount = 0;
-            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
             SendHeader = "发送区：已发送" + SendDataCount + "字节";
         }
         #endregion
@@ -529,7 +529,7 @@ namespace OSerialPort.ViewModels
 
             ReceDataCount += _ReadData.Length;
 
-            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
         }
         #endregion
 
@@ -670,7 +670,7 @@ namespace OSerialPort.ViewModels
             ReceData = "";
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
-            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
 
             /* 发送区 */
             SendData = "";
