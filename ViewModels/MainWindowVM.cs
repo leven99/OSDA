@@ -387,6 +387,8 @@ namespace OSerialPort.ViewModels
         {
             ReceDataCount = 0;
             SendDataCount = 0;
+            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            SendHeader = "发送区：已发送" + SendDataCount + "字节";
         }
         #endregion
 
@@ -507,7 +509,8 @@ namespace OSerialPort.ViewModels
             {
                 if(SaveRece)
                 {
-
+                    ReceAutoSave = "保存中";
+                    ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
                 }
             }
             /* 字符串接收 */
@@ -515,7 +518,8 @@ namespace OSerialPort.ViewModels
             {
                 if (SaveRece)
                 {
-
+                    ReceAutoSave = "保存中";
+                    ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
                 }
             }
         }
