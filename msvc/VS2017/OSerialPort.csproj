@@ -107,6 +107,9 @@
     <Compile Include="..\..\ViewModels\MainWindowBase.cs">
       <Link>ViewModels\MainWindowBase.cs</Link>
     </Compile>
+    <Compile Include="..\..\Interface\TextBoxAppend.cs">
+	  <Link>Interface\TextBoxAppend.cs</Link>
+	</Compile>
     <Page Include="..\..\Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -158,5 +161,6 @@
       <Link>icon\favicon.ico</Link>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

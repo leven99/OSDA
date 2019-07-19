@@ -1,6 +1,10 @@
-﻿using OSerialPort.Models;
+﻿using OSerialPort.Interface;
+using OSerialPort.Models;
 using System;
+using System.Diagnostics;
 using System.IO.Ports;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -203,11 +207,11 @@ namespace OSerialPort.ViewModels
         {
             get
             {
-                return _ReceData;
+                return _ReceData; 
             }
             set
             {
-                if (_ReceData != value)
+                if(_ReceData != value)
                 {
                     _ReceData = value;
                     RaisePropertyChanged("ReceData");
@@ -368,7 +372,6 @@ namespace OSerialPort.ViewModels
         public void ClarReceData()
         {
             ReceData = string.Empty;
-
         }
 
         public void ClearSendData()
@@ -685,6 +688,71 @@ namespace OSerialPort.ViewModels
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
             InitSystemClockTimer();   /* 实时显示系统时间 */
+        }
+        #endregion
+
+        #region 封装了在MVVM模式下TextBox Text Apped的实现
+        public sealed class MvvmTextBox
+        {
+            public static readonly DependencyProperty BufferProperty =
+                DependencyProperty.RegisterAttached(
+                    "Buffer",
+                    typeof(ITextBoxAppend),
+                    typeof(MvvmTextBox),
+                    new UIPropertyMetadata(null, PropertyChangedCallback)
+                );
+
+            private static void PropertyChangedCallback(
+                DependencyObject dependencyObject,
+                DependencyPropertyChangedEventArgs depPropChangedEvArgs)
+            {
+                // todo: unrelease old buffer.
+                var textBox = (TextBox)dependencyObject;
+                var textBuffer = (ITextBoxAppend)depPropChangedEvArgs.NewValue;
+
+                var detectChanges = true;
+
+                textBox.Text = textBuffer.GetCurrentValue();
+                textBuffer.BufferAppendedHandler += (sender, appendedText) =>
+                {
+                    detectChanges = false;
+                    textBox.AppendText(appendedText);
+                    detectChanges = true;
+                };
+
+                // todo unrelease event handlers.
+                textBox.TextChanged += (sender, args) =>
+                {
+                    if (!detectChanges)
+                        return;
+
+                    foreach (var change in args.Changes)
+                    {
+                        if (change.AddedLength > 0)
+                        {
+                            var addedContent = textBox.Text.Substring(
+                                change.Offset, change.AddedLength);
+
+                            textBuffer.Append(addedContent, change.Offset);
+                        }
+                        else
+                        {
+                            textBuffer.Delete(change.Offset, change.RemovedLength);
+                        }
+                    }
+
+                    Debug.WriteLine(textBuffer.GetCurrentValue());
+                };
+            }
+
+            public static void SetBuffer(UIElement element, bool value)
+            {
+                element.SetValue(BufferProperty, value);
+            }
+            public static ITextBoxAppend GetBuffer(UIElement element)
+            {
+                return (ITextBoxAppend)element.GetValue(BufferProperty);
+            }
         }
         #endregion
     }
