@@ -21,6 +21,7 @@
             </Style>
             <!--发送、多项发送样式-->
             <Style TargetType="Button" x:Key="SendButton">
+                <Setter Property="Margin" Value="3,3,0,0"/>
                 <Setter Property="Width" Value="86"/>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="Background" Value="White"/>
@@ -28,6 +29,7 @@
             </Style>
             <!--串口配置样式-->
             <Style TargetType="TextBox" x:Key="SPTextBox">
+                <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="Margin" Value="3,0,0,0"/>
                 <Setter Property="Width" Value="54"/>
                 <Setter Property="Height" Value="17.24"/>
@@ -43,6 +45,7 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
             <Style TargetType="Button" x:Key="SPButton">
+                <Setter Property="Margin" Value="0,3.25,0,0"/>
                 <Setter Property="Width" Value="120"/>
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="Padding" Value="6,1"/>

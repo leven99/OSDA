@@ -1,6 +1,5 @@
 ﻿using OSerialPort.Models;
 using System;
-using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -22,7 +21,7 @@ namespace OSerialPort.ViewModels
         public string[] LSPPort { get; set; }
         public int[] LSPBaudRate { get; set; }
         public int[] LSPDataBits { get; set; }
-        public string[] LSPStopbits { get; set; }
+        public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
         #endregion
 
@@ -78,25 +77,25 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public StopBits _SPStopbits;
-        public StopBits SPStopbits
+        public string _SPStopBits;
+        public string SPStopBits
         {
             get
             {
-                return _SPStopbits;
+                return _SPStopBits;
             }
             set
             {
-                if(_SPStopbits != value)
+                if(_SPStopBits != value)
                 {
-                    _SPStopbits = value;
+                    _SPStopBits = value;
                     RaisePropertyChanged("SPStopbit");
                 }
             }
         }
 
-        public Parity _SPParity;
-        public Parity SPParity
+        public string _SPParity;
+        public string SPParity
         {
             get
             {
@@ -353,9 +352,9 @@ namespace OSerialPort.ViewModels
             switch (emp)
             {
                 case "None": parity = Parity.None; break;
+                case "Odd": parity = Parity.Odd; break;
                 case "Even": parity = Parity.Even; break;
                 case "Mark": parity = Parity.Mark; break;
-                case "Odd": parity = Parity.Odd; break;
                 case "Space": parity = Parity.Space; break;
                 default: break;
             }
@@ -377,7 +376,7 @@ namespace OSerialPort.ViewModels
                     PortName = SPPort,
                     BaudRate = SPBaudRate,
                     DataBits = SPDataBits,
-                    StopBits = GetStopBits(SPStopbits.ToString()),
+                    StopBits = GetStopBits(SPStopBits.ToString()),
                     Parity = GetParity(SPParity.ToString())
                 };
 
@@ -553,9 +552,13 @@ namespace OSerialPort.ViewModels
             LSPPort = SerialPort.GetPortNames();
             LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200 };
             LSPDataBits = new int[] { 5, 6, 7, 8 };
-            LSPStopbits = new string[] { "One", "Two", "OnePointFive" };
-            LSPParity = new string[] { "None", "Even", "Odd", "Mark", "Space" };
+            LSPStopBits = new string[] { "One", "Two", "OnePointFive" };
+            LSPParity = new string[] { "None", "Odd", "Even", "Mark", "Space" };
 
+            SPBaudRate = 9600;
+            SPDataBits = 8;
+            SPStopBits = "One";
+            SPParity = "None";
             SPBrush = Brushes.Red;
             OpenCloseSP = "打开串口";
 
