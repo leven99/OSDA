@@ -360,14 +360,7 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public void SaveRecePath()
         {
-            if (SaveRece)
-            {
 
-            }
-            else
-            {
-
-            }
         }
         #endregion
 
@@ -439,14 +432,15 @@ namespace OSerialPort.ViewModels
                     BaudRate = SPBaudRate,
                     DataBits = SPDataBits,
                     StopBits = GetStopBits(SPStopBits.ToString()),
-                    Parity = GetParity(SPParity.ToString())
+                    Parity = GetParity(SPParity.ToString()),
+                    Handshake = Handshake.None,   /* 硬件控制流：无 */
+                    RtsEnable = true   /* 启用请求发送（RTS）信号 */
                 };
 
-                SPserialPort.DataReceived += SerialPort_DataReceived;
-                SPserialPort.Open();
-                SPserialPort.DiscardInBuffer();   /* 串口必须打开，才能清除缓冲区数据 */
-                SPserialPort.DiscardOutBuffer();
+                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
 
+                SPserialPort.Open();
+                
                 if (SPserialPort.IsOpen)
                 {
                     SPBrush = Brushes.GreenYellow;
@@ -505,36 +499,34 @@ namespace OSerialPort.ViewModels
         #region 接收
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (sender is SerialPort sp)
+            SerialPort sp = (SerialPort)sender;
+
+            string _ReadData = sp.ReadExisting();
+
+            if (HexRece)
             {
-                int bytesToRead = SPserialPort.BytesToRead;
-                byte[] ReadBuffer = new byte[bytesToRead];
 
-                SPserialPort.Read(ReadBuffer, 0, bytesToRead);
-
-                if (HexRece)
-                {
-                    
-                }
-                /* 字符串接收 */
-                else
-                {
-
-                }
-
-                ReceDataCount += bytesToRead;
-
-                if (SaveRece)
-                {
-                    ReceAutoSave = "保存中";
-                }
-                else
-                {
-                    ReceAutoSave = "已停止";
-                }
-
-                ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
             }
+            /* 字符串接收 */
+            else
+            {
+                ReceData = _ReadData;
+            } 
+
+            if (SaveRece)
+            {
+                ReceAutoSave = "保存中";
+
+                /* 执行数据保存函数 */
+            }
+            else
+            {
+                ReceAutoSave = "已停止";
+            }
+
+            ReceDataCount += _ReadData.Length;
+
+            ReceHeadrt = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
         }
         #endregion
 
@@ -550,8 +542,10 @@ namespace OSerialPort.ViewModels
                 /* 字符串发送 */
                 else
                 {
-
+                    
                 }
+
+                SendDataCount = SendData.Length;
             }
 
             SendHeader = "发送区：已发送" + SendDataCount + "字节";
