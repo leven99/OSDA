@@ -545,7 +545,7 @@ namespace OSerialPort.ViewModels
                     
                 }
 
-                SendDataCount = SendData.Length;
+                SendDataCount += SendData.Length;
             }
 
             SendHeader = "发送区：已发送" + SendDataCount + "字节";
