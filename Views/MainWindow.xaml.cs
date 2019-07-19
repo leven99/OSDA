@@ -26,7 +26,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (mainWindowVM.SPserialPort.IsOpen)
+            if (mainWindowVM.SPserialPort != null && mainWindowVM.SPserialPort.IsOpen)
             {
                 mainWindowVM.CloseSP();
             }

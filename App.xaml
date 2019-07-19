@@ -14,6 +14,7 @@
             </Style>
             <!--接收区发送区样式-->
             <Style TargetType="TextBox" x:Key="RSTextBox">
+                <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="AcceptsReturn" Value="True"/>
                 <Setter Property="Margin" Value="0,3,0,0"/>
                 <Setter Property="BorderBrush" Value="#FF0078D7"/>
