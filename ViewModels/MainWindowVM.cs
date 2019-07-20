@@ -362,9 +362,9 @@ namespace OSerialPort.ViewModels
         public void ClearCount()
         {
             ReceDataCount = 0;
-            SendDataCount = 0;
             ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
-            SendHeader = "发送区：已发送" + SendDataCount + "字节";
+
+            SendDataCount = 0;
         }
         #endregion
 
@@ -560,8 +560,6 @@ namespace OSerialPort.ViewModels
 
                 SendDataCount += SendData.Length;
             }
-
-            SendHeader = "发送区：已发送" + SendDataCount + "字节";
         }
 
         public void Sends()
@@ -578,7 +576,7 @@ namespace OSerialPort.ViewModels
 
                 }
 
-                SendHeader = "发送区：已发送" + SendDataCount + "字节";
+                SendDataCount += SendData.Length;
             }
         }
         #endregion
@@ -669,7 +667,6 @@ namespace OSerialPort.ViewModels
             /* 发送区 */
             SendData      = String.Empty;
             SendDataCount = 0;
-            SendHeader    = "发送区：已发送" + SendDataCount + "字节";
 
             /* 辅助 */
             HexRece     = false;
