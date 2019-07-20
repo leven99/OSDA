@@ -1,5 +1,13 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSerialPort.Interface;
+using OSerialPort.ViewModels;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+
+/*
+ * 关于MvvmTextBox的封装实现代码来源：
+ * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
+ */
 
 namespace OSerialPort
 {
@@ -124,4 +132,69 @@ namespace OSerialPort
         }
         #endregion
     }
+
+    #region 用于MVVM模型下TextBox控件的Append Text实现
+    public class MvvmTextBox
+    {
+        public static readonly DependencyProperty BufferProperty =
+            DependencyProperty.RegisterAttached(
+                "Buffer",
+                typeof(ITextBoxAppend),
+                typeof(MvvmTextBox),
+                new UIPropertyMetadata(null, PropertyChangedCallback)
+            );
+
+        private static void PropertyChangedCallback(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs depPropChangedEvArgs)
+        {
+            // todo: unrelease old buffer.
+            var textBox = (TextBox)dependencyObject;
+            var textBuffer = (ITextBoxAppend)depPropChangedEvArgs.NewValue;
+
+            var detectChanges = true;
+
+            textBox.Text = textBuffer.GetCurrentValue();
+            textBuffer.BufferAppendedHandler += (sender, appendedText) =>
+            {
+                detectChanges = false;
+                textBox.AppendText(appendedText);
+                detectChanges = true;
+            };
+
+            // todo: unrelease event handlers.
+            textBox.TextChanged += (sender, args) =>
+            {
+                if (!detectChanges)
+                    return;
+
+                foreach (var change in args.Changes)
+                {
+                    if (change.AddedLength > 0)
+                    {
+                        var addedContent = textBox.Text.Substring(
+                            change.Offset, change.AddedLength);
+
+                        textBuffer.Append(addedContent, change.Offset);
+                    }
+                    else
+                    {
+                        textBuffer.Delete(change.Offset, change.RemovedLength);
+                    }
+                }
+
+                Debug.WriteLine(textBuffer.GetCurrentValue());
+            };
+        }
+
+        public static void SetBuffer(UIElement element, bool value)
+        {
+            element.SetValue(BufferProperty, value);
+        }
+        public static ITextBoxAppend GetBuffer(UIElement element)
+        {
+            return (ITextBoxAppend)element.GetValue(BufferProperty);
+        }
+    }
+    #endregion
 }

@@ -107,8 +107,8 @@
     <Compile Include="..\..\ViewModels\MainWindowBase.cs">
       <Link>ViewModels\MainWindowBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\Interface\TextBoxAppend.cs">
-	  <Link>Interface\TextBoxAppend.cs</Link>
+    <Compile Include="..\..\Interface\ITextBoxAppend.cs">
+	  <Link>Interface\ITextBoxAppend.cs</Link>
 	</Compile>
     <Page Include="..\..\Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

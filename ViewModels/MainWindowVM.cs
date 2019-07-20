@@ -1,10 +1,7 @@
 ﻿using OSerialPort.Interface;
 using OSerialPort.Models;
 using System;
-using System.Diagnostics;
 using System.IO.Ports;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -202,22 +199,7 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public string _ReceData;
-        public string ReceData
-        {
-            get
-            {
-                return _ReceData; 
-            }
-            set
-            {
-                if(_ReceData != value)
-                {
-                    _ReceData = value;
-                    RaisePropertyChanged("ReceData");
-                }
-            }
-        }
+        public ITextBoxAppend ReceData { get; set; }
         #endregion
 
         #region 发送区
@@ -273,7 +255,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 辅助
+        #region 辅助区
         public bool _HexRece;
         public bool HexRece
         {
@@ -368,10 +350,10 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 清空
+        #region 清空实现
         public void ClarReceData()
         {
-            ReceData = string.Empty;
+            ReceData.Delete();
         }
 
         public void ClearSendData()
@@ -388,7 +370,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 打开/关闭串口
+        #region 打开/关闭串口实现
 
         #region 处理停止位和校验位
         public StopBits GetStopBits(string emp)
@@ -499,7 +481,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 接收
+        #region 数据接收实现
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
@@ -513,7 +495,7 @@ namespace OSerialPort.ViewModels
             /* 字符串接收 */
             else
             {
-                ReceData = _ReadData;
+                ReceData.Append(_ReadData);
             } 
 
             if (SaveRece)
@@ -533,7 +515,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 发送/多项发送
+        #region 数据发送/多项发送实现
         public void Send()
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
@@ -667,7 +649,8 @@ namespace OSerialPort.ViewModels
             OpenCloseSP = "打开串口";
 
             /* 接收区 */
-            ReceData = "";
+            ReceData = new IClassTextBoxAppend();
+            ReceData.Delete();
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
             ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
@@ -688,71 +671,6 @@ namespace OSerialPort.ViewModels
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
             InitSystemClockTimer();   /* 实时显示系统时间 */
-        }
-        #endregion
-
-        #region 封装了在MVVM模式下TextBox Text Apped的实现
-        public sealed class MvvmTextBox
-        {
-            public static readonly DependencyProperty BufferProperty =
-                DependencyProperty.RegisterAttached(
-                    "Buffer",
-                    typeof(ITextBoxAppend),
-                    typeof(MvvmTextBox),
-                    new UIPropertyMetadata(null, PropertyChangedCallback)
-                );
-
-            private static void PropertyChangedCallback(
-                DependencyObject dependencyObject,
-                DependencyPropertyChangedEventArgs depPropChangedEvArgs)
-            {
-                // todo: unrelease old buffer.
-                var textBox = (TextBox)dependencyObject;
-                var textBuffer = (ITextBoxAppend)depPropChangedEvArgs.NewValue;
-
-                var detectChanges = true;
-
-                textBox.Text = textBuffer.GetCurrentValue();
-                textBuffer.BufferAppendedHandler += (sender, appendedText) =>
-                {
-                    detectChanges = false;
-                    textBox.AppendText(appendedText);
-                    detectChanges = true;
-                };
-
-                // todo unrelease event handlers.
-                textBox.TextChanged += (sender, args) =>
-                {
-                    if (!detectChanges)
-                        return;
-
-                    foreach (var change in args.Changes)
-                    {
-                        if (change.AddedLength > 0)
-                        {
-                            var addedContent = textBox.Text.Substring(
-                                change.Offset, change.AddedLength);
-
-                            textBuffer.Append(addedContent, change.Offset);
-                        }
-                        else
-                        {
-                            textBuffer.Delete(change.Offset, change.RemovedLength);
-                        }
-                    }
-
-                    Debug.WriteLine(textBuffer.GetCurrentValue());
-                };
-            }
-
-            public static void SetBuffer(UIElement element, bool value)
-            {
-                element.SetValue(BufferProperty, value);
-            }
-            public static ITextBoxAppend GetBuffer(UIElement element)
-            {
-                return (ITextBoxAppend)element.GetValue(BufferProperty);
-            }
         }
         #endregion
     }
