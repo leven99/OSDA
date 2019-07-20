@@ -11,12 +11,11 @@ using System.Windows.Controls;
 
 namespace OSerialPort
 {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class MainWindow : Window
     {
+        #region 字段
         MainWindowVM mainWindowVM = null;
+        #endregion
 
         public MainWindow()
         {

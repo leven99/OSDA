@@ -1,39 +1,24 @@
 ﻿using OSerialPort.ViewModels;
 using System;
-using System.Windows.Threading;
 
 namespace OSerialPort.Models
 {
     class TimerM
     {
-        DispatcherTimer ADispatcherTimer = new DispatcherTimer();
-
-        /// <summary>
-        /// 定时器 - 用于自动发送
-        /// </summary>
-        public void InitAutoClockTimer()
+        public string SystemTimeData()
         {
-            ADispatcherTimer.IsEnabled = false;
-            ADispatcherTimer.Tick += DispatcherTimer_ATick;
-            ADispatcherTimer.Start();
-        }
+            string SystemTime = "";
+            DateTime systemTime = DateTime.Now;
 
-        private void DispatcherTimer_ATick(object sender, EventArgs e)
-        {
-            
-        }
+            SystemTime = string.Format("{0}年{1}月{2}日 {3}:{4}:{5}",
+                systemTime.Year.ToString("0000"),
+                systemTime.Month.ToString("00"),
+                systemTime.Day.ToString("00"),
+                systemTime.Hour.ToString("00"),
+                systemTime.Minute.ToString("00"),
+                systemTime.Second.ToString("00"));
 
-        public void StartAutoSendDataTimer(int interval)
-        {
-            ADispatcherTimer.IsEnabled = true;
-            ADispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);   /* 毫秒 */
-            ADispatcherTimer.Start();
-        }
-
-        public void StopAutoSendDataTimer()
-        {
-            ADispatcherTimer.IsEnabled = false;
-            ADispatcherTimer.Stop();
+            return SystemTime;
         }
     }
 }

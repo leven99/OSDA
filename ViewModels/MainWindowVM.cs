@@ -9,7 +9,10 @@ namespace OSerialPort.ViewModels
 {
     class MainWindowVM : MainWindowBase
     {
+        #region 字段
         public SerialPort SPserialPort = null;
+        TimerM TimerM = new TimerM();
+        #endregion
 
         #region 菜单栏
         public string VerInfo { get; set; }
@@ -18,15 +21,13 @@ namespace OSerialPort.ViewModels
         public string ObjIssue { get; set; }
         #endregion
 
-        #region 串口集
+        #region 串口配置区
         public string[] LSPPort { get; set; }
         public int[] LSPBaudRate { get; set; }
         public int[] LSPDataBits { get; set; }
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
-        #endregion
 
-        #region 串口配置
         public string _SPPort;
         public string SPPort
         {
@@ -341,9 +342,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        /// <summary>
-        /// 路径选择 - 用于修改接收接收时保存数据的路径
-        /// </summary>
         public void SaveRecePath()
         {
 
@@ -516,6 +514,36 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 数据发送/多项发送实现
+
+        #region 自动发送
+        DispatcherTimer ADispatcherTimer = new DispatcherTimer();
+
+        public void InitAutoClockTimer()
+        {
+            ADispatcherTimer.IsEnabled = false;
+            ADispatcherTimer.Tick += DispatcherTimer_ATick;
+            ADispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_ATick(object sender, EventArgs e)
+        {
+
+        }
+
+        public void StartAutoSendDataTimer(int interval)
+        {
+            ADispatcherTimer.IsEnabled = true;
+            ADispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);   /* 毫秒 */
+            ADispatcherTimer.Start();
+        }
+
+        public void StopAutoSendDataTimer()
+        {
+            ADispatcherTimer.IsEnabled = false;
+            ADispatcherTimer.Stop();
+        }
+        #endregion
+
         public void Send()
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
@@ -556,6 +584,24 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 状态栏
+
+        #region 用于获取系统时间的定时器初始化
+        DispatcherTimer SDispatcherTimer = new DispatcherTimer();
+
+        public void InitSystemClockTimer()
+        {
+            SDispatcherTimer.Interval = new TimeSpan(0, 0, 1);   /* 秒 */
+            SDispatcherTimer.IsEnabled = true;
+            SDispatcherTimer.Tick += DispatcherTimer_STick;
+            SDispatcherTimer.Start();
+        }
+
+        public void DispatcherTimer_STick(object sender, EventArgs e)
+        {
+            SystemTime = TimerM.SystemTimeData();
+        }
+        #endregion
+
         string _DepictInfo;
         public string DepictInfo
         {
@@ -573,24 +619,6 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        #region 计时器初始化 - 用于系统时间显示
-        public void InitSystemClockTimer()
-        {
-            DispatcherTimer SDispatcherTimer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 1),   /* 秒 */
-                IsEnabled = true
-            };
-            SDispatcherTimer.Tick += DispatcherTimer_STick;
-            SDispatcherTimer.Start();
-        }
-
-        private void DispatcherTimer_STick(object sender, EventArgs e)
-        {
-            SystemTimeData();
-        }
-        #endregion
-
         string _SystemTime;
         public string SystemTime
         {
@@ -607,45 +635,28 @@ namespace OSerialPort.ViewModels
                 }
             }
         }
-
-        /// <summary>
-        /// 获取系统当前时间和日期信息
-        /// </summary>
-        public void SystemTimeData()
-        {
-            DateTime systemTime = DateTime.Now;
-
-            SystemTime = string.Format("{0}年{1}月{2}日 {3}:{4}:{5}",
-                systemTime.Year.ToString("0000"),
-                systemTime.Month.ToString("00"),
-                systemTime.Day.ToString("00"),
-                systemTime.Hour.ToString("00"),
-                systemTime.Minute.ToString("00"),
-                systemTime.Second.ToString("00"));
-        }
         #endregion
 
-        #region UI初始化
         public MainWindowVM()
         {
             /* 菜单栏 */
-            VerInfo = "OSerialPort v1.0.0";
+            VerInfo   = "OSerialPort v1.0.0";
             VerUpInfo = "检查更新";
-            ObjRP = "Gitee存储库";
-            ObjIssue = "报告问题";
+            ObjRP     = "Gitee存储库";
+            ObjIssue  = "报告问题";
 
-            /* 串口配置 */
-            LSPPort = SerialPort.GetPortNames();
+            /* 串口配置区 */
+            LSPPort     = SerialPort.GetPortNames();
             LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600};
             LSPDataBits = new int[] { 5, 6, 7, 8 };
             LSPStopBits = new string[] { "One", "Two", "OnePointFive" };
-            LSPParity = new string[] { "None", "Odd", "Even", "Mark", "Space" };
+            LSPParity   = new string[] { "None", "Odd", "Even", "Mark", "Space" };
 
-            SPBaudRate = 9600;
-            SPDataBits = 8;
-            SPStopBits = "One";
-            SPParity = "None";
-            SPBrush = Brushes.Red;
+            SPBaudRate  = 9600;
+            SPDataBits  = 8;
+            SPStopBits  = "One";
+            SPParity    = "None";
+            SPBrush     = Brushes.Red;
             OpenCloseSP = "打开串口";
 
             /* 接收区 */
@@ -653,25 +664,24 @@ namespace OSerialPort.ViewModels
             ReceData.Delete();
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
-            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            ReceHeader    = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
 
             /* 发送区 */
-            SendData = "";
+            SendData      = String.Empty;
             SendDataCount = 0;
-            SendHeader = "发送区：已发送" + SendDataCount + "字节";
+            SendHeader    = "发送区：已发送" + SendDataCount + "字节";
 
             /* 辅助 */
-            HexRece = false;
-            HexSend = false;
-            AutoSend = false;
-            SaveRece = false;
+            HexRece     = false;
+            HexSend     = false;
+            AutoSend    = false;
+            SaveRece    = false;
             AutoSendNum = 1000;
 
             /* 状态栏 */
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
-            InitSystemClockTimer();   /* 实时显示系统时间 */
+            InitSystemClockTimer();
         }
-        #endregion
     }
 }
