@@ -19,22 +19,22 @@ namespace OSerialPort.Interface
         /// <summary>
         /// 移除指定范围的字符
         /// </summary>
-        /// <param name="offset"></param>
+        /// <param name="startIndex"></param>
         /// <param name="length"></param>
-        void Delete(int offset, int length);
+        void Delete(int startIndex, int length);
 
         /// <summary>
         /// 追加字符串的副本
         /// </summary>
-        /// <param name="content"></param>
-        void Append(string content);
+        /// <param name="value"></param>
+        void Append(string value);
 
         /// <summary>
         /// 将字符串插入到指定字符位置
         /// </summary>
-        /// <param name="content"></param>
-        /// <param name="offset"></param>
-        void Append(string content, int offset);
+        /// <param name="value"></param>
+        /// <param name="index"></param>
+        void Append(string value, int index);
 
         /// <summary>
         /// 获取当前值
@@ -59,27 +59,27 @@ namespace OSerialPort.Interface
             _buffer.Clear();
         }
 
-        public void Delete(int offset, int length)
+        public void Delete(int startIndex, int length)
         {
-            _buffer.Remove(offset, length);
+            _buffer.Remove(startIndex, length);
         }
 
-        public void Append(string content)
+        public void Append(string value)
         {
-            _buffer.Append(content);
+            _buffer.Append(value);
 
-            BufferAppendedHandler?.Invoke(this, content);
+            BufferAppendedHandler?.Invoke(this, value);
         }
 
-        public void Append(string content, int offset)
+        public void Append(string value, int index)
         {
-            if (offset == _buffer.Length)
+            if (index == _buffer.Length)
             {
-                _buffer.Append(content);
+                _buffer.Append(value);
             }
             else
             {
-                _buffer.Insert(offset, content);
+                _buffer.Insert(index, value);
             }
         }
 

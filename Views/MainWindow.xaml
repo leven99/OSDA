@@ -8,7 +8,7 @@
         Title="OSrtialPort" WindowStartupLocation="CenterScreen"
         Icon="/OSerialPort;component/icon/favicon.ico">
     <Viewbox x:Name="RootViewbox" Stretch="Fill">
-        <DockPanel x:Name="RootDockPanel">
+        <DockPanel x:Name="RootDockPanel" LastChildFill="True">
             <!--菜单栏-->
             <Menu x:Name="Menu" DockPanel.Dock="Top">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
@@ -34,14 +34,14 @@
             <!--数据发送区与接收区、串口配置与辅助-->
             <Grid x:Name="Grid">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9*"/>
-                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="DataGrid" Grid.Column="0">
                     <!--接受区、发送区-->
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="18*"/>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <!--接收区-->
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeader}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
@@ -67,15 +67,15 @@
                 <Grid x:Name="SerialPortGrid" Grid.Column="1">
                     <!--串口配置、辅助-->
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="115*"/>
-                        <RowDefinition Height="64*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0" Margin="2,0,5,0" BorderBrush="#FF007ACD">
                         <Grid x:Name="SPConfGrid" Width="188">
                             <!--串口配置：端口、数据位、波特率、数据位、停止位、校验位和串口状态-->
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="58*"/>
-                                <ColumnDefinition Width="129*"/>
+                                <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="130*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -95,7 +95,7 @@
                             <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPStopBits}" SelectedItem="{Binding SPStopBits}"/>
                             <TextBox x:Name="ParityTextBox" Text="校验位：" Grid.Row="4" Style="{StaticResource SPTextBox}"/>
                             <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPParity}" SelectedItem="{Binding SPParity}"/>
-                            <Ellipse x:Name="OnOffElipse" Fill="{Binding SPBrush}" Grid.Row="5" Grid.RowSpan="2" Margin="0" Width="28" Height="28"/>
+                            <Ellipse x:Name="OnOffElipse" Fill="{Binding SPBrush}" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource SPEilipse}"/>
                             <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>
                         </Grid>
                     </GroupBox>

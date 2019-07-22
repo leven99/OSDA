@@ -11,7 +11,7 @@ namespace OSerialPort.ViewModels
     {
         #region 字段
         public SerialPort SPserialPort = null;
-        TimerM TimerM = new TimerM();
+        public TimerM TimerM = null;
         #endregion
 
         #region 菜单栏
@@ -678,6 +678,7 @@ namespace OSerialPort.ViewModels
             /* 状态栏 */
             DepictInfo = "串行端口调试助手";
             SystemTime = "2019年06月09日 12:13:15";
+            TimerM = new TimerM();
             InitSystemClockTimer();
         }
     }
