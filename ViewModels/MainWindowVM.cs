@@ -10,12 +10,12 @@ namespace OSerialPort.ViewModels
 {
     class MainWindowVM : MainWindowBase
     {
-        #region 字段
+        #region 字段定义
         public SerialPort SPserialPort = null;
         public TimerM TimerM = null;
         #endregion
 
-        #region 菜单栏
+        #region 菜单栏帮助项
         public string VerInfo { get; set; }
         public string VerUpInfo { get; set; }
         public string ObjRP { get; set; }
@@ -325,16 +325,28 @@ namespace OSerialPort.ViewModels
             }
             set
             {
-                if (_AutoSend != value)
+                if (SPserialPort != null && SPserialPort.IsOpen)
                 {
-                    _AutoSend = value;
-                    RaisePropertyChanged("AutoSend");
+                    if (_AutoSend != value)
+                    {
+                        _AutoSend = value;
+                        RaisePropertyChanged("AutoSend");
+                    }
+
+                    if (AutoSend == true)
+                    {
+                        StartAutoSendTimer(AutoSendNum);
+                    }
+                    else
+                    {
+                        StopAutoSendTimer();
+                    }
                 }
             }
         }
 
-        public UInt32 _AutoSendNum;
-        public UInt32 AutoSendNum
+        public int _AutoSendNum;
+        public int AutoSendNum
         {
             get
             {
@@ -373,23 +385,39 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 清空实现
-        public void ClarReceData()
+        #region 状态栏
+        string _DepictInfo;
+        public string DepictInfo
         {
-            ReceData.Delete();
+            get
+            {
+                return _DepictInfo;
+            }
+            set
+            {
+                if (_DepictInfo != value)
+                {
+                    _DepictInfo = value;
+                    RaisePropertyChanged("DepictInfo");
+                }
+            }
         }
 
-        public void ClearSendData()
+        string _SystemTime;
+        public string SystemTime
         {
-            SendData = string.Empty;
-        }
-
-        public void ClearCount()
-        {
-            ReceDataCount = 0;
-            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
-
-            SendDataCount = 0;
+            get
+            {
+                return _SystemTime;
+            }
+            set
+            {
+                if (_SystemTime != value)
+                {
+                    _SystemTime = value;
+                    RaisePropertyChanged("SystemTime");
+                }
+            }
         }
         #endregion
 
@@ -504,7 +532,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 数据接收实现
+        #region 接收实现
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
@@ -541,37 +569,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 数据发送/多项发送实现
-
-        #region 自动发送
-        DispatcherTimer ADispatcherTimer = new DispatcherTimer();
-
-        public void InitAutoClockTimer()
-        {
-            ADispatcherTimer.IsEnabled = false;
-            ADispatcherTimer.Tick += DispatcherTimer_ATick;
-            ADispatcherTimer.Start();
-        }
-
-        private void DispatcherTimer_ATick(object sender, EventArgs e)
-        {
-
-        }
-
-        public void StartAutoSendDataTimer(int interval)
-        {
-            ADispatcherTimer.IsEnabled = true;
-            ADispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);   /* 毫秒 */
-            ADispatcherTimer.Start();
-        }
-
-        public void StopAutoSendDataTimer()
-        {
-            ADispatcherTimer.IsEnabled = false;
-            ADispatcherTimer.Stop();
-        }
-        #endregion
-
+        #region 发送/多项发送实现
         public void Send()
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
@@ -619,14 +617,32 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 状态栏
+        #region 清发送区/清接收区/清空计数实现
+        public void ClarReceData()
+        {
+            ReceData.Delete();
+        }
 
-        #region 用于获取系统时间的定时器初始化
-        DispatcherTimer SystemDispatcherTimer = new DispatcherTimer();
+        public void ClearSendData()
+        {
+            SendData = string.Empty;
+        }
+
+        public void ClearCount()
+        {
+            ReceDataCount = 0;
+            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+
+            SendDataCount = 0;
+        }
+        #endregion
+
+        #region 定时器实现
+        DispatcherTimer SystemDispatcherTimer = new DispatcherTimer();   /* 系统定时器 */
 
         public void InitSystemClockTimer()
         {
-            SystemDispatcherTimer.Interval = new TimeSpan(0, 0, 1);   /* 秒 */
+            SystemDispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             SystemDispatcherTimer.IsEnabled = true;
             SystemDispatcherTimer.Tick += SystemDispatcherTimer_Tick;
             SystemDispatcherTimer.Start();
@@ -636,46 +652,37 @@ namespace OSerialPort.ViewModels
         {
             SystemTime = TimerM.SystemTimeData();
         }
-        #endregion
 
-        string _DepictInfo;
-        public string DepictInfo
+        public DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();   /* 自动发送定时器 */
+
+        public void InitAutoSendTimer()
         {
-            get
-            {
-                return _DepictInfo;
-            }
-            set
-            {
-                if(_DepictInfo != value)
-                {
-                    _DepictInfo = value;
-                    RaisePropertyChanged("DepictInfo");
-                }
-            }
+            AutoSendDispatcherTimer.IsEnabled = false;
+            AutoSendDispatcherTimer.Tick += AutoSendDispatcherTimer_Tick;
         }
 
-        string _SystemTime;
-        public string SystemTime
+        public void AutoSendDispatcherTimer_Tick(object sender, EventArgs e)
         {
-            get
-            {
-                return _SystemTime;
-            }
-            set
-            {
-                if(_SystemTime != value)
-                {
-                    _SystemTime = value;
-                    RaisePropertyChanged("SystemTime");
-                }
-            }
+            Send();
+        }
+
+        public void StartAutoSendTimer(int interval)
+        {
+            AutoSendDispatcherTimer.IsEnabled = true;
+            AutoSendDispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);
+            AutoSendDispatcherTimer.Start();
+        }
+
+        public void StopAutoSendTimer()
+        {
+            AutoSendDispatcherTimer.IsEnabled = false;
+            AutoSendDispatcherTimer.Stop();
         }
         #endregion
 
         public MainWindowVM()
         {
-            /* 菜单栏 */
+            /* 菜单栏帮助项 */
             VerInfo   = "OSerialPort v1.1.0";
             VerUpInfo = "检查更新";
             ObjRP     = "Gitee存储库";
@@ -704,6 +711,7 @@ namespace OSerialPort.ViewModels
             /* 发送区 */
             SendData      = String.Empty;
             SendDataCount = 0;
+            InitAutoSendTimer();
 
             /* 辅助 */
             HexRece     = false;

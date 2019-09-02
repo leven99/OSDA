@@ -63,7 +63,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void RPMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://gitee.com/leven9/OSerialPort");
+            Process.Start("https://gitee.com/leven9/OSerialPort");
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void IssueMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://gitee.com/leven9/OSerialPort/issues");
+            Process.Start("https://gitee.com/leven9/OSerialPort/issues");
         }
         #endregion
 
