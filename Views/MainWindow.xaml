@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OSerialPort"
         mc:Ignorable="d"
         Title="OSrtialPort" WindowStartupLocation="CenterScreen"
-        Icon="/OSerialPort;component/icon/favicon.ico" SizeToContent="Width" ResizeMode="NoResize">
+        Icon="/OSerialPort;component/icon/favicon.ico" SizeToContent="Width" ResizeMode="CanMinimize">
     <Viewbox x:Name="RootViewbox">
         <DockPanel x:Name="RootDockPanel">
             <!--菜单栏-->
