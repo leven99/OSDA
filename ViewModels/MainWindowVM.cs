@@ -149,23 +149,6 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 接收区
-        public string _ReceHeadrt;
-        public string ReceHeader
-        {
-            get
-            {
-                return _ReceHeadrt;
-            }
-            set
-            {
-                if(_ReceHeadrt != value)
-                {
-                    _ReceHeadrt = value;
-                    RaisePropertyChanged("ReceHeadrt");
-                }
-            }
-        }
-
         public int _ReceDataCount;
         public int ReceDataCount
         {
@@ -196,6 +179,23 @@ namespace OSerialPort.ViewModels
                 {
                     _ReceAutoSave = value;
                     RaisePropertyChanged("ReceAutoSave");
+                }
+            }
+        }
+
+        public string _ReceHeader;
+        public string ReceHeader
+        {
+            get
+            {
+                return _ReceHeader;
+            }
+            set
+            {
+                if (_ReceHeader != value)
+                {
+                    _ReceHeader = value;
+                    RaisePropertyChanged("ReceHeader");
                 }
             }
         }
@@ -662,7 +662,7 @@ namespace OSerialPort.ViewModels
             /* 接收区 */
             ReceData = new IClassTextBoxAppend();
             ReceData.Delete();
-            ReceDataCount = 0;
+            ReceDataCount = 10;
             ReceAutoSave  = "已停止";
             ReceHeader    = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
 
