@@ -68,7 +68,12 @@ namespace OSerialPort.Interface
         {
             _buffer.Append(value);
 
-            BufferAppendedHandler?.Invoke(this, value);
+            //BufferAppendedHandler?.Invoke(this, value);
+
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                BufferAppendedHandler(this, value);
+            }));
         }
 
         public void Append(string value, int index)
