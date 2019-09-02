@@ -1,6 +1,7 @@
 ﻿using OSerialPort.Interface;
 using OSerialPort.Models;
 using System;
+using System.Globalization;
 using System.IO.Ports;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -302,6 +303,15 @@ namespace OSerialPort.ViewModels
                 {
                     _HexSend = value;
                     RaisePropertyChanged("HexSend");
+
+                    if(HexSend == true)
+                    {
+                        DepictInfo = "请输入十六进制数据用空格隔开，比如0A 1B 2C 3D";
+                    }
+                    else
+                    {
+                        DepictInfo = "串行端口调试助手";
+                    }
                 }
             }
         }
@@ -499,11 +509,11 @@ namespace OSerialPort.ViewModels
         {
             SerialPort sp = (SerialPort)sender;
 
-            string _ReadData = sp.ReadExisting();
+            string recvData = sp.ReadExisting();
 
             if (HexRece)
             {
-                foreach(char tmp in _ReadData.ToCharArray())
+                foreach(char tmp in recvData.ToCharArray())
                 {
                     ReceData.Append(string.Format("{0:X2} ", Convert.ToInt32(tmp)));
                 }
@@ -511,7 +521,7 @@ namespace OSerialPort.ViewModels
             /* 字符串接收 */
             else
             {
-                ReceData.Append(_ReadData);
+                ReceData.Append(recvData);
             } 
 
             if (SaveRece)
@@ -525,7 +535,7 @@ namespace OSerialPort.ViewModels
                 ReceAutoSave = "已停止";
             }
 
-            ReceDataCount += _ReadData.Length;
+            ReceDataCount += recvData.Length;
 
             ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
         }
@@ -568,17 +578,25 @@ namespace OSerialPort.ViewModels
             {
                 if (HexSend)
                 {
+                    int cnt = 0;
+                    string[] _sendData = SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    char[] sendData = new char[_sendData.Length];
+
+                    foreach(var tmp in _sendData)
+                    {
+                        sendData[cnt++] = (char)Int16.Parse(tmp, NumberStyles.AllowHexSpecifier);
+                    }
+
+                    SendDataCount += cnt;
+                    SPserialPort.Write(sendData, 0, cnt);
 
                 }
                 /* 字符串发送 */
                 else
                 {
-                    
+                    SendDataCount += SendData.Length;
+                    SPserialPort.Write(SendData.ToCharArray(), 0, SendData.Length);
                 }
-
-                SendDataCount += SendData.Length;
-
-                SPserialPort.Write(SendData.ToCharArray(), 0, SendData.Length);
             }
         }
 
