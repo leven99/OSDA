@@ -661,7 +661,6 @@ namespace OSerialPort.ViewModels
 
             /* 接收区 */
             ReceData = new IClassTextBoxAppend();
-            ReceData.Delete();
             ReceDataCount = 0;
             ReceAutoSave  = "已停止";
             ReceHeader    = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
