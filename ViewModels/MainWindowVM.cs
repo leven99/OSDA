@@ -325,7 +325,7 @@ namespace OSerialPort.ViewModels
             }
             set
             {
-                if(_AutoSend != value)
+                if (_AutoSend != value)
                 {
                     _AutoSend = value;
                     RaisePropertyChanged("AutoSend");
@@ -622,17 +622,17 @@ namespace OSerialPort.ViewModels
         #region 状态栏
 
         #region 用于获取系统时间的定时器初始化
-        DispatcherTimer SDispatcherTimer = new DispatcherTimer();
+        DispatcherTimer SystemDispatcherTimer = new DispatcherTimer();
 
         public void InitSystemClockTimer()
         {
-            SDispatcherTimer.Interval = new TimeSpan(0, 0, 1);   /* 秒 */
-            SDispatcherTimer.IsEnabled = true;
-            SDispatcherTimer.Tick += DispatcherTimer_STick;
-            SDispatcherTimer.Start();
+            SystemDispatcherTimer.Interval = new TimeSpan(0, 0, 1);   /* 秒 */
+            SystemDispatcherTimer.IsEnabled = true;
+            SystemDispatcherTimer.Tick += SystemDispatcherTimer_Tick;
+            SystemDispatcherTimer.Start();
         }
 
-        public void DispatcherTimer_STick(object sender, EventArgs e)
+        public void SystemDispatcherTimer_Tick(object sender, EventArgs e)
         {
             SystemTime = TimerM.SystemTimeData();
         }
