@@ -4,11 +4,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
-/*
- * 关于MvvmTextBox的封装实现代码来源：
- * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
- */
-
 namespace OSerialPort
 {
     public partial class MainWindow : Window
@@ -33,7 +28,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (mainWindowVM.SPserialPort != null && mainWindowVM.SPserialPort.IsOpen)
+            if ((mainWindowVM.SPserialPort != null) && mainWindowVM.SPserialPort.IsOpen)
             {
                 mainWindowVM.CloseSP();
             }
@@ -48,7 +43,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void CalcMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("calc.exe");
+            Process.Start("calc.exe");
         }
 
         /// <summary>
@@ -147,7 +142,6 @@ namespace OSerialPort
             DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs depPropChangedEvArgs)
         {
-            // todo: unrelease old buffer.
             var textBox = (TextBox)dependencyObject;
             var textBuffer = (ITextBoxAppend)depPropChangedEvArgs.NewValue;
 
@@ -161,7 +155,13 @@ namespace OSerialPort
                 detectChanges = true;
             };
 
-            // todo: unrelease event handlers.
+            textBuffer.BufferClearingHandler += (sender, clearingText) =>
+            {
+                detectChanges = false;
+                textBox.Clear();
+                detectChanges = true;
+            };
+
             textBox.TextChanged += (sender, args) =>
             {
                 if (!detectChanges)

@@ -2,7 +2,7 @@
 using System.Text;
 
 /*
- * 关于ITextBoxAppend接口定义及接口实现的参考代码来源：
+ * 关于ITextBoxAppend接口定义、接口实现以及MvvmTextBox封装实现（MainWindows.xaml.cs）的参考代码来源：
  * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
  */
 
@@ -17,20 +17,20 @@ namespace OSerialPort.Interface
         void Delete();
 
         /// <summary>
-        /// 移除指定范围的字符
+        /// 移除字符串
         /// </summary>
         /// <param name="startIndex"></param>
         /// <param name="length"></param>
         void Delete(int startIndex, int length);
 
         /// <summary>
-        /// 追加字符串的副本
+        /// 追加字符串
         /// </summary>
         /// <param name="value"></param>
         void Append(string value);
 
         /// <summary>
-        /// 将字符串插入到指定字符位置
+        /// 将字符串插入到指定位置
         /// </summary>
         /// <param name="value"></param>
         /// <param name="index"></param>
@@ -43,9 +43,14 @@ namespace OSerialPort.Interface
         string GetCurrentValue();
 
         /// <summary>
-        /// 数据Buffer的附加处理
+        /// 数据Buffer的追加处理
         /// </summary>
         event EventHandler<string> BufferAppendedHandler;
+
+        /// <summary>
+        /// 数据Buffer的清空处理
+        /// </summary>
+        event EventHandler<string> BufferClearingHandler;
     }
     #endregion
 
@@ -57,6 +62,11 @@ namespace OSerialPort.Interface
         public void Delete()
         {
             _buffer.Clear();
+
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                BufferClearingHandler(this, " ");
+            }));
         }
 
         public void Delete(int startIndex, int length)
@@ -92,6 +102,8 @@ namespace OSerialPort.Interface
         }
 
         public event EventHandler<string> BufferAppendedHandler;
+
+        public event EventHandler<string> BufferClearingHandler;
     }
     #endregion
 }

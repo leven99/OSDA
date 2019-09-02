@@ -200,7 +200,22 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        public ITextBoxAppend ReceData { get; set; }
+        public ITextBoxAppend _ReceData;
+        public ITextBoxAppend ReceData
+        {
+            get
+            {
+                return _ReceData;
+            }
+            set
+            {
+                if (_ReceData != value)
+                {
+                    _ReceData = value;
+                    RaisePropertyChanged("ReceData");
+                }
+            }
+        }
         #endregion
 
         #region 发送区
