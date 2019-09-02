@@ -503,7 +503,10 @@ namespace OSerialPort.ViewModels
 
             if (HexRece)
             {
-
+                foreach(char tmp in _ReadData.ToCharArray())
+                {
+                    ReceData.Append(string.Format("{0:X2} ", Convert.ToInt32(tmp)));
+                }
             }
             /* 字符串接收 */
             else
