@@ -2,7 +2,7 @@
 using System.Text;
 
 /*
- * 关于ITextBoxAppend接口定义及接口实现的代码来源：
+ * 关于ITextBoxAppend接口定义及接口实现的参考代码来源：
  * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
  */
 
@@ -67,8 +67,6 @@ namespace OSerialPort.Interface
         public void Append(string value)
         {
             _buffer.Append(value);
-
-            //BufferAppendedHandler?.Invoke(this, value);
 
             App.Current.Dispatcher.Invoke((Action)(() =>
             {
