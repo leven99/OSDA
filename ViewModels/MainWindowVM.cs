@@ -559,6 +559,8 @@ namespace OSerialPort.ViewModels
                 }
 
                 SendDataCount += SendData.Length;
+
+                SPserialPort.Write(SendData.ToCharArray(), 0, SendData.Length);
             }
         }
 
