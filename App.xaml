@@ -39,7 +39,7 @@
             </Style>
             <Style TargetType="ComboBox" x:Key="SPComboBox">
                 <Setter Property="Margin" Value="0,3.25,0,3.25"/>
-                <Setter Property="Width" Value="120"/>
+                <Setter Property="Width" Value="125"/>
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -50,7 +50,7 @@
             </Style>
             <Style TargetType="Button" x:Key="SPButton">
                 <Setter Property="Margin" Value="0,3.25,0,0"/>
-                <Setter Property="Width" Value="120"/>
+                <Setter Property="Width" Value="125"/>
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="Padding" Value="6,1"/>
                 <Setter Property="Background" Value="White"/>

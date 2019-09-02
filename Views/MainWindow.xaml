@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:OSerialPort"
         mc:Ignorable="d"
         Title="OSrtialPort" WindowStartupLocation="CenterScreen"
-        Icon="/OSerialPort;component/icon/favicon.ico">
-    <Viewbox x:Name="RootViewbox" Stretch="Fill">
-        <DockPanel x:Name="RootDockPanel" LastChildFill="True">
+        Icon="/OSerialPort;component/icon/favicon.ico" SizeToContent="Width" ResizeMode="NoResize">
+    <Viewbox x:Name="RootViewbox">
+        <DockPanel x:Name="RootDockPanel">
             <!--菜单栏-->
             <Menu x:Name="Menu" DockPanel.Dock="Top">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
@@ -45,7 +45,7 @@
                     </Grid.RowDefinitions>
                     <!--接收区-->
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeader}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
-                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" local:MvvmTextBox.Buffer="{Binding ReceData}" Width="380" Height="275"/>
+                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" local:MvvmTextBox.Buffer="{Binding ReceData}" Width="428" Height="248"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节" Grid.Row="1" Margin="5,0,2,2" BorderBrush="#FF007ACD">
@@ -55,10 +55,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="290"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="SendTextBox" Grid.RowSpan="2" Style="{StaticResource RSTextBox}" Text="{Binding SendData}" Width="290" Height="74"/>
+                            <TextBox x:Name="SendTextBox" Grid.RowSpan="2" Style="{StaticResource RSTextBox}" Text="{Binding SendData}" Width="338" Height="72"/>
                             <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1" Style="{StaticResource SendButton}" Click="Sends"/>
                             <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1" Style="{StaticResource SendButton}" Click="Send"/>
                         </Grid>
@@ -74,8 +74,8 @@
                         <Grid x:Name="SPConfGrid" Width="188">
                             <!--串口配置：端口、数据位、波特率、数据位、停止位、校验位和串口状态-->
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60*"/>
-                                <ColumnDefinition Width="130*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
