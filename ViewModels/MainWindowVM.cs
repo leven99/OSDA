@@ -683,7 +683,7 @@ namespace OSerialPort.ViewModels
         public MainWindowVM()
         {
             /* 菜单栏帮助项 */
-            VerInfo   = "OSerialPort v1.1.0";
+            VerInfo   = "OSerialPort v1.2.0";
             VerUpInfo = "检查更新";
             ObjRP     = "Gitee存储库";
             ObjIssue  = "报告问题";
