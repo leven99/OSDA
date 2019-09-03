@@ -680,6 +680,13 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
+        #region 在线更新实现
+        public void Update()
+        {
+
+        }
+        #endregion
+
         public MainWindowVM()
         {
             /* 菜单栏帮助项 */

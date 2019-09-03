@@ -53,7 +53,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void VerUpMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            mainWindowVM.Update();
         }
 
         /// <summary>
