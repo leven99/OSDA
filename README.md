@@ -2,7 +2,7 @@
 ---------------------
 这是一个适用于Windows（不支持Windows XP）的串行端口调试助手。
 
-![OSerialPort](Docs/images/OserialPort.PNG)
+![OSerialPort](Docs/source/_images/OserialPort.PNG)
 
 ### 软件架构
 ---------------------
