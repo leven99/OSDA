@@ -45,7 +45,7 @@
                     </Grid.RowDefinitions>
                     <!--接收区-->
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding ReceHeader}" Grid.Row="0" Margin="5,0,2,0" BorderBrush="#FF007ACD">
-                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" local:MvvmTextBox.Buffer="{Binding ReceData}" Width="428" Height="248"/>
+                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}" local:MvvmTextBox.Buffer="{Binding ReceData}" IsReadOnly="True" Width="428" Height="248"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节" Grid.Row="1" Margin="5,0,2,2" BorderBrush="#FF007ACD">
