@@ -1,7 +1,9 @@
-﻿using OSerialPort.Interface;
+﻿using Microsoft.Win32;
+using OSerialPort.Interface;
 using OSerialPort.Models;
 using System;
 using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -13,6 +15,7 @@ namespace OSerialPort.ViewModels
         #region 字段定义
         public SerialPort SPserialPort = null;
         public TimerM TimerM = null;
+        public string ReceDataPath = null;
         #endregion
 
         #region 菜单栏帮助项
@@ -376,12 +379,18 @@ namespace OSerialPort.ViewModels
                     _SaveRece = value;
                     RaisePropertyChanged("SaveRece");
                 }
+
+                if(SaveRece == true)
+                {
+                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
+                }
+                else
+                {
+                    DepictInfo = "串行端口调试助手";
+                    ReceAutoSave = "已停止";
+
+                }
             }
-        }
-
-        public void SaveRecePath()
-        {
-
         }
         #endregion
 
@@ -484,12 +493,14 @@ namespace OSerialPort.ViewModels
                     DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}", SPserialPort.PortName,
                     SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
                     SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
+                    ReceAutoSave = "已停止";
 
                     return true;
                 }
                 else
                 {
                     DepictInfo = "串行端口打开失败";
+                    ReceAutoSave = "已停止";
 
                     return false;
                 }
@@ -497,6 +508,7 @@ namespace OSerialPort.ViewModels
             catch
             {
                 DepictInfo = "串行端口发生意外，打开失败，请检查线路";
+                ReceAutoSave = "已停止";
 
                 return false;
             }
@@ -556,7 +568,7 @@ namespace OSerialPort.ViewModels
             {
                 ReceAutoSave = "保存中";
 
-                /* 执行数据保存函数 */
+                SaveReceData(recvData);
             }
             else
             {
@@ -680,6 +692,60 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
+        #region 路径选择实现
+        public void SaveRecePath()
+        {
+            try
+            {
+                SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
+                {
+                    Title = "接收数据路径选择",
+                    FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
+                    Filter = "文本文件|*.txt"
+                };
+
+                if (ReceDataSaveFileDialog.ShowDialog() == true)
+                {
+                    ReceDataPath = ReceDataSaveFileDialog.FileName;
+                }
+            }
+            catch
+            {
+                DepictInfo = "路径选择失败";
+            }
+        }
+        #endregion
+
+        #region 保存接收数据实现
+        public void SaveReceData(string ReceData)
+        {
+            try
+            {
+                if (ReceDataPath == null)
+                {
+                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
+
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(
+                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt", true))
+                    {
+                        DefaultReceDataPath.WriteAsync(ReceData);
+                    }
+                }
+                else
+                {
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(ReceDataPath, true))
+                    {
+                        DefaultReceDataPath.WriteAsync(ReceData);
+                    }
+                }
+            }
+            catch
+            {
+                DepictInfo = "接收数据保存失败";
+            }
+        }
+        #endregion
+
         #region 在线更新实现
         public void Update()
         {
@@ -729,7 +795,7 @@ namespace OSerialPort.ViewModels
 
             /* 状态栏 */
             DepictInfo = "串行端口调试助手";
-            SystemTime = "2019年06月09日 12:13:15";
+            SystemTime = "2019年08月31日 12:13:15";
             TimerM = new TimerM();
             InitSystemClockTimer();
         }
