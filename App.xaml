@@ -28,14 +28,10 @@
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
             <!--串口配置样式-->
-            <Style TargetType="TextBox" x:Key="SPTextBox">
-                <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="Margin" Value="3,0,0,0"/>
-                <Setter Property="Width" Value="54"/>
-                <Setter Property="Height" Value="17.24"/>
+            <Style TargetType="TextBlock" x:Key="SPTextBlock">
+                <Setter Property="Margin" Value="7,0,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="BorderBrush" Value="White"/>
             </Style>
             <Style TargetType="ComboBox" x:Key="SPComboBox">
                 <Setter Property="Margin" Value="0,3.25,0,3.25"/>
