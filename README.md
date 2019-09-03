@@ -2,6 +2,8 @@
 ---------------------
 这是一个开放源代码，以TIM授权的串行端口调试助手。
 
+![OSerialPort](Docs/images/OserialPort.PNG)
+
 ### 软件架构
 ---------------------
 采用WPF框架，MVVM模型。
