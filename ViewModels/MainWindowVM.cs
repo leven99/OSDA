@@ -478,8 +478,9 @@ namespace OSerialPort.ViewModels
                     DataBits = SPDataBits,
                     StopBits = GetStopBits(SPStopBits.ToString()),
                     Parity = GetParity(SPParity.ToString()),
-                    Handshake = Handshake.None,   /* 硬件控制流：无 */
-                    RtsEnable = true   /* 启用请求发送（RTS）信号 */
+                    Encoding = System.Text.Encoding.GetEncoding("UTF-8"),
+                    Handshake = Handshake.None,
+                    RtsEnable = true
                 };
 
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
