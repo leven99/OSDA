@@ -4,7 +4,7 @@
 
 # 主题安装
 
-如果计算机没有安装 ``sphinx_ustack_theme` `，请执行以下命令安装主题。
+如果计算机没有安装 `sphinx_ustack_theme`，请执行以下命令安装主题。
 
 ```
 pip install sphinx_ustack_theme
@@ -18,4 +18,3 @@ pip install sphinx_ustack_theme
 PS> cd OSerialPort/Docs
 PS> .\make.bat html
 ```
-
