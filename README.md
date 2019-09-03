@@ -4,7 +4,7 @@
 
 <p align="left">
     <a href="#编译" alt="build"><img src="https://img.shields.io/badge/build-passing-green" /></a>
-    <a alt="platform"><img src="https://img.shields.io/badge/platform-windows-green"/></a>
+    <a href="#For windows" alt="platform"><img src="https://img.shields.io/badge/platform-windows-green"/></a>
     <a href="#开源执照" alt="lincense"><img src="https://img.shields.io/badge/lincense-MIT-green" /></a>
 </p>
 
@@ -31,6 +31,8 @@
 * 串行端口输出缓冲区大小配置为 1MB
 
 ## 编译
+
+### For windows
 
 - [ ] VS2015
 - [X] VS2017
