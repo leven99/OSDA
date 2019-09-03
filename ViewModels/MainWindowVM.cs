@@ -478,6 +478,8 @@ namespace OSerialPort.ViewModels
                     DataBits = SPDataBits,
                     StopBits = GetStopBits(SPStopBits.ToString()),
                     Parity = GetParity(SPParity.ToString()),
+                    WriteBufferSize = 1048576,   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
+                    ReadBufferSize = 2097152,    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
                     Encoding = System.Text.Encoding.GetEncoding("UTF-8"),
                     Handshake = Handshake.None,
                     RtsEnable = true
