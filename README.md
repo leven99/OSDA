@@ -1,5 +1,7 @@
 ## OSerialPort - 串行端口调试助手
 
+------
+
 <p align="left">
     <a href="#编译" alt="build"><img src="https://img.shields.io/badge/build-passing-green" /></a>
     <a alt="platform"><img src="https://img.shields.io/badge/platform-windows-green"/></a>
