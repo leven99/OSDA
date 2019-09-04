@@ -5,7 +5,7 @@
 #define MyAppVersion "1.3.2"
 #define MyVersionInfoVersion "1.3.2.2"
 #define MyAppExeName "OSerialPort.exe"
-#define MyAppCopyright "MIT License"
+#define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
 
 #define WINDOWS_X64
@@ -18,11 +18,12 @@ AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
-AppPublisher={#MyAppPublisher}
 VersionInfoVersion={#MyVersionInfoVersion}
+AppPublisher={#MyAppPublisher}
 AppCopyright={#MyAppCopyright}
-DefaultDirName={autopf}\{#MyAppName}
-DisableProgramGroupPage=yes
+DefaultDirName={commonpf}\{#MyAppName}
+DefaultGroupName=OSerialPort
+DisableProgramGroupPage=auto
 OutputDir=.\
 SetupIconFile=.\favicon.ico
 #ifdef WINDOWS_X64
@@ -66,8 +67,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 #endif
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
