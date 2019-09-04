@@ -150,6 +150,91 @@ namespace OSerialPort.ViewModels
                 }
             }
         }
+
+        public bool _SPPortEnable;
+        public bool SPPortEnable
+        {
+            get
+            {
+                return _SPPortEnable;
+            }
+            set
+            {
+                if (_SPPortEnable != value)
+                {
+                    _SPPortEnable = value;
+                    RaisePropertyChanged("SPPortEnable");
+                }
+            }
+        }
+
+        public bool _SPBaudRateEnable;
+        public bool SPBaudRateEnable
+        {
+            get
+            {
+                return _SPBaudRateEnable;
+            }
+            set
+            {
+                if (_SPBaudRateEnable != value)
+                {
+                    _SPBaudRateEnable = value;
+                    RaisePropertyChanged("SPBaudRateEnable");
+                }
+            }
+        }
+
+        public bool _SPDataBitsEnable;
+        public bool SPDataBitsEnable
+        {
+            get
+            {
+                return _SPDataBitsEnable;
+            }
+            set
+            {
+                if (_SPDataBitsEnable != value)
+                {
+                    _SPDataBitsEnable = value;
+                    RaisePropertyChanged("SPDataBitsEnable");
+                }
+            }
+        }
+
+        public bool _SPStopBitsEnable;
+        public bool SPStopBitsEnable
+        {
+            get
+            {
+                return _SPStopBitsEnable;
+            }
+            set
+            {
+                if (_SPStopBitsEnable != value)
+                {
+                    _SPStopBitsEnable = value;
+                    RaisePropertyChanged("SPStopBitsEnable");
+                }
+            }
+        }
+
+        public bool _SPParityEnable;
+        public bool SPParityEnable
+        {
+            get
+            {
+                return _SPParityEnable;
+            }
+            set
+            {
+                if (_SPParityEnable != value)
+                {
+                    _SPParityEnable = value;
+                    RaisePropertyChanged("SPParityEnable");
+                }
+            }
+        }
         #endregion
 
         #region 接收区
@@ -498,6 +583,12 @@ namespace OSerialPort.ViewModels
                     SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
                     ReceAutoSave = "已停止";
 
+                    SPPortEnable = false;
+                    SPBaudRateEnable = false;
+                    SPDataBitsEnable = false;
+                    SPStopBitsEnable = false;
+                    SPParityEnable = false;
+
                     return true;
                 }
                 else
@@ -528,6 +619,12 @@ namespace OSerialPort.ViewModels
                     SPBrush = Brushes.Red;
                     OpenCloseSP = "打开串口";
                     DepictInfo = "串行端口关闭成功";
+
+                    SPPortEnable = true;
+                    SPBaudRateEnable = true;
+                    SPDataBitsEnable = true;
+                    SPStopBitsEnable = true;
+                    SPParityEnable = true;
 
                     return SPserialPort.IsOpen;
                 }
@@ -777,6 +874,11 @@ namespace OSerialPort.ViewModels
             SPParity    = "None";
             SPBrush     = Brushes.Red;
             OpenCloseSP = "打开串口";
+            SPPortEnable = true;
+            SPBaudRateEnable = true;
+            SPDataBitsEnable = true;
+            SPStopBitsEnable = true;
+            SPParityEnable = true;
 
             /* 接收区 */
             ReceData = new IClassTextBoxAppend();

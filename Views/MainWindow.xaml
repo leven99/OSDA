@@ -86,15 +86,15 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock x:Name="ComTextBox" Text="端口：" Grid.Row="0" Grid.Column="0" Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPPort}" SelectedItem="{Binding SPPort}"/>
+                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPPort}" SelectedItem="{Binding SPPort}" IsEnabled="{Binding SPPortEnable}"/>
                             <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0" Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPBaudRate}" SelectedItem="{Binding SPBaudRate}"/>
+                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPBaudRate}" SelectedItem="{Binding SPBaudRate}" IsEnabled="{Binding SPBaudRateEnable}"/>
                             <TextBlock x:Name="DataTextBox" Text="数据位：" Grid.Row="2" Grid.Column="0" Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPDataBits}" SelectedItem="{Binding SPDataBits}"/>
+                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPDataBits}" SelectedItem="{Binding SPDataBits}" IsEnabled="{Binding SPDataBitsEnable}"/>
                             <TextBlock x:Name="StopTextBox" Text="停止位：" Grid.Row="3" Grid.Column="0" Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPStopBits}" SelectedItem="{Binding SPStopBits}"/>
+                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPStopBits}" SelectedItem="{Binding SPStopBits}" IsEnabled="{Binding SPStopBitsEnable}"/>
                             <TextBlock x:Name="ParityTextBox" Text="校验位：" Grid.Row="4" Grid.Column="0" Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPParity}" SelectedItem="{Binding SPParity}"/>
+                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1" Style="{DynamicResource SPComboBox}" ItemsSource="{Binding LSPParity}" SelectedItem="{Binding SPParity}" IsEnabled="{Binding SPParityEnable}"/>
                             <Ellipse x:Name="OnOffElipse" Fill="{Binding SPBrush}" Grid.Row="5" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource SPEilipse}"/>
                             <Button x:Name="OnOffButton" Content="{Binding OpenCloseSP}" Grid.Row="5" Grid.Column="1" Style="{DynamicResource SPButton}" Click="OpenCloseSP"/>
                         </Grid>
