@@ -6,6 +6,7 @@
 #define MyVersionInfoVersion "1.3.2.2"
 #define MyAppExeName "OSerialPort.exe"
 #define MyAppCopyright "MIT License"
+#define MyAppPublisher "Leven"
 
 #define WINDOWS_X64
 
@@ -17,6 +18,7 @@ AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
+AppPublisher={#MyAppPublisher}
 VersionInfoVersion={#MyVersionInfoVersion}
 AppCopyright={#MyAppCopyright}
 DefaultDirName={autopf}\{#MyAppName}
