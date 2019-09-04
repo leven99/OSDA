@@ -16,11 +16,11 @@
 
 ## 功能
 
-- [X] 完整的 MVVM 模型
-- [X] 基础功能（打开、关闭、接收、发送、清接收区、清发送区和清空计数）
-- [X] 十六进制（HEX）接收，十六进制（HEX）发送
-- [X] 自动发送
-- [X] 保存接收，路径选择
+- [x] 完整的 MVVM 模型
+- [x] 基础功能（打开、关闭、接收、发送、清接收区、清发送区和清空计数）
+- [x] 十六进制（HEX）接收，十六进制（HEX）发送
+- [x] 自动发送
+- [x] 保存接收，路径选择
 - [ ] 多项发送
 - [ ] 检查更新
 
@@ -35,13 +35,14 @@
 ### For windows
 
 - [ ] VS2015
-- [X] VS2017
-- [ ] VS2019
+- [x] VS2017
+- [x] VS2019
 
 ```bash
 $ git clone https://gitee.com/leven9/OSerialPort.git
 $ cd OSerialPort/msvc
 ```
+对于 `VS2017` 双击 `OSerialPort2017.sln`，对于 `VS2019` 双击 `OSerialPort2019.sln` 即可。
 
 ## 参与贡献
 
