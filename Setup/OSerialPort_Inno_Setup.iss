@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSerialPort"
-#define MyAppVersion "1.3.3"
-#define MyVersionInfoVersion "1.3.3.1"
+#define MyAppVersion "2.0.0"
+#define MyVersionInfoVersion "2.0.0.4"
 #define MyAppExeName "OSerialPort.exe"
 #define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
@@ -11,7 +11,7 @@
 #define WINDOWS_X64
 
 ; Only VS2017 and VS2019
-#define VS2017
+;#define VS2017
 
 [Setup]
 AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}
@@ -28,9 +28,9 @@ OutputDir=.\
 SetupIconFile=.\favicon.ico
 #ifdef WINDOWS_X64
   ArchitecturesInstallIn64BitMode=x64
-  OutputBaseFilename=OSerialPort_Windows_V1.3.3_x64
+  OutputBaseFilename=OSerialPort_Windows_V2.0.0_x64
 #else
-  OutputBaseFilename=OSerialPort_Windows_V1.3.3_x86
+  OutputBaseFilename=OSerialPort_Windows_V2.0.0_x86
 #endif
 Compression=lzma
 SolidCompression=yes
