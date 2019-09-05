@@ -10,9 +10,9 @@
 
 ![OSerialPort](Docs/source/_images/OserialPort.PNG)
 
-## 软件架构
+## 架构
 
-软件采用 WPF [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 框架，MVVM 模型开发。
+软件采用 WPF [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 框架，MVVM 模型开发（代码逻辑与 `UI` 设计分离）。
 
 ## 功能
 
@@ -24,11 +24,23 @@
 - [ ] 多项发送
 - [ ] 检查更新
 
-####  额外属性
+####  串口属性
 
 * 软件串行端口传输的编码方式为 UTF-8 （**重要**）
 * 串行端口输入缓冲区大小配置为 2MB
 * 串行端口输出缓冲区大小配置为 1MB
+
+## 安装要求
+
+1. 仅支持 `Windows7 SP1` 及以上版本（不支持 `Windows XP`）。`Windows7` 未安装 `SP1` 请  [点击此处](https://support.microsoft.com/zh-cn/help/15090/windows-7-install-service-pack-1-sp1) 根据网站页面描述下载安装（Microsoft官方网站）。
+
+2. 已安装 `Microsoft .NET Framework 4.6.1` 。未安装请  [点击此处](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 下载（Microsoft官方网站）。
+
+## 参与贡献
+
+```bash
+$ git clone https://gitee.com/leven9/OSerialPort.git
+```
 
 ## 编译
 
@@ -44,11 +56,9 @@ $ cd OSerialPort/msvc
 ```
 对于 `VS2017` 双击 `OSerialPort2017.sln`，对于 `VS2019` 双击 `OSerialPort2019.sln` 即可。
 
-## 参与贡献
+## 错误疑问
 
-```bash
-$ git clone https://gitee.com/leven9/OSerialPort.git
-```
+有任何使用问题及疑问，请 [点击此处（issuse）](https://gitee.com/leven9/OSerialPort/issues) 反馈。
 
 ## 开源执照
 
