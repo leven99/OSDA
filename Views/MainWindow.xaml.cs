@@ -8,16 +8,16 @@ namespace OSerialPort
 {
     public partial class MainWindow : Window
     {
-        #region 字段
-        MainWindowVM mainWindowVM = null;
+        #region 字段定义
+        private readonly MainWindowVM _MainWindowVM = null;
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
 
-            mainWindowVM = new MainWindowVM();
-            DataContext = mainWindowVM;
+            _MainWindowVM = new MainWindowVM();
+            DataContext = _MainWindowVM;
         }
 
         #region 菜单栏
@@ -28,9 +28,9 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if ((mainWindowVM.SPserialPort != null) && mainWindowVM.SPserialPort.IsOpen)
+            if ((_MainWindowVM.SPserialPort != null) && _MainWindowVM.SPserialPort.IsOpen)
             {
-                mainWindowVM.CloseSP();
+                _MainWindowVM.CloseSP();
             }
 
             Close();
@@ -53,7 +53,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void VerUpMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.Update();
+            _MainWindowVM.Update();
         }
 
         /// <summary>
@@ -80,49 +80,49 @@ namespace OSerialPort
         #region 打开/关闭串口
         private void OpenCloseSP(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.OpenSP();
+            _MainWindowVM.OpenSP();
         }
         #endregion
 
         #region 发送
         private void Send(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.Send();
+            _MainWindowVM.Send();
         }
         #endregion
 
         #region 多项发送
         private void Sends(object sender, RoutedEventArgs e)
         {
-            /* 多项发送使用新的UI窗口（UI Window），暂未实现*/
+            _MainWindowVM.Sends();
         }
         #endregion
 
         #region 路径选择
         private void SaveRecePath(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.SaveRecePath();
+            _MainWindowVM.SaveRecePath();
         }
         #endregion
 
         #region 清接收区
         private void ClarReceData(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.ClarReceData();
+            _MainWindowVM.ClarReceData();
         }
         #endregion
 
         #region 清发送区
         private void ClearSendData(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.ClearSendData();
+            _MainWindowVM.ClearSendData();
         }
         #endregion
 
         #region 清空计数
         private void ClearCount(object sender, RoutedEventArgs e)
         {
-            mainWindowVM.ClearCount();
+            _MainWindowVM.ClearCount();
         }
         #endregion
     }
