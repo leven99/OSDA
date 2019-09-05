@@ -10,8 +10,8 @@
 
 #define WINDOWS_X64
 
-; Only VS2017 and VS2019
-;#define VS2017
+; VS2017 and VS2019
+#define VS2017
 
 [Setup]
 AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}
@@ -44,8 +44,8 @@ Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.i
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 #ifdef VS2017
-
 #ifdef WINDOWS_X64
   Source: "..\msvc\VS2017\bin\x64\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2017\bin\x64\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
@@ -53,9 +53,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
-
 #else
-
 #ifdef WINDOWS_X64
   Source: "..\msvc\VS2019\bin\x64\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2019\bin\x64\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
@@ -63,7 +61,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
   Source: "..\msvc\VS2019\bin\x86\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2019\bin\x86\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
-
 #endif
 
 [Icons]
