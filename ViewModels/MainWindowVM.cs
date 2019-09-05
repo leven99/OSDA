@@ -581,7 +581,6 @@ namespace OSerialPort.ViewModels
                     DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
                         SPserialPort.PortName,SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
                         SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
-                    ReceAutoSave = "已停止";
 
                     SPPortEnable = false;
                     SPBaudRateEnable = false;
@@ -594,7 +593,6 @@ namespace OSerialPort.ViewModels
                 else
                 {
                     DepictInfo = "串行端口打开失败";
-                    ReceAutoSave = "已停止";
 
                     return false;
                 }
@@ -602,7 +600,6 @@ namespace OSerialPort.ViewModels
             catch
             {
                 DepictInfo = "串行端口发生意外，打开失败，请检查线路";
-                ReceAutoSave = "已停止";
 
                 return false;
             }
@@ -618,6 +615,7 @@ namespace OSerialPort.ViewModels
 
                     SPBrush = Brushes.Red;
                     OpenCloseSP = "打开串口";
+
                     DepictInfo = "串行端口关闭成功";
 
                     SPPortEnable = true;
@@ -625,6 +623,9 @@ namespace OSerialPort.ViewModels
                     SPDataBitsEnable = true;
                     SPStopBitsEnable = true;
                     SPParityEnable = true;
+
+                    ReceAutoSave = "已停止";
+                    ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
 
                     return SPserialPort.IsOpen;
                 }
