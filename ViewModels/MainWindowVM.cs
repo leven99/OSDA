@@ -578,9 +578,9 @@ namespace OSerialPort.ViewModels
                 {
                     SPBrush = Brushes.GreenYellow;
                     OpenCloseSP = "关闭串口";
-                    DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}", SPserialPort.PortName,
-                    SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
-                    SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
+                    DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
+                        SPserialPort.PortName,SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
+                        SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
                     ReceAutoSave = "已停止";
 
                     SPPortEnable = false;
@@ -826,7 +826,8 @@ namespace OSerialPort.ViewModels
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(
-                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt", true))
+                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt",
+                        true))
                     {
                         DefaultReceDataPath.WriteAsync(ReceData);
                     }
