@@ -684,29 +684,36 @@ namespace OSerialPort.ViewModels
         #region 发送/多项发送实现
         public void Send()
         {
-            if (SPserialPort != null && SPserialPort.IsOpen)
+            try
             {
-                if (HexSend)
+                if (SPserialPort != null && SPserialPort.IsOpen)
                 {
-                    int cnt = 0;
-                    string[] _sendData = SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    char[] sendData = new char[_sendData.Length];
-
-                    foreach(var tmp in _sendData)
+                    if (HexSend)
                     {
-                        sendData[cnt++] = (char)Int16.Parse(tmp, NumberStyles.AllowHexSpecifier);
+                        int cnt = 0;
+                        string[] _sendData = SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        char[] sendData = new char[_sendData.Length];
+
+                        foreach (var tmp in _sendData)
+                        {
+                            sendData[cnt++] = (char)Int16.Parse(tmp, NumberStyles.AllowHexSpecifier);
+                        }
+
+                        SendDataCount += cnt;
+                        SPserialPort.Write(sendData, 0, cnt);
+
                     }
-
-                    SendDataCount += cnt;
-                    SPserialPort.Write(sendData, 0, cnt);
-
+                    /* 字符串发送 */
+                    else
+                    {
+                        SendDataCount += SendData.Length;
+                        SPserialPort.Write(SendData.ToCharArray(), 0, SendData.Length);
+                    }
                 }
-                /* 字符串发送 */
-                else
-                {
-                    SendDataCount += SendData.Length;
-                    SPserialPort.Write(SendData.ToCharArray(), 0, SendData.Length);
-                }
+            }
+            catch
+            {
+                DepictInfo = "发送异常，请检查发送数据";
             }
         }
 
