@@ -1,9 +1,6 @@
-﻿using Microsoft.Win32;
-using OSerialPort.Interface;
-using OSerialPort.Models;
+﻿using OSerialPort.Models;
 using System;
 using System.Globalization;
-using System.IO;
 using System.IO.Ports;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -44,7 +41,7 @@ namespace OSerialPort.ViewModels
                     Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString()),
                     WriteBufferSize = 1048576,   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
                     ReadBufferSize = 2097152,    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
-                    Encoding = System.Text.Encoding.GetEncoding("UTF-8"),
+                    Encoding = System.Text.Encoding.UTF8,
                     Handshake = Handshake.None,
                     RtsEnable = true
                 };
