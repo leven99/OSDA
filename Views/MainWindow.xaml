@@ -167,14 +167,14 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <TextBlock x:Name="CtsTextBlock" Text="Cts" Grid.Row="0" Grid.Column="0"
-                                       Style="{StaticResource HDTextBlock}" Margin="0,3,0,0"/>
+                                       Style="{StaticResource HDTextBlock}" Margin="0,2,0,0"/>
                             <Ellipse x:Name="CtsElipse" Grid.Row="0" Grid.Column="1"
-                                     Style="{StaticResource HDEilipse}"  Margin="0,3,9,0"
+                                     Style="{StaticResource HDEilipse}"  Margin="0,2,9,0"
                                      Fill="{Binding SerialPortModel.CtsBrush}"/>
                             <TextBlock x:Name="DsrTextBlock" Text="Dsr" Grid.Row="0" Grid.Column="2"
-                                       Style="{StaticResource HDTextBlock}" Margin="0,3,11,0"/>
+                                       Style="{StaticResource HDTextBlock}" Margin="0,2,11,0"/>
                             <Ellipse x:Name="DsrElipse" Grid.Row="0" Grid.Column="3"
-                                     Style="{StaticResource HDEilipse}" Margin="0,3,13,0"
+                                     Style="{StaticResource HDEilipse}" Margin="0,2,13,0"
                                      Fill="{Binding SerialPortModel.DsrBrush}"/>
                         </Grid>
                     </GroupBox>
