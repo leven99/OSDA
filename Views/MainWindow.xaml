@@ -23,7 +23,7 @@
                                   Click="ASCIIMenuItem_Click"/>
                         <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
                                   Click="UTF8MenuItem_Click"/>
-                        <MenuItem x:Name="UTF16MenuItem" Header="UTF-16" IsChecked="{Binding SerialPortModel.UTF16Enable}"
+                        <MenuItem x:Name="UTF16MenuItem" Header="Unicode" IsChecked="{Binding SerialPortModel.UTF16Enable}"
                                   Click="UTF16MenuItem_Click"/>
                         <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
                                   Click="UTF32MenuItem_Click"/>
