@@ -83,8 +83,11 @@ namespace OSerialPort.ViewModels
                 SPserialPort.WriteBufferSize = 1048576;   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
                 SPserialPort.ReadBufferSize = 2097152;    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
 
-                SPserialPort.RtsEnable = true;
-                SPserialPort.DtrEnable = true;
+                SPserialPort.DtrEnable = false;   /* 数据终端就绪（DTR）信号通常在 XON/XOFF 软件握手和
+                                                     请求发送/清除发送（RTS/CTS）硬件握手和调制解调器通信期间启用。 */
+                SPserialPort.RtsEnable = false;   /* 发送请求（RTS）信号通常用于请求发送/清除发送（RTS / CTS）硬件握手。 */
+
+                SPserialPort.Handshake = Handshake.None;   /* 数据传输的握手协议(或者通信控制协议、或者流控制) */
 
                 if (SerialPortModel.ASCIIEnable)
                 {
