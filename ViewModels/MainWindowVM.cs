@@ -79,10 +79,12 @@ namespace OSerialPort.ViewModels
                 SPserialPort.DataBits = SerialPortModel.SPDataBits;
                 SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString());
                 SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString());
+
                 SPserialPort.WriteBufferSize = 1048576;   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
                 SPserialPort.ReadBufferSize = 2097152;    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
-                SPserialPort.Handshake = Handshake.None;
+
                 SPserialPort.RtsEnable = true;
+                SPserialPort.DtrEnable = true;
 
                 if (SerialPortModel.ASCIIEnable)
                 {

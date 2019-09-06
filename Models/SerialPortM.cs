@@ -321,7 +321,7 @@ namespace OSerialPort.Models
         public void SerialPortDataContext()
         {
             LSPPort = SerialPort.GetPortNames();
-            LSPBaudRate = new int[] { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 };
+            LSPBaudRate = new int[] { 1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400 };
             LSPDataBits = new int[] { 5, 6, 7, 8 };
             LSPStopBits = new string[] { "One", "Two", "OnePointFive" };
             LSPParity = new string[] { "None", "Odd", "Even", "Mark", "Space" };
