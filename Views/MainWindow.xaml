@@ -28,7 +28,20 @@
                         <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
                                   Click="UTF32MenuItem_Click"/>
                     </MenuItem>
-                </MenuItem>
+                    <Separator/>
+                    <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"/>
+                    <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"/>
+                    <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
+                        <MenuItem x:Name="NoneMenuItem" Header="None"
+                                  IsChecked="{Binding SerialPortModel.NoneEnable}"/>
+                        <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
+                                  IsChecked="{Binding SerialPortModel.RequestToSendEnable}"/>
+                        <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
+                                  IsChecked="{Binding SerialPortModel.XOnXOffEnable}"/>
+                        <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
+                                  IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"/>
+                    </MenuItem>
+                    </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
                 <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
                     <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>

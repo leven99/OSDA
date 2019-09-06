@@ -220,7 +220,7 @@ namespace OSerialPort.Models
         }
         #endregion
 
-        #region 字节编码方式
+        #region 字节编码
         public bool _ASCIIEnable;
         public bool ASCIIEnable
         {
@@ -290,6 +290,112 @@ namespace OSerialPort.Models
         }
         #endregion
 
+        #region 信号控制
+        public bool _DtrEnable;
+        public bool DtrEnable
+        {
+            get
+            {
+                return _DtrEnable;
+            }
+            set
+            {
+                if (_DtrEnable != value)
+                {
+                    _DtrEnable = value;
+                    RaisePropertyChanged("DtrEnable");
+                }
+            }
+        }
+
+        public bool _RtsEnable;
+        public bool RtsEnable
+        {
+            get
+            {
+                return _RtsEnable;
+            }
+            set
+            {
+                if (_RtsEnable != value)
+                {
+                    _RtsEnable = value;
+                    RaisePropertyChanged("RtsEnable");
+                }
+            }
+        }
+        #endregion
+
+        #region 流控制（握手协议或者通信控制协议）
+        public bool _NoneEnable;
+        public bool NoneEnable
+        {
+            get
+            {
+                return _NoneEnable;
+            }
+            set
+            {
+                if(_NoneEnable != value)
+                {
+                    _NoneEnable = value;
+                    RaisePropertyChanged("NoneEnable");
+                }
+            }
+        }
+
+        public bool _RequestToSendEnable;
+        public bool RequestToSendEnable
+        {
+            get
+            {
+                return _RequestToSendEnable;
+            }
+            set
+            {
+                if (_RequestToSendEnable != value)
+                {
+                    _RequestToSendEnable = value;
+                    RaisePropertyChanged("RequestToSendEnable");
+                }
+            }
+        }
+
+        public bool _XOnXOffEnable;
+        public bool XOnXOffEnable
+        {
+            get
+            {
+                return _XOnXOffEnable;
+            }
+            set
+            {
+                if (_XOnXOffEnable != value)
+                {
+                    _XOnXOffEnable = value;
+                    RaisePropertyChanged("XOnXOffEnable");
+                }
+            }
+        }
+
+        public bool _RequestToSendXOnXOffEnable;
+        public bool RequestToSendXOnXOffEnable
+        {
+            get
+            {
+                return _RequestToSendXOnXOffEnable;
+            }
+            set
+            {
+                if (_RequestToSendXOnXOffEnable != value)
+                {
+                    _RequestToSendXOnXOffEnable = value;
+                    RaisePropertyChanged("RequestToSendXOnXOffEnable");
+                }
+            }
+        }
+        #endregion
+
         public StopBits GetStopBits(string emp)
         {
             StopBits stopBits = StopBits.One;
@@ -344,6 +450,14 @@ namespace OSerialPort.Models
             UTF8Enable = true;
             UTF16Enable = false;
             UTF32Enable = false;
+
+            DtrEnable = false;
+            RtsEnable = false;
+
+            NoneEnable = true;
+            RequestToSendEnable = false;
+            XOnXOffEnable = false;
+            RequestToSendXOnXOffEnable = false;
         }
     }
 }
