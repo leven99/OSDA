@@ -52,6 +52,15 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
+            <!--信号状态样式-->
+            <Style TargetType="TextBlock" x:Key="HDTextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Ellipse" x:Key="HDEilipse">
+                <Setter Property="Width" Value="13"/>
+                <Setter Property="Height" Value="13"/>
+            </Style>
             <!--辅助样式-->
             <Style TargetType="CheckBox" x:Key="AssistCheckBox">
                 <Setter Property="VerticalAlignment" Value="Center"/>

@@ -396,6 +396,40 @@ namespace OSerialPort.Models
         }
         #endregion
 
+        public Brush _CtsBrush;
+        public Brush CtsBrush
+        {
+            get
+            {
+                return _CtsBrush;
+            }
+            set
+            {
+                if (_CtsBrush != value)
+                {
+                    _CtsBrush = value;
+                    RaisePropertyChanged("CtsBrush");
+                }
+            }
+        }
+
+        public Brush _DsrBrush;
+        public Brush DsrBrush
+        {
+            get
+            {
+                return _DsrBrush;
+            }
+            set
+            {
+                if (_DsrBrush != value)
+                {
+                    _DsrBrush = value;
+                    RaisePropertyChanged("DsrBrush");
+                }
+            }
+        }
+
         public StopBits GetStopBits(string emp)
         {
             StopBits stopBits = StopBits.One;
@@ -458,6 +492,9 @@ namespace OSerialPort.Models
             RequestToSendEnable = false;
             XOnXOffEnable = false;
             RequestToSendXOnXOffEnable = false;
+
+            CtsBrush = Brushes.Black;
+            DsrBrush = Brushes.Black;
         }
     }
 }

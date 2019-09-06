@@ -41,7 +41,7 @@
                         <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
                                   IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"/>
                     </MenuItem>
-                    </MenuItem>
+                </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
                 <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
                     <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
@@ -75,7 +75,7 @@
                               BorderBrush="#FF007ACD">
                         <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.ReceData}" IsReadOnly="True"
-                                 Width="408" Height="238"/>
+                                 Width="478" Height="278"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendModel.SendDataCount}"
@@ -91,7 +91,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="SendTextBox" Grid.RowSpan="2" Style="{StaticResource RSTextBox}"
-                                     Text="{Binding SendModel.SendData}" Width="318" Height="78"/>
+                                     Text="{Binding SendModel.SendData}" Width="388" Height="78"/>
                             <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource SendButton}" Click="Sends"/>
                             <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1"
@@ -104,8 +104,9 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0" Margin="2,0,5,0" BorderBrush="#FF007ACD">
+                    <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0" Margin="2,0,5,2" BorderBrush="#FF007ACD">
                         <Grid x:Name="SPConfGrid">
                             <!--串口配置区-->
                             <Grid.ColumnDefinitions>
@@ -156,7 +157,28 @@
                                     Content="{Binding SerialPortModel.OpenCloseSP}" Click="OpenCloseSP"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="1" Margin="2,0,5,2" BorderBrush="#FF007ACD">
+                    <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1" Margin="2,0,5,2" BorderBrush="#FF007ACD">
+                        <!--信号状态区-->
+                        <Grid x:Name="HoldingGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="CtsTextBlock" Text="Cts" Grid.Row="0" Grid.Column="0"
+                                       Style="{StaticResource HDTextBlock}" Margin="0,3,0,0"/>
+                            <Ellipse x:Name="CtsElipse" Grid.Row="0" Grid.Column="1"
+                                     Style="{StaticResource HDEilipse}"  Margin="0,3,9,0"
+                                     Fill="{Binding SerialPortModel.CtsBrush}"/>
+                            <TextBlock x:Name="DsrTextBlock" Text="Dsr" Grid.Row="0" Grid.Column="2"
+                                       Style="{StaticResource HDTextBlock}" Margin="0,3,11,0"/>
+                            <Ellipse x:Name="DsrElipse" Grid.Row="0" Grid.Column="3"
+                                     Style="{StaticResource HDEilipse}" Margin="0,3,13,0"
+                                     Fill="{Binding SerialPortModel.DsrBrush}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2" Margin="2,0,5,2" BorderBrush="#FF007ACD">
                         <Grid x:Name="AssistGrid">
                             <!--辅助区-->
                             <Grid.RowDefinitions>
