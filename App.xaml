@@ -53,8 +53,10 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
             <!--辅助样式-->
+            <Style TargetType="CheckBox" x:Key="AssistCheckBox">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
             <Style TargetType="TextBox" x:Key="AutoSendNumTextBox">
-                <Setter Property="Width" Value="85"/>
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
