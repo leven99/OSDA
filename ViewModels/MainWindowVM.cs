@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace OSerialPort.ViewModels
 {
-    class MainWindowVM : MainWindowBase
+    class MainWindowViewModel : MainWindowBase
     {
         public HelpModel HelpModel { get; set; }
         public RecvModel RecvModel { get; set; }
@@ -267,7 +267,7 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        public MainWindowVM()
+        public MainWindowViewModel()
         {
             HelpModel = new HelpModel();
             HelpModel.HelpDataContext();
