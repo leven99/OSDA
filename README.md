@@ -8,11 +8,13 @@
     <a href="#开源执照" alt="lincense"><img src="https://img.shields.io/badge/lincense-MIT-green" /></a>
 </p>
 
-![OSerialPort](Docs/source/_images/OserialPort.PNG)
+![OSerialPort](Docs/source/_images/serialort.png)
 
 ## 架构
 
 软件采用 WPF [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 框架，MVVM 模型开发（代码逻辑与 `UI` 设计分离）。
+
+![Framework](Docs/source/_images/framework.png)
 
 ## 功能
 
