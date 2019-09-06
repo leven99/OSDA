@@ -19,9 +19,9 @@ copyright = u'2019, OSerialPort Project members and individual contributors'
 author = u'The OSerialPort Project'
 
 # The short X.Y version
-version = '2.0.0'
+version = '2.1.0'
 # The full version, including alpha/beta/rc tags
-release = '2.0.0'
+release = '2.1.0'
 
 # -- General configuration ---------------------------------------------------
 

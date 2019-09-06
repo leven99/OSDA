@@ -20,7 +20,7 @@ namespace OSerialPort.Models
 
         public void HelpDataContext()
         {
-            VerInfo = "OSerialPort v2.0.0";
+            VerInfo = "OSerialPort v2.1.0";
         }
     }
 }

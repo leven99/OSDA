@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSerialPort"
-#define MyAppVersion "2.0.0"
-#define MyVersionInfoVersion "2.0.0.4"
+#define MyAppVersion "2.1.0"
+#define MyVersionInfoVersion "2.1.0.2"
 #define MyAppExeName "OSerialPort.exe"
 #define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
@@ -11,7 +11,7 @@
 #define WINDOWS_X64
 
 ; VS2017 and VS2019
-#define VS2017
+;#define VS2017
 
 [Setup]
 AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}
