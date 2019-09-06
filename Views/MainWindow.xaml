@@ -17,6 +17,18 @@
                 <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}">
                     <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
                 </MenuItem>
+                <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
+                        <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
+                                  Click="ASCIIMenuItem_Click"/>
+                        <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
+                                  Click="UTF8MenuItem_Click"/>
+                        <MenuItem x:Name="UTF16MenuItem" Header="UTF-16" IsChecked="{Binding SerialPortModel.UTF16Enable}"
+                                  Click="UTF16MenuItem_Click"/>
+                        <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
+                                  Click="UTF32MenuItem_Click"/>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
                 <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
                     <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>

@@ -119,16 +119,16 @@
     <Compile Include="..\..\Models\TimerM.cs">
       <Link>Models\TimerM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\HelpM.cs">
+    <Compile Include="..\..\Models\HelpM.cs">
       <Link>Models\HelpM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\RecvM.cs">
+    <Compile Include="..\..\Models\RecvM.cs">
       <Link>Models\RecvM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\SendM.cs">
+    <Compile Include="..\..\Models\SendM.cs">
       <Link>Models\SendM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\SerialPortM.cs">
+    <Compile Include="..\..\Models\SerialPortM.cs">
       <Link>Models\SerialPortM.cs</Link>
     </Compile>
     <Compile Include="..\..\ViewModels\MainWindowBase.cs">

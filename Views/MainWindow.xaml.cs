@@ -44,6 +44,28 @@ namespace OSerialPort
             Process.Start("calc.exe");
         }
 
+        #region 选项 - 字节编码
+        private void ASCIIMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.ASCIIEnable();
+        }
+
+        private void UTF8MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.UTF8Enable();
+        }
+
+        private void UTF16MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.UTF16Enable();
+        }
+
+        private void UTF32MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.UTF32Enable();
+        }
+        #endregion
+
         /// <summary>
         /// 帮助 - 检查更新
         /// </summary>

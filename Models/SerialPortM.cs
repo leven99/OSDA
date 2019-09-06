@@ -12,6 +12,7 @@ namespace OSerialPort.Models
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
 
+        #region 串口配置内容
         public string _SPPort;
         public string SPPort
         {
@@ -96,6 +97,7 @@ namespace OSerialPort.Models
                 }
             }
         }
+        #endregion
 
         public Brush _SPBrush;
         public Brush SPBrush
@@ -131,6 +133,7 @@ namespace OSerialPort.Models
             }
         }
 
+        #region 控件启用/不启用
         public bool _SPPortEnable;
         public bool SPPortEnable
         {
@@ -215,6 +218,77 @@ namespace OSerialPort.Models
                 }
             }
         }
+        #endregion
+
+        #region 字节编码方式
+        public bool _ASCIIEnable;
+        public bool ASCIIEnable
+        {
+            get
+            {
+                return _ASCIIEnable;
+            }
+            set
+            {
+                if(_ASCIIEnable != value)
+                {
+                    _ASCIIEnable = value;
+                    RaisePropertyChanged("ASCIIEnable");
+                }
+            }
+        }
+
+        public bool _UTF8Enable;
+        public bool UTF8Enable
+        {
+            get
+            {
+                return _UTF8Enable;
+            }
+            set
+            {
+                if (_UTF8Enable != value)
+                {
+                    _UTF8Enable = value;
+                    RaisePropertyChanged("UTF8Enable");
+                }
+            }
+        }
+
+        public bool _UTF16Enable;
+        public bool UTF16Enable
+        {
+            get
+            {
+                return _UTF16Enable;
+            }
+            set
+            {
+                if (_UTF16Enable != value)
+                {
+                    _UTF16Enable = value;
+                    RaisePropertyChanged("UTF16Enable");
+                }
+            }
+        }
+
+        public bool _UTF32Enable;
+        public bool UTF32Enable
+        {
+            get
+            {
+                return _UTF32Enable;
+            }
+            set
+            {
+                if (_UTF32Enable != value)
+                {
+                    _UTF32Enable = value;
+                    RaisePropertyChanged("UTF32Enable");
+                }
+            }
+        }
+        #endregion
 
         public StopBits GetStopBits(string emp)
         {
@@ -256,13 +330,20 @@ namespace OSerialPort.Models
             SPDataBits = 8;
             SPStopBits = "One";
             SPParity = "None";
+
             SPBrush = Brushes.Red;
             OpenCloseSP = "打开串口";
+
             SPPortEnable = true;
             SPBaudRateEnable = true;
             SPDataBitsEnable = true;
             SPStopBitsEnable = true;
             SPParityEnable = true;
+
+            ASCIIEnable = false;
+            UTF8Enable = true;
+            UTF16Enable = false;
+            UTF32Enable = false;
         }
     }
 }

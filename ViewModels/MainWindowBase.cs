@@ -6,19 +6,7 @@ namespace OSerialPort.ViewModels
 {
     public class MainWindowBase : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #region 字段定义
-        /// <summary>
-        /// 串行端口
-        /// </summary>
-        public SerialPort SPserialPort = null;
-        #endregion
+        public SerialPort SPserialPort = new SerialPort();
 
         /// <summary>
         /// 信息描述
@@ -38,6 +26,13 @@ namespace OSerialPort.ViewModels
                     RaisePropertyChanged("DepictInfo");
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

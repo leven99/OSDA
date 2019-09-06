@@ -16,6 +16,48 @@ namespace OSerialPort.ViewModels
         public TimerModel TimerModel { get; set; }
 
         #region 菜单栏
+
+        #region 选项 - 字节编码
+        public void ASCIIEnable()
+        {
+            SerialPortModel.ASCIIEnable = true;
+
+            SerialPortModel.UTF8Enable = false;
+            SerialPortModel.UTF16Enable = false;
+            SerialPortModel.UTF32Enable = false;
+        }
+
+        public void UTF8Enable()
+        {
+            SerialPortModel.UTF8Enable = true;
+
+            SerialPortModel.ASCIIEnable = false;
+            SerialPortModel.UTF16Enable = false;
+            SerialPortModel.UTF32Enable = false;
+        }
+
+        public void UTF16Enable()
+        {
+            SerialPortModel.UTF16Enable = true;
+
+            SerialPortModel.ASCIIEnable = false;
+            SerialPortModel.UTF8Enable = false;
+            SerialPortModel.UTF32Enable = false;
+        }
+
+        public void UTF32Enable()
+        {
+            SerialPortModel.UTF32Enable = true;
+
+            SerialPortModel.ASCIIEnable = false;
+            SerialPortModel.UTF8Enable = false;
+            SerialPortModel.UTF16Enable = false;
+        }
+        #endregion
+
+        /// <summary>
+        /// 帮助 - 检查更新
+        /// </summary>
         public void Update()
         {
 
@@ -32,19 +74,32 @@ namespace OSerialPort.ViewModels
 
             try
             {
-                SPserialPort = new SerialPort
+                SPserialPort.PortName = SerialPortModel.SPPort;
+                SPserialPort.BaudRate = SerialPortModel.SPBaudRate;
+                SPserialPort.DataBits = SerialPortModel.SPDataBits;
+                SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString());
+                SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString());
+                SPserialPort.WriteBufferSize = 1048576;   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
+                SPserialPort.ReadBufferSize = 2097152;    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
+                SPserialPort.Handshake = Handshake.None;
+                SPserialPort.RtsEnable = true;
+
+                if (SerialPortModel.ASCIIEnable)
                 {
-                    PortName = SerialPortModel.SPPort,
-                    BaudRate = SerialPortModel.SPBaudRate,
-                    DataBits = SerialPortModel.SPDataBits,
-                    StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString()),
-                    Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString()),
-                    WriteBufferSize = 1048576,   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
-                    ReadBufferSize = 2097152,    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
-                    Encoding = System.Text.Encoding.UTF8,
-                    Handshake = Handshake.None,
-                    RtsEnable = true
-                };
+                    SPserialPort.Encoding = System.Text.Encoding.ASCII;
+                }
+                else if(SerialPortModel.UTF8Enable)
+                {
+                    SPserialPort.Encoding = System.Text.Encoding.UTF8;
+                }
+                else if (SerialPortModel.UTF16Enable)
+                {
+                    SPserialPort.Encoding = System.Text.Encoding.Unicode;
+                }
+                else if (SerialPortModel.UTF32Enable)
+                {
+                    SPserialPort.Encoding = System.Text.Encoding.UTF32;
+                }
 
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(RecvModel.SerialPort_DataReceived);
 
