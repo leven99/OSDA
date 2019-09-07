@@ -7,8 +7,10 @@ using System.Windows.Threading;
 
 namespace OSerialPort.ViewModels
 {
-    class MainWindowViewModel : MainWindowBase
+    class MainWindowViewModel : MainWindowBase, IDisposable
     {
+        public SerialPort SPserialPort = new SerialPort();
+
         public HelpModel HelpModel { get; set; }
         public RecvModel RecvModel { get; set; }
         public SendModel SendModel { get; set; }
@@ -558,5 +560,28 @@ namespace OSerialPort.ViewModels
             AutoSend = false;
             InitAutoSendTimer();
         }
+
+        #region 释放非托管资源（IDisposable）实现
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    SPserialPort.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

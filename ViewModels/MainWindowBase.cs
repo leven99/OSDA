@@ -6,11 +6,6 @@ namespace OSerialPort.ViewModels
 {
     public class MainWindowBase : INotifyPropertyChanged
     {
-        public SerialPort SPserialPort = new SerialPort();
-
-        /// <summary>
-        /// 信息描述
-        /// </summary>
         string _DepictInfo;
         public string DepictInfo
         {

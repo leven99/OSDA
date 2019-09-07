@@ -1,12 +1,13 @@
 ﻿using OSerialPort.Interface;
 using OSerialPort.ViewModels;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace OSerialPort
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
         private readonly MainWindowViewModel mainWindowViewModel = null;
 
@@ -185,6 +186,29 @@ namespace OSerialPort
         private void ClearCount(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.ClearCount();
+        }
+        #endregion
+
+        #region 释放非托管资源（IDisposable）实现
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    mainWindowViewModel.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
         #endregion
     }
