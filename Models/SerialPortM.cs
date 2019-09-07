@@ -12,7 +12,7 @@ namespace OSerialPort.Models
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
 
-        #region 串口配置内容
+        #region 串口配置
         public string _SPPort;
         public string SPPort
         {
@@ -133,7 +133,7 @@ namespace OSerialPort.Models
             }
         }
 
-        #region 控件启用/不启用
+        #region 串口配置控件启用/不启用
         public bool _SPPortEnable;
         public bool SPPortEnable
         {
@@ -394,6 +394,7 @@ namespace OSerialPort.Models
         }
         #endregion
 
+        #region 信号状态
         public Brush _DcdBrush;
         public Brush DcdBrush
         {
@@ -442,6 +443,48 @@ namespace OSerialPort.Models
                     _DsrBrush = value;
                     RaisePropertyChanged("DsrBrush");
                 }
+            }
+        }
+        #endregion
+
+        public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            SerialPort _SerialPort = (SerialPort)sender;
+
+            switch (e.EventType)
+            {
+                case SerialPinChange.CDChanged:
+                    if (_SerialPort.CDHolding)
+                    {
+                        DcdBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        DcdBrush = Brushes.Black;
+                    }
+                    break;
+                case SerialPinChange.CtsChanged:
+                    if (_SerialPort.CtsHolding)
+                    {
+                        CtsBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        CtsBrush = Brushes.Black;
+                    }
+                    break;
+                case SerialPinChange.DsrChanged:
+                    if (_SerialPort.DsrHolding)
+                    {
+                        DsrBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        DsrBrush = Brushes.Black;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 

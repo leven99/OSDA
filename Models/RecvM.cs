@@ -150,9 +150,9 @@ namespace OSerialPort.Models
 
         public void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
+            SerialPort _SerialPort = (SerialPort)sender;
 
-            string recvData = sp.ReadExisting();
+            string recvData = _SerialPort.ReadExisting();
 
             if (HexRece)
             {

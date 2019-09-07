@@ -147,7 +147,7 @@ namespace OSerialPort.ViewModels
             }
         }
 
-        #region 选项 - 流配置
+        #region 选项 - 流控制
         public void NoneEnable()
         {
             SerialPortModel.XOnXOffEnable = false;
@@ -319,6 +319,8 @@ namespace OSerialPort.ViewModels
 
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(RecvModel.SerialPort_DataReceived);
 
+                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortModel.SerialPort_PinChanged);
+
                 SPserialPort.Open();
 
                 if (SPserialPort.IsOpen)
@@ -476,13 +478,6 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 路径选择
-        public void SaveRecePath()
-        {
-            RecvModel.RecePath();
-        }
-        #endregion
-
         #region 辅助区
         public bool _AutoSend;
         public bool AutoSend
@@ -511,6 +506,13 @@ namespace OSerialPort.ViewModels
                     }
                 }
             }
+        }
+        #endregion
+
+        #region 路径选择
+        public void SaveRecePath()
+        {
+            RecvModel.RecePath();
         }
         #endregion
 
