@@ -290,7 +290,6 @@ namespace OSerialPort.Models
         }
         #endregion
 
-        #region 信号控制
         public bool _DtrEnable;
         public bool DtrEnable
         {
@@ -324,7 +323,6 @@ namespace OSerialPort.Models
                 }
             }
         }
-        #endregion
 
         #region 流控制（握手协议或者通信控制协议）
         public bool _NoneEnable;

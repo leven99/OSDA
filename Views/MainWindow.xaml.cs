@@ -67,6 +67,48 @@ namespace OSerialPort
         #endregion
 
         /// <summary>
+        /// 选项 - RtsEnable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RtsEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.RtsEnable();
+        }
+
+        /// <summary>
+        /// 选项 - DtrEnable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DtrEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.DtrEnable();
+        }
+
+        #region 选项 - 流控制
+        private void NoneEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.NoneEnable();
+        }
+
+        private void RequestToSendEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.RequestToSendEnable();
+        }
+
+        private void XOnXOffEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.XOnXOffEnable();
+        }
+
+        private void RequestToSendXOnXOffEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.RequestToSendXOnXOffEnable();
+        }
+        #endregion
+
+        /// <summary>
         /// 帮助 - 检查更新
         /// </summary>
         /// <param name="sender"></param>

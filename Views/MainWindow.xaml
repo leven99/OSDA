@@ -29,17 +29,23 @@
                                   Click="UTF32MenuItem_Click"/>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"/>
-                    <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"/>
+                    <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"
+                              Click="RtsEnableMenuItem_Click"/>
+                    <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"
+                              Click="DtrEnableMenuItem_Click"/>
                     <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
                         <MenuItem x:Name="NoneMenuItem" Header="None"
-                                  IsChecked="{Binding SerialPortModel.NoneEnable}"/>
+                                  IsChecked="{Binding SerialPortModel.NoneEnable}"
+                                  Click="NoneEnableMenuItem_Click"/>
                         <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
-                                  IsChecked="{Binding SerialPortModel.RequestToSendEnable}"/>
+                                  IsChecked="{Binding SerialPortModel.RequestToSendEnable}"
+                                  Click="RequestToSendEnableMenuItem_Click"/>
                         <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
-                                  IsChecked="{Binding SerialPortModel.XOnXOffEnable}"/>
+                                  IsChecked="{Binding SerialPortModel.XOnXOffEnable}"
+                                  Click="XOnXOffEnableMenuItem_Click"/>
                         <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
-                                  IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"/>
+                                  IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"
+                                  Click="RequestToSendXOnXOffEnableMenuItem_Click"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
