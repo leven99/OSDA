@@ -43,67 +43,85 @@ namespace OSerialPort.Interface
         string GetCurrentValue();
 
         /// <summary>
-        /// 数据Buffer的追加处理
-        /// </summary>
-        event EventHandler<string> BufferAppendedHandler;
-
-        /// <summary>
         /// 数据Buffer的清空处理
         /// </summary>
-        event EventHandler<string> BufferClearingHandler;
+        event EventHandler<BufferClearingHandlerEventArgs> BufferClearingHandler;
+
+        /// <summary>
+        /// 数据Buffer的追加处理
+        /// </summary>
+        event EventHandler<BufferAppendedHandlerEventArgs> BufferAppendedHandler;
     }
     #endregion
 
     #region 接口实现
     class IClassTextBoxAppend : ITextBoxAppend
     {
-        private readonly StringBuilder _buffer = new StringBuilder();
+        readonly StringBuilder stringBuilder = new StringBuilder();
+
+        readonly BufferClearingHandlerEventArgs bufferClearingHandlerEventArgs =
+            new BufferClearingHandlerEventArgs();
+
+        readonly BufferAppendedHandlerEventArgs bufferAppendedHandlerEventArgs =
+            new BufferAppendedHandlerEventArgs();
 
         public void Delete()
         {
-            _buffer.Clear();
+            stringBuilder.Clear();
 
-            App.Current.Dispatcher.Invoke((Action)(() =>
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                BufferClearingHandler(this, " ");
-            }));
+                BufferClearingHandler(this, bufferClearingHandlerEventArgs);
+            });
         }
 
         public void Delete(int startIndex, int length)
         {
-            _buffer.Remove(startIndex, length);
+            stringBuilder.Remove(startIndex, length);
         }
 
         public void Append(string value)
         {
-            _buffer.Append(value);
+            stringBuilder.Append(value);
 
-            App.Current.Dispatcher.Invoke((Action)(() =>
+            bufferAppendedHandlerEventArgs.AppendedText = value;
+
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                BufferAppendedHandler(this, value);
-            }));
+                BufferAppendedHandler(this, bufferAppendedHandlerEventArgs);
+            });
         }
 
         public void Append(string value, int index)
         {
-            if (index == _buffer.Length)
+            if (index == stringBuilder.Length)
             {
-                _buffer.Append(value);
+                stringBuilder.Append(value);
             }
             else
             {
-                _buffer.Insert(index, value);
+                stringBuilder.Insert(index, value);
             }
         }
 
         public string GetCurrentValue()
         {
-            return _buffer.ToString();
+            return stringBuilder.ToString();
         }
 
-        public event EventHandler<string> BufferAppendedHandler;
+        public event EventHandler<BufferClearingHandlerEventArgs> BufferClearingHandler;
 
-        public event EventHandler<string> BufferClearingHandler;
+        public event EventHandler<BufferAppendedHandlerEventArgs> BufferAppendedHandler;
+    }
+
+    public class BufferClearingHandlerEventArgs : EventArgs
+    {
+        public string ClearingText { get; set; }
+    }
+
+    public class BufferAppendedHandlerEventArgs : EventArgs
+    {
+        public string AppendedText { get; set; }
     }
     #endregion
 }

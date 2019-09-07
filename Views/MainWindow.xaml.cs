@@ -209,18 +209,18 @@ namespace OSerialPort
 
             var detectChanges = true;
 
-            textBox.Text = textBuffer.GetCurrentValue();
-            textBuffer.BufferAppendedHandler += (sender, appendedText) =>
-            {
-                detectChanges = false;
-                textBox.AppendText(appendedText);
-                detectChanges = true;
-            };
-
             textBuffer.BufferClearingHandler += (sender, clearingText) =>
             {
                 detectChanges = false;
                 textBox.Clear();
+                detectChanges = true;
+            };
+
+            textBox.Text = textBuffer.GetCurrentValue();
+            textBuffer.BufferAppendedHandler += (sender, appendedText) =>
+            {
+                detectChanges = false;
+                textBox.AppendText(appendedText.AppendedText);
                 detectChanges = true;
             };
 
