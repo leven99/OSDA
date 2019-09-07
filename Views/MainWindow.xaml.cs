@@ -192,19 +192,29 @@ namespace OSerialPort
         #region 释放非托管资源（IDisposable）实现
         private bool disposedValue = false;
 
+        /// <summary>
+        /// 受保护的 Dispose 方法实现
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
+                    /* 释放托管资源 */
                     mainWindowViewModel.Dispose();
                 }
+
+                /* 释放非托管资源（如果有的话） */
 
                 disposedValue = true;
             }
         }
 
+        /// <summary>
+        /// mainWindowViewModel 字段 IDisposable 接口的 Dispose 方法实现（无参数）
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
