@@ -171,16 +171,23 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="CtsTextBlock" Text="Cts" Grid.Row="0" Grid.Column="0"
+                            <TextBlock x:Name="DcdTextBlock" Text="DCD" Grid.Row="0" Grid.Column="0"
                                        Style="{StaticResource HDTextBlock}" Margin="0,2,0,0"/>
-                            <Ellipse x:Name="CtsElipse" Grid.Row="0" Grid.Column="1"
-                                     Style="{StaticResource HDEilipse}"  Margin="0,2,9,0"
+                            <Ellipse x:Name="DcdElipse" Grid.Row="0" Grid.Column="1"
+                                     Style="{StaticResource HDEilipse}"  Margin="0,2,0,0"
+                                     Fill="{Binding SerialPortModel.DcdBrush}"/>
+                            <TextBlock x:Name="CtsTextBlock" Text="CTS" Grid.Row="0" Grid.Column="2"
+                                       Style="{StaticResource HDTextBlock}" Margin="0,2,0,0"/>
+                            <Ellipse x:Name="CtsElipse" Grid.Row="0" Grid.Column="3"
+                                     Style="{StaticResource HDEilipse}"  Margin="0,2,0,0"
                                      Fill="{Binding SerialPortModel.CtsBrush}"/>
-                            <TextBlock x:Name="DsrTextBlock" Text="Dsr" Grid.Row="0" Grid.Column="2"
-                                       Style="{StaticResource HDTextBlock}" Margin="0,2,11,0"/>
-                            <Ellipse x:Name="DsrElipse" Grid.Row="0" Grid.Column="3"
-                                     Style="{StaticResource HDEilipse}" Margin="0,2,13,0"
+                            <TextBlock x:Name="DsrTextBlock" Text="DSR" Grid.Row="0" Grid.Column="4"
+                                       Style="{StaticResource HDTextBlock}" Margin="0,2,0,0"/>
+                            <Ellipse x:Name="DsrElipse" Grid.Row="0" Grid.Column="5"
+                                     Style="{StaticResource HDEilipse}" Margin="0,2,0,0"
                                      Fill="{Binding SerialPortModel.DsrBrush}"/>
                         </Grid>
                     </GroupBox>

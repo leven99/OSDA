@@ -394,6 +394,23 @@ namespace OSerialPort.Models
         }
         #endregion
 
+        public Brush _DcdBrush;
+        public Brush DcdBrush
+        {
+            get
+            {
+                return _DcdBrush;
+            }
+            set
+            {
+                if (_DcdBrush != value)
+                {
+                    _DcdBrush = value;
+                    RaisePropertyChanged("DcdBrush");
+                }
+            }
+        }
+
         public Brush _CtsBrush;
         public Brush CtsBrush
         {
@@ -491,6 +508,7 @@ namespace OSerialPort.Models
             XOnXOffEnable = false;
             RequestToSendXOnXOffEnable = false;
 
+            DcdBrush = Brushes.Black;
             CtsBrush = Brushes.Black;
             DsrBrush = Brushes.Black;
         }

@@ -561,7 +561,7 @@ namespace OSerialPort.ViewModels
             InitAutoSendTimer();
         }
 
-        #region 释放非托管资源（IDisposable）实现
+        #region IDisposable 实现
         private bool disposedValue = false;
 
         /// <summary>
