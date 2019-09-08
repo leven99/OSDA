@@ -80,6 +80,7 @@
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.ReceHeader}" Grid.Row="0" Margin="5,0,2,0"
                               BorderBrush="#FF007ACD">
                         <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}"
+                                 TextChanged="ReceTextBox_TextChanged"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.ReceData}" IsReadOnly="True"
                                  Width="478" Height="278"/>
                     </GroupBox>

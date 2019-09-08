@@ -189,6 +189,13 @@ namespace OSerialPort
         }
         #endregion
 
+        #region Rece Text Changed 实现
+        private void ReceTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ReceTextBox.ScrollToEnd();
+        }
+        #endregion
+
         #region IDisposable 实现
         private bool disposedValue = false;
 
