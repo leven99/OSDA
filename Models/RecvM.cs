@@ -182,7 +182,7 @@ namespace OSerialPort.Models
             ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
         }
 
-        public void SaveReceData(string ReceData)
+        public async void SaveReceData(string ReceData)
         {
             try
             {
@@ -194,14 +194,14 @@ namespace OSerialPort.Models
                         AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt",
                         true))
                     {
-                        DefaultReceDataPath.WriteAsync(ReceData);
+                        await DefaultReceDataPath.WriteAsync(ReceData);
                     }
                 }
                 else
                 {
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecePath, true))
                     {
-                        DefaultReceDataPath.WriteAsync(ReceData);
+                        await DefaultReceDataPath.WriteAsync(ReceData);
                     }
                 }
             }
