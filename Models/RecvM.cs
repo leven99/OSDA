@@ -180,6 +180,11 @@ namespace OSerialPort.Models
             ReceDataCount += recvData.Length;
 
             ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+
+            if(ReceDataCount == 262144)
+            {
+                ReceData.Delete();   /* 262144KB = 256MB */
+            }
         }
 
         public async void SaveReceData(string ReceData)
