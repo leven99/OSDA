@@ -1,6 +1,7 @@
 ﻿using OSerialPort.Models;
 using System;
 using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -35,9 +36,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Encoding = System.Text.Encoding.ASCII;
                 }
             }
-            catch
+            catch(ArgumentException e)
             {
-                DepictInfo = "更改字节编码为ASCII异常";
+                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -56,9 +57,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Encoding = System.Text.Encoding.UTF8;
                 }
             }
-            catch
+            catch (ArgumentException e)
             {
-                DepictInfo = "更改字节编码为UTF-8异常";
+                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -77,9 +78,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Encoding = System.Text.Encoding.Unicode;
                 }
             }
-            catch
+            catch (ArgumentException e)
             {
-                DepictInfo = "更改字节编码为Unicode(UTF-16)异常";
+                DepictInfo = string.Format("设置字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -98,9 +99,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Encoding = System.Text.Encoding.UTF32;
                 }
             }
-            catch
+            catch (ArgumentException e)
             {
-                DepictInfo = "更改字节编码为UTF-32异常";
+                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
         #endregion
@@ -120,9 +121,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.RtsEnable = false;
                 }
             }
-            catch
+            catch(InvalidOperationException e)
             {
-                DepictInfo = "信号Rts启用异常";
+                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置RTS", e.HResult);
             }
         }
 
@@ -141,9 +142,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.DtrEnable = false;
                 }
             }
-            catch
+            catch (InvalidOperationException e)
             {
-                DepictInfo = "信号Dtr启用异常";
+                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置DTR", e.HResult);
             }
         }
 
@@ -163,9 +164,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.None;
                 }
             }
-            catch
+            catch(ArgumentOutOfRangeException e)
             {
-                DepictInfo = "更改流控制为None异常";
+                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -184,9 +185,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.RequestToSend;
                 }
             }
-            catch
+            catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = "更改流控制为Hardware异常";
+                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -205,9 +206,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.XOnXOff;
                 }
             }
-            catch
+            catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = "更改流控制为XOnXOff异常";
+                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -226,9 +227,9 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.RequestToSendXOnXOff;
                 }
             }
-            catch
+            catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = "更改流控制为Hardware and XOnXOff异常";
+                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
             }
         }
         #endregion
@@ -346,9 +347,33 @@ namespace OSerialPort.ViewModels
                     return false;
                 }
             }
-            catch
+            catch (UnauthorizedAccessException e)
             {
-                DepictInfo = "串行端口发生意外，打开失败，请检查线路";
+                DepictInfo = string.Format("[{0}]端口访问被拒绝", e.HResult);
+
+                return false;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                DepictInfo = string.Format("串口属性{0}是非法的", e.ParamName);
+
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                DepictInfo = string.Format("串口{0}不支持", e.ParamName);
+
+                return false;
+            }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]发生I/O错误", e.HResult);
+
+                return false;
+            }
+            catch (InvalidOperationException e)
+            {
+                DepictInfo = string.Format("[{0}]指定端口已经打开", e.HResult);
 
                 return false;
             }
@@ -386,9 +411,9 @@ namespace OSerialPort.ViewModels
                     return SPserialPort.IsOpen;
                 }
             }
-            catch
+            catch(IOException e)
             {
-                DepictInfo = "串行端口发生意外，关闭失败，请检查线路";
+                DepictInfo = string.Format("[{0}]发生I/O错误", e.HResult);
 
                 return false;
             }

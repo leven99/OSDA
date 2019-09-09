@@ -130,23 +130,16 @@ namespace OSerialPort.Models
 
         public void RecvPath()
         {
-            try
+            SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
-                SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
-                {
-                    Title = "接收数据路径选择",
-                    FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
-                    Filter = "文本文件|*.txt"
-                };
+                Title = "接收数据路径选择",
+                FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
+                Filter = "文本文件|*.txt"
+            };
 
-                if (ReceDataSaveFileDialog.ShowDialog() == true)
-                {
-                    DataRecePath = ReceDataSaveFileDialog.FileName;
-                }
-            }
-            catch
+            if (ReceDataSaveFileDialog.ShowDialog() == true)
             {
-                DepictInfo = "路径选择失败";
+                DataRecePath = ReceDataSaveFileDialog.FileName;
             }
         }
 
