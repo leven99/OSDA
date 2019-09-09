@@ -125,6 +125,10 @@ namespace OSerialPort.ViewModels
             {
                 DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置RTS", e.HResult);
             }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+            }
         }
 
         public void DtrEnable()
@@ -146,6 +150,10 @@ namespace OSerialPort.ViewModels
             {
                 DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置DTR", e.HResult);
             }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+            }
         }
 
         #region 选项 - 流控制
@@ -164,7 +172,11 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.None;
                 }
             }
-            catch(ArgumentOutOfRangeException e)
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+            }
+            catch (ArgumentOutOfRangeException e)
             {
                 DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
             }
@@ -184,6 +196,10 @@ namespace OSerialPort.ViewModels
                 {
                     SPserialPort.Handshake = Handshake.RequestToSend;
                 }
+            }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -206,6 +222,10 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.XOnXOff;
                 }
             }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+            }
             catch (ArgumentOutOfRangeException e)
             {
                 DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
@@ -226,6 +246,10 @@ namespace OSerialPort.ViewModels
                 {
                     SPserialPort.Handshake = Handshake.RequestToSendXOnXOff;
                 }
+            }
+            catch (IOException e)
+            {
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -367,7 +391,7 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]发生I/O错误", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
 
                 return false;
             }
@@ -413,7 +437,7 @@ namespace OSerialPort.ViewModels
             }
             catch(IOException e)
             {
-                DepictInfo = string.Format("[{0}]发生I/O错误", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
 
                 return false;
             }
