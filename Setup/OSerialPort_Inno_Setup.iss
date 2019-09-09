@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSerialPort"
-#define MyAppVersion "2.1.0"
-#define MyVersionInfoVersion "2.1.0.2"
+#define MyAppVersion "2.2.0"
+#define MyVersionInfoVersion "2.2.0.21"
 #define MyAppExeName "OSerialPort.exe"
 #define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
@@ -28,9 +28,9 @@ OutputDir=.\
 SetupIconFile=.\favicon.ico
 #ifdef WINDOWS_X64
   ArchitecturesInstallIn64BitMode=x64
-  OutputBaseFilename=OSerialPort_Windows_V2.1.0_x64
+  OutputBaseFilename=OSerialPort_Windows_V2.2.0_x64
 #else
-  OutputBaseFilename=OSerialPort_Windows_V2.1.0_x86
+  OutputBaseFilename=OSerialPort_Windows_V2.2.0_x86
 #endif
 Compression=lzma
 SolidCompression=yes
