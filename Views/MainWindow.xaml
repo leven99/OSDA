@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSerialPort"
         mc:Ignorable="d"
-        Title="OSrtialPort" WindowStartupLocation="CenterScreen"
+        Title="OSerialPort" WindowStartupLocation="CenterScreen"
         Icon="/OSerialPort;component/icon/favicon.ico" SizeToContent="Width" ResizeMode="CanMinimize">
     <Viewbox x:Name="RootViewbox">
         <DockPanel x:Name="RootDockPanel">
