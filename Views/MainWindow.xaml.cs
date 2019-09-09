@@ -231,7 +231,7 @@ namespace OSerialPort
     }
 
     #region 用于MVVM模型下TextBox控件的Append Text实现
-    public class MvvmTextBox
+    public static class MvvmTextBox
     {
         public static readonly DependencyProperty BufferProperty =
             DependencyProperty.RegisterAttached(
