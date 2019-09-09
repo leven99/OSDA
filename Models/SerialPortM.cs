@@ -25,7 +25,7 @@ namespace OSerialPort.Models
                 if (_SPPort != value)
                 {
                     _SPPort = value;
-                    RaisePropertyChanged("SPPort");
+                    RaisePropertyChanged(nameof(SPPort));
                 }
             }
         }
@@ -42,7 +42,7 @@ namespace OSerialPort.Models
                 if (_SPBaudRate != value)
                 {
                     _SPBaudRate = value;
-                    RaisePropertyChanged("SPBaudRate");
+                    RaisePropertyChanged(nameof(SPBaudRate));
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace OSerialPort.Models
                 if (_SPDataBits != value)
                 {
                     _SPDataBits = value;
-                    RaisePropertyChanged("SPDataBits");
+                    RaisePropertyChanged(nameof(SPDataBits));
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace OSerialPort.Models
                 if (_SPStopBits != value)
                 {
                     _SPStopBits = value;
-                    RaisePropertyChanged("SPStopbit");
+                    RaisePropertyChanged(nameof(SPStopBits));
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace OSerialPort.Models
                 if (_SPParity != value)
                 {
                     _SPParity = value;
-                    RaisePropertyChanged("SPParity");
+                    RaisePropertyChanged(nameof(SPParity));
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace OSerialPort.Models
                 if (_SPBrush != value)
                 {
                     _SPBrush = value;
-                    RaisePropertyChanged("SPBrush");
+                    RaisePropertyChanged(nameof(SPBrush));
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace OSerialPort.Models
                 if (_OpenCloseSP != value)
                 {
                     _OpenCloseSP = value;
-                    RaisePropertyChanged("OpenCloseSP");
+                    RaisePropertyChanged(nameof(OpenCloseSP));
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace OSerialPort.Models
                 if (_SPPortEnable != value)
                 {
                     _SPPortEnable = value;
-                    RaisePropertyChanged("SPPortEnable");
+                    RaisePropertyChanged(nameof(SPPortEnable));
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace OSerialPort.Models
                 if (_SPBaudRateEnable != value)
                 {
                     _SPBaudRateEnable = value;
-                    RaisePropertyChanged("SPBaudRateEnable");
+                    RaisePropertyChanged(nameof(SPBaudRateEnable));
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace OSerialPort.Models
                 if (_SPDataBitsEnable != value)
                 {
                     _SPDataBitsEnable = value;
-                    RaisePropertyChanged("SPDataBitsEnable");
+                    RaisePropertyChanged(nameof(SPDataBitsEnable));
                 }
             }
         }
@@ -197,7 +197,7 @@ namespace OSerialPort.Models
                 if (_SPStopBitsEnable != value)
                 {
                     _SPStopBitsEnable = value;
-                    RaisePropertyChanged("SPStopBitsEnable");
+                    RaisePropertyChanged(nameof(SPStopBitsEnable));
                 }
             }
         }
@@ -214,7 +214,7 @@ namespace OSerialPort.Models
                 if (_SPParityEnable != value)
                 {
                     _SPParityEnable = value;
-                    RaisePropertyChanged("SPParityEnable");
+                    RaisePropertyChanged(nameof(SPParityEnable));
                 }
             }
         }
@@ -233,7 +233,7 @@ namespace OSerialPort.Models
                 if(_ASCIIEnable != value)
                 {
                     _ASCIIEnable = value;
-                    RaisePropertyChanged("ASCIIEnable");
+                    RaisePropertyChanged(nameof(ASCIIEnable));
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace OSerialPort.Models
                 if (_UTF8Enable != value)
                 {
                     _UTF8Enable = value;
-                    RaisePropertyChanged("UTF8Enable");
+                    RaisePropertyChanged(nameof(UTF8Enable));
                 }
             }
         }
@@ -267,7 +267,7 @@ namespace OSerialPort.Models
                 if (_UTF16Enable != value)
                 {
                     _UTF16Enable = value;
-                    RaisePropertyChanged("UTF16Enable");
+                    RaisePropertyChanged(nameof(UTF16Enable));
                 }
             }
         }
@@ -284,7 +284,7 @@ namespace OSerialPort.Models
                 if (_UTF32Enable != value)
                 {
                     _UTF32Enable = value;
-                    RaisePropertyChanged("UTF32Enable");
+                    RaisePropertyChanged(nameof(UTF32Enable));
                 }
             }
         }
@@ -302,7 +302,7 @@ namespace OSerialPort.Models
                 if (_DtrEnable != value)
                 {
                     _DtrEnable = value;
-                    RaisePropertyChanged("DtrEnable");
+                    RaisePropertyChanged(nameof(DtrEnable));
                 }
             }
         }
@@ -319,7 +319,7 @@ namespace OSerialPort.Models
                 if (_RtsEnable != value)
                 {
                     _RtsEnable = value;
-                    RaisePropertyChanged("RtsEnable");
+                    RaisePropertyChanged(nameof(RtsEnable));
                 }
             }
         }
@@ -337,7 +337,7 @@ namespace OSerialPort.Models
                 if(_NoneEnable != value)
                 {
                     _NoneEnable = value;
-                    RaisePropertyChanged("NoneEnable");
+                    RaisePropertyChanged(nameof(NoneEnable));
                 }
             }
         }
@@ -354,7 +354,7 @@ namespace OSerialPort.Models
                 if (_RequestToSendEnable != value)
                 {
                     _RequestToSendEnable = value;
-                    RaisePropertyChanged("RequestToSendEnable");
+                    RaisePropertyChanged(nameof(RequestToSendEnable));
                 }
             }
         }
@@ -371,7 +371,7 @@ namespace OSerialPort.Models
                 if (_XOnXOffEnable != value)
                 {
                     _XOnXOffEnable = value;
-                    RaisePropertyChanged("XOnXOffEnable");
+                    RaisePropertyChanged(nameof(XOnXOffEnable));
                 }
             }
         }
@@ -388,7 +388,7 @@ namespace OSerialPort.Models
                 if (_RequestToSendXOnXOffEnable != value)
                 {
                     _RequestToSendXOnXOffEnable = value;
-                    RaisePropertyChanged("RequestToSendXOnXOffEnable");
+                    RaisePropertyChanged(nameof(RequestToSendXOnXOffEnable));
                 }
             }
         }
@@ -407,7 +407,7 @@ namespace OSerialPort.Models
                 if (_DcdBrush != value)
                 {
                     _DcdBrush = value;
-                    RaisePropertyChanged("DcdBrush");
+                    RaisePropertyChanged(nameof(DcdBrush));
                 }
             }
         }
@@ -424,7 +424,7 @@ namespace OSerialPort.Models
                 if (_CtsBrush != value)
                 {
                     _CtsBrush = value;
-                    RaisePropertyChanged("CtsBrush");
+                    RaisePropertyChanged(nameof(CtsBrush));
                 }
             }
         }
@@ -441,7 +441,7 @@ namespace OSerialPort.Models
                 if (_DsrBrush != value)
                 {
                     _DsrBrush = value;
-                    RaisePropertyChanged("DsrBrush");
+                    RaisePropertyChanged(nameof(DsrBrush));
                 }
             }
         }

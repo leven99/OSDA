@@ -27,7 +27,7 @@ namespace OSerialPort.Models
                 if (_RecvDataCount != value)
                 {
                     _RecvDataCount = value;
-                    RaisePropertyChanged("RecvDataCount");
+                    RaisePropertyChanged(nameof(RecvDataCount));
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace OSerialPort.Models
                 if (_RecvAutoSave != value)
                 {
                     _RecvAutoSave = value;
-                    RaisePropertyChanged("RecvAutoSave");
+                    RaisePropertyChanged(nameof(RecvAutoSave));
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace OSerialPort.Models
                 if (_RecvHeader != value)
                 {
                     _RecvHeader = value;
-                    RaisePropertyChanged("RecvHeader");
+                    RaisePropertyChanged(nameof(RecvHeader));
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace OSerialPort.Models
                 if (_RecvData != value)
                 {
                     _RecvData = value;
-                    RaisePropertyChanged("RecvData");
+                    RaisePropertyChanged(nameof(RecvData));
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace OSerialPort.Models
                 if (_HexRecv != value)
                 {
                     _HexRecv = value;
-                    RaisePropertyChanged("HexRecv");
+                    RaisePropertyChanged(nameof(HexRecv));
                 }
             }
         }
@@ -112,7 +112,7 @@ namespace OSerialPort.Models
                 if (_SaveRecv != value)
                 {
                     _SaveRecv = value;
-                    RaisePropertyChanged("SaveRecv");
+                    RaisePropertyChanged(nameof(SaveRecv));
                 }
 
                 if (SaveRecv == true)

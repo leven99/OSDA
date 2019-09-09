@@ -14,7 +14,7 @@ namespace OSerialPort.Models
             set
             {
                 _VerInfo = value;
-                RaisePropertyChanged("VerInfo");
+                RaisePropertyChanged(nameof(VerInfo));
             }
         }
 

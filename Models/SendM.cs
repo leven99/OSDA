@@ -17,7 +17,7 @@ namespace OSerialPort.Models
                 if (_SendHeader != value)
                 {
                     _SendHeader = value;
-                    RaisePropertyChanged("SendHeader");
+                    RaisePropertyChanged(nameof(SendHeader));
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace OSerialPort.Models
                 if (_SendDataCount != value)
                 {
                     _SendDataCount = value;
-                    RaisePropertyChanged("SendDataCount");
+                    RaisePropertyChanged(nameof(SendDataCount));
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace OSerialPort.Models
                 if (_SendData != value)
                 {
                     _SendData = value;
-                    RaisePropertyChanged("SendData");
+                    RaisePropertyChanged(nameof(SendData));
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace OSerialPort.Models
                 if (_HexSend != value)
                 {
                     _HexSend = value;
-                    RaisePropertyChanged("HexSend");
+                    RaisePropertyChanged(nameof(HexSend));
 
                     if (HexSend == true)
                     {
@@ -94,7 +94,7 @@ namespace OSerialPort.Models
                 if (_AutoSendNum != value)
                 {
                     _AutoSendNum = value;
-                    RaisePropertyChanged("AutoSendNum");
+                    RaisePropertyChanged(nameof(AutoSendNum));
                 }
             }
         }

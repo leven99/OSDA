@@ -18,7 +18,7 @@ namespace OSerialPort.Models
                 if (_SystemTime != value)
                 {
                     _SystemTime = value;
-                    RaisePropertyChanged("SystemTime");
+                    RaisePropertyChanged(nameof(SystemTime));
                 }
             }
         }
