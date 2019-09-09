@@ -38,7 +38,7 @@ namespace OSerialPort.Models
             SystemTime = SystemTimeData();
         }
 
-        public string SystemTimeData()
+        public static string SystemTimeData()
         {
             string SystemTime;
             DateTime systemTime = DateTime.Now;
