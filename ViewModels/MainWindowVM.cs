@@ -373,9 +373,9 @@ namespace OSerialPort.ViewModels
                     SerialPortModel.SPStopBitsEnable = true;
                     SerialPortModel.SPParityEnable = true;
 
-                    RecvModel.ReceAutoSave = "已停止";
-                    RecvModel.ReceHeader = "接收区：已接收" + RecvModel.ReceDataCount +
-                            "字节，接收自动保存[" + RecvModel.ReceAutoSave + "]";
+                    RecvModel.RecvAutoSave = "已停止";
+                    RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
+                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
 
                     return SPserialPort.IsOpen;
                 }
@@ -510,16 +510,18 @@ namespace OSerialPort.ViewModels
         #endregion
 
         #region 路径选择
-        public void SaveRecePath()
+        public void SaveRecvPath()
         {
-            RecvModel.RecePath();
+            RecvModel.RecvPath();
         }
         #endregion
 
         #region 清接收区
         public void ClarReceData()
         {
-            RecvModel.ReceData.Delete();
+            RecvModel.RecvData.Delete();
+
+            RecvModel.RecvDataDeleteCount = 1;
         }
         #endregion
 
@@ -533,8 +535,8 @@ namespace OSerialPort.ViewModels
         #region 清空计数
         public void ClearCount()
         {
-            RecvModel.ReceDataCount = 0;
-            RecvModel.ReceHeader = "接收区：已接收" + RecvModel.ReceDataCount + "字节，接收自动保存[" + RecvModel.ReceAutoSave + "]";
+            RecvModel.RecvDataCount = 0;
+            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount + "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
 
             SendModel.SendDataCount = 0;
         }

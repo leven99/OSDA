@@ -9,124 +9,126 @@ namespace OSerialPort.Models
 {
     public class RecvModel : MainWindowBase
     {
-        #region 字段定义
         public string DataRecePath = null;
-        #endregion
+        /// <summary>
+        /// 接收区自动清空计数
+        /// </summary>
+        public int RecvDataDeleteCount = 1;
 
-        public int _ReceDataCount;
-        public int ReceDataCount
+        public int _RecvDataCount;
+        public int RecvDataCount
         {
             get
             {
-                return _ReceDataCount;
+                return _RecvDataCount;
             }
             set
             {
-                if (_ReceDataCount != value)
+                if (_RecvDataCount != value)
                 {
-                    _ReceDataCount = value;
-                    RaisePropertyChanged("ReceDataCount");
+                    _RecvDataCount = value;
+                    RaisePropertyChanged("RecvDataCount");
                 }
             }
         }
 
-        public string _ReceAutoSave;
-        public string ReceAutoSave
+        public string _RecvAutoSave;
+        public string RecvAutoSave
         {
             get
             {
-                return _ReceAutoSave;
+                return _RecvAutoSave;
             }
             set
             {
-                if (_ReceAutoSave != value)
+                if (_RecvAutoSave != value)
                 {
-                    _ReceAutoSave = value;
-                    RaisePropertyChanged("ReceAutoSave");
+                    _RecvAutoSave = value;
+                    RaisePropertyChanged("RecvAutoSave");
                 }
             }
         }
 
-        public string _ReceHeader;
-        public string ReceHeader
+        public string _RecvHeader;
+        public string RecvHeader
         {
             get
             {
-                return _ReceHeader;
+                return _RecvHeader;
             }
             set
             {
-                if (_ReceHeader != value)
+                if (_RecvHeader != value)
                 {
-                    _ReceHeader = value;
-                    RaisePropertyChanged("ReceHeader");
+                    _RecvHeader = value;
+                    RaisePropertyChanged("RecvHeader");
                 }
             }
         }
 
-        public ITextBoxAppend _ReceData;
-        public ITextBoxAppend ReceData
+        public ITextBoxAppend _RecvData;
+        public ITextBoxAppend RecvData
         {
             get
             {
-                return _ReceData;
+                return _RecvData;
             }
             set
             {
-                if (_ReceData != value)
+                if (_RecvData != value)
                 {
-                    _ReceData = value;
-                    RaisePropertyChanged("ReceData");
+                    _RecvData = value;
+                    RaisePropertyChanged("RecvData");
                 }
             }
         }
 
-        public bool _HexRece;
-        public bool HexRece
+        public bool _HexRecv;
+        public bool HexRecv
         {
             get
             {
-                return _HexRece;
+                return _HexRecv;
             }
             set
             {
-                if (_HexRece != value)
+                if (_HexRecv != value)
                 {
-                    _HexRece = value;
-                    RaisePropertyChanged("HexRece");
+                    _HexRecv = value;
+                    RaisePropertyChanged("HexRecv");
                 }
             }
         }
 
-        public bool _SaveRece;
-        public bool SaveRece
+        public bool _SaveRecv;
+        public bool SaveRecv
         {
             get
             {
-                return _SaveRece;
+                return _SaveRecv;
             }
             set
             {
-                if (_SaveRece != value)
+                if (_SaveRecv != value)
                 {
-                    _SaveRece = value;
-                    RaisePropertyChanged("SaveRece");
+                    _SaveRecv = value;
+                    RaisePropertyChanged("SaveRecv");
                 }
 
-                if (SaveRece == true)
+                if (SaveRecv == true)
                 {
                     DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
                 }
                 else
                 {
                     DepictInfo = "串行端口调试助手";
-                    ReceAutoSave = "已停止";
+                    RecvAutoSave = "已停止";
 
                 }
             }
         }
 
-        public void RecePath()
+        public void RecvPath()
         {
             try
             {
@@ -154,40 +156,42 @@ namespace OSerialPort.Models
 
             string recvData = _SerialPort.ReadExisting();
 
-            if (HexRece)
+            if (HexRecv)
             {
                 foreach (char tmp in recvData.ToCharArray())
                 {
-                    ReceData.Append(string.Format("{0:X2} ", Convert.ToInt32(tmp)));
+                    RecvData.Append(string.Format("{0:X2} ", Convert.ToInt32(tmp)));
                 }
             }
             else
             {
-                ReceData.Append(recvData);
+                RecvData.Append(recvData);
             }
 
-            if (SaveRece)
+            if (SaveRecv)
             {
-                ReceAutoSave = "保存中";
+                RecvAutoSave = "保存中";
 
-                SaveReceData(recvData);
+                SaveRecvData(recvData);
             }
             else
             {
-                ReceAutoSave = "已停止";
+                RecvAutoSave = "已停止";
             }
 
-            ReceDataCount += recvData.Length;
+            RecvDataCount += recvData.Length;
 
-            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]";
 
-            if(ReceDataCount > 65535)
+            if(RecvDataCount > (32768 * RecvDataDeleteCount))
             {
-                ReceData.Delete();   /* 64MB */
+                RecvData.Delete();   /* 32MB */
+
+                RecvDataDeleteCount += 1;
             }
         }
 
-        public async void SaveReceData(string ReceData)
+        public async void SaveRecvData(string ReceData)
         {
             try
             {
@@ -218,13 +222,13 @@ namespace OSerialPort.Models
 
         public void RecvDataContext()
         {
-            ReceData = new IClassTextBoxAppend();
-            ReceDataCount = 0;
-            ReceAutoSave = "已停止";
-            ReceHeader = "接收区：已接收" + ReceDataCount + "字节，接收自动保存[" + ReceAutoSave + "]";
+            RecvData = new IClassTextBoxAppend();
+            RecvDataCount = 0;
+            RecvAutoSave = "已停止";
+            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]";
 
-            HexRece = false;
-            SaveRece = false;
+            HexRecv = false;
+            SaveRecv = false;
         }
     }
 }

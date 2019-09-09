@@ -162,9 +162,9 @@ namespace OSerialPort
         #endregion
 
         #region 路径选择
-        private void SaveRecePath(object sender, RoutedEventArgs e)
+        private void SaveRecvPath(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.SaveRecePath();
+            mainWindowViewModel.SaveRecvPath();
         }
         #endregion
 
