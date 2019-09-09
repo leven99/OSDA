@@ -493,7 +493,7 @@ namespace OSerialPort.ViewModels
                     if (_AutoSend != value)
                     {
                         _AutoSend = value;
-                        RaisePropertyChanged("AutoSend");
+                        RaisePropertyChanged(nameof(AutoSend));
                     }
 
                     if (AutoSend == true)
