@@ -18,7 +18,7 @@ namespace OSerialPort.ViewModels
                 if (_DepictInfo != value)
                 {
                     _DepictInfo = value;
-                    RaisePropertyChanged("DepictInfo");
+                    RaisePropertyChanged(nameof(DepictInfo));
                 }
             }
         }

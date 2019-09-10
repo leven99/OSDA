@@ -189,14 +189,14 @@ namespace OSerialPort
         }
         #endregion
 
-        #region Rece Text Changed 实现
+        #region 接收区滚动到最后一行实现
         private void ReceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ReceTextBox.ScrollToEnd();
         }
         #endregion
 
-        #region IDisposable 实现
+        #region 释放非托管资源实现
         private bool disposedValue = false;
 
         /// <summary>

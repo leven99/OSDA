@@ -12,7 +12,7 @@ namespace OSerialPort.Models
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
 
-        #region 串口配置
+        #region 串口属性
         public string _SPPort;
         public string SPPort
         {
@@ -133,7 +133,7 @@ namespace OSerialPort.Models
             }
         }
 
-        #region 串口配置控件启用/不启用
+        #region 串口属性控件[启用/不启用]，用于实现串口打开时不允许更改串口属性
         public bool _SPPortEnable;
         public bool SPPortEnable
         {
@@ -324,7 +324,7 @@ namespace OSerialPort.Models
             }
         }
 
-        #region 流控制（握手协议或者通信控制协议）
+        #region 流控制
         public bool _NoneEnable;
         public bool NoneEnable
         {
@@ -488,6 +488,7 @@ namespace OSerialPort.Models
             }
         }
 
+        #region 计算停止位和校验位
         public StopBits GetStopBits(string emp)
         {
             StopBits stopBits = StopBits.One;
@@ -515,6 +516,7 @@ namespace OSerialPort.Models
             }
             return parity;
         }
+        #endregion
 
         public void SerialPortDataContext()
         {
@@ -532,12 +534,14 @@ namespace OSerialPort.Models
             SPBrush = Brushes.Red;
             OpenCloseSP = "打开串口";
 
+            /* 串口属性控件 */
             SPPortEnable = true;
             SPBaudRateEnable = true;
             SPDataBitsEnable = true;
             SPStopBitsEnable = true;
             SPParityEnable = true;
 
+            /* 字节编码 */
             ASCIIEnable = false;
             UTF8Enable = true;
             UTF16Enable = false;
@@ -546,11 +550,13 @@ namespace OSerialPort.Models
             DtrEnable = false;
             RtsEnable = false;
 
+            /* 流控制 */
             NoneEnable = true;
             RequestToSendEnable = false;
             XOnXOffEnable = false;
             RequestToSendXOnXOffEnable = false;
 
+            /* 信号状态 */
             DcdBrush = Brushes.Black;
             CtsBrush = Brushes.Black;
             DsrBrush = Brushes.Black;

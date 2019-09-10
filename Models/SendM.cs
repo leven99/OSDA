@@ -56,6 +56,7 @@ namespace OSerialPort.Models
             }
         }
 
+        /* 辅助区 - 十六进制发送 */
         public bool _HexSend;
         public bool HexSend
         {
@@ -82,6 +83,7 @@ namespace OSerialPort.Models
             }
         }
 
+        /* 辅助区 - 自送发送的时间间隔 */
         public int _AutoSendNum;
         public int AutoSendNum
         {

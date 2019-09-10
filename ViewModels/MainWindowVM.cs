@@ -263,7 +263,7 @@ namespace OSerialPort.ViewModels
         /// </summary>
         public void Update()
         {
-
+            /* 未实现 */
         }
         #endregion
 
@@ -344,6 +344,7 @@ namespace OSerialPort.ViewModels
 
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(RecvModel.SerialPort_DataReceived);
 
+                /* 检测串口信号状态事件 */
                 SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortModel.SerialPort_PinChanged);
 
                 SPserialPort.Open();
@@ -483,6 +484,7 @@ namespace OSerialPort.ViewModels
                     {
                         int cnt = 0;
                         string[] _sendData = SendModel.SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
                         char[] sendData = new char[_sendData.Length];
 
                         foreach (var tmp in _sendData)
@@ -614,7 +616,7 @@ namespace OSerialPort.ViewModels
             InitAutoSendTimer();
         }
 
-        #region IDisposable 实现
+        #region 释放非托管资源实现
         private bool disposedValue = false;
 
         /// <summary>

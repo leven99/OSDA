@@ -11,7 +11,7 @@ namespace OSerialPort.Models
     {
         public string DataRecePath = null;
         /// <summary>
-        /// 接收区自动清空计数
+        /// 用于实现接收区数据超过32MB时，自动清空接收控件中的内容
         /// </summary>
         public int RecvDataDeleteCount = 1;
 
@@ -32,6 +32,7 @@ namespace OSerialPort.Models
             }
         }
 
+        /* 接收区Header中的 [保存中/已停止] 字符串 */
         public string _RecvAutoSave;
         public string RecvAutoSave
         {
@@ -83,6 +84,7 @@ namespace OSerialPort.Models
             }
         }
 
+        /* 辅助区 - 十六进制接收 */
         public bool _HexRecv;
         public bool HexRecv
         {
@@ -100,6 +102,7 @@ namespace OSerialPort.Models
             }
         }
 
+        /* 辅助区 - 保存接收 */
         public bool _SaveRecv;
         public bool SaveRecv
         {
