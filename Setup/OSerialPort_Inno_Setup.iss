@@ -8,9 +8,10 @@
 #define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
 
-#define WINDOWS_X64
+; x64(64bit) and x86(32 bit)
+#define x_64
 
-; VS2017 and VS2019
+; Visual Studio 2017 and Visual Studio 2019
 ;#define VS2017
 
 [Setup]
@@ -26,11 +27,11 @@ DefaultGroupName=OSerialPort
 DisableProgramGroupPage=auto
 OutputDir=.\
 SetupIconFile=.\favicon.ico
-#ifdef WINDOWS_X64
+#ifdef x_64
   ArchitecturesInstallIn64BitMode=x64
-  OutputBaseFilename=OSerialPort_Windows_V2.2.0_x64
+  OutputBaseFilename=OSerialPort_Windows_V{#MyAppVersion}_x64
 #else
-  OutputBaseFilename=OSerialPort_Windows_V2.2.0_x86
+  OutputBaseFilename=OSerialPort_Windows_V{#MyAppVersion}_x86
 #endif
 Compression=lzma
 SolidCompression=yes
@@ -45,16 +46,20 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+
+; Visual Studio 2017
 #ifdef VS2017
-#ifdef WINDOWS_X64
+#ifdef x_64
   Source: "..\msvc\VS2017\bin\x64\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2017\bin\x64\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #else
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2017\bin\x86\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
+
+; Visual Studio 2019
 #else
-#ifdef WINDOWS_X64
+#ifdef x_64
   Source: "..\msvc\VS2019\bin\x64\Release\OSerialPort.exe"; DestDir: "{app}"; Flags: ignoreversion
   Source: "..\msvc\VS2019\bin\x64\Release\OSerialPort.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #else
