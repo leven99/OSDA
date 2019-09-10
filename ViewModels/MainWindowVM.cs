@@ -549,6 +549,12 @@ namespace OSerialPort.ViewModels
 
                     if (AutoSend == true)
                     {
+                        if(SendModel.AutoSendNum <= 0)
+                        {
+                            DepictInfo = "请输入正确的发送时间间隔";
+                            return;
+                        }
+
                         StartAutoSendTimer(SendModel.AutoSendNum);
                     }
                     else
