@@ -6,7 +6,7 @@ namespace OSerialPort.ViewModels
 {
     public class MainWindowBase : INotifyPropertyChanged
     {
-        string _DepictInfo;
+        public string _DepictInfo;
         public string DepictInfo
         {
             get

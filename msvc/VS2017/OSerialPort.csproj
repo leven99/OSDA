@@ -95,6 +95,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -116,23 +117,26 @@
     <Compile Include="..\..\ViewModels\MainWindowVM.cs">
       <Link>ViewModels\MainWindowVM.cs</Link>
     </Compile>
+    <Compile Include="..\..\ViewModels\MainWindowBase.cs">
+      <Link>ViewModels\MainWindowBase.cs</Link>
+    </Compile>
+	<Compile Include="..\..\ViewModels\WPFUpdateVM.cs" >
+	  <Link>ViewModels\WPFUpdateVM.cs</Link>
+	</Compile>
     <Compile Include="..\..\Models\TimerM.cs">
       <Link>Models\TimerM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\HelpM.cs">
+    <Compile Include="..\..\Models\HelpM.cs">
       <Link>Models\HelpM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\RecvM.cs">
+    <Compile Include="..\..\Models\RecvM.cs">
       <Link>Models\RecvM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\SendM.cs">
+    <Compile Include="..\..\Models\SendM.cs">
       <Link>Models\SendM.cs</Link>
     </Compile>
-	<Compile Include="..\..\Models\SerialPortM.cs">
+    <Compile Include="..\..\Models\SerialPortM.cs">
       <Link>Models\SerialPortM.cs</Link>
-    </Compile>
-    <Compile Include="..\..\ViewModels\MainWindowBase.cs">
-      <Link>ViewModels\MainWindowBase.cs</Link>
     </Compile>
     <Compile Include="..\..\Interface\ITextBoxAppend.cs">
       <Link>Interface\ITextBoxAppend.cs</Link>
@@ -142,14 +146,24 @@
       <SubType>Designer</SubType>
       <Link>Views\MainWindow.xaml</Link>
     </Page>
-    <Compile Include="..\..\App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="..\..\Views\WPFUpdate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+	  <Link>Views\WPFUpdate.xaml</Link>
+    </Page>
     <Compile Include="..\..\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
       <Link>Views\MainWindow.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Views\WPFUpdate.xaml.cs">
+      <DependentUpon>WPFUpdate.xaml</DependentUpon>
+	  <SubType>Code</SubType>
+	  <Link>Views\WPFUpdate.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

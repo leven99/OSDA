@@ -9,7 +9,7 @@ namespace OSerialPort
 {
     public partial class MainWindow : Window, IDisposable
     {
-        private readonly MainWindowViewModel mainWindowViewModel = null;
+        private MainWindowViewModel mainWindowViewModel = null;
 
         public MainWindow()
         {
@@ -116,7 +116,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void VerUpMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.Update();
+            mainWindowViewModel.UpdateAsync();
         }
 
         /// <summary>
@@ -189,14 +189,14 @@ namespace OSerialPort
         }
         #endregion
 
-        #region 接收区滚动到最后一行实现
-        private void ReceTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        #region RecvTextBox ScrollToEnd Support
+        private void RecvTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ReceTextBox.ScrollToEnd();
+            RecvTextBox.ScrollToEnd();
         }
         #endregion
 
-        #region 释放非托管资源实现
+        #region IDisposable Support
         private bool disposedValue = false;
 
         /// <summary>
@@ -209,11 +209,11 @@ namespace OSerialPort
             {
                 if (disposing)
                 {
-                    /* 释放托管资源 */
-                    mainWindowViewModel.Dispose();
+                    /* 释放托管资源（如果需要） */
                 }
 
-                /* 释放非托管资源（如果有的话） */
+                mainWindowViewModel.Dispose();
+                mainWindowViewModel = null;
 
                 disposedValue = true;
             }
@@ -230,7 +230,7 @@ namespace OSerialPort
         #endregion
     }
 
-    #region 用于MVVM模型下TextBox控件的Append Text实现
+    #region RecvTextBox Append Text Support
     public static class MvvmTextBox
     {
         public static readonly DependencyProperty BufferProperty =

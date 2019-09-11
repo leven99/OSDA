@@ -1,4 +1,5 @@
 ﻿using OSerialPort.Models;
+using OSerialPort.Views;
 using System;
 using System.Globalization;
 using System.IO;
@@ -123,11 +124,11 @@ namespace OSerialPort.ViewModels
             }
             catch(InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置RTS", e.HResult);
+                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置RTS", e.HResult.ToString("X"));
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
         }
 
@@ -148,11 +149,11 @@ namespace OSerialPort.ViewModels
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置DTR", e.HResult);
+                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置DTR", e.HResult.ToString("X"));
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
         }
 
@@ -174,7 +175,7 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -199,7 +200,7 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -224,7 +225,7 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -249,7 +250,7 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -261,9 +262,29 @@ namespace OSerialPort.ViewModels
         /// <summary>
         /// 帮助 - 检查更新
         /// </summary>
-        public void Update()
+        public async void UpdateAsync()
         {
-            /* 未实现 */
+            HelpModel.UpdateVerInfoNumber = await HelpModel.UpdateInfoAsync();
+
+            if(HelpModel.UpdateVerInfoNumber == "_HttpRequestException")
+            {
+                DepictInfo = string.Format("网络连接失败，请检查网络或稍后重试......");
+            }
+            else
+            {
+                if (HelpModel.UpdateVerInfoNumber == HelpModel.VerInfoNumber)
+                {
+                    DepictInfo = "OSerialPort v" + HelpModel.VerInfoNumber + "已经是最新版";
+                }
+                else
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        WPFUpdate wPFUpdate = new WPFUpdate();
+                        wPFUpdate.ShowDialog();
+                    });
+                }
+            }
         }
         #endregion
 
@@ -374,7 +395,7 @@ namespace OSerialPort.ViewModels
             }
             catch (UnauthorizedAccessException e)
             {
-                DepictInfo = string.Format("[{0}]端口访问被拒绝", e.HResult);
+                DepictInfo = string.Format("[{0}]端口访问被拒绝", e.HResult.ToString("X"));
 
                 return false;
             }
@@ -392,13 +413,13 @@ namespace OSerialPort.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
 
                 return false;
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]指定端口已经打开", e.HResult);
+                DepictInfo = string.Format("[{0}]指定端口已经打开", e.HResult.ToString("X"));
 
                 return false;
             }
@@ -438,7 +459,7 @@ namespace OSerialPort.ViewModels
             }
             catch(IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult);
+                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
 
                 return false;
             }
@@ -622,7 +643,7 @@ namespace OSerialPort.ViewModels
             InitAutoSendTimer();
         }
 
-        #region 释放非托管资源实现
+        #region IDisposable Support
         private bool disposedValue = false;
 
         /// <summary>
@@ -635,11 +656,11 @@ namespace OSerialPort.ViewModels
             {
                 if (disposing)
                 {
-                    /* 释放托管资源 */
-                    SPserialPort.Dispose();
+                    /* 释放托管资源（如果需要） */
                 }
 
-                /* 释放非托管资源（如果有的话） */
+                SPserialPort.Dispose();
+                SPserialPort = null;
 
                 disposedValue = true;
             }

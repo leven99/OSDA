@@ -1,0 +1,32 @@
+﻿<Window x:Class="OSerialPort.Views.WPFUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OSerialPort.Views"
+        mc:Ignorable="d"
+        Title="OSerialPort"  WindowStartupLocation="CenterScreen"
+        Icon="/OSerialPort;component/icon/favicon.ico" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <DockPanel x:Name="RootDockPanel">
+        <Grid x:Name="RootGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="UpdateInfoTextBlock" TextWrapping="Wrap"
+                           Text="{Binding UpdateInfo}"
+                           Margin="0,28,0,0" Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center"/>
+            <Button x:Name="UpdateYesButton" Content="前往更新"
+                        Margin="28,18,15,18" Grid.Row="1" Grid.Column="0" Background="White"
+                        Click="UpdateYesButton_Click" Padding="23,5"/>
+            <Button x:Name="UpdateNoButton" Content="暂不更新"
+                        Margin="15,18,28,18" Grid.Row="1" Grid.Column="1" Background="White"
+                        Click="UpdateNoButton_Click" Padding="23,5"/>
+        </Grid>
+    </DockPanel>
+</Window>

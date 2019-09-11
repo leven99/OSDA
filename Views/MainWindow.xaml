@@ -79,8 +79,8 @@
                     <!--接收区-->
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}" Grid.Row="0" Margin="5,0,2,0"
                               BorderBrush="#FF007ACD">
-                        <TextBox x:Name="ReceTextBox" Style="{StaticResource RSTextBox}"
-                                 TextChanged="ReceTextBox_TextChanged"
+                        <TextBox x:Name="RecvTextBox" Style="{StaticResource RSTextBox}"
+                                 TextChanged="RecvTextBox_TextChanged"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}" IsReadOnly="True"
                                  Width="478" Height="290"/>
                     </GroupBox>
