@@ -11,7 +11,7 @@ namespace OSerialPort.Models
     {
         public string DataRecePath = null;
         /// <summary>
-        /// 用于实现接收区数据超过32MB时，自动清空接收控件中的内容
+        /// 实现接收区数据超过32MB时，自动清空接收控件中的数据
         /// </summary>
         public int RecvDataDeleteCount = 1;
 

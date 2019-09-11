@@ -304,10 +304,10 @@ namespace OSerialPort.ViewModels
                 SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString());
                 SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString());
 
-                SPserialPort.WriteBufferSize = 1048576;   /* 设置串行端口输出缓冲区的大小为1048576字节，即1MB */
-                SPserialPort.ReadBufferSize = 2097152;    /* 设置串行端口输入缓冲区的大小为2097152字节，即2MB */
+                SPserialPort.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
+                SPserialPort.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
 
-                /* 字节编码方式 */
+                /* 字节编码 */
                 if (SerialPortModel.ASCIIEnable)
                 {
                     SPserialPort.Encoding = System.Text.Encoding.ASCII;
@@ -345,7 +345,7 @@ namespace OSerialPort.ViewModels
                     SPserialPort.DtrEnable = false;
                 }
 
-                /* 数据传输的握手协议(或者通信控制协议、或者流控制) */
+                /* 流控制 */
                 if (SerialPortModel.NoneEnable)
                 {
                     SPserialPort.Handshake = Handshake.None;
@@ -363,9 +363,10 @@ namespace OSerialPort.ViewModels
                     SPserialPort.Handshake = Handshake.RequestToSendXOnXOff;
                 }
 
+                /* 数据接收事件 */
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(RecvModel.SerialPort_DataReceived);
 
-                /* 检测串口信号状态事件 */
+                /* 信号状态事件 */
                 SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortModel.SerialPort_PinChanged);
 
                 SPserialPort.Open();
@@ -466,7 +467,44 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 自动发送
+        #region 辅助区 - 自动发送
+        public bool _AutoSend;
+        public bool AutoSend
+        {
+            get
+            {
+                return _AutoSend;
+            }
+            set
+            {
+                if (SPserialPort != null && SPserialPort.IsOpen)
+                {
+                    if (_AutoSend != value)
+                    {
+                        _AutoSend = value;
+                        RaisePropertyChanged(nameof(AutoSend));
+                    }
+
+                    if (AutoSend == true)
+                    {
+                        if (SendModel.AutoSendNum <= 0)
+                        {
+                            DepictInfo = "请输入正确的发送时间间隔";
+                            return;
+                        }
+
+                        StartAutoSendTimer(SendModel.AutoSendNum);
+                    }
+                    else
+                    {
+                        StopAutoSendTimer();
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region 自动发送定时器实现
         public DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();
 
         public void InitAutoSendTimer()
@@ -546,43 +584,6 @@ namespace OSerialPort.ViewModels
                 }
 
                 SendModel.SendDataCount += SendModel.SendData.Length;
-            }
-        }
-        #endregion
-
-        #region 辅助区
-        public bool _AutoSend;
-        public bool AutoSend
-        {
-            get
-            {
-                return _AutoSend;
-            }
-            set
-            {
-                if (SPserialPort != null && SPserialPort.IsOpen)
-                {
-                    if (_AutoSend != value)
-                    {
-                        _AutoSend = value;
-                        RaisePropertyChanged(nameof(AutoSend));
-                    }
-
-                    if (AutoSend == true)
-                    {
-                        if(SendModel.AutoSendNum <= 0)
-                        {
-                            DepictInfo = "请输入正确的发送时间间隔";
-                            return;
-                        }
-
-                        StartAutoSendTimer(SendModel.AutoSendNum);
-                    }
-                    else
-                    {
-                        StopAutoSendTimer();
-                    }
-                }
             }
         }
         #endregion

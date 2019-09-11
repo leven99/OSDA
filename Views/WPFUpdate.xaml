@@ -18,15 +18,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="UpdateInfoTextBlock" TextWrapping="Wrap"
-                           Text="{Binding UpdateInfo}"
-                           Margin="0,28,0,0" Grid.ColumnSpan="2"
-                           HorizontalAlignment="Center"/>
-            <Button x:Name="UpdateYesButton" Content="前往更新"
-                        Margin="28,18,15,18" Grid.Row="1" Grid.Column="0" Background="White"
-                        Click="UpdateYesButton_Click" Padding="23,5"/>
-            <Button x:Name="UpdateNoButton" Content="暂不更新"
-                        Margin="15,18,28,18" Grid.Row="1" Grid.Column="1" Background="White"
-                        Click="UpdateNoButton_Click" Padding="23,5"/>
+                       Text="{Binding UpdateInfo}"
+                       Margin="0,28,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+            <Button x:Name="UpdateYesButton" Content="前往更新" Margin="28,18,15,18" Grid.Row="1" Grid.Column="0"
+                    Style="{StaticResource UpdateButton}"
+                    Click="UpdateYesButton_Click"/>
+            <Button x:Name="UpdateNoButton" Content="暂不更新" Margin="15,18,28,18" Grid.Row="1" Grid.Column="1"
+                    Style="{StaticResource UpdateButton}"
+                    Click="UpdateNoButton_Click"/>
         </Grid>
     </DockPanel>
 </Window>

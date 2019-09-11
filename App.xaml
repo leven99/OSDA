@@ -4,22 +4,22 @@
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <!--菜单栏样式-->
+            <!--main xaml - menu style-->
             <Style TargetType="MenuItem" x:Key="MMenuItem">
                 <Setter Property="Padding" Value="6,3"/>
             </Style>
-            <!--状态栏样式-->
+            <!--main xaml - status style-->
             <Style TargetType="StatusBarItem" x:Key="SBStatusBarItem">
                 <Setter Property="Foreground" Value="White"/>
             </Style>
-            <!--接收区发送区样式-->
+            <!--main xaml - Recv and Send style-->
             <Style TargetType="TextBox" x:Key="RSTextBox">
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="AcceptsReturn" Value="True"/>
                 <Setter Property="Margin" Value="0,3,0,0"/>
                 <Setter Property="BorderBrush" Value="#FF0078D7"/>
             </Style>
-            <!--发送、多项发送样式-->
+            <!--main xaml - Send block style-->
             <Style TargetType="Button" x:Key="SendButton">
                 <Setter Property="Margin" Value="3,3,0,0"/>
                 <Setter Property="Width" Value="86"/>
@@ -27,7 +27,7 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
-            <!--串口配置样式-->
+            <!--main xaml - Serial config block style-->
             <Style TargetType="TextBlock" x:Key="SPTextBlock">
                 <Setter Property="Margin" Value="3.25,0,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -52,7 +52,7 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
-            <!--信号状态样式-->
+            <!--main xaml - signal block style-->
             <Style TargetType="TextBlock" x:Key="HDTextBlock">
                 <Setter Property="Margin" Value="0,5,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -63,7 +63,7 @@
                 <Setter Property="Width" Value="13"/>
                 <Setter Property="Height" Value="13"/>
             </Style>
-            <!--辅助样式-->
+            <!--main xaml - assist block style-->
             <Style TargetType="CheckBox" x:Key="AssistCheckBox">
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -80,7 +80,11 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
-            <!--更新样式-->
+            <!--Update xaml style-->
+            <Style TargetType="Button" x:Key="UpdateButton">
+                <Setter Property="Padding" Value="23.5"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

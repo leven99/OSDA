@@ -6,7 +6,7 @@ namespace OSerialPort.Models
 {
     public class TimerModel : MainWindowBase
     {
-        /* 状态栏 - 实时系统时间 */
+        /* 状态栏 - 系统时间 */
         string _SystemTime;
         public string SystemTime
         {

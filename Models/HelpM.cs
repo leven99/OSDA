@@ -63,7 +63,7 @@ namespace OSerialPort.Models
         private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSerialPort/releases/latest");
         private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSerialPort/releases/latest");
 
-        /* json中获取到的版本号 */
+        /* json中获取到的标签名称 */
         private struct UpdateJson
         {
             public string Tag_name { get; set; }
