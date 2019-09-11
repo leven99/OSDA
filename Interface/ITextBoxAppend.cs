@@ -8,7 +8,6 @@ using System.Text;
 
 namespace OSerialPort.Interface
 {
-    #region 接口定义
     public interface ITextBoxAppend
     {
         /// <summary>
@@ -17,7 +16,7 @@ namespace OSerialPort.Interface
         void Delete();
 
         /// <summary>
-        /// 移除字符串
+        /// 从startIndex开始移除length个字符
         /// </summary>
         /// <param name="startIndex"></param>
         /// <param name="length"></param>
@@ -43,16 +42,15 @@ namespace OSerialPort.Interface
         string GetCurrentValue();
 
         /// <summary>
-        /// 数据Buffer的清空处理
+        /// 移除所有字符事件的处理方法
         /// </summary>
         event EventHandler<BufferClearingHandlerEventArgs> BufferClearingHandler;
 
         /// <summary>
-        /// 数据Buffer的追加处理
+        /// 追加字符串事件的处理方法
         /// </summary>
         event EventHandler<BufferAppendedHandlerEventArgs> BufferAppendedHandler;
     }
-    #endregion
 
     #region 接口实现
     class IClassTextBoxAppend : ITextBoxAppend

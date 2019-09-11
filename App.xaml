@@ -82,7 +82,7 @@
             </Style>
             <!--Update xaml style-->
             <Style TargetType="Button" x:Key="UpdateButton">
-                <Setter Property="Padding" Value="23.5"/>
+                <Setter Property="Padding" Value="18,6"/>
                 <Setter Property="Background" Value="White"/>
             </Style>
         </ResourceDictionary>

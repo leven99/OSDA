@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Threading;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -278,13 +279,19 @@ namespace OSerialPort.ViewModels
                 }
                 else
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        WPFUpdate wPFUpdate = new WPFUpdate();
-                        wPFUpdate.ShowDialog();
-                    });
+                    Thread wPFUpdateThread = new Thread(new ThreadStart(ThreadStartingWPFUpdate));
+                    wPFUpdateThread.SetApartmentState(ApartmentState.STA);
+                    wPFUpdateThread.IsBackground = true;
+                    wPFUpdateThread.Start();
                 }
             }
+        }
+
+        private void ThreadStartingWPFUpdate()
+        {
+            WPFUpdate wPFUpdate = new WPFUpdate();
+            wPFUpdate.Show();
+            System.Windows.Threading.Dispatcher.Run();
         }
         #endregion
 
