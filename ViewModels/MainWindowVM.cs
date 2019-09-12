@@ -546,27 +546,29 @@ namespace OSerialPort.ViewModels
             {
                 if (SPserialPort != null && SPserialPort.IsOpen)
                 {
+                    Int32 SendCount = 0;
+
                     if (SendModel.HexSend)
                     {
-                        int cnt = 0;
                         string[] _sendData = SendModel.SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        char[] sendData = new char[_sendData.Length];
+                        byte[] sendData = new byte[_sendData.Length];
 
                         foreach (var tmp in _sendData)
                         {
-                            sendData[cnt++] = (char)Int16.Parse(tmp, NumberStyles.AllowHexSpecifier);
+                            sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier);
                         }
 
-                        SendModel.SendDataCount += cnt;
-                        SPserialPort.Write(sendData, 0, cnt);
+                        SPserialPort.Write(sendData, 0, SendCount);
 
                     }
                     else
                     {
-                        SendModel.SendDataCount += SendModel.SendData.Length;
-                        SPserialPort.Write(SendModel.SendData.ToCharArray(), 0, SendModel.SendData.Length);
+                        SendCount = SPserialPort.Encoding.GetByteCount(SendModel.SendData);
+                        SPserialPort.Write(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount);
                     }
+
+                    SendModel.SendDataCount += SendCount;
                 }
             }
             catch

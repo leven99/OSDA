@@ -120,9 +120,9 @@
     <Compile Include="..\..\ViewModels\MainWindowBase.cs">
       <Link>ViewModels\MainWindowBase.cs</Link>
     </Compile>
-	<Compile Include="..\..\ViewModels\WPFUpdateVM.cs" >
-	  <Link>ViewModels\WPFUpdateVM.cs</Link>
-	</Compile>
+    <Compile Include="..\..\ViewModels\WPFUpdateVM.cs">
+      <Link>ViewModels\WPFUpdateVM.cs</Link>
+    </Compile>
     <Compile Include="..\..\Models\TimerM.cs">
       <Link>Models\TimerM.cs</Link>
     </Compile>
@@ -149,7 +149,7 @@
     <Page Include="..\..\Views\WPFUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-	  <Link>Views\WPFUpdate.xaml</Link>
+      <Link>Views\WPFUpdate.xaml</Link>
     </Page>
     <Compile Include="..\..\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -158,8 +158,8 @@
     </Compile>
     <Compile Include="..\..\Views\WPFUpdate.xaml.cs">
       <DependentUpon>WPFUpdate.xaml</DependentUpon>
-	  <SubType>Code</SubType>
-	  <Link>Views\WPFUpdate.xaml.cs</Link>
+      <SubType>Code</SubType>
+      <Link>Views\WPFUpdate.xaml.cs</Link>
     </Compile>
     <Compile Include="..\..\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

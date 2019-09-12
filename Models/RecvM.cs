@@ -150,16 +150,16 @@ namespace OSerialPort.Models
         {
             SerialPort _SerialPort = (SerialPort)sender;
 
-            int bytesToRead = _SerialPort.BytesToRead;
-            byte[] recvData = new byte[bytesToRead];
+            int _bytesToRead = _SerialPort.BytesToRead;
+            byte[] recvData = new byte[_bytesToRead];
 
-            _SerialPort.Read(recvData, 0, bytesToRead);
+            _SerialPort.Read(recvData, 0, _bytesToRead);
 
             if (HexRecv)
             {
-                foreach (char tmp in recvData)
+                foreach (var tmp in recvData)
                 {
-                    RecvData.Append(string.Format("{0:X2} ", Convert.ToInt32(tmp)));
+                    RecvData.Append(string.Format("{0:X2} ", tmp));
                 }
             }
             else
