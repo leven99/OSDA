@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSerialPort"
-#define MyAppVersion "2.3.0"
-#define MyVersionInfoVersion "2.3.0.3"
+#define MyAppVersion "2.4.0"
+#define MyVersionInfoVersion "2.4.0.5"
 #define MyAppExeName "OSerialPort.exe"
 #define MyAppCopyright "Copyright (C) 2019 Leven"
 #define MyAppPublisher "Leven"
