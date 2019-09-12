@@ -97,9 +97,9 @@ namespace OSerialPort.Models
 
                     return UpdateJson.Tag_name.TrimStart('v');
                 }
-                catch (HttpRequestException)
+                catch (HttpRequestException x)
                 {
-                    DepictInfo = string.Format("[{0}]网络连接失败......", e.HResult.ToString("X"));
+                    DepictInfo = string.Format("[{0}]网络连接失败......", x.HResult.ToString("X"));
 
                     return "_HttpRequestException";
                 }
