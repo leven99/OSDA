@@ -76,12 +76,12 @@ namespace OSerialPort.Models
         {
             httpClient = new HttpClient
             {
-                Timeout = TimeSpan.FromMilliseconds(500)
+                Timeout = TimeSpan.FromMilliseconds(1000)
             };
 
             try
             {
-                string _UpdateJson = await httpClient.GetStringAsync(gitee_uri);
+                string _UpdateJson = await httpClient.GetStringAsync(github_cri);
                 UpdateJson UpdateJson = javaScriptSerializer.Deserialize<UpdateJson>(_UpdateJson);
 
                 return UpdateJson.Tag_name.TrimStart('v');
@@ -90,7 +90,7 @@ namespace OSerialPort.Models
             {
                 try
                 {
-                    string _UpdateJson = await httpClient.GetStringAsync(github_cri);
+                    string _UpdateJson = await httpClient.GetStringAsync(gitee_uri);
                     UpdateJson UpdateJson = javaScriptSerializer.Deserialize<UpdateJson>(_UpdateJson);
 
                     return UpdateJson.Tag_name.TrimStart('v');
