@@ -734,8 +734,7 @@ namespace OSerialPort.ViewModels
 
             RecvModel.RecvDataCount += recvData.Length;
 
-            RecvModel.RecvHeader = "接收区：已接收" +
-                RecvModel.RecvDataCount +
+            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
                 "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
 
             if (RecvModel.RecvDataCount > (32768 * RecvModel.RecvDataDeleteCount))
@@ -772,6 +771,10 @@ namespace OSerialPort.ViewModels
             catch
             {
                 DepictInfo = "接收数据保存失败";
+
+                RecvModel.RecvAutoSave = "已停止";
+                RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount + 
+                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
             }
         }
         #endregion
