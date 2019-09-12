@@ -209,13 +209,13 @@
                             <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0" Margin="0,0,2.5,1.25"
                                       IsChecked="{Binding RecvModel.HexRecv}" Style="{StaticResource AssistCheckBox}"/>
                             <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1" Margin="2.5,0,0,1.25"
-                                      IsChecked="{Binding SendModel.HexSend}" Style="{StaticResource AssistCheckBox}"/>
+                                      IsChecked="{Binding HexSend}" Style="{StaticResource AssistCheckBox}"/>
                             <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0" Margin="0,0,2.5,5" 
                                       IsChecked="{Binding AutoSend}" Style="{StaticResource AssistCheckBox}"/>
                             <TextBox x:Name="AutoSendNumTextBox" Text="{Binding SendModel.AutoSendNum}" Grid.Row="1" Grid.Column="1"
                                      Margin="2.5,0,0,5" Style="{DynamicResource AutoSendNumTextBox}"/>
                             <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0" Margin="0,0,2.5,5" 
-                                      IsChecked="{Binding RecvModel.SaveRecv}" Style="{StaticResource AssistCheckBox}"/>
+                                      IsChecked="{Binding SaveRecv}" Style="{StaticResource AssistCheckBox}"/>
                             <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1"
                                     Margin="2.5,0,0,5" Style="{StaticResource AssistButton}" Click="SaveRecvPath"/>
                             <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0"

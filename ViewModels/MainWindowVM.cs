@@ -20,6 +20,20 @@ namespace OSerialPort.ViewModels
         public SerialPortModel SerialPortModel { get; set; }
         public TimerModel TimerModel { get; set; }
 
+        public string _DepictInfo;
+        public string DepictInfo
+        {
+            get { return _DepictInfo; }
+            set
+            {
+                if (_DepictInfo != value)
+                {
+                    _DepictInfo = value;
+                    RaisePropertyChanged(nameof(DepictInfo));
+                }
+            }
+        }
+
         #region 菜单栏
 
         #region 选项 - 字节编码
@@ -267,7 +281,8 @@ namespace OSerialPort.ViewModels
         {
             HelpModel.UpdateVerInfoNumber = await HelpModel.UpdateInfoAsync();
 
-            if(HelpModel.UpdateVerInfoNumber == "_HttpRequestException")
+            /* _HttpRequestException 是 UpdateInfoAsync() 返回的自定义字符串 */
+            if (HelpModel.UpdateVerInfoNumber == "_HttpRequestException")
             {
                 DepictInfo = string.Format("网络连接失败，请检查网络或稍后重试......");
             }
@@ -371,7 +386,7 @@ namespace OSerialPort.ViewModels
                 }
 
                 /* 数据接收事件 */
-                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(RecvModel.SerialPort_DataReceived);
+                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
 
                 /* 信号状态事件 */
                 SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortModel.SerialPort_PinChanged);
@@ -474,7 +489,33 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        #region 辅助区 - 自动发送
+        #region 辅助区
+        public bool _HexSend;
+        public bool HexSend
+        {
+            get
+            {
+                return _HexSend;
+            }
+            set
+            {
+                if (_HexSend != value)
+                {
+                    _HexSend = value;
+                    RaisePropertyChanged(nameof(HexSend));
+
+                    if (HexSend == true)
+                    {
+                        DepictInfo = "请输入十六进制数据用空格隔开，比如A0 B1 C2 D3";
+                    }
+                    else
+                    {
+                        DepictInfo = "串行端口调试助手";
+                    }
+                }
+            }
+        }
+
         public bool _AutoSend;
         public bool AutoSend
         {
@@ -506,6 +547,34 @@ namespace OSerialPort.ViewModels
                     {
                         StopAutoSendTimer();
                     }
+                }
+            }
+        }
+
+        public bool _SaveRecv;
+        public bool SaveRecv
+        {
+            get
+            {
+                return _SaveRecv;
+            }
+            set
+            {
+                if (_SaveRecv != value)
+                {
+                    _SaveRecv = value;
+                    RaisePropertyChanged(nameof(SaveRecv));
+                }
+
+                if (SaveRecv)
+                {
+                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
+                }
+                else
+                {
+                    DepictInfo = "串行端口调试助手";
+                    RecvModel.RecvAutoSave = "已停止";
+
                 }
             }
         }
@@ -548,7 +617,7 @@ namespace OSerialPort.ViewModels
                 {
                     Int32 SendCount = 0;
 
-                    if (SendModel.HexSend)
+                    if (HexSend)
                     {
                         string[] _sendData = SendModel.SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -583,7 +652,7 @@ namespace OSerialPort.ViewModels
         {
             if (SPserialPort != null && SPserialPort.IsOpen)
             {
-                if (SendModel.HexSend)
+                if (HexSend)
                 {
 
                 }
@@ -630,6 +699,83 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
+        #region 数据接收事件实现
+        public void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort _SerialPort = (SerialPort)sender;
+
+            int _bytesToRead = _SerialPort.BytesToRead;
+            byte[] recvData = new byte[_bytesToRead];
+
+            _SerialPort.Read(recvData, 0, _bytesToRead);
+
+            if (RecvModel.HexRecv)
+            {
+                foreach (var tmp in recvData)
+                {
+                    RecvModel.RecvData.Append(string.Format("{0:X2} ", tmp));
+                }
+            }
+            else
+            {
+                RecvModel.RecvData.Append(_SerialPort.Encoding.GetString(recvData));
+            }
+
+            if (SaveRecv)
+            {
+                RecvModel.RecvAutoSave = "保存中";
+
+                SaveRecvData(_SerialPort.Encoding.GetString(recvData));
+            }
+            else
+            {
+                RecvModel.RecvAutoSave = "已停止";
+            }
+
+            RecvModel.RecvDataCount += recvData.Length;
+
+            RecvModel.RecvHeader = "接收区：已接收" +
+                RecvModel.RecvDataCount +
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
+
+            if (RecvModel.RecvDataCount > (32768 * RecvModel.RecvDataDeleteCount))
+            {
+                RecvModel.RecvData.Delete();   /* 32MB */
+
+                RecvModel.RecvDataDeleteCount += 1;
+            }
+        }
+
+        public async void SaveRecvData(string ReceData)
+        {
+            try
+            {
+                if (RecvModel.DataRecePath == null)
+                {
+                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
+
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(
+                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt",
+                        true))
+                    {
+                        await DefaultReceDataPath.WriteAsync(ReceData);
+                    }
+                }
+                else
+                {
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(RecvModel.DataRecePath, true))
+                    {
+                        await DefaultReceDataPath.WriteAsync(ReceData);
+                    }
+                }
+            }
+            catch
+            {
+                DepictInfo = "接收数据保存失败";
+            }
+        }
+        #endregion
+
         public MainWindowViewModel()
         {
             HelpModel = new HelpModel();
@@ -649,8 +795,11 @@ namespace OSerialPort.ViewModels
             TimerModel = new TimerModel();
             TimerModel.TimerDataContext();
 
+            HexSend = false;
             AutoSend = false;
             InitAutoSendTimer();
+
+            SaveRecv = false;
         }
 
         #region IDisposable Support

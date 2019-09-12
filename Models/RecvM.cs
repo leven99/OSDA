@@ -102,35 +102,6 @@ namespace OSerialPort.Models
             }
         }
 
-        /* 辅助区 - 保存接收 */
-        public bool _SaveRecv;
-        public bool SaveRecv
-        {
-            get
-            {
-                return _SaveRecv;
-            }
-            set
-            {
-                if (_SaveRecv != value)
-                {
-                    _SaveRecv = value;
-                    RaisePropertyChanged(nameof(SaveRecv));
-                }
-
-                if (SaveRecv == true)
-                {
-                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
-                }
-                else
-                {
-                    DepictInfo = "串行端口调试助手";
-                    RecvAutoSave = "已停止";
-
-                }
-            }
-        }
-
         public void RecvPath()
         {
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
@@ -146,79 +117,6 @@ namespace OSerialPort.Models
             }
         }
 
-        public void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            SerialPort _SerialPort = (SerialPort)sender;
-
-            int _bytesToRead = _SerialPort.BytesToRead;
-            byte[] recvData = new byte[_bytesToRead];
-
-            _SerialPort.Read(recvData, 0, _bytesToRead);
-
-            if (HexRecv)
-            {
-                foreach (var tmp in recvData)
-                {
-                    RecvData.Append(string.Format("{0:X2} ", tmp));
-                }
-            }
-            else
-            {
-                RecvData.Append(_SerialPort.Encoding.GetString(recvData));
-            }
-
-            if (SaveRecv)
-            {
-                RecvAutoSave = "保存中";
-
-                SaveRecvData(_SerialPort.Encoding.GetString(recvData));
-            }
-            else
-            {
-                RecvAutoSave = "已停止";
-            }
-
-            RecvDataCount += recvData.Length;
-
-            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]";
-
-            if(RecvDataCount > (32768 * RecvDataDeleteCount))
-            {
-                RecvData.Delete();   /* 32MB */
-
-                RecvDataDeleteCount += 1;
-            }
-        }
-
-        public async void SaveRecvData(string ReceData)
-        {
-            try
-            {
-                if (DataRecePath == null)
-                {
-                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
-
-                    using (StreamWriter DefaultReceDataPath = new StreamWriter(
-                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt",
-                        true))
-                    {
-                        await DefaultReceDataPath.WriteAsync(ReceData);
-                    }
-                }
-                else
-                {
-                    using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecePath, true))
-                    {
-                        await DefaultReceDataPath.WriteAsync(ReceData);
-                    }
-                }
-            }
-            catch
-            {
-                DepictInfo = "接收数据保存失败";
-            }
-        }
-
         public void RecvDataContext()
         {
             RecvData = new IClassTextBoxAppend();
@@ -227,7 +125,6 @@ namespace OSerialPort.Models
             RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]";
 
             HexRecv = false;
-            SaveRecv = false;
         }
     }
 }

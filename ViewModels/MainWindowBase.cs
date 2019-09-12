@@ -6,23 +6,6 @@ namespace OSerialPort.ViewModels
 {
     public class MainWindowBase : INotifyPropertyChanged
     {
-        public string _DepictInfo;
-        public string DepictInfo
-        {
-            get
-            {
-                return _DepictInfo;
-            }
-            set
-            {
-                if (_DepictInfo != value)
-                {
-                    _DepictInfo = value;
-                    RaisePropertyChanged(nameof(DepictInfo));
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = "")

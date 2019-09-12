@@ -56,33 +56,6 @@ namespace OSerialPort.Models
             }
         }
 
-        /* 辅助区 - 十六进制发送 */
-        public bool _HexSend;
-        public bool HexSend
-        {
-            get
-            {
-                return _HexSend;
-            }
-            set
-            {
-                if (_HexSend != value)
-                {
-                    _HexSend = value;
-                    RaisePropertyChanged(nameof(HexSend));
-
-                    if (HexSend == true)
-                    {
-                        DepictInfo = "请输入十六进制数据用空格隔开，比如0A 1B 2C 3D";
-                    }
-                    else
-                    {
-                        DepictInfo = "串行端口调试助手";
-                    }
-                }
-            }
-        }
-
         /* 辅助区 - 自送发送的时间间隔 */
         public int _AutoSendNum;
         public int AutoSendNum
@@ -106,7 +79,6 @@ namespace OSerialPort.Models
             SendData = string.Empty;
             SendDataCount = 0;
 
-            HexSend = false;
             AutoSendNum = 1000;
         }
     }

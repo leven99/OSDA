@@ -86,10 +86,8 @@ namespace OSerialPort.Models
 
                 return UpdateJson.Tag_name.TrimStart('v');
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
-                DepictInfo = string.Format("[{0}]网络连接失败，更换服务器......", e.HResult.ToString("X"));
-
                 try
                 {
                     string _UpdateJson = await httpClient.GetStringAsync(github_cri);
@@ -97,10 +95,8 @@ namespace OSerialPort.Models
 
                     return UpdateJson.Tag_name.TrimStart('v');
                 }
-                catch (HttpRequestException x)
+                catch (HttpRequestException)
                 {
-                    DepictInfo = string.Format("[{0}]网络连接失败......", x.HResult.ToString("X"));
-
                     return "_HttpRequestException";
                 }
             }
