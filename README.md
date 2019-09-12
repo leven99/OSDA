@@ -16,25 +16,25 @@
 
 ## 功能
 
-- [x] 完整的 MVVM 模型
 - [x] 基础功能（打开、关闭、接收、发送、清接收区、清发送区和清空计数）
 - [x] 十六进制（HEX）接收，十六进制（HEX）发送
 - [x] 自动发送
-- [x] 保存接收，路径选择
+- [x] 保存接收和路径选择
 - [ ] 多项发送
-- [x] 更改编码方式
+- [x] 编码方式
 - [x] 流控制（握手协议、控制协议）
 - [x] 信号控制
 - [x] 信号检测
 - [x] 检查更新
+- [ ] 全球化和本地化
 
 ####  串口属性
 
-* 软件串行端口传输的默认编码方式为 `UTF-8` （**重要**）
+* 软件串行端口传输的默认编码方式为 UTF-8 
 * 串行端口输入缓冲区大小配置为 2MB
 * 串行端口输出缓冲区大小配置为 1MB
-* 串行端口默认流控制为 `None`（无控制流）
-* 串行端口信号控制  `Rts`  和 `Dtr` 默认未启用
+* 串行端口默认流控制为 None（无控制流）
+* 串行端口信号控制 Rts 和 Dtr 默认均未启用
 
 ## 要求
 
@@ -58,8 +58,8 @@ $ cd OSerialPort/msvc
 
 ## 疑问
 
-有任何使用问题及疑问，请 [点击此处（issuse）](https://gitee.com/leven9/OSerialPort/issues) 反馈。
+有任何使用问题或疑问， 请点击 [此处(Github)](https://github.com/leven99/OSerialPort/issues) 或 [此处(Gitee)](https://gitee.com/leven9/OSerialPort/issues) 反馈。
 
 ## License
 
-软件采用 [MIT](https://gitee.com/leven9/OSerialPort/blob/master/LICENSE) 授权。
+软件采用 [MIT](https://gitee.com/leven9/OSerialPort/blob/master/LICENSE) 授权（可以在 [Github](https://github.com/leven99/OSerialPort) 或 [Gitee](https://gitee.com/leven9/OSerialPort) 中找到）。
