@@ -76,7 +76,7 @@ namespace OSerialPort.Models
 
         public void HelpDataContext()
         {
-            VerInfoNumber = "2.4.0";
+            VerInfoNumber = "2.4.1";
 
             VerInfo = "OSerialPort v" + VerInfoNumber;
         }
