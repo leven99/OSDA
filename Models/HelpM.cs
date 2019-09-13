@@ -60,47 +60,19 @@ namespace OSerialPort.Models
         }
 
         /* 可以获取json内容的两个地址 */
-        private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSerialPort/releases/latest");
-        private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSerialPort/releases/latest");
+        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSerialPort/releases/latest");
+        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSerialPort/releases/latest");
 
         /* json中获取到的标签名称 */
-        private struct UpdateJson
+        public struct UpdateJson
         {
             public string Tag_name { get; set; }
         }
 
-        private HttpClient httpClient = null;
-        private readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+        public UpdateJson updateJson;
 
-        public async Task<string> UpdateInfoAsync()
-        {
-            httpClient = new HttpClient
-            {
-                Timeout = TimeSpan.FromMilliseconds(1000)
-            };
-
-            try
-            {
-                string _UpdateJson = await httpClient.GetStringAsync(github_cri);
-                UpdateJson UpdateJson = javaScriptSerializer.Deserialize<UpdateJson>(_UpdateJson);
-
-                return UpdateJson.Tag_name.TrimStart('v');
-            }
-            catch (HttpRequestException)
-            {
-                try
-                {
-                    string _UpdateJson = await httpClient.GetStringAsync(gitee_uri);
-                    UpdateJson UpdateJson = javaScriptSerializer.Deserialize<UpdateJson>(_UpdateJson);
-
-                    return UpdateJson.Tag_name.TrimStart('v');
-                }
-                catch (HttpRequestException)
-                {
-                    return "_HttpRequestException";
-                }
-            }
-        }
+        public HttpClient httpClient = null;
+        public readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
 
         public void HelpDataContext()
         {
