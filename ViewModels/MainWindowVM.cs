@@ -4,7 +4,9 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -274,40 +276,114 @@ namespace OSerialPort.ViewModels
         }
         #endregion
 
-        /// <summary>
-        /// 帮助 - 检查更新
-        /// </summary>
+        #region 帮助 - 检查更新
         public async void UpdateAsync()
         {
-            HelpModel.UpdateVerInfoNumber = await HelpModel.UpdateInfoAsync();
-
-            /* _HttpRequestException 是 UpdateInfoAsync() 返回的自定义字符串 */
-            if (HelpModel.UpdateVerInfoNumber == "_HttpRequestException")
+            HelpModel.httpClient = new HttpClient
             {
-                DepictInfo = string.Format("网络连接失败，请检查网络或稍后重试......");
+                Timeout = TimeSpan.FromMilliseconds(2000)
+            };
+
+            try
+            {
+                HelpModel.httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
+
+                DepictInfo = "正在向wwww.github.com请求数据......";
+
+                HttpResponseMessage response = await HelpModel.httpClient.GetAsync(HelpModel.github_cri);
+
+                DepictInfo = "正在向www.github.com响应数据......";
+
+                if (response.ReasonPhrase == "OK")
+                {
+                    string _updateJson = await response.Content.ReadAsStringAsync();
+
+                    if(_updateJson != null && _updateJson.Length > 450)
+                    {
+                        HelpModel.updateJson = HelpModel.javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+
+                        string UpdateVerInfoNumber = HelpModel.updateJson.Tag_name.TrimStart('v');
+
+                        UpdateVersionCompareTo(UpdateVerInfoNumber);
+                    }
+                }
+            }
+            catch(TaskCanceledException)
+            {
+                DepictInfo = string.Format("服务器请求异常，更换服务器......请稍后");
+
+                await UpdatesAsync();
+            }
+            catch(HttpRequestException e)
+            {
+                DepictInfo = string.Format("[{0}]网络异常，更换服务器......请稍后", e.HResult.ToString("X"));
+
+                await UpdatesAsync();
+            }
+        }
+
+        public async Task UpdatesAsync()
+        {
+            try
+            {
+                DepictInfo = "正在向wwww.gitee.com请求数据......";
+
+                HttpResponseMessage response = await HelpModel.httpClient.GetAsync(HelpModel.gitee_uri);
+
+                DepictInfo = "正在向www.gitee.com响应数据......";
+
+                if (response.ReasonPhrase == "OK")
+                {
+                    string _updateJson = await response.Content.ReadAsStringAsync();
+
+                    if (_updateJson != null && _updateJson.Length > 45)
+                    {
+                        HelpModel.updateJson = HelpModel.javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+
+                        string UpdateVerInfoNumber = HelpModel.updateJson.Tag_name.TrimStart('v');
+
+                        UpdateVersionCompareTo(UpdateVerInfoNumber);
+                    }
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                DepictInfo = string.Format("检查更新异常，请稍后再试。");
+            }
+            catch (HttpRequestException)
+            {
+                DepictInfo = string.Format("检查更新异常，请稍后再试。");
+            }
+        }
+
+        public void UpdateVersionCompareTo(string UpdateVerInfoNumber)
+        {
+            Version NewVersion = new Version(UpdateVerInfoNumber);
+            Version OldVersion = new Version(HelpModel.VerInfoNumber);
+
+            if (NewVersion.CompareTo(OldVersion) > 0)
+            {
+                Thread wPFUpdateThread = new Thread(new ThreadStart(ThreadStartingWPFUpdate));
+                wPFUpdateThread.SetApartmentState(ApartmentState.STA);
+                wPFUpdateThread.IsBackground = true;
+                wPFUpdateThread.Start();
             }
             else
             {
-                if (HelpModel.UpdateVerInfoNumber == HelpModel.VerInfoNumber)
-                {
-                    DepictInfo = "OSerialPort v" + HelpModel.VerInfoNumber + "已经是最新版";
-                }
-                else
-                {
-                    Thread wPFUpdateThread = new Thread(new ThreadStart(ThreadStartingWPFUpdate));
-                    wPFUpdateThread.SetApartmentState(ApartmentState.STA);
-                    wPFUpdateThread.IsBackground = true;
-                    wPFUpdateThread.Start();
-                }
+                DepictInfo = "OSerialPort v" + HelpModel.VerInfoNumber + "已经是最新版";
             }
         }
 
         private void ThreadStartingWPFUpdate()
         {
+            DepictInfo = "串行端口调试助手";
+
             WPFUpdate wPFUpdate = new WPFUpdate();
             wPFUpdate.Show();
-            System.Windows.Threading.Dispatcher.Run();
+            Dispatcher.Run();
         }
+        #endregion
+
         #endregion
 
         #region 打开/关闭串口
