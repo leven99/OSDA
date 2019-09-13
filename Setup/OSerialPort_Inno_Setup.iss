@@ -5,8 +5,8 @@
 #define MyAppVersion "2.4.0"
 #define MyVersionInfoVersion "2.4.0.5"
 #define MyAppExeName "OSerialPort.exe"
-#define MyAppCopyright "Copyright (C) 2019 Leven"
-#define MyAppPublisher "Leven"
+#define MyAppCopyright "Copyright (C) 2019 Cao Liwen"
+#define MyAppPublisher "Cao Liwen"
 
 ; x64(64bit) and x86(32 bit)
 #define x_64
