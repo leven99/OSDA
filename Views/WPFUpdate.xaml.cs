@@ -1,8 +1,8 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSDA.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 
-namespace OSerialPort.Views
+namespace OSDA.Views
 {
     /// <summary>
     /// WPFUpdate.xaml 的交互逻辑
@@ -21,7 +21,7 @@ namespace OSerialPort.Views
 
         private void UpdateYesButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://leven9.gitee.io/oserialportweb/download.html");
+            Process.Start("https://leven9.gitee.io/osdaweb/download.html");
 
             Close();
         }

@@ -1,10 +1,9 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSDA.ViewModels;
 using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace OSerialPort.Models
+namespace OSDA.Models
 {
     public class HelpModel : MainWindowBase, IDisposable
     {
@@ -60,8 +59,8 @@ namespace OSerialPort.Models
         }
 
         /* 可以获取json内容的两个地址 */
-        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSerialPort/releases/latest");
-        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSerialPort/releases/latest");
+        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
+        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
 
         /* json中获取到的标签名称 */
         public struct UpdateJson
@@ -78,7 +77,7 @@ namespace OSerialPort.Models
         {
             VerInfoNumber = "2.4.1";
 
-            VerInfo = "OSerialPort v" + VerInfoNumber;
+            VerInfo = "OSDA v" + VerInfoNumber;
         }
 
         #region IDisposable Support

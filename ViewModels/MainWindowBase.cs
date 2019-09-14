@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using System.IO.Ports;
 using System.Runtime.CompilerServices;
 
-namespace OSerialPort.ViewModels
+namespace OSDA.ViewModels
 {
     public class MainWindowBase : INotifyPropertyChanged
     {

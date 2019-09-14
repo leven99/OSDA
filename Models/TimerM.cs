@@ -1,8 +1,8 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSDA.ViewModels;
 using System;
 using System.Windows.Threading;
 
-namespace OSerialPort.Models
+namespace OSDA.Models
 {
     public class TimerModel : MainWindowBase
     {

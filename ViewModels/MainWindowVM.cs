@@ -1,5 +1,5 @@
-﻿using OSerialPort.Models;
-using OSerialPort.Views;
+﻿using OSDA.Models;
+using OSDA.Views;
 using System;
 using System.Globalization;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace OSerialPort.ViewModels
+namespace OSDA.ViewModels
 {
     class MainWindowViewModel : MainWindowBase, IDisposable
     {
@@ -370,7 +370,7 @@ namespace OSerialPort.ViewModels
             }
             else
             {
-                DepictInfo = "OSerialPort v" + HelpModel.VerInfoNumber + "已经是最新版";
+                DepictInfo = "OSDA v" + HelpModel.VerInfoNumber + "已经是最新版";
             }
         }
 

@@ -1,4 +1,4 @@
-## OSerialPort - 串行端口调试助手
+## OSDA - The Open Serial Debug Assistant
 
 <p align="left">
     <a href="#License" alt="License"><img src="https://img.shields.io/badge/License-MIT-green"/></a>
@@ -6,7 +6,7 @@
     <a alt="Version"><img src="https://img.shields.io/badge/Release-V2.4.0-green"/></a>
 </p>
 
-![OSerialPort](Docs/source/_images/serialort.png)
+![OSDA](Docs/source/_images/osda.png)
 
 ## 架构
 
@@ -51,15 +51,15 @@
 - [x] VS2019
 
 ```bash
-$ git clone https://gitee.com/leven9/OSerialPort.git
-$ cd OSerialPort/msvc
+$ git clone https://gitee.com/leven9/OSDA.git
+$ cd OSDA/msvc
 ```
-对于 `VS2017` 双击 `OSerialPort2017.sln`，对于 `VS2019` 双击 `OSerialPort2019.sln` 即可。
+对于 `VS2017` 双击 `OSDA2017.sln`，对于 `VS2019` 双击 `OSDA2019.sln` 即可。
 
 ## 疑问
 
-有任何使用问题或疑问， 请点击 [此处(Github)](https://github.com/leven99/OSerialPort/issues) 或 [此处(Gitee)](https://gitee.com/leven9/OSerialPort/issues) 反馈。
+有任何使用问题或疑问， 请点击 [此处(Github)](https://github.com/leven99/OSDA/issues) 或 [此处(Gitee)](https://gitee.com/leven9/OSDA/issues) 反馈。
 
 ## License
 
-软件采用 [MIT License](https://gitee.com/leven9/OSerialPort/blob/master/LICENSE) 授权（可以在 [Github](https://github.com/leven99/OSerialPort) 或 [Gitee](https://gitee.com/leven9/OSerialPort) 中找到）。
+软件采用 [MIT License](https://gitee.com/leven9/OSDA/blob/master/LICENSE) 授权（可以在 [Github](https://github.com/leven99/OSDA) 或 [Gitee](https://gitee.com/leven9/OSDA) 中找到）。

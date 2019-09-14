@@ -1,11 +1,11 @@
 ﻿using Microsoft.Win32;
-using OSerialPort.Interface;
-using OSerialPort.ViewModels;
+using OSDA.Interface;
+using OSDA.ViewModels;
 using System;
 using System.IO;
 using System.IO.Ports;
 
-namespace OSerialPort.Models
+namespace OSDA.Models
 {
     public class RecvModel : MainWindowBase
     {

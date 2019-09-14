@@ -1,6 +1,4 @@
-﻿using OSerialPort.Models;
-
-namespace OSerialPort.ViewModels
+﻿namespace OSDA.ViewModels
 {
     class WPFUpdateViewModel : MainWindowBase
     {
@@ -23,7 +21,7 @@ namespace OSerialPort.ViewModels
 
         public WPFUpdateViewModel()
         {
-            UpdateInfo = "OSerialPort发现新版本le........";
+            UpdateInfo = "OSDA发现新版本le........";
         }
     }
 }

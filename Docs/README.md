@@ -15,6 +15,6 @@ pip install sphinx_ustack_theme
 * For Windows. PowerShell
 
 ```
-PS> cd OSerialPort/Docs
+PS> cd OSDA/Docs
 PS> .\make.bat html
 ```

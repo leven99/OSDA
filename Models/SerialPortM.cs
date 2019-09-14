@@ -1,8 +1,8 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSDA.ViewModels;
 using System.IO.Ports;
 using System.Windows.Media;
 
-namespace OSerialPort.Models
+namespace OSDA.Models
 {
     class SerialPortModel : MainWindowBase
     {

@@ -14,9 +14,9 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = u'OSerialPort Project'
-copyright = u'2019, OSerialPort Project members and individual contributors'
-author = u'The OSerialPort Project'
+project = u'OSDA Project'
+copyright = u'2019, OSDA Project members and individual contributors'
+author = u'The OSDA Project'
 
 # The short X.Y version
 version = '2.4.1'

@@ -9,8 +9,6 @@
 
     中文语言包点击 [此处](http://www.jrsoftware.org/files/istrans/) （`Inno` 官方网站），选择 `Chinese (Simplified)` 对应文件下载到 `PATH/Languages/` 目录下即可。
 
------------
-
 ## 图标作者
 BlackVariant (Patrick)
 

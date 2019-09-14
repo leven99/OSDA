@@ -1,11 +1,11 @@
-﻿using OSerialPort.Interface;
-using OSerialPort.ViewModels;
+﻿using OSDA.Interface;
+using OSDA.ViewModels;
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OSerialPort
+namespace OSDA
 {
     public partial class MainWindow : Window, IDisposable
     {
@@ -126,7 +126,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void RPMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://gitee.com/leven9/OSerialPort");
+            Process.Start("https://gitee.com/leven9/OSDA");
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace OSerialPort
         /// <param name="e"></param>
         private void IssueMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://gitee.com/leven9/OSerialPort/issues");
+            Process.Start("https://gitee.com/leven9/OSDA/issues");
         }
         #endregion
 

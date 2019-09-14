@@ -1,7 +1,7 @@
-﻿using OSerialPort.ViewModels;
+﻿using OSDA.ViewModels;
 using System;
 
-namespace OSerialPort.Models
+namespace OSDA.Models
 {
     public class SendModel : MainWindowBase
     {
