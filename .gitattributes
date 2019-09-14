@@ -1,4 +1,0 @@
-# Treat ClickOnce files as non-text
-*.manifest binary
-*.application binary
-*.deploy binary
