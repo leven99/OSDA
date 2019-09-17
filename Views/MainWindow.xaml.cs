@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace OSDA
 {
@@ -18,6 +19,16 @@ namespace OSDA
             mainWindowViewModel = new MainWindowViewModel();
             DataContext = mainWindowViewModel;
         }
+
+        #region Mouse move Support
+        private void MouseMove_Click(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+        #endregion
 
         #region 菜单栏
         /// <summary>
@@ -137,6 +148,27 @@ namespace OSDA
         private void IssueMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://gitee.com/leven9/OSDA/issues");
+        }
+
+        /// <summary>
+        /// 最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MinButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// 最大化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MaxButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            Application.Current.Shutdown();
         }
         #endregion
 

@@ -5,58 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSDA"
         mc:Ignorable="d"
-        Title="OSDA - The Open Serial Debug Assistant" WindowStartupLocation="CenterScreen"
-        Icon="/OSDA;component/icon/favicon.ico" SizeToContent="Width" ResizeMode="CanMinimize">
+        Title="OSDA - The Open Serial Debug Assistant"
+        Icon="/OSDA;component/icon/favicon.ico"
+        WindowStartupLocation="CenterScreen" Background="Black"
+        SizeToContent="Width" ResizeMode="CanMinimize" WindowStyle="None">
     <Viewbox x:Name="RootViewbox">
-        <DockPanel x:Name="RootDockPanel">
+        <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.5,0.5,0.1,0.5">
             <!--菜单栏-->
-            <Menu x:Name="Menu" DockPanel.Dock="Top">
-                <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
-                    <MenuItem x:Name="ExitMenuItem" Header="退出(_X)" Click="ExitMenuItem_Click"/>
-                </MenuItem>
-                <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}">
-                    <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
-                </MenuItem>
-                <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MMenuItem}">
-                    <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
-                        <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
-                                  Click="ASCIIMenuItem_Click"/>
-                        <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
-                                  Click="UTF8MenuItem_Click"/>
-                        <MenuItem x:Name="UTF16MenuItem" Header="Unicode" IsChecked="{Binding SerialPortModel.UTF16Enable}"
-                                  Click="UTF16MenuItem_Click"/>
-                        <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
-                                  Click="UTF32MenuItem_Click"/>
+            <Grid x:Name="MenuGrid" DockPanel.Dock="Top" MouseMove="MouseMove_Click">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
+                       Width="18" Height="18" Margin="6,0,3,0"/>
+                <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
+                    <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
+                        <MenuItem x:Name="ExitMenuItem" Header="退出(_X)" Click="ExitMenuItem_Click"/>
                     </MenuItem>
-                    <Separator/>
-                    <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"
+                    <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}">
+                        <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
+                    </MenuItem>
+                    <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MMenuItem}">
+                        <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
+                            <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
+                                  Click="ASCIIMenuItem_Click"/>
+                            <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
+                                  Click="UTF8MenuItem_Click"/>
+                            <MenuItem x:Name="UTF16MenuItem" Header="Unicode" IsChecked="{Binding SerialPortModel.UTF16Enable}"
+                                  Click="UTF16MenuItem_Click"/>
+                            <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
+                                  Click="UTF32MenuItem_Click"/>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"
                               Click="RtsEnableMenuItem_Click"/>
-                    <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"
+                        <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"
                               Click="DtrEnableMenuItem_Click"/>
-                    <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
-                        <MenuItem x:Name="NoneMenuItem" Header="None"
+                        <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
+                            <MenuItem x:Name="NoneMenuItem" Header="None"
                                   IsChecked="{Binding SerialPortModel.NoneEnable}"
                                   Click="NoneEnableMenuItem_Click"/>
-                        <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
+                            <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
                                   IsChecked="{Binding SerialPortModel.RequestToSendEnable}"
                                   Click="RequestToSendEnableMenuItem_Click"/>
-                        <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
+                            <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
                                   IsChecked="{Binding SerialPortModel.XOnXOffEnable}"
                                   Click="XOnXOffEnableMenuItem_Click"/>
-                        <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
+                            <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
                                   IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"
                                   Click="RequestToSendXOnXOffEnableMenuItem_Click"/>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
-                <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
-                    <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
-                    <MenuItem x:Name="VerUpMenuItem" Header="检查更新" Click="VerUpMenuItem_Click"/>
-                    <Separator/>
-                    <MenuItem x:Name="RPMenuItem" Header="Gitee存储库" Click="RPMenuItem_Click"/>
-                    <MenuItem x:Name="IssueMenuItem" Header="报告问题" Click="IssueMenuItem_Click"/>
-                </MenuItem>
-            </Menu>
+                    <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
+                    <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
+                        <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
+                        <MenuItem x:Name="VerUpMenuItem" Header="检查更新" Click="VerUpMenuItem_Click"/>
+                        <Separator/>
+                        <MenuItem x:Name="RPMenuItem" Header="Gitee存储库" Click="RPMenuItem_Click"/>
+                        <MenuItem x:Name="IssueMenuItem" Header="报告问题" Click="IssueMenuItem_Click"/>
+                    </MenuItem>
+                </Menu>
+                <Button x:Name="MinButton" Grid.Column="2" Content="—"
+                        Width="36" Background="{x:Null}" BorderBrush="{x:Null}" Click="MinButton_Click"/>
+                <Button x:Name="MaxButton" Grid.Column="3" Content="X"
+                        Width="36" Background="{x:Null}" BorderBrush="{x:Null}" Click="MaxButton_Click"/>
+            </Grid>
+
             <!--状态栏-->
             <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
                 <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}" HorizontalAlignment="Left"
@@ -64,6 +81,7 @@
                 <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding TimerModel.SystemTime}" HorizontalAlignment="Right"
                                Style="{StaticResource SBStatusBarItem}"/>
             </StatusBar>
+            
             <!--ALL工作区-->
             <Grid x:Name="Grid">
                 <Grid.ColumnDefinitions>

@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSDA.Views"
         mc:Ignorable="d"
-        Title="OSDA"  WindowStartupLocation="CenterScreen"
-        Icon="/OSDA;component/icon/favicon.ico" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
-    <DockPanel x:Name="RootDockPanel">
+        Title="OSDA"
+        Icon="/OSDA;component/icon/favicon.ico"
+        WindowStartupLocation="CenterScreen" Background="Black"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="None">
+    <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.5,0.5,0.5,0.1">
         <Grid x:Name="RootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -16,14 +18,18 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
+                   Margin="0,28,0,0" Grid.Row="0" Grid.ColumnSpan="2"
+                   Width="32" Height="32"/>
             <TextBlock x:Name="UpdateInfoTextBlock" TextWrapping="Wrap"
                        Text="{Binding UpdateInfo}"
-                       Margin="0,28,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-            <Button x:Name="UpdateYesButton" Content="前往更新" Margin="28,18,15,18" Grid.Row="1" Grid.Column="0"
+                       Margin="0,16,0,0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+            <Button x:Name="UpdateYesButton" Content="前往更新" Margin="32,18,18,18" Grid.Row="2" Grid.Column="0"
                     Style="{StaticResource UpdateButton}"
                     Click="UpdateYesButton_Click"/>
-            <Button x:Name="UpdateNoButton" Content="暂不更新" Margin="15,18,28,18" Grid.Row="1" Grid.Column="1"
+            <Button x:Name="UpdateNoButton" Content="暂不更新" Margin="18,18,32,18" Grid.Row="2" Grid.Column="1"
                     Style="{StaticResource UpdateButton}"
                     Click="UpdateNoButton_Click"/>
         </Grid>

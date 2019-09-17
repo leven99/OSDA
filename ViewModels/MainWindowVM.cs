@@ -22,6 +22,7 @@ namespace OSDA.ViewModels
         public SerialPortModel SerialPortModel { get; set; }
         public TimerModel TimerModel { get; set; }
 
+        #region 状态栏- 信息描述
         public string _DepictInfo;
         public string DepictInfo
         {
@@ -35,6 +36,7 @@ namespace OSDA.ViewModels
                 }
             }
         }
+        #endregion
 
         #region 菜单栏
 
@@ -370,7 +372,7 @@ namespace OSDA.ViewModels
             }
             else
             {
-                DepictInfo = "OSDA v" + HelpModel.VerInfoNumber + "已经是最新版";
+                DepictInfo = "OSDA v" + HelpModel.VerInfoNumber + " 已经是最新版le......";
             }
         }
 

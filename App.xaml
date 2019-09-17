@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <!--main xaml - menu style-->
             <Style TargetType="MenuItem" x:Key="MMenuItem">
-                <Setter Property="Padding" Value="6,3"/>
+                <Setter Property="Padding" Value="3,3"/>
             </Style>
             <!--main xaml - status style-->
             <Style TargetType="StatusBarItem" x:Key="SBStatusBarItem">
