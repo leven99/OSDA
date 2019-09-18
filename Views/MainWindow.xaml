@@ -100,7 +100,7 @@
                         <TextBox x:Name="RecvTextBox" Style="{StaticResource RSTextBox}"
                                  TextChanged="RecvTextBox_TextChanged"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}" IsReadOnly="True"
-                                 Width="466" Height="290"/>
+                                 Width="466" Height="288"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendModel.SendDataCount}"
