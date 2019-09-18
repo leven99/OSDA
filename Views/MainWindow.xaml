@@ -22,13 +22,13 @@
                 <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
                        Width="18" Height="18" Margin="6,0,3,0"/>
                 <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
-                    <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="ExitMenuItem" Header="退出(_X)" Click="ExitMenuItem_Click"/>
                     </MenuItem>
-                    <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
                     </MenuItem>
-                    <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
                             <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
                                   Click="ASCIIMenuItem_Click"/>
@@ -59,8 +59,8 @@
                                   Click="RequestToSendXOnXOffEnableMenuItem_Click"/>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MMenuItem}"/>
-                    <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MMenuItem}">
+                    <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}"/>
+                    <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
                         <MenuItem x:Name="VerUpMenuItem" Header="检查更新" Click="VerUpMenuItem_Click"/>
                         <Separator/>
@@ -69,9 +69,9 @@
                     </MenuItem>
                 </Menu>
                 <Button x:Name="MinButton" Grid.Column="2" Content="—"
-                        Width="36" Background="{x:Null}" BorderBrush="{x:Null}" Click="MinButton_Click"/>
+                        Style="{StaticResource MinMaxButton}" Click="MinButton_Click"/>
                 <Button x:Name="MaxButton" Grid.Column="3" Content="X"
-                        Width="36" Background="{x:Null}" BorderBrush="{x:Null}" Click="MaxButton_Click"/>
+                        Style="{StaticResource MinMaxButton}" Click="MaxButton_Click"/>
             </Grid>
 
             <!--状态栏-->
@@ -100,7 +100,7 @@
                         <TextBox x:Name="RecvTextBox" Style="{StaticResource RSTextBox}"
                                  TextChanged="RecvTextBox_TextChanged"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}" IsReadOnly="True"
-                                 Width="478" Height="290"/>
+                                 Width="466" Height="290"/>
                     </GroupBox>
                     <!--发送区-->
                     <GroupBox x:Name="SendDataGroupBox" Header="{Binding SendModel.SendDataCount}"
@@ -116,7 +116,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="SendTextBox" Grid.RowSpan="2" Style="{StaticResource RSTextBox}"
-                                     Text="{Binding SendModel.SendData}" Width="388" Height="78"/>
+                                     Text="{Binding SendModel.SendData}" Width="376" Height="78"/>
                             <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource SendButton}" Click="Sends"/>
                             <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1"
@@ -151,7 +151,8 @@
                             <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource SPComboBox}"
                                       ItemsSource="{Binding SerialPortModel.LSPPort}"
                                       SelectedItem="{Binding SerialPortModel.SPPort}"
-                                      IsEnabled="{Binding SerialPortModel.SPPortEnable}"/>
+                                      IsEnabled="{Binding SerialPortModel.SPPortEnable}" BorderBrush="Black">
+                            </ComboBox>
                             <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0"
                                        Style="{StaticResource SPTextBlock}"/>
                             <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource SPComboBox}"

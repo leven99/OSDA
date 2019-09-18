@@ -5,8 +5,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <!--main xaml - menu style-->
-            <Style TargetType="MenuItem" x:Key="MMenuItem">
+            <Style TargetType="MenuItem" x:Key="MainMenuItem">
                 <Setter Property="Padding" Value="3,3"/>
+            </Style>
+            <Style TargetType="Button" x:Key="MinMaxButton">
+                <Setter Property="Width" Value="36"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="White"/>
             </Style>
             <!--main xaml - status style-->
             <Style TargetType="StatusBarItem" x:Key="SBStatusBarItem">
@@ -50,6 +55,7 @@
                 <Setter Property="Height" Value="25"/>
                 <Setter Property="Padding" Value="6,1"/>
                 <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
             <!--main xaml - signal block style-->
