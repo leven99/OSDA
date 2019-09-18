@@ -485,6 +485,10 @@ namespace OSDA.ViewModels
                     SerialPortModel.SPStopBitsEnable = false;
                     SerialPortModel.SPParityEnable = false;
 
+                    RecvModel.EnableRecv = "允许";
+                    RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
+                        "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
+
                     return true;
                 }
                 else
@@ -547,7 +551,7 @@ namespace OSDA.ViewModels
 
                     RecvModel.RecvAutoSave = "已停止";
                     RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
+                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
 
                     return SPserialPort.IsOpen;
                 }
@@ -771,7 +775,8 @@ namespace OSDA.ViewModels
         public void ClearCount()
         {
             RecvModel.RecvDataCount = 0;
-            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount + "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
+            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
 
             SendModel.SendDataCount = 0;
         }
@@ -787,16 +792,19 @@ namespace OSDA.ViewModels
 
             _SerialPort.Read(recvData, 0, _bytesToRead);
 
-            if (RecvModel.HexRecv)
+            if (RecvModel.Enable_Recv)
             {
-                foreach (var tmp in recvData)
+                if (RecvModel.HexRecv)
                 {
-                    RecvModel.RecvData.Append(string.Format("{0:X2} ", tmp));
+                    foreach (var tmp in recvData)
+                    {
+                        RecvModel.RecvData.Append(string.Format("{0:X2} ", tmp));
+                    }
                 }
-            }
-            else
-            {
-                RecvModel.RecvData.Append(_SerialPort.Encoding.GetString(recvData));
+                else
+                {
+                    RecvModel.RecvData.Append(_SerialPort.Encoding.GetString(recvData));
+                }
             }
 
             if (SaveRecv)
@@ -813,7 +821,7 @@ namespace OSDA.ViewModels
             RecvModel.RecvDataCount += recvData.Length;
 
             RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
 
             if (RecvModel.RecvDataCount > (32768 * RecvModel.RecvDataDeleteCount))
             {
@@ -852,7 +860,23 @@ namespace OSDA.ViewModels
 
                 RecvModel.RecvAutoSave = "已停止";
                 RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount + 
-                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]";
+                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
+            }
+        }
+        #endregion
+
+        #region RecvTextBox Mouse Double Support
+        public void Enable_Recv()
+        {
+            RecvModel.Enable_Recv = !RecvModel.Enable_Recv;
+
+            if(RecvModel.Enable_Recv)
+            {
+                RecvModel.EnableRecv = "允许";
+            }
+            else
+            {
+                RecvModel.EnableRecv = "暂停";
             }
         }
         #endregion

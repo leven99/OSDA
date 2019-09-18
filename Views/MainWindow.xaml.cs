@@ -20,7 +20,7 @@ namespace OSDA
             DataContext = mainWindowViewModel;
         }
 
-        #region Mouse move Support
+        #region Menu Mouse movement Support
         private void MouseMove_Click(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -218,6 +218,13 @@ namespace OSDA
         private void ClearCount(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.ClearCount();
+        }
+        #endregion
+
+        #region RecvTextBox Mouse Double Support
+        private void RecvTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            mainWindowViewModel.Enable_Recv();
         }
         #endregion
 

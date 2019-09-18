@@ -32,7 +32,9 @@ namespace OSDA.Models
             }
         }
 
-        /* 接收区Header中的 [保存中/已停止] 字符串 */
+        /// <summary>
+        /// 接收区Header中的 [保存中/已停止] 字符串
+        /// </summary>
         public string _RecvAutoSave;
         public string RecvAutoSave
         {
@@ -50,6 +52,29 @@ namespace OSDA.Models
             }
         }
 
+        /// <summary>
+        /// 接收区Header中的 [允许/暂停] 字符串
+        /// </summary>
+        public string _EnableRecv;
+        public string EnableRecv
+        {
+            get
+            {
+                return _EnableRecv;
+            }
+            set
+            {
+                if (_EnableRecv != value)
+                {
+                    _EnableRecv = value;
+                    RaisePropertyChanged(nameof(EnableRecv));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 接收区Header字符串
+        /// </summary>
         public string _RecvHeader;
         public string RecvHeader
         {
@@ -63,6 +88,26 @@ namespace OSDA.Models
                 {
                     _RecvHeader = value;
                     RaisePropertyChanged(nameof(RecvHeader));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 接收区 - 允许/暂停接收数据
+        /// </summary>
+        public bool _Enable_Recv;
+        public bool Enable_Recv
+        {
+            get
+            {
+                return _Enable_Recv;
+            }
+            set
+            {
+                if(_Enable_Recv != value)
+                {
+                    _Enable_Recv = value;
+                    RaisePropertyChanged(nameof(Enable_Recv));
                 }
             }
         }
@@ -84,7 +129,9 @@ namespace OSDA.Models
             }
         }
 
-        /* 辅助区 - 十六进制接收 */
+        /// <summary>
+        /// 辅助区 - 十六进制接收
+        /// </summary>
         public bool _HexRecv;
         public bool HexRecv
         {
@@ -122,8 +169,10 @@ namespace OSDA.Models
             RecvData = new IClassTextBoxAppend();
             RecvDataCount = 0;
             RecvAutoSave = "已停止";
-            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]";
+            EnableRecv = "（提示：双击文本框更改接收状态）";
+            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + EnableRecv;
 
+            Enable_Recv = true;
             HexRecv = false;
         }
     }

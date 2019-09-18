@@ -6,7 +6,9 @@ namespace OSDA.Models
 {
     public class TimerModel : MainWindowBase
     {
-        /* 状态栏 - 系统时间 */
+        /// <summary>
+        /// 状态栏 - 系统时间
+        /// </summary>
         string _SystemTime;
         public string SystemTime
         {

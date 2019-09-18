@@ -98,7 +98,7 @@
                     <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}" Grid.Row="0" Margin="5,0,2,0"
                               BorderBrush="#FF007ACD">
                         <TextBox x:Name="RecvTextBox" Style="{StaticResource RSTextBox}"
-                                 TextChanged="RecvTextBox_TextChanged"
+                                 TextChanged="RecvTextBox_TextChanged" MouseDoubleClick="RecvTextBox_MouseDoubleClick"
                                  local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}" IsReadOnly="True"
                                  Width="466" Height="288"/>
                     </GroupBox>

@@ -5,23 +5,6 @@ namespace OSDA.Models
 {
     public class SendModel : MainWindowBase
     {
-        public string _SendHeader;
-        public string SendHeader
-        {
-            get
-            {
-                return _SendHeader;
-            }
-            set
-            {
-                if (_SendHeader != value)
-                {
-                    _SendHeader = value;
-                    RaisePropertyChanged(nameof(SendHeader));
-                }
-            }
-        }
-
         public int _SendDataCount;
         public int SendDataCount
         {
@@ -35,6 +18,26 @@ namespace OSDA.Models
                 {
                     _SendDataCount = value;
                     RaisePropertyChanged(nameof(SendDataCount));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 发送区Header字符串
+        /// </summary>
+        public string _SendHeader;
+        public string SendHeader
+        {
+            get
+            {
+                return _SendHeader;
+            }
+            set
+            {
+                if (_SendHeader != value)
+                {
+                    _SendHeader = value;
+                    RaisePropertyChanged(nameof(SendHeader));
                 }
             }
         }
@@ -56,7 +59,9 @@ namespace OSDA.Models
             }
         }
 
-        /* 辅助区 - 自送发送的时间间隔 */
+        /// <summary>
+        /// 辅助区 - 自送发送的时间间隔
+        /// </summary>
         public int _AutoSendNum;
         public int AutoSendNum
         {
