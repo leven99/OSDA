@@ -75,7 +75,7 @@ namespace OSDA.Models
 
         public void HelpDataContext()
         {
-            VerInfoNumber = "3.0.0";
+            VerInfoNumber = "3.1.0";
 
             VerInfo = "OSDA v" + VerInfoNumber;
         }
