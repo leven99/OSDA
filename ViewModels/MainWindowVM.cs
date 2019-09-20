@@ -485,7 +485,14 @@ namespace OSDA.ViewModels
                     SerialPortModel.SPStopBitsEnable = false;
                     SerialPortModel.SPParityEnable = false;
 
-                    RecvModel.EnableRecv = "允许";
+                    if (RecvModel.Enable_Recv)
+                    {
+                        RecvModel.EnableRecv = "允许";
+                    }
+                    else
+                    {
+                        RecvModel.EnableRecv = "暂停";
+                    }
                     RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
                         "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
 
@@ -655,8 +662,6 @@ namespace OSDA.ViewModels
                 else
                 {
                     DepictInfo = "串行端口调试助手";
-                    RecvModel.RecvAutoSave = "已停止";
-
                 }
             }
         }
@@ -878,6 +883,9 @@ namespace OSDA.ViewModels
             {
                 RecvModel.EnableRecv = "暂停";
             }
+
+            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
         }
         #endregion
 
