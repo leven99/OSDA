@@ -2,7 +2,7 @@
 
 <p align="left">
     <a href="#License" alt="License"><img src="https://img.shields.io/badge/License-MIT-green"/></a>
-    <a href="#要求" alt="Platform"><img src="https://img.shields.io/badge/Platform-Windows-green"/></a>
+    <a href="#安装" alt="Platform"><img src="https://img.shields.io/badge/Platform-Windows-green"/></a>
     <a alt="Version"><img src="https://img.shields.io/badge/Release-V3.1.0-green"/></a>
 </p>
 
@@ -36,15 +36,21 @@
 * 串行端口默认流控制为 None（无控制流）
 * 串行端口信号控制 Rts 和 Dtr 默认均未启用
 
-## 要求
+## 安装
+
+#### 先决条件
 
 1. 仅支持 `Windows7 Service Pack 1(SP1)` 及以上版本（不支持 `Windows XP`）。`Windows7` 未安装 `SP1` 请  [点击此处](https://support.microsoft.com/zh-cn/help/15090/windows-7-install-service-pack-1-sp1) 根据网站页面描述下载安装（Microsoft官方网站）。
 
 2. 已安装 `Microsoft .NET Framework 4.6.1` 。未安装请  [点击此处](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 下载（Microsoft官方网站）。
 
+#### Windows
+
+下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。根据计算机平台，从 `Gitee` 或 `Github` 下载点下载。
+
 ## 编译
 
-### For windows
+#### Windows
 
 - [ ] VS2015
 - [x] VS2017
@@ -56,10 +62,6 @@ $ cd OSDA/msvc
 ```
 对于 `VS2017` 双击 `OSDA2017.sln`，对于 `VS2019` 双击 `OSDA2019.sln` 即可。
 
-## 疑问
-
-有任何使用问题或疑问， 请点击 [此处(Github)](https://github.com/leven99/OSDA/issues) 或 [此处(Gitee)](https://gitee.com/leven9/OSDA/issues) 反馈。
-
 ## License
 
-软件采用 [MIT License](https://gitee.com/leven9/OSDA/blob/master/LICENSE) 授权（可以在 [Github](https://github.com/leven99/OSDA) 或 [Gitee](https://gitee.com/leven9/OSDA) 中找到）。
+软件采用 [MIT](https://gitee.com/leven9/OSDA/blob/master/LICENSE) 授权（授权协议可以在 [Github](https://github.com/leven99/OSDA) 或 [Gitee](https://gitee.com/leven9/OSDA) 中找到）。
