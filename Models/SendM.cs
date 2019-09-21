@@ -79,12 +79,88 @@ namespace OSDA.Models
             }
         }
 
+        #region 发送换行
+        public bool _NonesEnable;
+        public bool NonesEnable
+        {
+            get
+            {
+                return _NonesEnable;
+            }
+            set
+            {
+                if (_NonesEnable != value)
+                {
+                    _NonesEnable = value;
+                    RaisePropertyChanged(nameof(NonesEnable));
+                }
+            }
+        }
+
+        public bool _CrEnable;
+        public bool CrEnable
+        {
+            get
+            {
+                return _CrEnable;
+            }
+            set
+            {
+                if (_CrEnable != value)
+                {
+                    _CrEnable = value;
+                    RaisePropertyChanged(nameof(CrEnable));
+                }
+            }
+        }
+
+        public bool _LfEnable;
+        public bool LfEnable
+        {
+            get
+            {
+                return _LfEnable;
+            }
+            set
+            {
+                if (_LfEnable != value)
+                {
+                    _LfEnable = value;
+                    RaisePropertyChanged(nameof(LfEnable));
+                }
+            }
+        }
+
+        public bool _CrLfEnable;
+        public bool CrLfEnable
+        {
+            get
+            {
+                return _CrLfEnable;
+            }
+            set
+            {
+                if (_CrLfEnable != value)
+                {
+                    _CrLfEnable = value;
+                    RaisePropertyChanged(nameof(CrLfEnable));
+                }
+            }
+        }
+        #endregion
+
         public void SendDataContext()
         {
             SendData = string.Empty;
             SendDataCount = 0;
 
             AutoSendNum = 1000;
+
+            /* 发送换行 */
+            NonesEnable = true;
+            CrEnable = false;
+            LfEnable = false;
+            CrLfEnable = false;
         }
     }
 }

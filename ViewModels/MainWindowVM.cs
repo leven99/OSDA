@@ -278,6 +278,44 @@ namespace OSDA.ViewModels
         }
         #endregion
 
+        #region 选项 - 发送换行
+        public void NonesEnable()
+        {
+            SendModel.CrEnable = false;
+            SendModel.LfEnable = false;
+            SendModel.CrLfEnable = false;
+
+            SendModel.NonesEnable = true;
+        }
+
+        public void CrEnable()
+        {
+            SendModel.NonesEnable = false;
+            SendModel.LfEnable = false;
+            SendModel.CrLfEnable = false;
+
+            SendModel.CrEnable = true;
+        }
+
+        public void  LfEnable()
+        {
+            SendModel.NonesEnable = false;
+            SendModel.CrEnable = false;
+            SendModel.CrLfEnable = false;
+
+            SendModel.LfEnable = true;
+        }
+
+        public void CrLfEnable()
+        {
+            SendModel.NonesEnable = false;
+            SendModel.CrEnable = false;
+            SendModel.LfEnable = false;
+
+            SendModel.CrLfEnable = true;
+        }
+        #endregion
+
         #region 帮助 - 检查更新
         public async void UpdateAsync()
         {
@@ -724,7 +762,25 @@ namespace OSDA.ViewModels
                         SPserialPort.Write(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount);
                     }
 
-                    SendModel.SendDataCount += SendCount;
+                    if (SendModel.NonesEnable)
+                    {
+                        SendModel.SendDataCount += SendCount;
+                    }
+                    else if (SendModel.CrEnable)
+                    {
+                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r"), 0, 1);
+                        SendModel.SendDataCount += (SendCount + 1);
+                    }
+                    else if (SendModel.LfEnable)
+                    {
+                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\n"), 0, 1);
+                        SendModel.SendDataCount += (SendCount + 1);
+                    }
+                    else if (SendModel.CrLfEnable)
+                    {
+                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2);
+                        SendModel.SendDataCount += (SendCount + 2);
+                    }
                 }
             }
             catch

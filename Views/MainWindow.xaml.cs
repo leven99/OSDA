@@ -99,24 +99,46 @@ namespace OSDA
         }
 
         #region 选项 - 流控制
-        private void NoneEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        private void NoneMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.NoneEnable();
         }
 
-        private void RequestToSendEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        private void RequestToSendMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.RequestToSendEnable();
         }
 
-        private void XOnXOffEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        private void XOnXOffMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.XOnXOffEnable();
         }
 
-        private void RequestToSendXOnXOffEnableMenuItem_Click(object sender, RoutedEventArgs e)
+        private void RequestToSendXOnXOffMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.RequestToSendXOnXOffEnable();
+        }
+        #endregion
+
+        #region 选项 - 发送换行
+        private void NonesMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.NonesEnable();
+        }
+
+        private void CrMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.CrEnable();
+        }
+
+        private void LfMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.LfEnable();
+        }
+
+        private void CrLfMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.CrLfEnable();
         }
         #endregion
 
