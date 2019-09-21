@@ -23,3 +23,5 @@ PS> .\make.bat html
 $ makefile html
 ```
 
+## 在线浏览
+`OSDA` 的在线文档已生成，在线浏览请 [点击此处](https://leven9.gitee.io/osdadoc/) 。
