@@ -26,9 +26,9 @@
                         <MenuItem x:Name="ExitMenuItem" Header="退出(_X)" Click="ExitMenuItem_Click"/>
                     </MenuItem>
                     <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MainMenuItem}">
-                        <MenuItem x:Name="CalcMenuItem" Header="计算器" Click="CalcMenuItem_Click"/>
+                        <MenuItem x:Name="CalcMenuItem" Header="计算器(_C)" Click="CalcMenuItem_Click"/>
                     </MenuItem>
-                    <MenuItem x:Name="ConfMenuItem" Header="配置(_C)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="ConfMenuItem" Header="选项(_O)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
                             <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
                                   Click="ASCIIMenuItem_Click"/>
@@ -77,7 +77,7 @@
                     <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}"/>
                     <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
                         <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
-                        <MenuItem x:Name="VerUpMenuItem" Header="检查更新" Click="VerUpMenuItem_Click"/>
+                        <MenuItem x:Name="VerUpMenuItem" Header="检查更新(_U)" Click="VerUpMenuItem_Click"/>
                         <Separator/>
                         <MenuItem x:Name="RPMenuItem" Header="Gitee存储库" Click="RPMenuItem_Click"/>
                         <MenuItem x:Name="IssueMenuItem" Header="报告问题" Click="IssueMenuItem_Click"/>
