@@ -7,6 +7,24 @@ namespace OSDA.Models
 {
     public class HelpModel : MainWindowBase, IDisposable
     {
+        /* 可以获取json内容的两个地址 */
+        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
+        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
+
+        /* json中获取到的标签名称 */
+        public struct UpdateJson
+        {
+            public string Tag_name { get; set; }
+        }
+
+        public UpdateJson updateJson;
+
+        public HttpClient httpClient = null;
+        public readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+
+        /// <summary>
+        /// 本地软件的版本号
+        /// </summary>
         public string _VerInfoNumber;
         public string VerInfoNumber
         {
@@ -24,6 +42,9 @@ namespace OSDA.Models
             }
         }
 
+        /// <summary>
+        /// 本地软件的版本信息
+        /// </summary>
         public string _VerInfo;
         public string VerInfo
         {
@@ -41,6 +62,9 @@ namespace OSDA.Models
             }
         }
 
+        /// <summary>
+        /// 服务器软件的版本号
+        /// </summary>
         public string _UpdateVerInfoNumber;
         public string UpdateVerInfoNumber
         {
@@ -58,26 +82,32 @@ namespace OSDA.Models
             }
         }
 
-        /* 可以获取json内容的两个地址 */
-        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
-        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
-
-        /* json中获取到的标签名称 */
-        public struct UpdateJson
+        /// <summary>
+        /// 服务器软件的版本信息
+        /// </summary>
+        public string _UpdateInfo;
+        public string UpdateInfo
         {
-            public string Tag_name { get; set; }
+            get
+            {
+                return _UpdateInfo;
+            }
+            set
+            {
+                if (_UpdateInfo != value)
+                {
+                    _UpdateInfo = value;
+                    RaisePropertyChanged(nameof(UpdateInfo));
+                }
+            }
         }
-
-        public UpdateJson updateJson;
-
-        public HttpClient httpClient = null;
-        public readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
 
         public void HelpDataContext()
         {
             VerInfoNumber = "3.1.0";
-
             VerInfo = "OSDA v" + VerInfoNumber;
+
+            UpdateInfo = "OSDA发现新版本le........";
         }
 
         #region IDisposable Support

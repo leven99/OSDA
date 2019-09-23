@@ -386,17 +386,13 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch (TaskCanceledException)
-            {
-                DepictInfo = string.Format("检查更新异常，请稍后再试。");
-            }
-            catch (HttpRequestException)
+            catch
             {
                 DepictInfo = string.Format("检查更新异常，请稍后再试。");
             }
         }
 
-        public void UpdateVersionCompareTo(string UpdateVerInfoNumber)
+        private void UpdateVersionCompareTo(string UpdateVerInfoNumber)
         {
             Version NewVersion = new Version(UpdateVerInfoNumber);
             Version OldVersion = new Version(HelpModel.VerInfoNumber);
