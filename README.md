@@ -62,6 +62,10 @@ $ cd OSDA/msvc
 ```
 对于 `VS2017` 双击 `OSDA2017.sln`，对于 `VS2019` 双击 `OSDA2019.sln` 即可。
 
+## 贡献
+
+请参阅项目的贡献者指南（贡献者指南文件可以在 [GitHub](https://github.com/leven99/OSDA/blob/master/CONTRIBUTING.md) 或 [Gitee](https://gitee.com/leven9/OSDA/blob/master/CONTRIBUTING.md) 中找到）。
+
 ## License
 
-软件采用 [MIT](https://gitee.com/leven9/OSDA/blob/master/LICENSE) 授权（授权协议可以在 [Github](https://github.com/leven99/OSDA) 或 [Gitee](https://gitee.com/leven9/OSDA) 中找到）。
+软件采用 MIT License 授权（授权许可证可以在 [Github](https://github.com/leven99/OSDA) 或 [Gitee](https://gitee.com/leven9/OSDA) 中找到）。
