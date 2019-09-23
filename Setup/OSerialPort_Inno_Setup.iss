@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSDA"
-#define MyAppVersion "3.1.0"
-#define MyVersionInfoVersion "3.1.0.3"
+#define MyAppVersion "3.2.0"
+#define MyVersionInfoVersion "3.2.0.3"
 #define MyAppExeName "OSDA.exe"
 #define MyAppCopyright "Copyright (C) 2019 Cao Liwen"
 #define MyAppPublisher "Cao Liwen"
@@ -12,7 +12,7 @@
 #define x_64
 
 ; Visual Studio 2017 and Visual Studio 2019
-#define VS2017
+;#define VS2017
 
 [Setup]
 AppId={{CD6994CA-F69D-4B27-A1EC-1E34684AE73A}

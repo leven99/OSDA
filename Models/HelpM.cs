@@ -104,7 +104,7 @@ namespace OSDA.Models
 
         public void HelpDataContext()
         {
-            VerInfoNumber = "3.1.0";
+            VerInfoNumber = "3.2.0";
             VerInfo = "OSDA v" + VerInfoNumber;
 
             UpdateInfo = "OSDA发现新版本le........";
