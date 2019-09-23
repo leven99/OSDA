@@ -1,14 +1,14 @@
 ## 如何贡献
 
-非常感谢您阅读这篇文章，我们需要多的志愿开发者帮助这个项目，使这个项目更加运行稳定和功能完善。
+非常感谢您阅读这篇文章，这个项目需要多的志愿开发者帮助，使这个项目（软件）更加运行稳定、流畅和功能完善。
 
 ### 创建议题
 
-在向项目创建一个 `Issuse` 时，请确保包含**标题和清晰的描述**，尽可能多的相关信息，以及代码示例或可执行测试用例，以展示未发生的预期行为。
+在向项目创建一个 `Issue` 时，请确保包含**标题和清晰的描述**。如果有需要，请提供尽可能多的相关信息，以及代码示例或可执行测试用例，以展示未发生的预期行为。
 
 ### 提交更改
 
-在向项目发送一个 `Pull Requests` 时，请您清楚的列出您完成的具体内容（关于 `Pull Requests`的更多信息请 [点击此处](https://help.github.com/cn/articles/proposing-changes-to-your-work-with-pull-requests)）。
+在向项目发起一个 `Pull Request` 时，请您清楚的列出您完成的具体内容（关于 `Pull Request`的更多信息请 [点击此处](https://help.github.com/cn/articles/proposing-changes-to-your-work-with-pull-requests)）。
 
 请始终为您的 `Commit` 写一条清晰的日志信息。单行的日志信息适用于小的更改。但更大的更改应如下所示：
 
@@ -34,4 +34,4 @@ $ git commit -a -S -m "A brief summary of the commit
 * 所有的视图（View）使用 `xaml`
 * 尽可能的避免在视图（View）中包含逻辑代码
 
-♥♥♥谢谢您参与 `OSDA` 开发♥♥♥
+♥♥♥ 非常感谢您对 OSDA 的贡献 ♥♥♥
