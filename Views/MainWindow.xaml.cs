@@ -187,7 +187,7 @@ namespace OSDA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MaxButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
             Application.Current.Shutdown();

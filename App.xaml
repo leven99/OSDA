@@ -8,7 +8,7 @@
             <Style TargetType="MenuItem" x:Key="MainMenuItem">
                 <Setter Property="Padding" Value="3,3"/>
             </Style>
-            <Style TargetType="Button" x:Key="MinMaxButton">
+            <Style TargetType="Button" x:Key="MainButton">
                 <Setter Property="Width" Value="36"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="White"/>

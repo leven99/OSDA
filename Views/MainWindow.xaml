@@ -84,9 +84,9 @@
                     </MenuItem>
                 </Menu>
                 <Button x:Name="MinButton" Grid.Column="2" Content="—"
-                        Style="{StaticResource MinMaxButton}" Click="MinButton_Click"/>
-                <Button x:Name="MaxButton" Grid.Column="3" Content="X"
-                        Style="{StaticResource MinMaxButton}" Click="MaxButton_Click" Margin="0,0,0.1,0"/>
+                        Style="{StaticResource MainButton}" Click="MinButton_Click"/>
+                <Button x:Name="CloseButton" Grid.Column="3" Content="X"
+                        Style="{StaticResource MainButton}" Click="CloseButton_Click" Margin="0,0,0.1,0"/>
             </Grid>
 
             <!--状态栏-->
