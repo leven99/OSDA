@@ -102,12 +102,55 @@ namespace OSDA.Models
             }
         }
 
+        /// <summary>
+        /// 精简视图
+        /// </summary>
+        public bool _Reduced_Enable;
+        public bool Reduced_Enable
+        {
+            get
+            {
+                return _Reduced_Enable;
+            }
+            set
+            {
+                if (_Reduced_Enable != value)
+                {
+                    _Reduced_Enable = value;
+                    RaisePropertyChanged(nameof(Reduced_Enable));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 视图可见性
+        /// </summary>
+        public string _View_Visibility;
+        public string View_Visibility
+        {
+            get
+            {
+                return _View_Visibility;
+            }
+            set
+            {
+                if (_View_Visibility != value)
+                {
+                    _View_Visibility = value;
+                    RaisePropertyChanged(nameof(View_Visibility));
+                }
+            }
+        }
+
         public void HelpDataContext()
         {
             VerInfoNumber = "3.2.0";
             VerInfo = "OSDA v" + VerInfoNumber;
 
             UpdateInfo = "OSDA发现新版本le........";
+
+            Reduced_Enable = false;
+            View_Visibility = "Visible";
         }
 
         #region IDisposable Support

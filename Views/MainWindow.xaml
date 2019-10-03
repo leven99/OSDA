@@ -7,299 +7,306 @@
         mc:Ignorable="d"
         Title="OSDA"
         Background="Black"
-        WindowStartupLocation="CenterScreen"
-        SizeToContent="Width" ResizeMode="CanMinimize" WindowStyle="None">
-    <Viewbox x:Name="RootViewbox">
-        <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.4,0.5,0.2,0.5">
-            <!--菜单栏-->
-            <Grid x:Name="MenuGrid" DockPanel.Dock="Top" MouseMove="MouseMove_Click">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
-                       Margin="6,1,3,1" Width="18" Height="18" />
-                <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
-                    <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
-                        <MenuItem x:Name="ExitMenuItem" Header="退出(_X)"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
+    <DockPanel x:Name="RootDockPanel" Background="White">
+        <!--菜单栏-->
+        <Grid x:Name="MenuGrid" DockPanel.Dock="Top" MouseMove="MouseMove_Click">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
+                       Margin="6,3,4,3" Width="18" Height="18"/>
+            <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
+                <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="ExitMenuItem" Header="退出(_X)"
                                   Click="ExitMenuItem_Click"/>
-                    </MenuItem>
-                    <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MainMenuItem}">
-                        <MenuItem x:Name="CalcMenuItem" Header="计算器(_C)"
+                </MenuItem>
+                <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="CalcMenuItem" Header="计算器(_C)" 
                                   Click="CalcMenuItem_Click"/>
-                    </MenuItem>
-                    <MenuItem x:Name="ConfMenuItem" Header="选项(_O)" Style="{StaticResource MainMenuItem}">
-                        <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
-                            <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
+                </MenuItem>
+                <MenuItem x:Name="ConfMenuItem" Header="选项(_O)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="EncodingMenuItem" Header="字节编码">
+                        <MenuItem x:Name="ASCIIMenuItem" Header="ASCII" IsChecked="{Binding SerialPortModel.ASCIIEnable}"
                                   Click="ASCIIMenuItem_Click"/>
-                            <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
+                        <MenuItem x:Name="UTF8MenuItem" Header="UTF-8" IsChecked="{Binding SerialPortModel.UTF8Enable}"
                                   Click="UTF8MenuItem_Click"/>
-                            <MenuItem x:Name="UTF16MenuItem" Header="Unicode" IsChecked="{Binding SerialPortModel.UTF16Enable}"
+                        <MenuItem x:Name="UTF16MenuItem" Header="Unicode" IsChecked="{Binding SerialPortModel.UTF16Enable}"
                                   Click="UTF16MenuItem_Click"/>
-                            <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
+                        <MenuItem x:Name="UTF32MenuItem" Header="UTF-32" IsChecked="{Binding SerialPortModel.UTF32Enable}"
                                   Click="UTF32MenuItem_Click"/>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem x:Name="RtsEnableMenuItem" Header="RtsEnable" IsChecked="{Binding SerialPortModel.RtsEnable}"
                               Click="RtsEnableMenuItem_Click"/>
-                        <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"
+                    <MenuItem x:Name="DtrEnableMenuItem" Header="DtrEnable" IsChecked="{Binding SerialPortModel.DtrEnable}"
                               Click="DtrEnableMenuItem_Click"/>
-                        <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
-                            <MenuItem x:Name="NoneMenuItem" Header="None"
+                    <MenuItem x:Name="HandshakeMenuItem" Header="流控制">
+                        <MenuItem x:Name="NoneMenuItem" Header="None"
                                   IsChecked="{Binding SerialPortModel.NoneEnable}"
                                   Click="NoneMenuItem_Click"/>
-                            <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
+                        <MenuItem x:Name="RequestToSendMenuItem" Header="Hardware"
                                   IsChecked="{Binding SerialPortModel.RequestToSendEnable}"
                                   Click="RequestToSendMenuItem_Click"/>
-                            <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
+                        <MenuItem x:Name="XOnXOffMenuItem" Header="XOnXOff"
                                   IsChecked="{Binding SerialPortModel.XOnXOffEnable}"
                                   Click="XOnXOffMenuItem_Click"/>
-                            <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
+                        <MenuItem x:Name="RequestToSendXOnXOffMenuItem" Header="Hardware and XOnXOff"
                                   IsChecked="{Binding SerialPortModel.RequestToSendXOnXOffEnable}"
                                   Click="RequestToSendXOnXOffMenuItem_Click"/>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem x:Name="LineMenuItem" Header="发送换行">
-                            <MenuItem x:Name="NonesMenuItem" Header="None"
-                                      IsChecked="{Binding SendModel.NonesEnable}"
-                                      Click="NonesMenuItem_Click"/>
-                            <MenuItem x:Name="CrMenuItem" Header="CR"
-                                      IsChecked="{Binding SendModel.CrEnable}"
-                                      Click="CrMenuItem_Click"/>
-                            <MenuItem x:Name="LfMenuItem" Header="LF"
-                                      IsChecked="{Binding SendModel.LfEnable}"
-                                      Click="LfMenuItem_Click"/>
-                            <MenuItem x:Name="CrLfMenuItem" Header="CR LF"
-                                      IsChecked="{Binding SendModel.CrLfEnable}"
-                                      Click="CrLfMenuItem_Click"/>
-                        </MenuItem>
                     </MenuItem>
-                    <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}"/>
-                    <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
-                        <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
-                        <MenuItem x:Name="VerUpMenuItem" Header="检查更新(_U)"
-                                  Click="VerUpMenuItem_Click"/>
-                        <Separator/>
-                        <MenuItem x:Name="RPMenuItem" Header="Gitee存储库"
-                                  Click="RPMenuItem_Click"/>
-                        <MenuItem x:Name="IssueMenuItem" Header="报告问题"
-                                  Click="IssueMenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="LineMenuItem" Header="发送换行">
+                        <MenuItem x:Name="NonesMenuItem" Header="None" IsChecked="{Binding SendModel.NonesEnable}"
+                                  Click="NonesMenuItem_Click"/>
+                        <MenuItem x:Name="CrMenuItem" Header="CR" IsChecked="{Binding SendModel.CrEnable}" 
+                                  Click="CrMenuItem_Click"/>
+                        <MenuItem x:Name="LfMenuItem" Header="LF" IsChecked="{Binding SendModel.LfEnable}"
+                                  Click="LfMenuItem_Click"/>
+                        <MenuItem x:Name="CrLfMenuItem" Header="CR LF" IsChecked="{Binding SendModel.CrLfEnable}"
+                                  Click="CrLfMenuItem_Click"/>
                     </MenuItem>
-                </Menu>
-                <Button x:Name="MinButton" Grid.Column="2" Content="—"
-                        Style="{StaticResource MainButton}"
-                        Click="MinButton_Click"/>
-                <Button x:Name="CloseButton" Grid.Column="3" Content="X"
-                        Style="{StaticResource MainButton}"
-                        Margin="0,0,0.1,0"
-                        Click="CloseButton_Click"/>
-            </Grid>
+                </MenuItem>
+                <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="EveryMenuItem" Header="精简视图"
+                              Click="EveryMenuItem_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
+                    <MenuItem x:Name="VerMenuItem" Header="{Binding HelpModel.VerInfo}" IsEnabled="False"/>
+                    <MenuItem x:Name="VerUpMenuItem" Header="检查更新(_U)" 
+                              Click="VerUpMenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="RPMenuItem" Header="Gitee存储库"
+                              Click="RPMenuItem_Click"/>
+                    <MenuItem x:Name="IssueMenuItem" Header="报告问题" 
+                              Click="IssueMenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <Button x:Name="MinButton" Grid.Column="2" Content="—"
+                    Style="{StaticResource MainButton}"
+                    Click="MinButton_Click"/>
+            <Button x:Name="CloseButton" Grid.Column="4" Content="X"
+                    Style="{StaticResource MainButton}" 
+                    Click="CloseButton_Click"/>
+        </Grid>
 
-            <!--状态栏-->
-            <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
-                <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}"
-                               Style="{StaticResource SBStatusBarItem}"
-                               HorizontalAlignment="Left"/>
-                <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding TimerModel.SystemTime}"
-                               Style="{StaticResource SBStatusBarItem}"
-                               HorizontalAlignment="Right"/>
-            </StatusBar>
-            
-            <!--ALL工作区-->
-            <Grid x:Name="Grid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <!--接受区和发送区-->
-                <Grid x:Name="DataGrid" Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10*"/>
-                        <RowDefinition Height="3*"/>
-                    </Grid.RowDefinitions>
-                    <!--接收区-->
-                    <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}" Grid.Row="0"
-                              Margin="5,0,2,0"
+        <!--状态栏-->
+        <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
+            <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}"
+                           Style="{StaticResource SBStatusBarItem}"
+                           HorizontalAlignment="Left"/>
+            <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding TimerModel.SystemTime}"
+                           Style="{StaticResource SBStatusBarItem}"
+                           HorizontalAlignment="Right"/>
+        </StatusBar>
+
+        <!--ALL工作区-->
+        <Grid x:Name="Grid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--接受区和发送区-->
+            <Grid x:Name="DataGrid" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="348*"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                <!--接收区-->
+                <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}"
+                              Grid.Row="0"
+                              Margin="5,0,5,2"
                               BorderBrush="#FF007ACD">
-                        <TextBox x:Name="RecvTextBox" local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}"
+                    <TextBox x:Name="RecvTextBox" local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}"
                                  Style="{StaticResource RSTextBox}"
-                                 Width="466" Height="288"
+                                 IsReadOnly="True"
                                  TextChanged="RecvTextBox_TextChanged"
-                                 MouseDoubleClick="RecvTextBox_MouseDoubleClick"
-                                 IsReadOnly="True"/>
-                    </GroupBox>
-                    <!--发送区-->
-                    <GroupBox x:Name="SendDataGroupBox"
+                                 MouseDoubleClick="RecvTextBox_MouseDoubleClick"/>
+                </GroupBox>
+                <!--发送区-->
+                <GroupBox x:Name="SendDataGroupBox"
                               Header="{Binding SendModel.SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节"
-                              Grid.Row="1" Margin="5,0,2,2"
+                              Grid.Row="1"
+                              Margin="5,0,5,3"
                               BorderBrush="#FF007ACD">
-                        <Grid x:Name="SendDataGrid">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="SendTextBox" Text="{Binding SendModel.SendData}" Grid.RowSpan="2"
-                                     Style="{StaticResource RSTextBox}"
-                                     Width="376" Height="78"/>
-                            <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
-                                    Style="{StaticResource SendButton}" Click="Sends"/>
-                            <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1"
-                                    Style="{StaticResource SendButton}" Click="Send"/>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-                <!--串口配置区、信号状态区和辅助区-->
-                <Grid x:Name="SerialPortGrid" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <!--串口配置区-->
-                    <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0" Margin="2,0,5,2" BorderBrush="#FF007ACD">
-                        <Grid x:Name="SPConfGrid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="ComTextBox" Text="端口：" Grid.Row="0" Grid.Column="0"
-                                       Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1"
-                                      Style="{DynamicResource SPComboBox}"
-                                      ItemsSource="{Binding SerialPortModel.LSPPort}"
-                                      SelectedItem="{Binding SerialPortModel.SPPort}"
-                                      IsEnabled="{Binding SerialPortModel.SPPortEnable}"
-                                      BorderBrush="Black">
-                            </ComboBox>
-                            <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0"
-                                       Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1"
-                                      ItemsSource="{Binding SerialPortModel.LSPBaudRate}"
-                                      SelectedItem="{Binding SerialPortModel.SPBaudRate}"
-                                      Style="{DynamicResource SPComboBox}"
-                                      IsEnabled="{Binding SerialPortModel.SPBaudRateEnable}"/>
-                            <TextBlock x:Name="DataTextBox" Text="数据位：" Grid.Row="2" Grid.Column="0"
-                                       Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1"
-                                      ItemsSource="{Binding SerialPortModel.LSPDataBits}"
-                                      SelectedItem="{Binding SerialPortModel.SPDataBits}"
-                                      Style="{DynamicResource SPComboBox}"
-                                      IsEnabled="{Binding SerialPortModel.SPDataBitsEnable}"/>
-                            <TextBlock x:Name="StopTextBox" Text="停止位：" Grid.Row="3" Grid.Column="0"
-                                       Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1"
-                                      ItemsSource="{Binding SerialPortModel.LSPStopBits}"
-                                      SelectedItem="{Binding SerialPortModel.SPStopBits}"
-                                      Style="{DynamicResource SPComboBox}"
-                                      IsEnabled="{Binding SerialPortModel.SPStopBitsEnable}"/>
-                            <TextBlock x:Name="ParityTextBox" Text="校验位：" Grid.Row="4" Grid.Column="0"
-                                       Style="{StaticResource SPTextBlock}"/>
-                            <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1"
-                                      ItemsSource="{Binding SerialPortModel.LSPParity}"
-                                      SelectedItem="{Binding SerialPortModel.SPParity}"
-                                      Style="{DynamicResource SPComboBox}"
-                                      IsEnabled="{Binding SerialPortModel.SPParityEnable}"/>
-                            <Ellipse x:Name="OnOffElipse" Fill="{Binding SerialPortModel.SPBrush}"
-                                     Grid.Row="5" Grid.Column="0" Grid.RowSpan="2"
-                                     Style="{StaticResource SPEilipse}"/>
-                            <Button x:Name="OnOffButton" Content="{Binding SerialPortModel.OpenCloseSP}"
-                                    Grid.Row="5" Grid.Column="1"
-                                    Style="{DynamicResource SPButton}"
-                                    Click="OpenCloseSP"/>
-                        </Grid>
-                    </GroupBox>
-                    <!--信号状态区-->
-                    <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1" Margin="2,0,5,2" BorderBrush="#FF007ACD">
-                        <Grid x:Name="HoldingGrid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="DcdTextBlock" Text="DCD" Grid.Row="0" Grid.Column="0"
-                                       Style="{StaticResource HDTextBlock}"/>
-                            <Ellipse x:Name="DcdElipse" Fill="{Binding SerialPortModel.DcdBrush}" Grid.Row="0" Grid.Column="1"
-                                     Style="{StaticResource HDEilipse}"/>
-                            <TextBlock x:Name="CtsTextBlock" Text="CTS" Grid.Row="0" Grid.Column="2"
-                                       Style="{StaticResource HDTextBlock}"/>
-                            <Ellipse x:Name="CtsElipse" Fill="{Binding SerialPortModel.CtsBrush}" Grid.Row="0" Grid.Column="3"
-                                     Style="{StaticResource HDEilipse}"/>
-                            <TextBlock x:Name="DsrTextBlock" Text="DSR" Grid.Row="0" Grid.Column="4"
-                                       Style="{StaticResource HDTextBlock}"/>
-                            <Ellipse x:Name="DsrElipse" Fill="{Binding SerialPortModel.DsrBrush}" Grid.Row="0" Grid.Column="5"
-                                     Style="{StaticResource HDEilipse}"/>
-                        </Grid>
-                    </GroupBox>
-                    <!--辅助区-->
-                    <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2" Margin="2,0,5,2" BorderBrush="#FF007ACD">
-                        <Grid x:Name="AssistGrid">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0"
-                                      Style="{StaticResource AssistCheckBox}"
-                                      Margin="0,0,2.5,1.25"
-                                      IsChecked="{Binding RecvModel.HexRecv}"/>
-                            <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1"
-                                      Style="{StaticResource AssistCheckBox}"
-                                      Margin="2.5,0,0,1.25"
-                                      IsChecked="{Binding HexSend}"/>
-                            <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0"
-                                      Style="{StaticResource AssistCheckBox}"
-                                      Margin="0,0,2.5,5" 
-                                      IsChecked="{Binding AutoSend}"/>
-                            <TextBox x:Name="AutoSendNumTextBox" Text="{Binding SendModel.AutoSendNum}" Grid.Row="1" Grid.Column="1"
-                                     Style="{DynamicResource AutoSendNumTextBox}"
-                                     Margin="2.5,0,0,5"/>
-                            <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0"
-                                      Style="{StaticResource AssistCheckBox}"
-                                      Margin="0,0,2.5,5" 
-                                      IsChecked="{Binding SaveRecv}"/>
-                            <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1"
-                                    Style="{StaticResource AssistButton}" 
-                                    Margin="2.5,0,0,5"
-                                    Click="SaveRecvPath"/>
-                            <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0"
-                                    Style="{StaticResource AssistButton}" 
-                                    Margin="0,0,2.5,5"
-                                    Click="ClarReceData"/>
-                            <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1"
-                                    Style="{StaticResource AssistButton}" 
-                                    Margin="2.5,0,0,5"
-                                    Click="ClearSendData"/>
-                            <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.ColumnSpan="2"
-                                    Style="{StaticResource AssistButton}" 
-                                    Margin="0,0,0,0"
-                                    Click="ClearCount"/>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
+                    <Grid x:Name="SendDataGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="SendTextBox" Text="{Binding SendModel.SendData}" Grid.RowSpan="2" 
+                                 Style="{StaticResource RSTextBox}"/>
+                        <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
+                                Style="{StaticResource SendButton}"
+                                Margin="3,3,0,2"
+                                Click="Sends"/>
+                        <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1"
+                                Style="{StaticResource SendButton}"
+                                Margin="3,3,0,0"
+                                Click="Send"/>
+                    </Grid>
+                </GroupBox>
             </Grid>
-        </DockPanel>
-    </Viewbox>
+            <!--串口配置区、信号状态区和辅助区-->
+            <Grid x:Name="SerialPortGrid" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--串口配置区-->
+                <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0"
+                              Margin="0,0,5,2"
+                              BorderBrush="#FF007ACD"
+                              Visibility="{Binding HelpModel.View_Visibility}">
+                    <Grid x:Name="SPConfGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="ComTextBox" Text="端口：" Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource SPTextBlock}"/>
+                        <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1"
+                                  ItemsSource="{Binding SerialPortModel.LSPPort}"
+                                  SelectedItem="{Binding SerialPortModel.SPPort}"
+                                  Style="{DynamicResource SPComboBox}"
+                                  IsEnabled="{Binding SerialPortModel.SPPortEnable}"
+                                  BorderBrush="Black"/>
+                        <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0"
+                                   Style="{StaticResource SPTextBlock}"/>
+                        <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1"
+                                  ItemsSource="{Binding SerialPortModel.LSPBaudRate}"
+                                  SelectedItem="{Binding SerialPortModel.SPBaudRate}"
+                                  Style="{DynamicResource SPComboBox}"
+                                  IsEnabled="{Binding SerialPortModel.SPBaudRateEnable}"/>
+                        <TextBlock x:Name="DataTextBox" Text="数据位：" Grid.Row="2" Grid.Column="0"
+                                   Style="{StaticResource SPTextBlock}"/>
+                        <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1"
+                                  ItemsSource="{Binding SerialPortModel.LSPDataBits}"
+                                  SelectedItem="{Binding SerialPortModel.SPDataBits}"
+                                  Style="{DynamicResource SPComboBox}"
+                                  IsEnabled="{Binding SerialPortModel.SPDataBitsEnable}"/>
+                        <TextBlock x:Name="StopTextBox" Text="停止位：" Grid.Row="3" Grid.Column="0"
+                                   Style="{StaticResource SPTextBlock}"/>
+                        <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1"
+                                  ItemsSource="{Binding SerialPortModel.LSPStopBits}"
+                                  SelectedItem="{Binding SerialPortModel.SPStopBits}"
+                                  Style="{DynamicResource SPComboBox}"
+                                  IsEnabled="{Binding SerialPortModel.SPStopBitsEnable}"/>
+                        <TextBlock x:Name="ParityTextBox" Text="校验位：" Grid.Row="4" Grid.Column="0"
+                                   Style="{StaticResource SPTextBlock}"/>
+                        <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1"
+                                  ItemsSource="{Binding SerialPortModel.LSPParity}"
+                                  SelectedItem="{Binding SerialPortModel.SPParity}"
+                                  Style="{DynamicResource SPComboBox}"
+                                  IsEnabled="{Binding SerialPortModel.SPParityEnable}"/>
+                        <Ellipse x:Name="OnOffElipse" Fill="{Binding SerialPortModel.SPBrush}"
+                                 Grid.Row="5" Grid.Column="0" Grid.RowSpan="2"
+                                 Style="{StaticResource SPEilipse}"/>
+                        <Button x:Name="OnOffButton" Content="{Binding SerialPortModel.OpenCloseSP}"
+                                Grid.Row="5" Grid.Column="1"
+                                Style="{DynamicResource SPButton}"
+                                Click="OpenCloseSP"/>
+                    </Grid>
+                </GroupBox>
+                <!--信号状态区-->
+                <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
+                              Margin="0,0,5,2"
+                              BorderBrush="#FF007ACD"
+                              Visibility="{Binding HelpModel.View_Visibility}">
+                    <Grid x:Name="HoldingGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="DcdTextBlock" Text="DCD" Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource HDTextBlock}"/>
+                        <Ellipse x:Name="DcdElipse" Fill="{Binding SerialPortModel.DcdBrush}" Grid.Row="0" Grid.Column="1"
+                                 Style="{StaticResource HDEilipse}"/>
+                        <TextBlock x:Name="CtsTextBlock" Text="CTS" Grid.Row="0" Grid.Column="2"
+                                   Style="{StaticResource HDTextBlock}"/>
+                        <Ellipse x:Name="CtsElipse" Fill="{Binding SerialPortModel.CtsBrush}" Grid.Row="0" Grid.Column="3"
+                                 Style="{StaticResource HDEilipse}"/>
+                        <TextBlock x:Name="DsrTextBlock" Text="DSR" Grid.Row="0" Grid.Column="4"
+                                   Style="{StaticResource HDTextBlock}"/>
+                        <Ellipse x:Name="DsrElipse" Fill="{Binding SerialPortModel.DsrBrush}" Grid.Row="0" Grid.Column="5"
+                                 Style="{StaticResource HDEilipse}"/>
+                    </Grid>
+                </GroupBox>
+                <!--辅助区-->
+                <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2"
+                              Margin="0,0,5,3"
+                              BorderBrush="#FF007ACD"
+                              Visibility="{Binding HelpModel.View_Visibility}">
+                    <Grid x:Name="AssistGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="HexReceCheckBox" Content="Hex接收" Grid.Row="0" Grid.Column="0" 
+                                      Style="{StaticResource AssistCheckBox}"
+                                      Margin="0,6,2.5,6"
+                                      IsChecked="{Binding RecvModel.HexRecv}"/>
+                        <CheckBox x:Name="HexSendCheckBox" Content="Hex发送" Grid.Row="0" Grid.Column="1"
+                                      Style="{StaticResource AssistCheckBox}"
+                                      Margin="2.5,6,0,6"
+                                      IsChecked="{Binding HexSend}"/>
+                        <CheckBox x:Name="AutoSendCheckBox" Content="自动发送(ms)" Grid.Row="1" Grid.Column="0"
+                                      Style="{StaticResource AssistCheckBox}"
+                                      Margin="0,3,2.5,5" 
+                                      IsChecked="{Binding AutoSend}"/>
+                        <TextBox x:Name="AutoSendNumTextBox" Text="{Binding SendModel.AutoSendNum}" Grid.Row="1" Grid.Column="1"
+                                     Style="{DynamicResource AutoSendNumTextBox}"
+                                     Margin="2.5,3,0,5"/>
+                        <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0"
+                                      Style="{StaticResource AssistCheckBox}"
+                                      Margin="0,3,2.5,5" 
+                                  IsChecked="{Binding SaveRecv}"/>
+                        <Button x:Name="SaveReceButton" Content="路径选择"  Grid.Row="2" Grid.Column="1"
+                                    Style="{StaticResource AssistButton}"
+                                    Margin="2.5,3,0,5"
+                                    Click="SaveRecvPath"/>
+                        <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0"
+                                    Style="{StaticResource AssistButton}" 
+                                    Margin="0,3,2.5,5"
+                                    Click="ClarReceData"/>
+                        <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1"
+                                    Style="{StaticResource AssistButton}" 
+                                    Margin="2.5,3,0,5" 
+                                    Click="ClearSendData"/>
+                        <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.ColumnSpan="2"
+                                    Style="{StaticResource AssistButton}" 
+                                    Margin="0,3,0,0"
+                                    Click="ClearCount"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

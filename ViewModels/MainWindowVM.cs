@@ -316,6 +316,20 @@ namespace OSDA.ViewModels
         }
         #endregion
 
+        public void Reduced_Enable()
+        {
+            HelpModel.Reduced_Enable = !HelpModel.Reduced_Enable;
+
+            if(HelpModel.Reduced_Enable)
+            {
+                HelpModel.View_Visibility = "Collapsed";
+            }
+            else
+            {
+                HelpModel.View_Visibility = "Visible";
+            }
+        }
+
         #region 帮助 - 检查更新
         public async void UpdateAsync()
         {

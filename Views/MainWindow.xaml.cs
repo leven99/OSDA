@@ -16,6 +16,9 @@ namespace OSDA
         {
             InitializeComponent();
 
+            this.Height = 540;
+            this.Width = this.Height / 0.625;
+
             mainWindowViewModel = new MainWindowViewModel();
             DataContext = mainWindowViewModel;
         }
@@ -141,6 +144,16 @@ namespace OSDA
             mainWindowViewModel.CrLfEnable();
         }
         #endregion
+
+        /// <summary>
+        /// 精简视图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EveryMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.Reduced_Enable();
+        }
 
         /// <summary>
         /// 帮助 - 检查更新

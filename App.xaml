@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <!--main xaml - menu style-->
             <Style TargetType="MenuItem" x:Key="MainMenuItem">
-                <Setter Property="Padding" Value="5,3"/>
+                <Setter Property="Padding" Value="5,3,5,3"/>
             </Style>
             <Style TargetType="Button" x:Key="MainButton">
                 <Setter Property="Width" Value="36"/>
@@ -26,23 +26,23 @@
             </Style>
             <!--main xaml - Send block style-->
             <Style TargetType="Button" x:Key="SendButton">
-                <Setter Property="Margin" Value="3,3,0,0"/>
-                <Setter Property="Width" Value="86"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Padding" Value="32,10"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
             <!--main xaml - Serial config block style-->
             <Style TargetType="TextBlock" x:Key="SPTextBlock">
-                <Setter Property="Margin" Value="3.25,0,0,0"/>
+                <Setter Property="Margin" Value="3,0,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="ComboBox" x:Key="SPComboBox">
-                <Setter Property="Margin" Value="0,3.25,3.25,3.25"/>
-                <Setter Property="Width" Value="125"/>
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,5,3,3"/>
+                <Setter Property="Padding" Value="6,6,5,6"/>
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
             <Style TargetType="Ellipse" x:Key="SPEilipse">
@@ -50,39 +50,39 @@
                 <Setter Property="Height" Value="28"/>
             </Style>
             <Style TargetType="Button" x:Key="SPButton">
-                <Setter Property="Margin" Value="0,3.25,3.25,0"/>
-                <Setter Property="Width" Value="125"/>
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="Padding" Value="6,1"/>
+                <Setter Property="Margin" Value="0,5,3,3"/>
+                <Setter Property="Padding" Value="48,6,48,6"/>
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="Auto"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
             <!--main xaml - signal block style-->
             <Style TargetType="TextBlock" x:Key="HDTextBlock">
-                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="Margin" Value="0,6,0,2"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="Ellipse" x:Key="HDEilipse">
-                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="Margin" Value="0,6,0,2"/>
                 <Setter Property="Width" Value="13"/>
                 <Setter Property="Height" Value="13"/>
             </Style>
             <!--main xaml - assist block style-->
             <Style TargetType="CheckBox" x:Key="AssistCheckBox">
-                <Setter Property="Height" Value="25"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="TextBox" x:Key="AutoSendNumTextBox">
-                <Setter Property="Height" Value="25"/>
+                <Setter Property="Padding" Value="0,6"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
             <Style TargetType="Button" x:Key="AssistButton">
-                <Setter Property="Height" Value="25"/>
+                <Setter Property="Padding" Value="24,6"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>

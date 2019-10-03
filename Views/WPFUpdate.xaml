@@ -6,9 +6,9 @@
         mc:Ignorable="d"
         Title="OSDA"
         Background="Black"
-        WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="None">
-    <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.5,0.5,0.5,0.1">
+        WindowStartupLocation="CenterScreen" 
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="None" SnapsToDevicePixels="True">
+    <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.3,0.3,0.3,0.3">
         <Grid x:Name="RootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -26,7 +26,7 @@
                        Grid.Row="1" Grid.ColumnSpan="2"
                        HorizontalAlignment="Center"
                        TextWrapping="Wrap"
-                       Margin="0,16,0,0"/>
+                       Margin="0,16,0,0" />
             <Button x:Name="UpdateYesButton" Content="前往更新" Grid.Row="2" Grid.Column="0"
                     Style="{StaticResource UpdateButton}"
                     Margin="32,18,18,18" 
