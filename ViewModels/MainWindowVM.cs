@@ -40,7 +40,9 @@ namespace OSDA.ViewModels
 
         #region 菜单栏
 
-        #region 选项 - 字节编码
+        #region 选项
+
+        #region 字节编码
         public void ASCIIEnable()
         {
             SerialPortModel.UTF8Enable = false;
@@ -176,7 +178,7 @@ namespace OSDA.ViewModels
             }
         }
 
-        #region 选项 - 流控制
+        #region 流控制
         public void NoneEnable()
         {
             SerialPortModel.XOnXOffEnable = false;
@@ -278,7 +280,7 @@ namespace OSDA.ViewModels
         }
         #endregion
 
-        #region 选项 - 发送换行
+        #region 发送换行
         public void NonesEnable()
         {
             SendModel.CrEnable = false;
@@ -316,6 +318,9 @@ namespace OSDA.ViewModels
         }
         #endregion
 
+        #endregion
+
+        #region 视图
         public void Reduced_Enable()
         {
             HelpModel.Reduced_Enable = !HelpModel.Reduced_Enable;
@@ -329,8 +334,11 @@ namespace OSDA.ViewModels
                 HelpModel.View_Visibility = "Visible";
             }
         }
+        #endregion
 
-        #region 帮助 - 检查更新
+        #region 帮助
+
+        #region 检查更新
         public async void UpdateAsync()
         {
             HelpModel.httpClient = new HttpClient
@@ -432,6 +440,8 @@ namespace OSDA.ViewModels
             wPFUpdate.Show();
             Dispatcher.Run();
         }
+        #endregion
+
         #endregion
 
         #endregion

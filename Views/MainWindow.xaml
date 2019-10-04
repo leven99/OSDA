@@ -19,7 +19,7 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
                        Margin="6,3,4,3" Width="18" Height="18"/>
-            <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
+            <Menu x:Name="ItemMenu" Grid.Column="1" Background="White" MouseDoubleClick="ItemMenu_MouseDoubleClick">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
                     <MenuItem x:Name="ExitMenuItem" Header="退出(_X)"
                                   Click="ExitMenuItem_Click"/>

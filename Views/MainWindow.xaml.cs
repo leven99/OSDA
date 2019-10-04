@@ -23,19 +23,43 @@ namespace OSDA
             DataContext = mainWindowViewModel;
         }
 
-        #region Menu Mouse movement Support
+        #region Menu Mouse Support
+        /// <summary>
+        /// 鼠标移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseMove_Click(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                this.DragMove();
+                DragMove();
+            }
+        }
+
+        /// <summary>
+        /// 鼠标双击（最大化与还原）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ItemMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
             }
         }
         #endregion
 
         #region 菜单栏
+
+        #region 文件
         /// <summary>
-        /// 文件 - 退出
+        /// 退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -48,9 +72,11 @@ namespace OSDA
 
             Close();
         }
+        #endregion
 
+        #region 工具
         /// <summary>
-        /// 工具 - 计算器
+        /// 计算器
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,8 +84,11 @@ namespace OSDA
         {
             Process.Start("calc.exe");
         }
+        #endregion
 
-        #region 选项 - 字节编码
+        #region 选项
+
+        #region 字节编码
         private void ASCIIMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.ASCIIEnable();
@@ -82,7 +111,7 @@ namespace OSDA
         #endregion
 
         /// <summary>
-        /// 选项 - RtsEnable
+        /// RtsEnable
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,7 +121,7 @@ namespace OSDA
         }
 
         /// <summary>
-        /// 选项 - DtrEnable
+        /// DtrEnable
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -101,7 +130,7 @@ namespace OSDA
             mainWindowViewModel.DtrEnable();
         }
 
-        #region 选项 - 流控制
+        #region 流控制
         private void NoneMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.NoneEnable();
@@ -123,7 +152,7 @@ namespace OSDA
         }
         #endregion
 
-        #region 选项 - 发送换行
+        #region 发送换行
         private void NonesMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.NonesEnable();
@@ -145,6 +174,9 @@ namespace OSDA
         }
         #endregion
 
+        #endregion
+
+        #region 视图
         /// <summary>
         /// 精简视图
         /// </summary>
@@ -154,9 +186,11 @@ namespace OSDA
         {
             mainWindowViewModel.Reduced_Enable();
         }
+        #endregion
 
+        #region 帮助
         /// <summary>
-        /// 帮助 - 检查更新
+        /// 检查更新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -166,7 +200,7 @@ namespace OSDA
         }
 
         /// <summary>
-        /// 帮助 - Gitee Repository（码云存储库）
+        /// Gitee 存储库
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -176,7 +210,7 @@ namespace OSDA
         }
 
         /// <summary>
-        /// 帮助 - Report issue（报告问题）
+        /// 报告问题
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -184,6 +218,7 @@ namespace OSDA
         {
             Process.Start("https://gitee.com/leven9/OSDA/issues");
         }
+        #endregion
 
         /// <summary>
         /// 最小化
@@ -256,14 +291,22 @@ namespace OSDA
         }
         #endregion
 
-        #region RecvTextBox Mouse Double Support
+        #region RecvTextBox Support
+        /// <summary>
+        /// Mouse Double（鼠标双击）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecvTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             mainWindowViewModel.Enable_Recv();
         }
-        #endregion
 
-        #region RecvTextBox ScrollToEnd Support
+        /// <summary>
+        /// ScrollToEnd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecvTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             RecvTextBox.ScrollToEnd();
