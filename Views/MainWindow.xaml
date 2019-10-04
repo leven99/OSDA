@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="IconImage" Source="/OSDA;component/icon/favicon.ico"
+            <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                        Margin="6,3,4,3" Width="18" Height="18"/>
             <Menu x:Name="ItemMenu" Grid.Column="1" Background="White" MouseDoubleClick="ItemMenu_MouseDoubleClick">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
@@ -88,7 +88,7 @@
             <Button x:Name="MinButton" Grid.Column="2" Content="—"
                     Style="{StaticResource MainButton}"
                     Click="MinButton_Click"/>
-            <Button x:Name="CloseButton" Grid.Column="4" Content="X"
+            <Button x:Name="CloseButton" Grid.Column="3" Content="X"
                     Style="{StaticResource MainButton}" 
                     Click="CloseButton_Click"/>
         </Grid>
