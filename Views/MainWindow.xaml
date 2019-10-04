@@ -141,7 +141,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="SendTextBox" Text="{Binding SendModel.SendData}" Grid.RowSpan="2" 
+                        <TextBox x:Name="SendTextBox" Text="{Binding SendModel.SendData}" Grid.RowSpan="2"
                                  Style="{StaticResource RSTextBox}"/>
                         <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
                                 Style="{StaticResource SendButton}"
@@ -185,8 +185,7 @@
                                   ItemsSource="{Binding SerialPortModel.LSPPort}"
                                   SelectedItem="{Binding SerialPortModel.SPPort}"
                                   Style="{DynamicResource SPComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPPortEnable}"
-                                  BorderBrush="Black"/>
+                                  IsEnabled="{Binding SerialPortModel.SPPortEnable}"/>
                         <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0"
                                    Style="{StaticResource SPTextBlock}"/>
                         <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1"
@@ -300,7 +299,7 @@
                                     Style="{StaticResource AssistButton}" 
                                     Margin="2.5,3,0,5" 
                                     Click="ClearSendData"/>
-                        <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.ColumnSpan="2"
+                        <Button x:Name="ClearCountButton" Content="清空计数"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                                     Style="{StaticResource AssistButton}" 
                                     Margin="0,3,0,0"
                                     Click="ClearCount"/>
