@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:OSDA"
         mc:Ignorable="d"
         Title="OSDA"
-        Background="Black"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
+        Icon="/OSDA;component/icon/favicon.ico"
+        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
     <DockPanel x:Name="RootDockPanel" Background="White">
         <!--菜单栏-->
         <Grid x:Name="MenuGrid" DockPanel.Dock="Top" MouseMove="MouseMove_Click">
