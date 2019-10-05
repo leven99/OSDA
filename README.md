@@ -10,7 +10,7 @@
 
 ## 架构
 
-软件采用 WPF [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/zh-CN/download/details.aspx?id=49982) 框架，MVVM 模型开发（代码逻辑与 `UI` 设计分离）。
+软件采用 WPF [Microsoft .NET Framework 4.6.1](https://dotnet.microsoft.com/download/dotnet-framework/net461) 框架，MVVM 模型开发（代码逻辑与 `UI` 设计分离）。
 
 ![Framework](Docs/source/_images/framework.png)
 
