@@ -5,7 +5,9 @@ namespace OSDA.Models
 {
     public class HelpModel : MainWindowBase
     {
-        /* json中获取到的标签名称 */
+        /// <summary>
+        /// 从服务器获取到的Json结构数据
+        /// </summary>
         public struct UpdateJson
         {
             public string Tag_name { get; set; }

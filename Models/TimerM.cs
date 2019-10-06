@@ -1,11 +1,17 @@
 ﻿using OSDA.ViewModels;
 using System;
+using System.Globalization;
 using System.Timers;
 
 namespace OSDA.Models
 {
     public class TimerModel : MainWindowBase
     {
+        /// <summary>
+        /// 提供区域性信息
+        /// </summary>
+        private readonly CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
+
         /// <summary>
         /// 状态栏 - 系统时间
         /// </summary>
@@ -45,18 +51,18 @@ namespace OSDA.Models
             SystemTime = SystemTimeData();
         }
 
-        private static string SystemTimeData()
+        private string SystemTimeData()
         {
             string SystemTime;
             DateTime systemTime = DateTime.Now;
 
-            SystemTime = string.Format("{0}年{1}月{2}日 {3}:{4}:{5}",
-                systemTime.Year.ToString("0000"),
-                systemTime.Month.ToString("00"),
-                systemTime.Day.ToString("00"),
-                systemTime.Hour.ToString("00"),
-                systemTime.Minute.ToString("00"),
-                systemTime.Second.ToString("00"));
+            SystemTime = string.Format(cultureInfo, "{0}年{1}月{2}日 {3}:{4}:{5}",
+                systemTime.Year.ToString("0000", cultureInfo),
+                systemTime.Month.ToString("00", cultureInfo),
+                systemTime.Day.ToString("00", cultureInfo),
+                systemTime.Hour.ToString("00", cultureInfo),
+                systemTime.Minute.ToString("00", cultureInfo),
+                systemTime.Second.ToString("00", cultureInfo));
 
             return SystemTime;
         }

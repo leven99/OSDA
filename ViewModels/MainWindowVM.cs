@@ -19,6 +19,11 @@ namespace OSDA.ViewModels
         #region 字段
 
         /// <summary>
+        /// 提供区域性信息
+        /// </summary>
+        private readonly CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
+
+        /// <summary>
         /// 服务器网址
         /// </summary>
         public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
@@ -100,7 +105,7 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -121,7 +126,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -142,7 +147,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format("设置字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "设置字节编码为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -163,7 +168,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format("更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
             }
         }
         #endregion
@@ -185,11 +190,12 @@ namespace OSDA.ViewModels
             }
             catch(InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置RTS", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]当设置为硬件流或硬软件流时，不允许设置RTS",
+                    e.HResult.ToString("X", cultureInfo));
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
         }
 
@@ -210,11 +216,12 @@ namespace OSDA.ViewModels
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]当设置为硬件流或硬软件流时，不允许设置DTR", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]当设置为硬件流或硬软件流时，不允许设置DTR",
+                    e.HResult.ToString("X", cultureInfo));
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
         }
 
@@ -236,11 +243,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -261,11 +268,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -286,11 +293,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
             }
         }
 
@@ -311,11 +318,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format("设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
             }
         }
         #endregion
@@ -409,19 +416,20 @@ namespace OSDA.ViewModels
             }
             catch(TaskCanceledException)
             {
-                DepictInfo = string.Format("服务器请求异常，更换服务器......请稍后");
+                DepictInfo = string.Format(cultureInfo, "服务器请求异常，更换服务器......请稍后");
 
                 await UpdatesAsync();
             }
             catch(HttpRequestException e)
             {
-                DepictInfo = string.Format("[{0}]网络异常，更换服务器......请稍后", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]网络异常，更换服务器......请稍后", e.HResult.ToString("X", cultureInfo));
 
                 await UpdatesAsync();
             }
             catch (NullReferenceException e)
             {
-                DepictInfo = string.Format("[{0}]数据解析异常，请通过帮助菜单报告错误！", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]数据解析异常，请通过帮助菜单报告错误！",
+                    e.HResult.ToString("X", cultureInfo));
             }
         }
 
@@ -451,7 +459,7 @@ namespace OSDA.ViewModels
             }
             catch
             {
-                DepictInfo = string.Format("检查更新异常，请检查网络或稍后再试！");
+                DepictInfo = string.Format(cultureInfo, "检查更新异常，请检查网络或稍后再试！");
             }
         }
 
@@ -500,8 +508,8 @@ namespace OSDA.ViewModels
                 SPserialPort.PortName = SerialPortModel.SPPort;
                 SPserialPort.BaudRate = SerialPortModel.SPBaudRate;
                 SPserialPort.DataBits = SerialPortModel.SPDataBits;
-                SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString());
-                SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString());
+                SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString(cultureInfo));
+                SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString(cultureInfo));
 
                 SPserialPort.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
                 SPserialPort.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
@@ -574,8 +582,8 @@ namespace OSDA.ViewModels
                 {
                     SerialPortModel.SPBrush = Brushes.GreenYellow;
                     SerialPortModel.OpenCloseSP = "关闭串口";
-                    DepictInfo = string.Format("成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
-                        SPserialPort.PortName, SPserialPort.BaudRate.ToString(), SPserialPort.DataBits.ToString(),
+                    DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
+                        SPserialPort.PortName, SPserialPort.BaudRate.ToString(cultureInfo), SPserialPort.DataBits.ToString(cultureInfo),
                         SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
 
                     SerialPortModel.SPPortEnable = false;
@@ -606,31 +614,31 @@ namespace OSDA.ViewModels
             }
             catch (UnauthorizedAccessException e)
             {
-                DepictInfo = string.Format("[{0}]端口访问被拒绝", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口访问被拒绝", e.HResult.ToString("X", cultureInfo));
 
                 return false;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format("串口属性{0}是非法的", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "串口属性{0}是非法的", e.ParamName);
 
                 return false;
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format("串口{0}不支持", e.ParamName);
+                DepictInfo = string.Format(cultureInfo, "串口{0}不支持", e.ParamName);
 
                 return false;
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
 
                 return false;
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format("[{0}]指定端口已经打开", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]指定端口已经打开", e.HResult.ToString("X", cultureInfo));
 
                 return false;
             }
@@ -670,7 +678,7 @@ namespace OSDA.ViewModels
             }
             catch(IOException e)
             {
-                DepictInfo = string.Format("[{0}]端口处于无效状态", e.HResult.ToString("X"));
+                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
 
                 return false;
             }
@@ -811,7 +819,7 @@ namespace OSDA.ViewModels
 
                         foreach (var tmp in _sendData)
                         {
-                            sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier);
+                            sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
                         }
 
                         SPserialPort.Write(sendData, 0, SendCount);
@@ -876,7 +884,7 @@ namespace OSDA.ViewModels
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
                 Title = "接收数据路径选择",
-                FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
+                FileName = string.Format(cultureInfo, "{0}", DateTime.Now.ToString("yyyyMMdd", cultureInfo)),
                 Filter = "文本文件|*.txt"
             };
 
@@ -930,7 +938,7 @@ namespace OSDA.ViewModels
                 {
                     foreach (var tmp in recvData)
                     {
-                        RecvModel.RecvData.Append(string.Format("{0:X2} ", tmp));
+                        RecvModel.RecvData.Append(string.Format(cultureInfo, "{0:X2} ", tmp));
                     }
                 }
                 else
@@ -972,7 +980,7 @@ namespace OSDA.ViewModels
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(
-                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt",
+                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt",
                         true))
                     {
                         await DefaultReceDataPath.WriteAsync(ReceData);
