@@ -396,13 +396,13 @@ namespace OSDA.ViewModels
 
                 DepictInfo = "正在向wwww.github.com请求数据......";
 
-                HttpResponseMessage response = await httpClient.GetAsync(github_cri);
+                HttpResponseMessage response = await httpClient.GetAsync(github_cri).ConfigureAwait(false);
 
                 DepictInfo = "正在向www.github.com响应数据......";
 
                 if (response.ReasonPhrase == "OK")
                 {
-                    string _updateJson = await response.Content.ReadAsStringAsync();
+                    string _updateJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     if(_updateJson != null && _updateJson.Length > 450)
                     {
@@ -418,13 +418,13 @@ namespace OSDA.ViewModels
             {
                 DepictInfo = string.Format(cultureInfo, "服务器请求异常，更换服务器......请稍后");
 
-                await UpdatesAsync();
+                await UpdatesAsync().ConfigureAwait(false);
             }
             catch(HttpRequestException e)
             {
                 DepictInfo = string.Format(cultureInfo, "[{0}]网络异常，更换服务器......请稍后", e.HResult.ToString("X", cultureInfo));
 
-                await UpdatesAsync();
+                await UpdatesAsync().ConfigureAwait(false);
             }
             catch (NullReferenceException e)
             {
@@ -439,13 +439,13 @@ namespace OSDA.ViewModels
             {
                 DepictInfo = "正在向wwww.gitee.com请求数据......";
 
-                HttpResponseMessage response = await httpClient.GetAsync(gitee_uri);
+                HttpResponseMessage response = await httpClient.GetAsync(gitee_uri).ConfigureAwait(false);
 
                 DepictInfo = "正在向www.gitee.com响应数据......";
 
                 if (response.ReasonPhrase == "OK")
                 {
-                    string _updateJson = await response.Content.ReadAsStringAsync();
+                    string _updateJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     if (_updateJson != null && _updateJson.Length > 45)
                     {
@@ -983,14 +983,14 @@ namespace OSDA.ViewModels
                         AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt",
                         true))
                     {
-                        await DefaultReceDataPath.WriteAsync(ReceData);
+                        await DefaultReceDataPath.WriteAsync(ReceData).ConfigureAwait(false);
                     }
                 }
                 else
                 {
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecvPath, true))
                     {
-                        await DefaultReceDataPath.WriteAsync(ReceData);
+                        await DefaultReceDataPath.WriteAsync(ReceData).ConfigureAwait(false);
                     }
                 }
             }
