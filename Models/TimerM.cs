@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace OSDA.Models
 {
-    public class TimerModel : MainWindowBase
+    public class TimerModel : MainWindowBase, IDisposable
     {
         /// <summary>
         /// 提供区域性信息
@@ -73,5 +73,38 @@ namespace OSDA.Models
 
             InitSystemClockTimer();
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false;
+
+        /// <summary>
+        /// 受保护的 Dispose 方法实现
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    /* 释放托管资源（如果需要） */
+                }
+
+                SystemTimer.Dispose();
+                SystemTimer = null;
+
+                disposedValue = true;
+            }
+        }
+
+        /// <summary>
+        /// SerialPort 字段 IDisposable 接口的 Dispose 方法实现（无参数）
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
