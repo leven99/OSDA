@@ -2,16 +2,16 @@
 
 namespace OSDA.Models
 {
+    /// <summary>
+    /// 从服务器获取到的Json结构数据
+    /// </summary>
+    public class UpdateJsons
+    {
+        public string tag_name { get; set; }
+    }
+
     public class HelpModel : MainWindowBase
     {
-        /// <summary>
-        /// 从服务器获取到的Json结构数据
-        /// </summary>
-        public struct UpdateJson
-        {
-            public string Tag_name { get; set; }
-        }
-
         /// <summary>
         /// 本地软件的版本号
         /// </summary>

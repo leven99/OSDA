@@ -27,7 +27,7 @@ namespace OSDA.ViewModels
         /// <summary>
         /// 从服务器获取到的Json标签数据
         /// </summary>
-        public HelpModel.UpdateJson updateJson;
+        public UpdateJsons UpdateJsons = new UpdateJsons();
 
         /// <summary>
         /// HTTP客户端
@@ -383,8 +383,6 @@ namespace OSDA.ViewModels
         #region 检查更新
         public async void UpdateAsync()
         {
-            httpClient.Timeout = TimeSpan.FromMilliseconds(2000);
-
             try
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
@@ -401,9 +399,9 @@ namespace OSDA.ViewModels
 
                     if(_updateJson != null && _updateJson.Length > 450)
                     {
-                        updateJson = javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+                        UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
 
-                        string UpdateVerInfoNumber = updateJson.Tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = UpdateJsons.tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }
@@ -444,9 +442,9 @@ namespace OSDA.ViewModels
 
                     if (_updateJson != null && _updateJson.Length > 45)
                     {
-                        updateJson = javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+                        UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
 
-                        string UpdateVerInfoNumber = updateJson.Tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = UpdateJsons.tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }
