@@ -401,7 +401,7 @@ namespace OSDA.ViewModels
                     {
                         UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
 
-                        string UpdateVerInfoNumber = UpdateJsons.tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = UpdateJsons.Tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }
@@ -444,7 +444,7 @@ namespace OSDA.ViewModels
                     {
                         UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
 
-                        string UpdateVerInfoNumber = UpdateJsons.tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = UpdateJsons.Tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }

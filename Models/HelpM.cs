@@ -7,7 +7,7 @@ namespace OSDA.Models
     /// </summary>
     public class UpdateJsons
     {
-        public string tag_name { get; set; }
+        public string Tag_name { get; set; }
     }
 
     public class HelpModel : MainWindowBase
