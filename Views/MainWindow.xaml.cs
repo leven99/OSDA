@@ -408,10 +408,18 @@ namespace OSDA
 
         public static void SetBuffer(UIElement element, bool value)
         {
-            element.SetValue(BufferProperty, value);
+            if(element != null)
+            {
+                element.SetValue(BufferProperty, value);
+            }
         }
         public static ITextBoxAppend GetBuffer(UIElement element)
         {
+            if(element == null)
+            {
+                return (ITextBoxAppend)null;
+            }
+
             return (ITextBoxAppend)element.GetValue(BufferProperty);
         }
     }
