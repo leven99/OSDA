@@ -407,22 +407,21 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch(TaskCanceledException)
+            catch(HttpRequestException)
             {
-                DepictInfo = string.Format(cultureInfo, "服务器请求异常，更换服务器......请稍后");
+                DepictInfo = string.Format(cultureInfo, "GitHub服务器请求异常，更换服务器......请稍后");
 
                 await UpdatesAsync().ConfigureAwait(false);
             }
-            catch(HttpRequestException e)
+            catch (TaskCanceledException)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]网络异常，更换服务器......请稍后", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = string.Format(cultureInfo, "GitHub服务器响应异常，更换服务器......请稍后");
 
                 await UpdatesAsync().ConfigureAwait(false);
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]数据解析异常，请通过帮助菜单报告错误！",
-                    e.HResult.ToString("X", cultureInfo));
+                DepictInfo = string.Format(cultureInfo, "数据解析异常，请通过帮助菜单报告问题！");
             }
         }
 
@@ -450,9 +449,17 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch
+            catch (HttpRequestException)
             {
-                DepictInfo = string.Format(cultureInfo, "检查更新异常，请检查网络或稍后再试！");
+                DepictInfo = string.Format(cultureInfo, "服务器请求异常，请检查网络或稍后再试！");
+            }
+            catch (TaskCanceledException)
+            {
+                DepictInfo = string.Format(cultureInfo, "服务器响应异常，请检查网络或稍后再试！");
+            }
+            catch (NullReferenceException)
+            {
+                DepictInfo = string.Format(cultureInfo, "数据解析异常，请通过帮助菜单报告问题！");
             }
         }
 
