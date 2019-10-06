@@ -143,9 +143,10 @@ namespace OSDA.Models
         {
             RecvData = new IClassTextBoxAppend();
             RecvDataCount = 0;
-            RecvAutoSave = "已停止";
-            RecvEnable = "（提示：双击文本框更改接收状态）";
-            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + RecvEnable;
+            RecvAutoSave = string.Format(cultureInfo, "已停止");
+            RecvEnable = string.Format(cultureInfo, "（提示：双击文本框更改接收状态）");
+            RecvHeader = string.Format(cultureInfo,
+                "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + RecvEnable);
 
             EnableRecv = true;
             HexRecv = false;

@@ -1,17 +1,11 @@
 ﻿using OSDA.ViewModels;
 using System;
-using System.Globalization;
 using System.Timers;
 
 namespace OSDA.Models
 {
     public class TimerModel : MainWindowBase, IDisposable
     {
-        /// <summary>
-        /// 提供区域性信息
-        /// </summary>
-        private readonly CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
-
         /// <summary>
         /// 状态栏 - 系统时间
         /// </summary>
@@ -69,7 +63,7 @@ namespace OSDA.Models
 
         public void TimerDataContext()
         {
-            SystemTime = "2019年08月31日 12:13:15";
+            SystemTime = string.Format(cultureInfo, "2019年08月31日 12:13:15");
 
             InitSystemClockTimer();
         }

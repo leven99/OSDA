@@ -532,7 +532,7 @@ namespace OSDA.Models
             SPParity = "None";
 
             SPBrush = Brushes.Red;
-            OpenCloseSP = "打开串口";
+            OpenCloseSP = string.Format(cultureInfo, "打开串口");
 
             /* 串口属性控件 */
             SPPortEnable = true;

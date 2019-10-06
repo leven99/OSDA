@@ -19,11 +19,6 @@ namespace OSDA.ViewModels
         #region 字段
 
         /// <summary>
-        /// 提供区域性信息
-        /// </summary>
-        private readonly CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
-
-        /// <summary>
         /// 服务器网址
         /// </summary>
         public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
@@ -394,11 +389,11 @@ namespace OSDA.ViewModels
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
 
-                DepictInfo = "正在向wwww.github.com请求数据......";
+                DepictInfo = string.Format(cultureInfo, "正在向wwww.github.com请求数据......");
 
                 HttpResponseMessage response = await httpClient.GetAsync(github_cri).ConfigureAwait(false);
 
-                DepictInfo = "正在向www.github.com响应数据......";
+                DepictInfo = string.Format(cultureInfo, "正在向www.github.com响应数据......");
 
                 if (response.ReasonPhrase == "OK")
                 {
@@ -437,11 +432,11 @@ namespace OSDA.ViewModels
         {
             try
             {
-                DepictInfo = "正在向wwww.gitee.com请求数据......";
+                DepictInfo = string.Format(cultureInfo, "正在向wwww.gitee.com请求数据......");
 
                 HttpResponseMessage response = await httpClient.GetAsync(gitee_uri).ConfigureAwait(false);
 
-                DepictInfo = "正在向www.gitee.com响应数据......";
+                DepictInfo = string.Format(cultureInfo, "正在向www.gitee.com响应数据......");
 
                 if (response.ReasonPhrase == "OK")
                 {
@@ -477,13 +472,13 @@ namespace OSDA.ViewModels
             }
             else
             {
-                DepictInfo = "OSDA v" + HelpModel.VerInfoNumber + " 已经是最新版le......";
+                DepictInfo = string.Format(cultureInfo, "OSDA v" + HelpModel.VerInfoNumber + " 已经是最新版le......");
             }
         }
 
         private void ThreadStartingWPFUpdate()
         {
-            DepictInfo = "串行端口调试助手";
+            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
 
             WPFUpdate wPFUpdate = new WPFUpdate();
             wPFUpdate.Show();
@@ -581,7 +576,7 @@ namespace OSDA.ViewModels
                 if (SPserialPort.IsOpen)
                 {
                     SerialPortModel.SPBrush = Brushes.GreenYellow;
-                    SerialPortModel.OpenCloseSP = "关闭串口";
+                    SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "关闭串口");
                     DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
                         SPserialPort.PortName, SPserialPort.BaudRate.ToString(cultureInfo), SPserialPort.DataBits.ToString(cultureInfo),
                         SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
@@ -594,20 +589,20 @@ namespace OSDA.ViewModels
 
                     if (RecvModel.EnableRecv)
                     {
-                        RecvModel.RecvEnable = "允许";
+                        RecvModel.RecvEnable = string.Format(cultureInfo, "允许");
                     }
                     else
                     {
-                        RecvModel.RecvEnable = "暂停";
+                        RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
                     }
-                    RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                        "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
+                    RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
+                        "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
                     return true;
                 }
                 else
                 {
-                    DepictInfo = "串行端口打开失败";
+                    DepictInfo = string.Format(cultureInfo, "串行端口打开失败");
 
                     return false;
                 }
@@ -653,9 +648,9 @@ namespace OSDA.ViewModels
                     SPserialPort.Close();
 
                     SerialPortModel.SPBrush = Brushes.Red;
-                    SerialPortModel.OpenCloseSP = "打开串口";
+                    SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "打开串口");
 
-                    DepictInfo = "串行端口关闭成功";
+                    DepictInfo = string.Format(cultureInfo, "串行端口关闭成功");
 
                     SerialPortModel.SPPortEnable = true;
                     SerialPortModel.SPBaudRateEnable = true;
@@ -663,15 +658,15 @@ namespace OSDA.ViewModels
                     SerialPortModel.SPStopBitsEnable = true;
                     SerialPortModel.SPParityEnable = true;
 
-                    RecvModel.RecvAutoSave = "已停止";
-                    RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
+                    RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                    RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
+                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
                     return SPserialPort.IsOpen;
                 }
                 else
                 {
-                    DepictInfo = "串行端口已关闭";
+                    DepictInfo = string.Format(cultureInfo, "串行端口已关闭");
 
                     return SPserialPort.IsOpen;
                 }
@@ -702,11 +697,11 @@ namespace OSDA.ViewModels
 
                     if (HexSend == true)
                     {
-                        DepictInfo = "请输入十六进制数据用空格隔开，比如A0 B1 C2 D3";
+                        DepictInfo = string.Format(cultureInfo, "请输入十六进制数据用空格隔开，比如A0 B1 C2 D3");
                     }
                     else
                     {
-                        DepictInfo = "串行端口调试助手";
+                        DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
                     }
                 }
             }
@@ -733,7 +728,7 @@ namespace OSDA.ViewModels
                     {
                         if (SendModel.AutoSendNum <= 0)
                         {
-                            DepictInfo = "请输入正确的发送时间间隔";
+                            DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
                             return;
                         }
 
@@ -854,7 +849,7 @@ namespace OSDA.ViewModels
             }
             catch
             {
-                DepictInfo = "发送异常，请检查发送数据";
+                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
             }
         }
         #endregion
@@ -883,9 +878,9 @@ namespace OSDA.ViewModels
         {
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
-                Title = "接收数据路径选择",
+                Title = string.Format(cultureInfo, "接收数据路径选择"),
                 FileName = string.Format(cultureInfo, "{0}", DateTime.Now.ToString("yyyyMMdd", cultureInfo)),
-                Filter = "文本文件|*.txt"
+                Filter = string.Format(cultureInfo, "文本文件|*.txt")
             };
 
             if (ReceDataSaveFileDialog.ShowDialog() == true)
@@ -915,8 +910,8 @@ namespace OSDA.ViewModels
         public void ClearCount()
         {
             RecvModel.RecvDataCount = 0;
-            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
+            RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
             SendModel.SendDataCount = 0;
         }
@@ -949,19 +944,19 @@ namespace OSDA.ViewModels
 
             if (SaveRecv)
             {
-                RecvModel.RecvAutoSave = "保存中";
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "保存中");
 
                 SaveRecvData(_SerialPort.Encoding.GetString(recvData));
             }
             else
             {
-                RecvModel.RecvAutoSave = "已停止";
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
             }
 
             RecvModel.RecvDataCount += recvData.Length;
 
-            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
+            RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
+                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
             if (RecvModel.RecvDataCount > (32768 * RecvDataDeleteCount))
             {
@@ -996,11 +991,11 @@ namespace OSDA.ViewModels
             }
             catch
             {
-                DepictInfo = "接收数据保存失败";
+                DepictInfo = string.Format(cultureInfo, "接收数据保存失败");
 
-                RecvModel.RecvAutoSave = "已停止";
-                RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount + 
-                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount + 
+                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
             }
         }
         #endregion
@@ -1038,7 +1033,7 @@ namespace OSDA.ViewModels
             SerialPortModel = new SerialPortModel();
             SerialPortModel.SerialPortDataContext();
 
-            DepictInfo = "串行端口调试助手";
+            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
 
             TimerModel = new TimerModel();
             TimerModel.TimerDataContext();

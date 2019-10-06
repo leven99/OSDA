@@ -1,5 +1,4 @@
 ﻿using OSDA.ViewModels;
-using System;
 
 namespace OSDA.Models
 {
@@ -138,7 +137,7 @@ namespace OSDA.Models
             VerInfoNumber = "3.2.0";
             VerInfo = "OSDA v" + VerInfoNumber;
 
-            UpdateInfo = "OSDA发现新版本le........";
+            UpdateInfo = string.Format(cultureInfo, "OSDA发现新版本le........");
 
             ReducedEnable = false;
             ViewVisibility = "Visible";
