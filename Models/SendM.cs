@@ -1,11 +1,10 @@
 ﻿using OSDA.ViewModels;
-using System;
 
 namespace OSDA.Models
 {
     public class SendModel : MainWindowBase
     {
-        public int _SendDataCount;
+        private int _SendDataCount;
         public int SendDataCount
         {
             get
@@ -25,7 +24,7 @@ namespace OSDA.Models
         /// <summary>
         /// 发送区Header字符串
         /// </summary>
-        public string _SendHeader;
+        private string _SendHeader;
         public string SendHeader
         {
             get
@@ -42,7 +41,7 @@ namespace OSDA.Models
             }
         }
 
-        public string _SendData;
+        private string _SendData;
         public string SendData
         {
             get
@@ -62,7 +61,7 @@ namespace OSDA.Models
         /// <summary>
         /// 辅助区 - 自送发送的时间间隔
         /// </summary>
-        public int _AutoSendNum;
+        private int _AutoSendNum;
         public int AutoSendNum
         {
             get
@@ -80,7 +79,7 @@ namespace OSDA.Models
         }
 
         #region 发送换行
-        public bool _NonesEnable;
+        private bool _NonesEnable;
         public bool NonesEnable
         {
             get
@@ -97,7 +96,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _CrEnable;
+        private bool _CrEnable;
         public bool CrEnable
         {
             get
@@ -114,7 +113,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _LfEnable;
+        private bool _LfEnable;
         public bool LfEnable
         {
             get
@@ -131,7 +130,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _CrLfEnable;
+        private bool _CrLfEnable;
         public bool CrLfEnable
         {
             get

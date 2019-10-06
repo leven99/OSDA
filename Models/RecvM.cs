@@ -1,21 +1,11 @@
-﻿using Microsoft.Win32;
-using OSDA.Interface;
+﻿using OSDA.Interface;
 using OSDA.ViewModels;
-using System;
-using System.IO;
-using System.IO.Ports;
 
 namespace OSDA.Models
 {
     public class RecvModel : MainWindowBase
     {
-        public string DataRecePath = null;
-        /// <summary>
-        /// 实现接收区数据超过32MB时，自动清空接收控件中的数据
-        /// </summary>
-        public int RecvDataDeleteCount = 1;
-
-        public int _RecvDataCount;
+        private int _RecvDataCount;
         public int RecvDataCount
         {
             get
@@ -35,7 +25,7 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区Header中的 [保存中/已停止] 字符串
         /// </summary>
-        public string _RecvAutoSave;
+        private string _RecvAutoSave;
         public string RecvAutoSave
         {
             get
@@ -55,7 +45,7 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区Header中的 [允许/暂停] 字符串
         /// </summary>
-        public string _EnableRecv;
+        private string _EnableRecv;
         public string EnableRecv
         {
             get
@@ -75,7 +65,7 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区Header字符串
         /// </summary>
-        public string _RecvHeader;
+        private string _RecvHeader;
         public string RecvHeader
         {
             get
@@ -95,7 +85,7 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区 - 允许/暂停接收数据
         /// </summary>
-        public bool _Enable_Recv;
+        private bool _Enable_Recv;
         public bool Enable_Recv
         {
             get
@@ -112,7 +102,7 @@ namespace OSDA.Models
             }
         }
 
-        public ITextBoxAppend _RecvData;
+        private ITextBoxAppend _RecvData;
         public ITextBoxAppend RecvData
         {
             get
@@ -132,7 +122,7 @@ namespace OSDA.Models
         /// <summary>
         /// 辅助区 - 十六进制接收
         /// </summary>
-        public bool _HexRecv;
+        private bool _HexRecv;
         public bool HexRecv
         {
             get
@@ -146,21 +136,6 @@ namespace OSDA.Models
                     _HexRecv = value;
                     RaisePropertyChanged(nameof(HexRecv));
                 }
-            }
-        }
-
-        public void RecvPath()
-        {
-            SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
-            {
-                Title = "接收数据路径选择",
-                FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
-                Filter = "文本文件|*.txt"
-            };
-
-            if (ReceDataSaveFileDialog.ShowDialog() == true)
-            {
-                DataRecePath = ReceDataSaveFileDialog.FileName;
             }
         }
 

@@ -9,7 +9,7 @@ namespace OSDA.Models
         /// <summary>
         /// 状态栏 - 系统时间
         /// </summary>
-        string _SystemTime;
+        private string _SystemTime;
         public string SystemTime
         {
             get

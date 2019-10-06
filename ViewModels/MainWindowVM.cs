@@ -1,4 +1,5 @@
-﻿using OSDA.Models;
+﻿using Microsoft.Win32;
+using OSDA.Models;
 using OSDA.Views;
 using System;
 using System.Globalization;
@@ -7,6 +8,7 @@ using System.IO.Ports;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -14,7 +16,45 @@ namespace OSDA.ViewModels
 {
     class MainWindowViewModel : MainWindowBase, IDisposable
     {
+        #region 字段
+
+        /// <summary>
+        /// 服务器网址
+        /// </summary>
+        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
+        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
+
+        /// <summary>
+        /// 从服务器获取到的Json标签数据
+        /// </summary>
+        public HelpModel.UpdateJson updateJson;
+
+        /// <summary>
+        /// HTTP客户端
+        /// </summary>
+        public HttpClient httpClient = null;
+
+        /// <summary>
+        /// 解析json数据
+        /// </summary>
+        public readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+
+        /// <summary>
+        /// 数据接收路径
+        /// </summary>
+        public string DataRecvPath = null;
+
+        /// <summary>
+        /// 实现接收区数据超过32MB时，自动清空接收控件中的数据
+        /// </summary>
+        public int RecvDataDeleteCount = 1;
+
+        /// <summary>
+        /// 串行端口
+        /// </summary>
         public SerialPort SPserialPort = new SerialPort();
+
+        #endregion
 
         public HelpModel HelpModel { get; set; }
         public RecvModel RecvModel { get; set; }
@@ -341,18 +381,18 @@ namespace OSDA.ViewModels
         #region 检查更新
         public async void UpdateAsync()
         {
-            HelpModel.httpClient = new HttpClient
+            httpClient = new HttpClient
             {
                 Timeout = TimeSpan.FromMilliseconds(2000)
             };
 
             try
             {
-                HelpModel.httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
 
                 DepictInfo = "正在向wwww.github.com请求数据......";
 
-                HttpResponseMessage response = await HelpModel.httpClient.GetAsync(HelpModel.github_cri);
+                HttpResponseMessage response = await httpClient.GetAsync(github_cri);
 
                 DepictInfo = "正在向www.github.com响应数据......";
 
@@ -362,9 +402,9 @@ namespace OSDA.ViewModels
 
                     if(_updateJson != null && _updateJson.Length > 450)
                     {
-                        HelpModel.updateJson = HelpModel.javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+                        updateJson = javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
 
-                        string UpdateVerInfoNumber = HelpModel.updateJson.Tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = updateJson.Tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }
@@ -390,7 +430,7 @@ namespace OSDA.ViewModels
             {
                 DepictInfo = "正在向wwww.gitee.com请求数据......";
 
-                HttpResponseMessage response = await HelpModel.httpClient.GetAsync(HelpModel.gitee_uri);
+                HttpResponseMessage response = await httpClient.GetAsync(gitee_uri);
 
                 DepictInfo = "正在向www.gitee.com响应数据......";
 
@@ -400,9 +440,9 @@ namespace OSDA.ViewModels
 
                     if (_updateJson != null && _updateJson.Length > 45)
                     {
-                        HelpModel.updateJson = HelpModel.javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
+                        updateJson = javaScriptSerializer.Deserialize<HelpModel.UpdateJson>(_updateJson);
 
-                        string UpdateVerInfoNumber = HelpModel.updateJson.Tag_name.TrimStart('v');
+                        string UpdateVerInfoNumber = updateJson.Tag_name.TrimStart('v');
 
                         UpdateVersionCompareTo(UpdateVerInfoNumber);
                     }
@@ -832,7 +872,17 @@ namespace OSDA.ViewModels
         #region 路径选择
         public void SaveRecvPath()
         {
-            RecvModel.RecvPath();
+            SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
+            {
+                Title = "接收数据路径选择",
+                FileName = string.Format("{0}", DateTime.Now.ToString("yyyyMMdd")),
+                Filter = "文本文件|*.txt"
+            };
+
+            if (ReceDataSaveFileDialog.ShowDialog() == true)
+            {
+                DataRecvPath = ReceDataSaveFileDialog.FileName;
+            }
         }
         #endregion
 
@@ -841,7 +891,7 @@ namespace OSDA.ViewModels
         {
             RecvModel.RecvData.Delete();
 
-            RecvModel.RecvDataDeleteCount = 1;
+            RecvDataDeleteCount = 1;
         }
         #endregion
 
@@ -904,11 +954,11 @@ namespace OSDA.ViewModels
             RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
                 "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.EnableRecv + "]";
 
-            if (RecvModel.RecvDataCount > (32768 * RecvModel.RecvDataDeleteCount))
+            if (RecvModel.RecvDataCount > (32768 * RecvDataDeleteCount))
             {
                 RecvModel.RecvData.Delete();   /* 32MB */
 
-                RecvModel.RecvDataDeleteCount += 1;
+                RecvDataDeleteCount += 1;
             }
         }
 
@@ -916,7 +966,7 @@ namespace OSDA.ViewModels
         {
             try
             {
-                if (RecvModel.DataRecePath == null)
+                if (DataRecvPath == null)
                 {
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
@@ -929,7 +979,7 @@ namespace OSDA.ViewModels
                 }
                 else
                 {
-                    using (StreamWriter DefaultReceDataPath = new StreamWriter(RecvModel.DataRecePath, true))
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecvPath, true))
                     {
                         await DefaultReceDataPath.WriteAsync(ReceData);
                     }
