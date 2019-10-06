@@ -1,6 +1,6 @@
 ﻿using OSDA.ViewModels;
 using System;
-using System.Windows.Threading;
+using System.Timers;
 
 namespace OSDA.Models
 {
@@ -26,22 +26,26 @@ namespace OSDA.Models
             }
         }
 
-        readonly DispatcherTimer SystemDispatcherTimer = new DispatcherTimer();
+        private Timer SystemTimer = null;
 
         public void InitSystemClockTimer()
         {
-            SystemDispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            SystemDispatcherTimer.IsEnabled = true;
-            SystemDispatcherTimer.Tick += SystemDispatcherTimer_Tick;
-            SystemDispatcherTimer.Start();
+            SystemTimer = new Timer
+            {
+                Interval = 1000
+            };
+
+            SystemTimer.Elapsed += SystemTimer_Elapsed;
+            SystemTimer.AutoReset = true;
+            SystemTimer.Enabled = true;
         }
 
-        public void SystemDispatcherTimer_Tick(object sender, EventArgs e)
+        private void SystemTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             SystemTime = SystemTimeData();
         }
 
-        public static string SystemTimeData()
+        private static string SystemTimeData()
         {
             string SystemTime;
             DateTime systemTime = DateTime.Now;

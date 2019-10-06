@@ -410,7 +410,7 @@ namespace OSDA.ViewModels
             }
             catch
             {
-                DepictInfo = string.Format("检查更新异常，请稍后再试。");
+                DepictInfo = string.Format("检查更新异常，请检查网络或稍后再试！");
             }
         }
 
