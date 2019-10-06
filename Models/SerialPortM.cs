@@ -489,7 +489,7 @@ namespace OSDA.Models
         }
 
         #region 停止位和校验位
-        public StopBits GetStopBits(string emp)
+        public static StopBits GetStopBits(string emp)
         {
             StopBits stopBits = StopBits.One;
             switch (emp)
@@ -502,7 +502,7 @@ namespace OSDA.Models
             return stopBits;
         }
 
-        public Parity GetParity(string emp)
+        public static Parity GetParity(string emp)
         {
             Parity parity = Parity.None;
             switch (emp)
