@@ -1,4 +1,4 @@
-﻿using OSDA.Interface;
+﻿using OSDA.Interfaces;
 using OSDA.ViewModels;
 using System;
 using System.Diagnostics;

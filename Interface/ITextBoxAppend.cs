@@ -6,7 +6,7 @@ using System.Text;
  * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
  */
 
-namespace OSDA.Interface
+namespace OSDA.Interfaces
 {
     public interface ITextBoxAppend
     {
