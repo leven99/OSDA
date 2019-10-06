@@ -165,7 +165,7 @@
                 <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0"
                               Margin="0,0,5,2"
                               BorderBrush="#FF007ACD"
-                              Visibility="{Binding HelpModel.View_Visibility}">
+                              Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="SPConfGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -227,7 +227,7 @@
                 <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
                               Margin="0,0,5,2"
                               BorderBrush="#FF007ACD"
-                              Visibility="{Binding HelpModel.View_Visibility}">
+                              Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="HoldingGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -255,7 +255,7 @@
                 <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2"
                               Margin="0,0,5,3"
                               BorderBrush="#FF007ACD"
-                              Visibility="{Binding HelpModel.View_Visibility}">
+                              Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="AssistGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>

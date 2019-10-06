@@ -94,19 +94,19 @@ namespace OSDA.Models
         /// <summary>
         /// 精简视图
         /// </summary>
-        private bool _Reduced_Enable;
-        public bool Reduced_Enable
+        private bool _ReducedEnable;
+        public bool ReducedEnable
         {
             get
             {
-                return _Reduced_Enable;
+                return _ReducedEnable;
             }
             set
             {
-                if (_Reduced_Enable != value)
+                if (_ReducedEnable != value)
                 {
-                    _Reduced_Enable = value;
-                    RaisePropertyChanged(nameof(Reduced_Enable));
+                    _ReducedEnable = value;
+                    RaisePropertyChanged(nameof(ReducedEnable));
                 }
             }
         }
@@ -114,19 +114,19 @@ namespace OSDA.Models
         /// <summary>
         /// 视图可见性
         /// </summary>
-        private string _View_Visibility;
-        public string View_Visibility
+        private string _ViewVisibility;
+        public string ViewVisibility
         {
             get
             {
-                return _View_Visibility;
+                return _ViewVisibility;
             }
             set
             {
-                if (_View_Visibility != value)
+                if (_ViewVisibility != value)
                 {
-                    _View_Visibility = value;
-                    RaisePropertyChanged(nameof(View_Visibility));
+                    _ViewVisibility = value;
+                    RaisePropertyChanged(nameof(ViewVisibility));
                 }
             }
         }
@@ -138,8 +138,8 @@ namespace OSDA.Models
 
             UpdateInfo = "OSDA发现新版本le........";
 
-            Reduced_Enable = false;
-            View_Visibility = "Visible";
+            ReducedEnable = false;
+            ViewVisibility = "Visible";
         }
     }
 }

@@ -45,19 +45,19 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区Header中的 [允许/暂停] 字符串
         /// </summary>
-        private string _EnableRecv;
-        public string EnableRecv
+        private string _RecvEnable;
+        public string RecvEnable
         {
             get
             {
-                return _EnableRecv;
+                return _RecvEnable;
             }
             set
             {
-                if (_EnableRecv != value)
+                if (_RecvEnable != value)
                 {
-                    _EnableRecv = value;
-                    RaisePropertyChanged(nameof(EnableRecv));
+                    _RecvEnable = value;
+                    RaisePropertyChanged(nameof(RecvEnable));
                 }
             }
         }
@@ -85,19 +85,19 @@ namespace OSDA.Models
         /// <summary>
         /// 接收区 - 允许/暂停接收数据
         /// </summary>
-        private bool _Enable_Recv;
-        public bool Enable_Recv
+        private bool _EnableRecv;
+        public bool EnableRecv
         {
             get
             {
-                return _Enable_Recv;
+                return _EnableRecv;
             }
             set
             {
-                if(_Enable_Recv != value)
+                if(_EnableRecv != value)
                 {
-                    _Enable_Recv = value;
-                    RaisePropertyChanged(nameof(Enable_Recv));
+                    _EnableRecv = value;
+                    RaisePropertyChanged(nameof(EnableRecv));
                 }
             }
         }
@@ -144,10 +144,10 @@ namespace OSDA.Models
             RecvData = new IClassTextBoxAppend();
             RecvDataCount = 0;
             RecvAutoSave = "已停止";
-            EnableRecv = "（提示：双击文本框更改接收状态）";
-            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + EnableRecv;
+            RecvEnable = "（提示：双击文本框更改接收状态）";
+            RecvHeader = "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + RecvEnable;
 
-            Enable_Recv = true;
+            EnableRecv = true;
             HexRecv = false;
         }
     }
