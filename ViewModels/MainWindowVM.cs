@@ -852,7 +852,15 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch
+            catch (ArgumentException)
+            {
+                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
+            }
+            catch(InvalidOperationException)
+            {
+                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
+            }
+            catch(FormatException)
             {
                 DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
             }
