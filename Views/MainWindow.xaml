@@ -71,7 +71,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}">
-                    <MenuItem x:Name="EveryMenuItem" Header="精简视图"
+                    <MenuItem x:Name="EveryMenuItem" Header="精简视图" IsChecked="{Binding HelpModel.ReducedEnable}"
                               Click="EveryMenuItem_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
