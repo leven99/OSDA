@@ -201,6 +201,21 @@
     <Resource Include="..\..\icon\favicon.ico">
       <Link>icon\favicon.ico</Link>
     </Resource>
+    <Resource Include="..\..\icon\Close.png">
+	  <Link>icon\Close.png</Link>
+	</Resource>
+    <Resource Include="..\..\icon\favicon.png">
+	  <Link>icon\favicon.png</Link>
+	</Resource>
+    <Resource Include="..\..\icon\Max.png">
+	  <Link>icon\Max.png</Link>
+	</Resource>
+    <Resource Include="..\..\icon\Min.png">
+	  <Link>icon\Min.png</Link>
+	</Resource>
+    <Resource Include="..\..\icon\Red.png">
+	  <Link>icon\Red.png</Link>
+	</Resource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
