@@ -5,12 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSDA"
         mc:Ignorable="d"
-        Title="OSDA"
-        Icon="/OSDA;component/icon/favicon.ico"
-        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
-    <DockPanel x:Name="RootDockPanel" Background="White">
+        Title="OSDA" WindowStartupLocation="CenterScreen" Style="{DynamicResource WindowChromeStyle}">
+    <!--Window Style-->
+    <Window.Resources>
+        <Style x:Key="WindowChromeStyle" TargetType="{x:Type local:MainWindow}">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!--Root-->
+    <DockPanel x:Name="RootDockPanel">
         <!--菜单栏-->
-        <Grid x:Name="MenuGrid" DockPanel.Dock="Top" MouseMove="MouseMove_Click">
+        <Grid x:Name="MenuGrid" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseMove="MouseMove_Click">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
@@ -19,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                        Margin="6,3,4,3" Width="18" Height="18"/>
-            <Menu x:Name="ItemMenu" Grid.Column="1" Background="White" MouseDoubleClick="ItemMenu_MouseDoubleClick">
+            <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
                     <MenuItem x:Name="ExitMenuItem" Header="退出(_X)"
                                   Click="ExitMenuItem_Click"/>
@@ -85,12 +94,22 @@
                               Click="IssueMenuItem_Click"/>
                 </MenuItem>
             </Menu>
-            <Button x:Name="MinButton" Grid.Column="2" Content="—"
+            <Button x:Name="MinButton" Grid.Column="2"
                     Style="{StaticResource MainButton}"
-                    Click="MinButton_Click"/>
-            <Button x:Name="CloseButton" Grid.Column="3" Content="X"
+                    Click="MinButton_Click">
+                <WrapPanel x:Name="MinWrapPanel">
+                    <Image x:Name="MinImage" Source="/OSDA;component/icon/Min.png"
+                           Width="23" Height="23"/>
+                </WrapPanel>
+            </Button>
+            <Button x:Name="CloseButton" Grid.Column="3"
                     Style="{StaticResource MainButton}" 
-                    Click="CloseButton_Click"/>
+                    Click="CloseButton_Click">
+                <WrapPanel x:Name="CloseWrapPanel">
+                    <Image x:Name="CloseImage" Source="/OSDA;component/icon/Close.png"
+                           Width="18" Height="18"/>
+                </WrapPanel>
+            </Button>
         </Grid>
 
         <!--状态栏-->

@@ -16,7 +16,7 @@ namespace OSDA
         {
             InitializeComponent();
 
-            this.Height = 540;
+            this.Height = 532;
             this.Width = this.Height / 0.625;
 
             mainWindowViewModel = new MainWindowViewModel();
@@ -34,23 +34,6 @@ namespace OSDA
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
-            }
-        }
-
-        /// <summary>
-        /// 鼠标双击（最大化与还原）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ItemMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
             }
         }
         #endregion
@@ -231,7 +214,7 @@ namespace OSDA
         }
 
         /// <summary>
-        /// 最大化
+        /// 关闭
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

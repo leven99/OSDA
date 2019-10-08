@@ -6,10 +6,11 @@
         <ResourceDictionary>
             <!--main xaml - menu style-->
             <Style TargetType="MenuItem" x:Key="MainMenuItem">
+                <Setter Property="Margin" Value="0,3,0,3"/>
                 <Setter Property="Padding" Value="5,3,5,3"/>
             </Style>
             <Style TargetType="Button" x:Key="MainButton">
-                <Setter Property="Width" Value="36"/>
+                <Setter Property="Width" Value="46"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="White"/>
             </Style>
