@@ -8,11 +8,11 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("OSDA")]
-[assembly: AssemblyDescription("The Open Serial Debug Assistant")]
+[assembly: AssemblyDescription("The Open Source Serial Port Debug Assistant")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("OSDA")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright (C) 2019 Cao Liwen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -47,3 +47,4 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.2.0.3")]
 [assembly: AssemblyFileVersion("3.2.0.3")]
+[assembly: NeutralResourcesLanguage("zh-Hans")]
