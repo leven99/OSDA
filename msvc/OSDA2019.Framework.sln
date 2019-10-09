@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSDA", "VS2019\OSDA.csproj", "{4626E3E4-8C98-4840-8656-F445C87168BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSDA", "VS2019.Framework\OSDA.csproj", "{4626E3E4-8C98-4840-8656-F445C87168BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
