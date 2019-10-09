@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace OSDA
+namespace OSDA.Views
 {
     public partial class MainWindow : Window, IDisposable
     {
@@ -16,8 +16,8 @@ namespace OSDA
         {
             InitializeComponent();
 
-            this.Height = 532;
-            this.Width = this.Height / 0.625;
+            Height = 532;
+            Width = Height / 0.625;
 
             mainWindowViewModel = new MainWindowViewModel();
             DataContext = mainWindowViewModel;

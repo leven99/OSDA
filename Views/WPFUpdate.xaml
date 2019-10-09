@@ -3,12 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OSDA.Views"
         mc:Ignorable="d"
-        Title="OSDA"
-        Background="Black"
-        WindowStartupLocation="CenterScreen" 
-        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="None" SnapsToDevicePixels="True">
-    <DockPanel x:Name="RootDockPanel" Background="White" Margin="0.3,0.3,0.3,0.3">
+        Title="OSDA" WindowStartupLocation="CenterScreen" Style="{DynamicResource UpdateWindowChromeStyle}">
+    
+    <!--Window Style-->
+    <Window.Resources>
+        <Style x:Key="UpdateWindowChromeStyle" TargetType="{x:Type local:WPFUpdate}">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!--Root-->
+    <DockPanel x:Name="RootDockPanel">
         <Grid x:Name="RootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -26,7 +37,7 @@
                        Grid.Row="1" Grid.ColumnSpan="2"
                        HorizontalAlignment="Center"
                        TextWrapping="Wrap"
-                       Margin="0,16,0,0" />
+                       Margin="0,16,0,12" />
             <Button x:Name="UpdateYesButton" Content="前往更新" Grid.Row="2" Grid.Column="0"
                     Style="{StaticResource UpdateButton}"
                     Margin="32,18,18,18" 

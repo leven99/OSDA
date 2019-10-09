@@ -15,6 +15,9 @@ namespace OSDA.Views
         {
             InitializeComponent();
 
+            Height = 180;
+            Width = Height / 0.625;
+
             wPFUpdateViewModel = new WPFUpdateViewModel();
             DataContext = wPFUpdateViewModel;
         }

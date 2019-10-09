@@ -1,14 +1,15 @@
-﻿<Window x:Class="OSDA.MainWindow"
+﻿<Window x:Class="OSDA.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OSDA"
+        xmlns:local="clr-namespace:OSDA.Views"
         mc:Ignorable="d"
-        Title="OSDA" WindowStartupLocation="CenterScreen" Style="{DynamicResource WindowChromeStyle}">
+        Title="OSDA" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowChromeStyle}">
+    
     <!--Window Style-->
     <Window.Resources>
-        <Style x:Key="WindowChromeStyle" TargetType="{x:Type local:MainWindow}">
+        <Style x:Key="MainWindowChromeStyle" TargetType="{x:Type local:MainWindow}">
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
                     <WindowChrome/>
@@ -16,8 +17,10 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
     <!--Root-->
     <DockPanel x:Name="RootDockPanel">
+        
         <!--菜单栏-->
         <Grid x:Name="MenuGrid" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseMove="MouseMove_Click">
             <Grid.ColumnDefinitions>
@@ -26,6 +29,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            
             <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                        Margin="6,3,4,3" Width="18" Height="18"/>
             <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
@@ -128,12 +132,14 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            
             <!--接受区和发送区-->
             <Grid x:Name="DataGrid" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="348*"/>
                     <RowDefinition Height="100*"/>
                 </Grid.RowDefinitions>
+                
                 <!--接收区-->
                 <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}"
                               Grid.Row="0"
@@ -145,6 +151,7 @@
                                  TextChanged="RecvTextBox_TextChanged"
                                  MouseDoubleClick="RecvTextBox_MouseDoubleClick"/>
                 </GroupBox>
+                
                 <!--发送区-->
                 <GroupBox x:Name="SendDataGroupBox"
                               Header="{Binding SendModel.SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节"
@@ -173,6 +180,7 @@
                     </Grid>
                 </GroupBox>
             </Grid>
+            
             <!--串口配置区、信号状态区和辅助区-->
             <Grid x:Name="SerialPortGrid" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -180,6 +188,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <!--串口配置区-->
                 <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0"
                               Margin="0,0,5,2"
@@ -242,6 +251,7 @@
                                 Click="OpenCloseSP"/>
                     </Grid>
                 </GroupBox>
+                
                 <!--信号状态区-->
                 <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
                               Margin="0,0,5,2"
@@ -270,6 +280,7 @@
                                  Style="{StaticResource HDEilipse}"/>
                     </Grid>
                 </GroupBox>
+                
                 <!--辅助区-->
                 <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2"
                               Margin="0,0,5,3"
@@ -326,5 +337,7 @@
                 </GroupBox>
             </Grid>
         </Grid>
+        
     </DockPanel>
+    
 </Window>
