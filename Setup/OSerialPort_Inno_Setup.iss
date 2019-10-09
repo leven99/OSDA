@@ -50,21 +50,21 @@ Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 ; Visual Studio 2017
 #ifdef VS2017
 #ifdef x_64
-  Source: "..\msvc\VS2017\bin\x64\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
-  Source: "..\msvc\VS2017\bin\x64\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2017.Framework\bin\x64\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2017.Framework\bin\x64\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #else
-  Source: "..\msvc\VS2017\bin\x86\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
-  Source: "..\msvc\VS2017\bin\x86\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2017.Framework\bin\x86\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2017.Framework\bin\x86\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
 
 ; Visual Studio 2019
 #else
 #ifdef x_64
-  Source: "..\msvc\VS2019\bin\x64\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
-  Source: "..\msvc\VS2019\bin\x64\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2019.Framework\bin\x64\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2019.Framework\bin\x64\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #else
-  Source: "..\msvc\VS2019\bin\x86\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
-  Source: "..\msvc\VS2019\bin\x86\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2019.Framework\bin\x86\Release\OSDA.exe"; DestDir: "{app}"; Flags: ignoreversion
+  Source: "..\msvc\VS2019.Framework\bin\x86\Release\OSDA.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 #endif
 #endif
 
