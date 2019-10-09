@@ -46,13 +46,13 @@
 
 2. 已安装 `Microsoft .NET Framework 4.6.1` 。未安装请 [点击此处](https://dotnet.microsoft.com/download/dotnet-framework/net461) 根据网站描述下载安装（Microsoft官方网站）。
 
-#### Windows
+#### For Windows
 
 下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。根据计算机平台，从 `Gitee` 或 `Github` 下载点下载。
 
 ## 编译
 
-#### Windows
+#### For Windows
 
 - [ ] VS2015
 - [x] VS2017
@@ -62,7 +62,7 @@
 $ git clone https://gitee.com/leven9/OSDA.git
 $ cd OSDA/msvc
 ```
-对于 `VS2017` 双击 `OSDA2017.sln`，对于 `VS2019` 双击 `OSDA2019.sln` 即可。
+对于 `VS2017` 双击 `OSDA2017.Framework.sln`，对于 `VS2019` 双击 `OSDA2019.Framework.sln` 即可。
 
 ## 贡献
 
