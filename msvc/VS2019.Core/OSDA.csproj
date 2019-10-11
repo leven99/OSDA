@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWpf>true</UseWpf>
+    <ApplicationIcon>icon\favicon.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Authors>Cao Liwen</Authors>
+    <Description>The Open Source Serial Port Debug Assistant</Description>
+    <Copyright>Copyright (C) 2019 Cao Liwen</Copyright>
+    <NeutralLanguage>zh-Hans</NeutralLanguage>
+    <AssemblyVersion>3.3.0.23</AssemblyVersion>
+    <FileVersion>3.3.0.23</FileVersion>
+    <Company />
+    <Version>3.3.0.23</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	<PackageReference Include="System.IO.Ports" Version="4.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+	  <Link>App.xaml</Link>
+    </ApplicationDefinition>
+    <Page Include="..\..\Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Link>Views\MainWindow.xaml</Link>
+    </Page>
+    <Page Include="..\..\Views\WPFUpdate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Link>Views\WPFUpdate.xaml</Link>
+    </Page>
+    <Compile Include="..\..\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+	  <Link>App.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+      <Link>Views\MainWindow.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Views\WPFUpdate.xaml.cs">
+      <DependentUpon>WPFUpdate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+      <Link>Views\WPFUpdate.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Interface\ITextBoxAppend.cs">
+      <Link>Interface\ITextBoxAppend.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ViewModels\MainWindowBase.cs">
+      <Link>ViewModels\MainWindowBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ViewModels\MainWindowVM.cs">
+      <Link>ViewModels\MainWindowVM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ViewModels\WPFUpdateVM.cs">
+      <Link>ViewModels\WPFUpdateVM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\TimerM.cs">
+      <Link>Models\TimerM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\HelpM.cs">
+      <Link>Models\HelpM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\RecvM.cs">
+      <Link>Models\RecvM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\SendM.cs">
+      <Link>Models\SendM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Models\SerialPortM.cs">
+      <Link>Models\SerialPortM.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\icon\favicon.ico">
+      <Link>icon\favicon.ico</Link>
+    </Resource>
+    <Resource Include="..\..\icon\Close.png">
+      <Link>icon\Close.png</Link>
+    </Resource>
+    <Resource Include="..\..\icon\favicon.png">
+      <Link>icon\favicon.png</Link>
+    </Resource>
+    <Resource Include="..\..\icon\Max.png">
+      <Link>icon\Max.png</Link>
+    </Resource>
+    <Resource Include="..\..\icon\Min.png">
+      <Link>icon\Min.png</Link>
+    </Resource>
+    <Resource Include="..\..\icon\Red.png">
+      <Link>icon\Red.png</Link>
+    </Resource>
+  </ItemGroup>
+</Project>
