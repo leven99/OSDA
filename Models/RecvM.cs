@@ -5,6 +5,10 @@ namespace OSDA.Models
 {
     public class RecvModel : MainWindowBase
     {
+        #region 接收区 - Header
+        /// <summary>
+        /// 接收区Header中的接收计数
+        /// </summary>
         private int _RecvDataCount;
         public int RecvDataCount
         {
@@ -81,9 +85,10 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
         /// <summary>
-        /// 接收区 - 允许/暂停接收数据
+        /// 接收区 - 允许/暂停 接收数据
         /// </summary>
         private bool _EnableRecv;
         public bool EnableRecv

@@ -35,25 +35,10 @@ namespace OSDA.Models
         /// <summary>
         /// 本地软件的版本号
         /// </summary>
-        private string _VerInfoNumber;
-        public string VerInfoNumber
-        {
-            get
-            {
-                return _VerInfoNumber;
-            }
-            set
-            {
-                if (_VerInfoNumber != value)
-                {
-                    _VerInfoNumber = value;
-                    RaisePropertyChanged(nameof(VerInfoNumber));
-                }
-            }
-        }
+        public string VerInfoNumber { get; set; }
 
         /// <summary>
-        /// 本地软件的版本信息
+        /// 菜单栏 - 帮助 - 本地版本信息
         /// </summary>
         private string _VerInfo;
         public string VerInfo
@@ -73,44 +58,9 @@ namespace OSDA.Models
         }
 
         /// <summary>
-        /// 服务器软件的版本号
-        /// </summary>
-        private string _UpdateVerInfoNumber;
-        public string UpdateVerInfoNumber
-        {
-            get
-            {
-                return _UpdateVerInfoNumber;
-            }
-            set
-            {
-                if(_UpdateVerInfoNumber != value)
-                {
-                    _UpdateVerInfoNumber = value;
-                    RaisePropertyChanged(nameof(UpdateVerInfoNumber));
-                }
-            }
-        }
-
-        /// <summary>
         /// 服务器软件的版本信息
         /// </summary>
-        private string _UpdateInfo;
-        public string UpdateInfo
-        {
-            get
-            {
-                return _UpdateInfo;
-            }
-            set
-            {
-                if (_UpdateInfo != value)
-                {
-                    _UpdateInfo = value;
-                    RaisePropertyChanged(nameof(UpdateInfo));
-                }
-            }
-        }
+        public string UpdateInfo { get; set; }
 
         /// <summary>
         /// 菜单栏 - 视图 - 精简视图

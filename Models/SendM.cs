@@ -4,6 +4,10 @@ namespace OSDA.Models
 {
     public class SendModel : MainWindowBase
     {
+        #region 发送区 - Header
+        /// <summary>
+        /// 发送区Header中的发送计数
+        /// </summary>
         private int _SendDataCount;
         public int SendDataCount
         {
@@ -40,6 +44,7 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
         private string _SendData;
         public string SendData

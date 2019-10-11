@@ -12,7 +12,7 @@ namespace OSDA.Models
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
 
-        #region 串口配置区串口属性
+        #region 串口配置区 - 串口属性
         public string _SPPort;
         public string SPPort
         {
@@ -99,6 +99,7 @@ namespace OSDA.Models
         }
         #endregion
 
+        #region 串口配置区 - 红绿标识和打开/关闭按钮
         public Brush _SPBrush;
         public Brush SPBrush
         {
@@ -132,6 +133,7 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
         #region 串口属性控件[启用/不启用]，用于实现串口打开时不允许更改串口属性
         public bool _SPPortEnable;
@@ -394,7 +396,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 信号状态区信号
+        #region 信号状态区 - 信号指示灯
         public Brush _DcdBrush;
         public Brush DcdBrush
         {
@@ -447,6 +449,11 @@ namespace OSDA.Models
         }
         #endregion
 
+        /// <summary>
+        /// 信号状态事件实现
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
             SerialPort _SerialPort = (SerialPort)sender;

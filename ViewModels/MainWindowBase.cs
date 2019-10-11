@@ -13,6 +13,10 @@ namespace OSDA.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// 提供属性更改事件的方法
+        /// </summary>
+        /// <param name="propertyName"></param>
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
