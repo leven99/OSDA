@@ -26,7 +26,7 @@ DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName=OSDA
 DisableProgramGroupPage=auto
 OutputDir=.\
-SetupIconFile=.\favicon.ico
+SetupIconFile=..\icon\favicon.ico
 #ifdef x_64
   ArchitecturesInstallIn64BitMode=x64
   OutputBaseFilename=OSDA_Windows_V{#MyAppVersion}_x64
