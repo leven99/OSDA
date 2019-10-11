@@ -1,13 +1,33 @@
 ﻿using OSDA.ViewModels;
+using System;
+using System.Runtime.Serialization;
 
 namespace OSDA.Models
 {
-    /// <summary>
-    /// 从服务器获取到的Json结构数据
-    /// </summary>
-    public class UpdateJsons
+    [DataContract]
+    public sealed class GitRelease
     {
-        public string Tag_name { get; set; }
+        private Version _version = null;
+
+        [DataMember(Name = "tag_name")]
+        public string TagName { get; set; }
+
+        public Version GetVersion()
+        {
+            if (_version != null)
+            {
+                return _version;
+            }
+
+            string version = TagName;
+
+            if (version.StartsWith("v", StringComparison.CurrentCulture))
+            {
+                version = version.Substring(1);
+            }
+
+            return (_version = Version.Parse(version));
+        }
     }
 
     public class HelpModel : MainWindowBase
@@ -93,7 +113,7 @@ namespace OSDA.Models
         }
 
         /// <summary>
-        /// 精简视图
+        /// 菜单栏 - 视图 - 精简视图
         /// </summary>
         private bool _ReducedEnable;
         public bool ReducedEnable

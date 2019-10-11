@@ -26,7 +26,7 @@ namespace OSDA.Models
             }
         }
 
-        private Timer SystemTimer = null;
+        private static Timer SystemTimer = null;
 
         public void InitSystemClockTimer()
         {

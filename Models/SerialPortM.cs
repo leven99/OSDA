@@ -12,7 +12,7 @@ namespace OSDA.Models
         public string[] LSPStopBits { get; set; }
         public string[] LSPParity { get; set; }
 
-        #region 串口属性
+        #region 串口配置区串口属性
         public string _SPPort;
         public string SPPort
         {
@@ -220,7 +220,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 字节编码
+        #region 菜单栏 - 选项 - 字节编码
         public bool _ASCIIEnable;
         public bool ASCIIEnable
         {
@@ -324,7 +324,7 @@ namespace OSDA.Models
             }
         }
 
-        #region 流控制
+        #region 菜单栏 - 选项 - 流控制
         public bool _NoneEnable;
         public bool NoneEnable
         {
@@ -394,7 +394,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 信号状态
+        #region 信号状态区信号
         public Brush _DcdBrush;
         public Brush DcdBrush
         {

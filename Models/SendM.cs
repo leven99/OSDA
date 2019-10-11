@@ -78,7 +78,7 @@ namespace OSDA.Models
             }
         }
 
-        #region 发送换行
+        #region 菜单栏 - 选项 - 发送换行
         private bool _NonesEnable;
         public bool NonesEnable
         {

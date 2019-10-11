@@ -6,9 +6,10 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -17,50 +18,29 @@ namespace OSDA.ViewModels
     class MainWindowViewModel : MainWindowBase, IDisposable
     {
         #region 字段
-
-        /// <summary>
-        /// 服务器网址
-        /// </summary>
-        public readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
-        public readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
-
-        /// <summary>
-        /// 从服务器获取到的Json标签数据
-        /// </summary>
-        public UpdateJsons UpdateJsons = new UpdateJsons();
-
-        /// <summary>
-        /// HTTP客户端
-        /// </summary>
-        public HttpClient httpClient = new HttpClient();
-
-        /// <summary>
-        /// 解析json数据
-        /// </summary>
-        public readonly JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-
-        /// <summary>
-        /// 数据接收路径
-        /// </summary>
-        public string DataRecvPath = null;
-
-        /// <summary>
-        /// 实现接收区数据超过32MB时，自动清空接收控件中的数据
-        /// </summary>
-        public int RecvDataDeleteCount = 1;
-
-        /// <summary>
-        /// 串行端口
-        /// </summary>
         public SerialPort SPserialPort = new SerialPort();
 
+        private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
+        private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
+
+        private HttpClient httpClient = new HttpClient();
+
+        private readonly DataContractJsonSerializer ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
+
+        private string DataRecvPath = null;   /* 数据接收路径 */
+
+        /// <summary>
+        /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
+        /// </summary>
+        private volatile Int32 RecvDataDeleteCount = 1;
         #endregion
 
-        public HelpModel HelpModel { get; set; }
-        public RecvModel RecvModel { get; set; }
-        public SendModel SendModel { get; set; }
         public SerialPortModel SerialPortModel { get; set; }
+        public SendModel SendModel { get; set; }
+        public RecvModel RecvModel { get; set; }
         public TimerModel TimerModel { get; set; }
+        public HelpModel HelpModel { get; set; }
+        public GitRelease LatestRelease { get; set; }
 
         #region 状态栏- 信息描述
         public string _DepictInfo;
@@ -379,93 +359,72 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 帮助
-
-        #region 检查更新
         public async void UpdateAsync()
+        {
+            LatestRelease = await DownloadJsonObjectAsync<GitRelease>(github_cri, ReleaseDeserializer, "github")
+                .ConfigureAwait(false);
+
+            if(LatestRelease == default)
+            {
+                DepictInfo = string.Format(cultureInfo, "GitHub.com 服务器请求/响应异常，更换服务器......请稍后");
+
+                LatestRelease = await DownloadJsonObjectAsync<GitRelease>(gitee_uri, ReleaseDeserializer, "gitee")
+                    .ConfigureAwait(false);
+
+                if (LatestRelease == default)
+                {
+                    DepictInfo = string.Format(cultureInfo, "服务器异常，请检查网络或稍后再试！");
+
+                    return;
+                }
+            }
+
+            UpdateVersionCompareTo(LatestRelease.GetVersion());
+        }
+
+        protected async Task<T> DownloadJsonObjectAsync<T>(Uri address, DataContractJsonSerializer serializer, string git)
         {
             try
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
+                httpClient.Timeout = TimeSpan.FromMilliseconds(3000);
 
-                DepictInfo = string.Format(cultureInfo, "正在向wwww.github.com请求数据......");
-
-                HttpResponseMessage response = await httpClient.GetAsync(github_cri).ConfigureAwait(false);
-
-                DepictInfo = string.Format(cultureInfo, "正在向www.github.com响应数据......");
-
-                if (response.ReasonPhrase == "OK")
+                if (git == "github")
                 {
-                    string _updateJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    DepictInfo = string.Format(cultureInfo, "正在向 GitHub.com 请求数据......");
+                }
+                else if (git == "gitee")
+                {
+                    DepictInfo = string.Format(cultureInfo, "正在向 Gitee.com 请求数据......");
+                }
 
-                    if(_updateJson != null && _updateJson.Length > 450)
-                    {
-                        UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
+                var _resPonse = await httpClient.GetAsync(address).ConfigureAwait(false);
 
-                        string UpdateVerInfoNumber = UpdateJsons.Tag_name.TrimStart('v');
+                if (git == "github")
+                {
+                    DepictInfo = string.Format(cultureInfo, "等待 GitHub.com 响应数据......");
+                }
+                else if (git == "gitee")
+                {
+                    DepictInfo = string.Format(cultureInfo, "等待 Gitee.com 响应数据......");
+                }
 
-                        UpdateVersionCompareTo(UpdateVerInfoNumber);
-                    }
+                var _jsonData = await _resPonse.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                using (var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(_jsonData)))
+                {
+                    return (T)serializer.ReadObject(jsonStream);
                 }
             }
-            catch(HttpRequestException)
+            catch
             {
-                DepictInfo = string.Format(cultureInfo, "GitHub服务器请求异常，更换服务器......请稍后");
-
-                await UpdatesAsync().ConfigureAwait(false);
-            }
-            catch (TaskCanceledException)
-            {
-                DepictInfo = string.Format(cultureInfo, "GitHub服务器响应异常，更换服务器......请稍后");
-
-                await UpdatesAsync().ConfigureAwait(false);
-            }
-            catch (NullReferenceException)
-            {
-                DepictInfo = string.Format(cultureInfo, "数据解析异常，请通过帮助菜单报告问题！");
+                return default;
+                throw;
             }
         }
 
-        public async Task UpdatesAsync()
+        private void UpdateVersionCompareTo(Version NewVersion)
         {
-            try
-            {
-                DepictInfo = string.Format(cultureInfo, "正在向wwww.gitee.com请求数据......");
-
-                HttpResponseMessage response = await httpClient.GetAsync(gitee_uri).ConfigureAwait(false);
-
-                DepictInfo = string.Format(cultureInfo, "正在向www.gitee.com响应数据......");
-
-                if (response.ReasonPhrase == "OK")
-                {
-                    string _updateJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                    if (_updateJson != null && _updateJson.Length > 45)
-                    {
-                        UpdateJsons = javaScriptSerializer.Deserialize<UpdateJsons>(_updateJson);
-
-                        string UpdateVerInfoNumber = UpdateJsons.Tag_name.TrimStart('v');
-
-                        UpdateVersionCompareTo(UpdateVerInfoNumber);
-                    }
-                }
-            }
-            catch (HttpRequestException)
-            {
-                DepictInfo = string.Format(cultureInfo, "服务器请求异常，请检查网络或稍后再试！");
-            }
-            catch (TaskCanceledException)
-            {
-                DepictInfo = string.Format(cultureInfo, "服务器响应异常，请检查网络或稍后再试！");
-            }
-            catch (NullReferenceException)
-            {
-                DepictInfo = string.Format(cultureInfo, "数据解析异常，请通过帮助菜单报告问题！");
-            }
-        }
-
-        private void UpdateVersionCompareTo(string UpdateVerInfoNumber)
-        {
-            Version NewVersion = new Version(UpdateVerInfoNumber);
             Version OldVersion = new Version(HelpModel.VerInfoNumber);
 
             if (NewVersion.CompareTo(OldVersion) > 0)
@@ -489,8 +448,6 @@ namespace OSDA.ViewModels
             wPFUpdate.Show();
             Dispatcher.Run();
         }
-        #endregion
-
         #endregion
 
         #endregion
@@ -807,60 +764,54 @@ namespace OSDA.ViewModels
         {
             try
             {
-                if (SPserialPort != null && SPserialPort.IsOpen)
+                if ((SPserialPort == null) && (SPserialPort.IsOpen == false))
                 {
-                    Int32 SendCount = 0;
+                    return;
+                }
 
-                    if (HexSend)
+                Int32 SendCount = 0;
+
+                if (HexSend)
+                {
+                    string[] _sendData = SendModel.SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    byte[] sendData = new byte[_sendData.Length];
+
+                    foreach (var tmp in _sendData)
                     {
-                        string[] _sendData = SendModel.SendData.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                        byte[] sendData = new byte[_sendData.Length];
-
-                        foreach (var tmp in _sendData)
-                        {
-                            sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
-                        }
-
-                        SPserialPort.Write(sendData, 0, SendCount);
-
-                    }
-                    else
-                    {
-                        SendCount = SPserialPort.Encoding.GetByteCount(SendModel.SendData);
-                        SPserialPort.Write(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount);
+                        sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
                     }
 
-                    if (SendModel.NonesEnable)
-                    {
-                        SendModel.SendDataCount += SendCount;
-                    }
-                    else if (SendModel.CrEnable)
-                    {
-                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r"), 0, 1);
-                        SendModel.SendDataCount += (SendCount + 1);
-                    }
-                    else if (SendModel.LfEnable)
-                    {
-                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\n"), 0, 1);
-                        SendModel.SendDataCount += (SendCount + 1);
-                    }
-                    else if (SendModel.CrLfEnable)
-                    {
-                        SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2);
-                        SendModel.SendDataCount += (SendCount + 2);
-                    }
+                    SPserialPort.Write(sendData, 0, SendCount);
+
+                }
+                else
+                {
+                    SendCount = SPserialPort.Encoding.GetByteCount(SendModel.SendData);
+                    SPserialPort.Write(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount);
+                }
+
+                if (SendModel.NonesEnable)
+                {
+                    SendModel.SendDataCount += SendCount;
+                }
+                else if (SendModel.CrEnable)
+                {
+                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r"), 0, 1);
+                    SendModel.SendDataCount += (SendCount + 1);
+                }
+                else if (SendModel.LfEnable)
+                {
+                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\n"), 0, 1);
+                    SendModel.SendDataCount += (SendCount + 1);
+                }
+                else if (SendModel.CrLfEnable)
+                {
+                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2);
+                    SendModel.SendDataCount += (SendCount + 2);
                 }
             }
-            catch (ArgumentException)
-            {
-                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
-            }
-            catch(InvalidOperationException)
-            {
-                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
-            }
-            catch(FormatException)
+            catch
             {
                 DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
             }
@@ -973,9 +924,9 @@ namespace OSDA.ViewModels
 
             if (RecvModel.RecvDataCount > (32768 * RecvDataDeleteCount))
             {
-                RecvModel.RecvData.Delete();   /* 32MB */
+                RecvModel.RecvData.Delete();
 
-                RecvDataDeleteCount += 1;
+                RecvDataDeleteCount += 1;   /* 接收区数据达到32MB（32768KB）或其倍数，则自动清空接收区数据 */
             }
         }
 
@@ -988,7 +939,8 @@ namespace OSDA.ViewModels
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(
-                        AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt",
+                        AppDomain.CurrentDomain.BaseDirectory +
+                        "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt",
                         true))
                     {
                         await DefaultReceDataPath.WriteAsync(ReceData).ConfigureAwait(false);
@@ -1004,11 +956,11 @@ namespace OSDA.ViewModels
             }
             catch
             {
-                DepictInfo = string.Format(cultureInfo, "接收数据保存失败");
-
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
                 RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount + 
                     "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
+
+                DepictInfo = string.Format(cultureInfo, "接收数据保存失败");
             }
         }
         #endregion
