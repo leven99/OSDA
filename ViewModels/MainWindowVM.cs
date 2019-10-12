@@ -838,22 +838,10 @@ namespace OSDA.ViewModels
         }
         #endregion
 
-        #region 多项发送
-        public void Sends()
+        #region 发送文件
+        public void SendFile()
         {
-            if (SPserialPort != null && SPserialPort.IsOpen)
-            {
-                if (HexSend)
-                {
 
-                }
-                else
-                {
-
-                }
-
-                SendModel.SendDataCount += SendModel.SendData.Length;
-            }
         }
         #endregion
 

@@ -169,10 +169,10 @@
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="SendTextBox" Text="{Binding SendModel.SendData}" Grid.RowSpan="2"
                                  Style="{StaticResource RSTextBox}"/>
-                        <Button x:Name="SendsButton" Content="多项发送" Grid.Row="0" Grid.Column="1"
+                        <Button x:Name="SendFileButton" Content="发送文件" Grid.Row="0" Grid.Column="1"
                                 Style="{StaticResource SendButton}"
-                                Margin="3,3,0,2"
-                                Click="Sends"/>
+                                Margin="3,3,0,0"
+                                Click="SendFile"/>
                         <Button x:Name="SenfButton" Content="发送" Grid.Row="1" Grid.Column="1"
                                 Style="{StaticResource SendButton}"
                                 Margin="3,3,0,0"

@@ -239,10 +239,10 @@ namespace OSDA.Views
         }
         #endregion
 
-        #region 多项发送
-        private void Sends(object sender, RoutedEventArgs e)
+        #region 发送文件
+        private void SendFile(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.Sends();
+            mainWindowViewModel.SendFile();
         }
         #endregion
 
