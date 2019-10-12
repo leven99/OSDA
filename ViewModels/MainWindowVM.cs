@@ -678,28 +678,39 @@ namespace OSDA.ViewModels
             }
             set
             {
-                if (SPserialPort != null && SPserialPort.IsOpen)
+                if (SPserialPort == null)
                 {
-                    if (_AutoSend != value)
+                    DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
+
+                    return;
+                }
+
+                if (SPserialPort.IsOpen == false)
+                {
+                    DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
+
+                    return;
+                }
+
+                if (_AutoSend != value)
+                {
+                    _AutoSend = value;
+                    RaisePropertyChanged(nameof(AutoSend));
+                }
+
+                if (AutoSend == true)
+                {
+                    if (SendModel.AutoSendNum <= 0)
                     {
-                        _AutoSend = value;
-                        RaisePropertyChanged(nameof(AutoSend));
+                        DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
+                        return;
                     }
 
-                    if (AutoSend == true)
-                    {
-                        if (SendModel.AutoSendNum <= 0)
-                        {
-                            DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
-                            return;
-                        }
-
-                        StartAutoSendTimer(SendModel.AutoSendNum);
-                    }
-                    else
-                    {
-                        StopAutoSendTimer();
-                    }
+                    StartAutoSendTimer(SendModel.AutoSendNum);
+                }
+                else
+                {
+                    StopAutoSendTimer();
                 }
             }
         }
@@ -762,13 +773,22 @@ namespace OSDA.ViewModels
         #region 发送
         public void Send()
         {
+            if (SPserialPort == null)
+            {
+                DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
+
+                return;
+            }
+
+            if (SPserialPort.IsOpen == false)
+            {
+                DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
+
+                return;
+            }
+
             try
             {
-                if ((SPserialPort == null) && (SPserialPort.IsOpen == false))
-                {
-                    return;
-                }
-
                 Int32 SendCount = 0;
 
                 if (HexSend)
