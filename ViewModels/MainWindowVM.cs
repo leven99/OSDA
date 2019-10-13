@@ -27,7 +27,7 @@ namespace OSDA.ViewModels
 
         private readonly DataContractJsonSerializer ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
 
-        private string DataRecvPath = null;   /* 数据接收路径 */
+        private string DataRecvPath = string.Empty;   /* 数据接收路径 */
 
         /// <summary>
         /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
@@ -789,7 +789,7 @@ namespace OSDA.ViewModels
 
             try
             {
-                Int32 SendCount = 0;
+                int SendCount = 0;
 
                 if (HexSend)
                 {
@@ -841,7 +841,65 @@ namespace OSDA.ViewModels
         #region 发送文件
         public void SendFile()
         {
+            if (SPserialPort == null)
+            {
+                DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
 
+                return;
+            }
+
+            if (SPserialPort.IsOpen == false)
+            {
+                DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
+
+                return;
+            }
+
+            try
+            {
+                OpenFileDialog SendDataOpenFileDialog = new OpenFileDialog
+                {
+                    Title = string.Format(cultureInfo, "选择发送数据"),
+                    DefaultExt = "*.*",
+                    Filter = string.Format(cultureInfo, "所有类型|*.*")
+                };
+
+                if (SendDataOpenFileDialog.ShowDialog() == true)
+                {
+                    var filePath = SendDataOpenFileDialog.FileName;
+
+                    if (filePath == null)
+                    {
+                        return;
+                    }
+
+                    HelpModel.StatusBarProgressBarVisibility = "Visible";
+
+                    var fileStream = SendDataOpenFileDialog.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        var fileContent = reader.ReadToEnd();
+                        var SendCount = SPserialPort.Encoding.GetByteCount(fileContent);
+
+                        DepictInfo = string.Format(cultureInfo, "文件正在发送......");
+                        HelpModel.StatusBarProgressBarIsIndeterminate = true;
+
+                        SPserialPort.Write(SPserialPort.Encoding.GetBytes(fileContent), 0, SendCount);
+
+                        HelpModel.StatusBarProgressBarIsIndeterminate = false;
+                        DepictInfo = string.Format(cultureInfo, "文件发送完毕");
+
+                        SendModel.SendDataCount += SendCount;
+                    }
+
+                    HelpModel.StatusBarProgressBarVisibility = "Collapsed";
+                }
+            }
+            catch
+            {
+                DepictInfo = string.Format(cultureInfo, "文件发送失败，请重新尝试！");
+            }
         }
         #endregion
 
@@ -850,8 +908,9 @@ namespace OSDA.ViewModels
         {
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
-                Title = string.Format(cultureInfo, "接收数据路径选择"),
+                Title = string.Format(cultureInfo, "接收数据保存"),
                 FileName = string.Format(cultureInfo, "{0}", DateTime.Now.ToString("yyyyMMdd", cultureInfo)),
+                DefaultExt = ".txt",
                 Filter = string.Format(cultureInfo, "文本文件|*.txt")
             };
 

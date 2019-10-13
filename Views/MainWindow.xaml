@@ -20,7 +20,7 @@
     
     <!--Root-->
     <DockPanel x:Name="RootDockPanel">
-        
+
         <!--菜单栏-->
         <Grid x:Name="MenuGrid" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseMove="MouseMove_Click">
             <Grid.ColumnDefinitions>
@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                        Margin="6,3,4,3" Width="18" Height="18"/>
             <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
@@ -117,14 +117,27 @@
         </Grid>
 
         <!--状态栏-->
-        <StatusBar x:Name="Status" DockPanel.Dock="Bottom" Background="#FF007ACD">
-            <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}"
-                           Style="{StaticResource SBStatusBarItem}"
-                           HorizontalAlignment="Left"/>
-            <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding TimerModel.SystemTime}"
-                           Style="{StaticResource SBStatusBarItem}"
-                           HorizontalAlignment="Right"/>
-        </StatusBar>
+        <Grid x:Name="StatusBarGrid" DockPanel.Dock="Bottom" Background="#FF007ACD">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StatusBar x:Name="InfoStatus" Grid.Column="0" Background="#FF007ACD" HorizontalAlignment="Left">
+                <StatusBarItem x:Name="InfoStatusBraItem" Content="{Binding DepictInfo}"
+                           Style="{StaticResource SBStatusBarItem}"/>
+            </StatusBar>
+            <ProgressBar x:Name="SendFileProgressBar" Grid.Column="1"
+                         Margin="6,6"
+                         Background="#FF007ACD" BorderBrush="White" Foreground="Yellow"
+                         Visibility="{Binding HelpModel.StatusBarProgressBarVisibility}"
+                         Value="{Binding HelpModel.StatusBarProgressBarValue}"
+                         IsIndeterminate="{Binding HelpModel.StatusBarProgressBarIsIndeterminate}"/>
+            <StatusBar x:Name="TimeStatus" Grid.Column="2" Background="#FF007ACD" HorizontalAlignment="Right">
+                <StatusBarItem x:Name="TimeStatusBraItem" Content="{Binding TimerModel.SystemTime}"
+                           Style="{StaticResource SBStatusBarItem}"/>
+            </StatusBar>
+        </Grid>
 
         <!--ALL工作区-->
         <Grid x:Name="Grid">
@@ -132,14 +145,14 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--接受区和发送区-->
             <Grid x:Name="DataGrid" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="348*"/>
                     <RowDefinition Height="100*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--接收区-->
                 <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}"
                               Grid.Row="0"
@@ -151,7 +164,7 @@
                                  TextChanged="RecvTextBox_TextChanged"
                                  MouseDoubleClick="RecvTextBox_MouseDoubleClick"/>
                 </GroupBox>
-                
+
                 <!--发送区-->
                 <GroupBox x:Name="SendDataGroupBox"
                               Header="{Binding SendModel.SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节"
@@ -180,7 +193,7 @@
                     </Grid>
                 </GroupBox>
             </Grid>
-            
+
             <!--串口配置区、信号状态区和辅助区-->
             <Grid x:Name="SerialPortGrid" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -188,7 +201,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--串口配置区-->
                 <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0"
                               Margin="0,0,5,2"
@@ -251,7 +264,7 @@
                                 Click="OpenCloseSP"/>
                     </Grid>
                 </GroupBox>
-                
+
                 <!--信号状态区-->
                 <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
                               Margin="0,0,5,2"
@@ -280,7 +293,7 @@
                                  Style="{StaticResource HDEilipse}"/>
                     </Grid>
                 </GroupBox>
-                
+
                 <!--辅助区-->
                 <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2"
                               Margin="0,0,5,3"
@@ -337,7 +350,5 @@
                 </GroupBox>
             </Grid>
         </Grid>
-        
     </DockPanel>
-    
 </Window>

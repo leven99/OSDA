@@ -83,7 +83,7 @@ namespace OSDA.Models
         }
 
         /// <summary>
-        /// 视图可见性
+        /// 精简视图 - 视图可见性
         /// </summary>
         private string _ViewVisibility;
         public string ViewVisibility
@@ -102,6 +102,60 @@ namespace OSDA.Models
             }
         }
 
+        /// <summary>
+        /// 状态栏 - 进度条可见性
+        /// </summary>
+        private string _StatusBarProgressBarVisibility;
+        public string StatusBarProgressBarVisibility
+        {
+            get
+            {
+                return _StatusBarProgressBarVisibility;
+            }
+            set
+            {
+                if (_StatusBarProgressBarVisibility != value)
+                {
+                    _StatusBarProgressBarVisibility = value;
+                    RaisePropertyChanged(nameof(StatusBarProgressBarVisibility));
+                }
+            }
+        }
+
+        private double _StatusBarProgressBarValue;
+        public double StatusBarProgressBarValue
+        {
+            get
+            {
+                return _StatusBarProgressBarValue;
+            }
+            set
+            {
+                if (_StatusBarProgressBarValue != value)
+                {
+                    _StatusBarProgressBarValue = value;
+                    RaisePropertyChanged(nameof(StatusBarProgressBarValue));
+                }
+            }
+        }
+
+        private bool _StatusBarProgressBarIsIndeterminate;
+        public bool StatusBarProgressBarIsIndeterminate
+        {
+            get
+            {
+                return _StatusBarProgressBarIsIndeterminate;
+            }
+            set
+            {
+                if (_StatusBarProgressBarIsIndeterminate != value)
+                {
+                    _StatusBarProgressBarIsIndeterminate = value;
+                    RaisePropertyChanged(nameof(StatusBarProgressBarIsIndeterminate));
+                }
+            }
+        }
+
         public void HelpDataContext()
         {
             VerInfoNumber = "3.3.0";
@@ -111,6 +165,10 @@ namespace OSDA.Models
 
             ReducedEnable = false;
             ViewVisibility = "Visible";
+
+            StatusBarProgressBarVisibility = "Collapsed";
+            StatusBarProgressBarValue = 0;
+            StatusBarProgressBarIsIndeterminate = false;
         }
     }
 }
