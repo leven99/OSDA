@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSDA"
-#define MyAppVersion "3.3.0"
-#define MyVersionInfoVersion "3.3.0.23"
+#define MyAppVersion "3.4.0"
+#define MyVersionInfoVersion "3.4.0.5"
 #define MyAppExeName "OSDA.exe"
 #define MyAppCopyright "Copyright (C) 2019 Cao Liwen"
 #define MyAppPublisher "Cao Liwen"
@@ -29,9 +29,9 @@ OutputDir=.\
 SetupIconFile=..\icon\favicon.ico
 #ifdef x_64
   ArchitecturesInstallIn64BitMode=x64
-  OutputBaseFilename=OSDA_Windows_V{#MyAppVersion}_x64
+  OutputBaseFilename=OSDA_Windows_Framework_V{#MyAppVersion}_x64
 #else
-  OutputBaseFilename=OSDA_Windows_V{#MyAppVersion}_x86
+  OutputBaseFilename=OSDA_Windows_Framework_V{#MyAppVersion}_x86
 #endif
 Compression=lzma
 SolidCompression=yes

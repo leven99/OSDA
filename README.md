@@ -3,14 +3,14 @@
 <p align="left">
     <a href="#License" alt="License"><img src="https://img.shields.io/badge/License-MIT-green"/></a>
     <a href="#安装" alt="Platform"><img src="https://img.shields.io/badge/Platform-Windows-green"/></a>
-    <a alt="Version"><img src="https://img.shields.io/badge/Release-V3.3.0-green"/></a>
+    <a alt="Version"><img src="https://img.shields.io/badge/Release-V3.4.0-green"/></a>
 </p>
 
 ![OSDA](Docs/source/_images/osda.png)
 
 ## 架构
 
-软件采用 WPF [Microsoft .NET Framework 4.6.1](https://dotnet.microsoft.com/download/dotnet-framework/net461) 框架，MVVM 模型开发（代码逻辑与 `UI` 设计分离）。
+软件支持 WPF [Microsoft .NET Framework 4.6.1](https://dotnet.microsoft.com/download/dotnet-framework/net461) 和 WPF [Microsoft .NET Core 3.0.0]( https://dotnet.microsoft.com/download/dotnet-core/3.0 ) 两种框架，MVVM 模型开发（代码逻辑与 UI 设计分离）。
 
 ![Framework](Docs/source/_images/framework.png)
 
@@ -20,7 +20,7 @@
 - [x] 十六进制（HEX）接收，十六进制（HEX）发送
 - [x] 自动发送
 - [x] 保存接收和路径选择
-- [ ] 多项文件
+- [x] 多项文件
 - [x] 编码方式
 - [x] 流控制（握手协议、控制协议）
 - [x] 暂停接收
@@ -48,21 +48,23 @@
 
 #### For Windows
 
-下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。根据计算机平台，从 `Gitee` 或 `Github` 下载点下载。
+下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。可以选择从 `Gitee` 或 `Github` 下载点下载。
 
 ## 编译
 
 #### For Windows
 
 - [ ] VS2015
-- [x] VS2017
-- [x] VS2019
+- [x] VS2017（仅支持 .Framework 框架）
+- [x] VS2019（支持 .Framework 和 .Core 两种框架）
 
 ```bash
 $ git clone https://gitee.com/leven9/OSDA.git
 $ cd OSDA/msvc
 ```
-对于 `VS2017` 双击 `OSDA2017.Framework.sln`，对于 `VS2019` 双击 `OSDA2019.Framework.sln` 即可。
+* 对于 VS2017 ，双击 `OSDA2017.Framework.sln` 
+* 对于 VS2019 ` .Framework` 框架，双击 `OSDA2019.Framework.sln` 
+* 对于 VS2019 `.Core` 框架，双击 `OSDA2019.Core.sln`
 
 ## 贡献
 
