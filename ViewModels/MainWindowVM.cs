@@ -23,10 +23,6 @@ namespace OSDA.ViewModels
         private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
         private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
 
-        private HttpClient httpClient = new HttpClient();
-
-        private readonly DataContractJsonSerializer ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
-
         private string DataRecvPath = string.Empty;   /* 数据接收路径 */
 
         /// <summary>
@@ -361,19 +357,21 @@ namespace OSDA.ViewModels
         #region 帮助
         public async void UpdateAsync()
         {
+            var ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
+            
             LatestRelease = await DownloadJsonObjectAsync<GitRelease>(github_cri, ReleaseDeserializer, "github")
                 .ConfigureAwait(false);
 
             if(LatestRelease == default)
             {
-                DepictInfo = string.Format(cultureInfo, "GitHub.com 服务器请求/响应异常，更换服务器......请稍后");
+                DepictInfo = string.Format(cultureInfo, "更换服务器......请稍后");
 
                 LatestRelease = await DownloadJsonObjectAsync<GitRelease>(gitee_uri, ReleaseDeserializer, "gitee")
                     .ConfigureAwait(false);
 
                 if (LatestRelease == default)
                 {
-                    DepictInfo = string.Format(cultureInfo, "服务器异常，请检查网络或稍后再试！");
+                    DepictInfo = string.Format(cultureInfo, "请检查网络或稍后再试！");
 
                     return;
                 }
@@ -386,40 +384,34 @@ namespace OSDA.ViewModels
         {
             try
             {
-                httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
-                httpClient.Timeout = TimeSpan.FromMilliseconds(3000);
-
-                if (git == "github")
+                using (var _httpClient = new HttpClient())
                 {
-                    DepictInfo = string.Format(cultureInfo, "正在向 GitHub.com 请求数据......");
-                }
-                else if (git == "gitee")
-                {
-                    DepictInfo = string.Format(cultureInfo, "正在向 Gitee.com 请求数据......");
-                }
+                    _httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
+                    _httpClient.Timeout = TimeSpan.FromMilliseconds(3000);
 
-                var _resPonse = await httpClient.GetAsync(address).ConfigureAwait(false);
+                    if (git == "github")
+                    {
+                        DepictInfo = string.Format(cultureInfo, "等待 GitHub.com 响应数据......");
+                    }
+                    else if (git == "gitee")
+                    {
+                        DepictInfo = string.Format(cultureInfo, "等待 Gitee.com 响应数据......");
+                    }
 
-                if (git == "github")
-                {
-                    DepictInfo = string.Format(cultureInfo, "等待 GitHub.com 响应数据......");
-                }
-                else if (git == "gitee")
-                {
-                    DepictInfo = string.Format(cultureInfo, "等待 Gitee.com 响应数据......");
-                }
+                    var _resPonse = await _httpClient.GetAsync(address).ConfigureAwait(false);
+                    _resPonse.EnsureSuccessStatusCode();
 
-                var _jsonData = await _resPonse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var _jsonData = await _resPonse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                using (var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(_jsonData)))
-                {
-                    return (T)serializer.ReadObject(jsonStream);
+                    using (var _jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(_jsonData)))
+                    {
+                        return (T)serializer.ReadObject(_jsonStream);
+                    }
                 }
             }
             catch
             {
                 return default;
-                throw;
             }
         }
 
@@ -1095,9 +1087,6 @@ namespace OSDA.ViewModels
 
                 SPserialPort.Dispose();
                 SPserialPort = null;
-
-                httpClient.Dispose();
-                httpClient = null;
 
                 disposedValue = true;
             }
