@@ -743,9 +743,9 @@ namespace OSDA.ViewModels
             AutoSendDispatcherTimer.Tick += AutoSendDispatcherTimer_Tick;
         }
 
-        public void AutoSendDispatcherTimer_Tick(object sender, EventArgs e)
+        public async void AutoSendDispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Send();
+            await SendAsync().ConfigureAwait(false);
         }
 
         public void StartAutoSendTimer(int interval)
@@ -763,7 +763,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 发送
-        public void Send()
+        public async Task SendAsync()
         {
             if (SPserialPort == null)
             {
@@ -794,13 +794,14 @@ namespace OSDA.ViewModels
                         sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
                     }
 
-                    SPserialPort.Write(sendData, 0, SendCount);
+                    await SPserialPort.BaseStream.WriteAsync(sendData, 0, SendCount).ConfigureAwait(false);
 
                 }
                 else
                 {
                     SendCount = SPserialPort.Encoding.GetByteCount(SendModel.SendData);
-                    SPserialPort.Write(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount);
+                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount)
+                        .ConfigureAwait(false);
                 }
 
                 if (SendModel.NonesEnable)
@@ -809,17 +810,20 @@ namespace OSDA.ViewModels
                 }
                 else if (SendModel.CrEnable)
                 {
-                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r"), 0, 1);
+                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\r"), 0, 1)
+                        .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 1);
                 }
                 else if (SendModel.LfEnable)
                 {
-                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\n"), 0, 1);
+                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\n"), 0, 1)
+                        .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 1);
                 }
                 else if (SendModel.CrLfEnable)
                 {
-                    SPserialPort.Write(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2);
+                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2)
+                        .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 2);
                 }
             }
@@ -831,7 +835,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 发送文件
-        public void SendFile()
+        public async Task SendFileAsync()
         {
             if (SPserialPort == null)
             {
@@ -877,7 +881,8 @@ namespace OSDA.ViewModels
                         DepictInfo = string.Format(cultureInfo, "文件正在发送......");
                         HelpModel.StatusBarProgressBarIsIndeterminate = true;
 
-                        SPserialPort.Write(SPserialPort.Encoding.GetBytes(fileContent), 0, SendCount);
+                        await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes(fileContent), 0, SendCount)
+                            .ConfigureAwait(false);
 
                         HelpModel.StatusBarProgressBarIsIndeterminate = false;
                         DepictInfo = string.Format(cultureInfo, "文件发送完毕");
@@ -941,14 +946,14 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 数据接收事件实现
-        public void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public async void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort _SerialPort = (SerialPort)sender;
 
             int _bytesToRead = _SerialPort.BytesToRead;
             byte[] recvData = new byte[_bytesToRead];
 
-            _SerialPort.Read(recvData, 0, _bytesToRead);
+            await _SerialPort.BaseStream.ReadAsync(recvData, 0, _bytesToRead).ConfigureAwait(false);
 
             if (RecvModel.EnableRecv)
             {

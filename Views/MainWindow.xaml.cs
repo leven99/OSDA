@@ -233,16 +233,16 @@ namespace OSDA.Views
         #endregion
 
         #region 发送
-        private void Send(object sender, RoutedEventArgs e)
+        private async void Send(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.Send();
+            await mainWindowViewModel.SendAsync().ConfigureAwait(false);
         }
         #endregion
 
         #region 发送文件
-        private void SendFile(object sender, RoutedEventArgs e)
+        private async void SendFile(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.SendFile();
+            await mainWindowViewModel.SendFileAsync().ConfigureAwait(false);
         }
         #endregion
 
