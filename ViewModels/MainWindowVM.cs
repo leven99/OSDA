@@ -39,7 +39,7 @@ namespace OSDA.ViewModels
         public GitRelease LatestRelease { get; set; }
 
         #region 状态栏- 信息描述
-        public string _DepictInfo;
+        private string _DepictInfo;
         public string DepictInfo
         {
             get { return _DepictInfo; }

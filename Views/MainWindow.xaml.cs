@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace OSDA.Views
 {
-    public partial class MainWindow : Window, IDisposable
+    public partial class MainWindow : Window
     {
-        private MainWindowViewModel mainWindowViewModel = null;
+        private readonly MainWindowViewModel mainWindowViewModel = null;
 
         public MainWindow()
         {
@@ -293,39 +293,6 @@ namespace OSDA.Views
         private void RecvTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             RecvTextBox.ScrollToEnd();
-        }
-        #endregion
-
-        #region IDisposable Support
-        private bool disposedValue = false;
-
-        /// <summary>
-        /// 受保护的 Dispose 方法实现
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    /* 释放托管资源（如果需要） */
-                }
-
-                mainWindowViewModel.Dispose();
-                mainWindowViewModel = null;
-
-                disposedValue = true;
-            }
-        }
-
-        /// <summary>
-        /// mainWindowViewModel 字段 IDisposable 接口的 Dispose 方法实现（无参数）
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
         #endregion
     }
