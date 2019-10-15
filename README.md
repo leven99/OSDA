@@ -10,7 +10,7 @@
 
 ## 架构
 
-软件支持 WPF [Microsoft .NET Framework 4.6.1](https://dotnet.microsoft.com/download/dotnet-framework/net461) 和 WPF [Microsoft .NET Core 3.0.0]( https://dotnet.microsoft.com/download/dotnet-core/3.0 ) 两种框架，MVVM 模型开发（代码逻辑与 UI 设计分离）。
+软件支持 WPF [Microsoft .NET Framework 4.6.1](https://dotnet.microsoft.com/download/dotnet-framework/net461) 和 WPF [Microsoft .NET Core 3.0.0]( https://dotnet.microsoft.com/download/dotnet-core/3.0 ) 两种框架，使用 MVVM 模型开发。
 
 ![Framework](Docs/source/_images/framework.png)
 
