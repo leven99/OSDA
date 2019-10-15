@@ -4,7 +4,8 @@
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <!--main xaml - menu style-->
+            
+            <!--MainWindows XAML - Menu style-->
             <Style TargetType="MenuItem" x:Key="MainMenuItem">
                 <Setter Property="Margin" Value="0,3,0,3"/>
                 <Setter Property="Padding" Value="5,3,5,3"/>
@@ -14,53 +15,50 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="White"/>
             </Style>
-            <!--main xaml - status style-->
+            
+            <!--MainWindows XAML - Status style-->
             <Style TargetType="StatusBarItem" x:Key="SBStatusBarItem">
                 <Setter Property="Foreground" Value="White"/>
             </Style>
-            <!--main xaml - Recv and Send style-->
+            
+            <!--MainWindows XAML - Recv and Send style-->
             <Style TargetType="TextBox" x:Key="RSTextBox">
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="AcceptsReturn" Value="True"/>
                 <Setter Property="Margin" Value="0,3,0,0"/>
                 <Setter Property="BorderBrush" Value="#FF0078D7"/>
             </Style>
-            <!--main xaml - Send block style-->
             <Style TargetType="Button" x:Key="SendButton">
                 <Setter Property="Padding" Value="32,10"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
-            <!--main xaml - Serial config block style-->
-            <Style TargetType="TextBlock" x:Key="SPTextBlock">
+            
+            <!--MainWindows XAML - Config Block style-->
+            <Style TargetType="TextBlock" x:Key="ConfigTextBlock">
                 <Setter Property="Margin" Value="3,0,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
-            <Style TargetType="ComboBox" x:Key="SPComboBox">
+            <Style TargetType="ComboBox" x:Key="ConfigComboBox">
                 <Setter Property="Margin" Value="0,5,3,3"/>
-                <Setter Property="Padding" Value="6,6,5,6"/>
-                <Setter Property="Width" Value="Auto"/>
-                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="Padding" Value="6,6,0,6"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
-            <Style TargetType="Ellipse" x:Key="SPEilipse">
+            <Style TargetType="Ellipse" x:Key="ConfigEilipse">
                 <Setter Property="Width" Value="28"/>
                 <Setter Property="Height" Value="28"/>
             </Style>
-            <Style TargetType="Button" x:Key="SPButton">
+            <Style TargetType="Button" x:Key="ConfigButton">
                 <Setter Property="Margin" Value="0,5,3,3"/>
                 <Setter Property="Padding" Value="48,6,48,6"/>
-                <Setter Property="Width" Value="Auto"/>
-                <Setter Property="Height" Value="Auto"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
-            <!--main xaml - signal block style-->
+            
+            <!--MainWindows XAML - Signal Block style-->
             <Style TargetType="TextBlock" x:Key="HDTextBlock">
                 <Setter Property="Margin" Value="0,6,0,2"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -71,7 +69,8 @@
                 <Setter Property="Width" Value="13"/>
                 <Setter Property="Height" Value="13"/>
             </Style>
-            <!--main xaml - assist block style-->
+            
+            <!--MainWindows XAML - Assist Block style-->
             <Style TargetType="CheckBox" x:Key="AssistCheckBox">
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -83,11 +82,12 @@
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
             <Style TargetType="Button" x:Key="AssistButton">
-                <Setter Property="Padding" Value="24,6"/>
+                <Setter Property="Padding" Value="25,6"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
             </Style>
-            <!--Update xaml style-->
+            
+            <!--WPFUpdate XAML Style-->
             <Style TargetType="Button" x:Key="UpdateButton">
                 <Setter Property="Padding" Value="18,6"/>
                 <Setter Property="Background" Value="White"/>

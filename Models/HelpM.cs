@@ -62,6 +62,7 @@ namespace OSDA.Models
         /// </summary>
         public string UpdateInfo { get; set; }
 
+        #region 菜单栏 - 视图 - 精简视图
         /// <summary>
         /// 菜单栏 - 视图 - 精简视图
         /// </summary>
@@ -101,10 +102,9 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
-        /// <summary>
-        /// 状态栏 - 进度条可见性
-        /// </summary>
+        #region 状态栏 - 发送文件进度条可见性
         private string _StatusBarProgressBarVisibility;
         public string StatusBarProgressBarVisibility
         {
@@ -155,6 +155,7 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
         public void HelpDataContext()
         {

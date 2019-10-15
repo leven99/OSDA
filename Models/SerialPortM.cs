@@ -6,11 +6,11 @@ namespace OSDA.Models
 {
     class SerialPortModel : MainWindowBase
     {
-        public string[] LSPPort { get; set; }
-        public int[] LSPBaudRate { get; set; }
-        public int[] LSPDataBits { get; set; }
-        public string[] LSPStopBits { get; set; }
-        public string[] LSPParity { get; set; }
+        public string[] SPPortItemsSource { get; set; }
+        public int[] SPBaudRateItemsSource { get; set; }
+        public int[] SPDataBitsItemsSource { get; set; }
+        public string[] SPStopBitsItemsSource { get; set; }
+        public string[] SPParityItemsSource { get; set; }
 
         #region 串口配置区 - 串口属性
         public string _SPPort;
@@ -135,7 +135,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 串口属性控件[启用/不启用]，用于实现串口打开时不允许更改串口属性
+        #region 串口属性控件 - 启用/不启用
         public bool _SPPortEnable;
         public bool SPPortEnable
         {
@@ -292,6 +292,7 @@ namespace OSDA.Models
         }
         #endregion
 
+        #region 菜单栏 - 选项 - DTR/RTS
         public bool _DtrEnable;
         public bool DtrEnable
         {
@@ -325,6 +326,7 @@ namespace OSDA.Models
                 }
             }
         }
+        #endregion
 
         #region 菜单栏 - 选项 - 流控制
         public bool _NoneEnable;
@@ -449,11 +451,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        /// <summary>
-        /// 信号状态事件实现
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #region 信号状态事件实现
         public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
             SerialPort _SerialPort = (SerialPort)sender;
@@ -494,6 +492,7 @@ namespace OSDA.Models
                     break;
             }
         }
+        #endregion
 
         #region 停止位和校验位
         public static StopBits GetStopBits(string emp)
@@ -527,11 +526,11 @@ namespace OSDA.Models
 
         public void SerialPortDataContext()
         {
-            LSPPort = SerialPort.GetPortNames();
-            LSPBaudRate = new int[] { 1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400 };
-            LSPDataBits = new int[] { 5, 6, 7, 8 };
-            LSPStopBits = new string[] { "One", "Two", "OnePointFive" };
-            LSPParity = new string[] { "None", "Odd", "Even", "Mark", "Space" };
+            SPPortItemsSource = SerialPort.GetPortNames();
+            SPBaudRateItemsSource = new int[] { 1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400 };
+            SPDataBitsItemsSource = new int[] { 5, 6, 7, 8 };
+            SPStopBitsItemsSource = new string[] { "One", "Two", "OnePointFive" };
+            SPParityItemsSource = new string[] { "None", "Odd", "Even", "Mark", "Space" };
 
             SPBaudRate = 9600;
             SPDataBits = 8;
