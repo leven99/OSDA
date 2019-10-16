@@ -4,7 +4,6 @@ namespace OSDA.Models
 {
     public class SendModel : MainWindowBase
     {
-        #region 发送区 - Header
         /// <summary>
         /// 发送区Header中的发送计数
         /// </summary>
@@ -24,27 +23,6 @@ namespace OSDA.Models
                 }
             }
         }
-
-        /// <summary>
-        /// 发送区Header字符串
-        /// </summary>
-        private string _SendHeader;
-        public string SendHeader
-        {
-            get
-            {
-                return _SendHeader;
-            }
-            set
-            {
-                if (_SendHeader != value)
-                {
-                    _SendHeader = value;
-                    RaisePropertyChanged(nameof(SendHeader));
-                }
-            }
-        }
-        #endregion
 
         private string _SendData;
         public string SendData
