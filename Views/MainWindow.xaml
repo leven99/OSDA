@@ -16,6 +16,38 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="HeaderedContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                        <ContentPresenter ContentSource="Header"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="RecvGroupBoxHeader">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}接收区：已接收{0}字节，接收自动保存[{1}]，接收状态[{2}]">
+                        <Binding Path="RecvModel.RecvDataCount"/>
+                        <Binding Path="RecvModel.RecvAutoSave"/>
+                        <Binding Path="RecvModel.RecvEnable"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SendGroupBoxHeader">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}发送区：已发送{0}字节">
+                        <Binding Path="SendModel.SendDataCount"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
     </Window.Resources>
     
     <!--Root-->
@@ -154,7 +186,9 @@
                 </Grid.RowDefinitions>
 
                 <!--接收区-->
-                <GroupBox x:Name="ReceDataGroupBox" Header="{Binding RecvModel.RecvHeader}"
+                <GroupBox x:Name="ReceDataGroupBox"
+                          Header="{Binding}"
+                          HeaderTemplate="{StaticResource RecvGroupBoxHeader}"
                           Grid.Row="0"
                           Margin="5,0,5,2"
                           BorderBrush="#FF007ACD">
@@ -167,7 +201,8 @@
 
                 <!--发送区-->
                 <GroupBox x:Name="SendDataGroupBox"
-                          Header="{Binding SendModel.SendDataCount}" HeaderStringFormat="{}发送区：已发送{0}字节"
+                          Header="{Binding}"
+                          HeaderTemplate="{StaticResource SendGroupBoxHeader}"
                           Grid.Row="1"
                           Margin="5,0,5,3"
                           BorderBrush="#FF007ACD">

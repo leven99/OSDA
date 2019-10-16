@@ -65,26 +65,6 @@ namespace OSDA.Models
                 }
             }
         }
-
-        /// <summary>
-        /// 接收区Header字符串
-        /// </summary>
-        private string _RecvHeader;
-        public string RecvHeader
-        {
-            get
-            {
-                return _RecvHeader;
-            }
-            set
-            {
-                if (_RecvHeader != value)
-                {
-                    _RecvHeader = value;
-                    RaisePropertyChanged(nameof(RecvHeader));
-                }
-            }
-        }
         #endregion
 
         /// <summary>
@@ -147,11 +127,10 @@ namespace OSDA.Models
         public void RecvDataContext()
         {
             RecvData = new IClassTextBoxAppend();
+
             RecvDataCount = 0;
             RecvAutoSave = string.Format(cultureInfo, "已停止");
-            RecvEnable = string.Format(cultureInfo, "（提示：双击文本框更改接收状态）");
-            RecvHeader = string.Format(cultureInfo,
-                "接收区：已接收" + RecvDataCount + "字节，接收自动保存[" + RecvAutoSave + "]" + RecvEnable);
+            RecvEnable = string.Format(cultureInfo, " 提示：双击文本框更改接收状态 ");
 
             EnableRecv = true;
             HexRecv = false;

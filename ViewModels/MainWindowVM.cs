@@ -549,8 +549,6 @@ namespace OSDA.ViewModels
                     {
                         RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
                     }
-                    RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
-                        "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
                     return true;
                 }
@@ -613,8 +611,6 @@ namespace OSDA.ViewModels
                     SerialPortModel.SPParityEnable = true;
 
                     RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
-                    RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
-                            "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
                     return SPserialPort.IsOpen;
                 }
@@ -735,7 +731,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 自动发送定时器实现
-        private DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();
+        private readonly DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();
 
         private void InitAutoSendTimer()
         {
@@ -938,9 +934,6 @@ namespace OSDA.ViewModels
         public void ClearCount()
         {
             RecvModel.RecvDataCount = 0;
-            RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
-
             SendModel.SendDataCount = 0;
         }
         #endregion
@@ -983,9 +976,6 @@ namespace OSDA.ViewModels
 
             RecvModel.RecvDataCount += recvData.Length;
 
-            RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
-
             if (RecvModel.RecvDataCount > (32768 * RecvDataDeleteCount))
             {
                 RecvModel.RecvData.Delete();
@@ -1021,8 +1011,6 @@ namespace OSDA.ViewModels
             catch
             {
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
-                RecvModel.RecvHeader = string.Format(cultureInfo, "接收区：已接收" + RecvModel.RecvDataCount + 
-                    "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]");
 
                 DepictInfo = string.Format(cultureInfo, "接收数据保存失败");
             }
@@ -1085,9 +1073,6 @@ namespace OSDA.ViewModels
             {
                 RecvModel.RecvEnable = "暂停";
             }
-
-            RecvModel.RecvHeader = "接收区：已接收" + RecvModel.RecvDataCount +
-                "字节，接收自动保存[" + RecvModel.RecvAutoSave + "]，接收状态[" + RecvModel.RecvEnable + "]";
         }
         #endregion
 
