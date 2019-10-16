@@ -52,7 +52,7 @@
             </Style>
             <Style TargetType="Button" x:Key="ConfigButton">
                 <Setter Property="Margin" Value="0,5,3,3"/>
-                <Setter Property="Padding" Value="48,6,48,6"/>
+                <Setter Property="Padding" Value="0,6,0,6"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>

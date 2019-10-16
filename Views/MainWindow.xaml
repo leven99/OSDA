@@ -209,8 +209,8 @@
                           Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="ConfigGrid">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
