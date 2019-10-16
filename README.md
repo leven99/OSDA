@@ -19,20 +19,21 @@
 - [x] 基础功能（打开、关闭、接收、发送、清接收区、清发送区和清空计数）
 - [x] 十六进制（HEX）接收，十六进制（HEX）发送
 - [x] 自动发送
-- [x] 保存接收和路径选择
-- [x] 多项文件
-- [x] 编码方式
+- [x] 保存接收数据（可自定义保存位置）
+- [x] 发送文件
+- [x] 编码方式（ASCII，UTF-8，UTF-16，UTF-32）
 - [x] 流控制（握手协议、控制协议）
 - [x] 暂停接收
-- [x] 发送新行（换行符）
-- [x] 信号控制
-- [x] 信号检测
-- [x] 检查更新
+- [x] 发送新行（三种换行符）
+- [x] 信号控制（RTS，STR）
+- [x] 信号检测（DCD，CTS，DSR）
+- [x] 在线更新
+- [x] 精简视图（只保留接收区和发送区）
 - [ ] 全球化和本地化
 
 ####  串口属性
 
-* 软件串行端口传输的默认编码方式为 UTF-8 
+* 串行端口传输前后的默认编码方式为 UTF-8 
 * 串行端口输入缓冲区大小配置为 2MB
 * 串行端口输出缓冲区大小配置为 1MB
 * 串行端口默认流控制为 None（无控制流）
@@ -68,7 +69,7 @@ $ cd OSDA/msvc
 
 ## 贡献
 
-请参阅项目的贡献者指南（贡献者指南文件可以在 [GitHub](https://github.com/leven99/OSDA/blob/master/CONTRIBUTING.md) 或 [Gitee](https://gitee.com/leven9/OSDA/blob/master/CONTRIBUTING.md) 中找到）。
+请参阅项目的贡献者指南（贡献者指南可以在 [GitHub](https://github.com/leven99/OSDA/blob/master/CONTRIBUTING.md) 或 [Gitee](https://gitee.com/leven9/OSDA/blob/master/CONTRIBUTING.md) 中找到）。
 
 ## License
 
