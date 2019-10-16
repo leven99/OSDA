@@ -45,6 +45,14 @@
                 <Setter Property="Margin" Value="0,5,3,3"/>
                 <Setter Property="Padding" Value="6,6,0,6"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="Ellipse" x:Key="ConfigEilipse">
                 <Setter Property="Width" Value="28"/>
