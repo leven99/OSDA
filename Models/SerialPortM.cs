@@ -1,4 +1,5 @@
 ﻿using OSDA.ViewModels;
+using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Windows.Media;
 
@@ -7,10 +8,10 @@ namespace OSDA.Models
     class SerialPortModel : MainWindowBase
     {
         public string[] SPPortItemsSource { get; set; }
-        public int[] SPBaudRateItemsSource { get; set; }
-        public int[] SPDataBitsItemsSource { get; set; }
-        public string[] SPStopBitsItemsSource { get; set; }
-        public string[] SPParityItemsSource { get; set; }
+        public Collection<int> SPBaudRateItemsSource { get; set; }
+        public Collection<int> SPDataBitsItemsSource { get; set; }
+        public Collection<StopBits> SPStopBitsItemsSource { get; set; }
+        public Collection<Parity> SPParityItemsSource { get; set; }
 
         #region 串口配置区 - 串口属性
         public string _SPPort;
@@ -64,8 +65,8 @@ namespace OSDA.Models
             }
         }
 
-        public string _SPStopBits;
-        public string SPStopBits
+        public StopBits _SPStopBits;
+        public StopBits SPStopBits
         {
             get
             {
@@ -81,8 +82,8 @@ namespace OSDA.Models
             }
         }
 
-        public string _SPParity;
-        public string SPParity
+        public Parity _SPParity;
+        public Parity SPParity
         {
             get
             {
@@ -494,48 +495,30 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 停止位和校验位
-        public static StopBits GetStopBits(string emp)
-        {
-            StopBits stopBits = StopBits.One;
-            switch (emp)
-            {
-                case "One": stopBits = StopBits.One; break;
-                case "Two": stopBits = StopBits.Two; break;
-                case "OnePointFive": stopBits = StopBits.OnePointFive; break;
-                default: break;
-            }
-            return stopBits;
-        }
-
-        public static Parity GetParity(string emp)
-        {
-            Parity parity = Parity.None;
-            switch (emp)
-            {
-                case "None": parity = Parity.None; break;
-                case "Odd": parity = Parity.Odd; break;
-                case "Even": parity = Parity.Even; break;
-                case "Mark": parity = Parity.Mark; break;
-                case "Space": parity = Parity.Space; break;
-                default: break;
-            }
-            return parity;
-        }
-        #endregion
-
         public void SerialPortDataContext()
         {
             SPPortItemsSource = SerialPort.GetPortNames();
-            SPBaudRateItemsSource = new int[] { 1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400 };
-            SPDataBitsItemsSource = new int[] { 5, 6, 7, 8 };
-            SPStopBitsItemsSource = new string[] { "One", "Two", "OnePointFive" };
-            SPParityItemsSource = new string[] { "None", "Odd", "Even", "Mark", "Space" };
+            SPBaudRateItemsSource = new Collection<int>
+            {
+                1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400
+            };
+            SPDataBitsItemsSource = new Collection<int>
+            {
+                5, 6, 7, 8
+            };
+            SPStopBitsItemsSource = new Collection<StopBits>
+            {
+                StopBits.One, StopBits.Two, StopBits.OnePointFive
+            };
+            SPParityItemsSource = new Collection<Parity>
+            {
+                Parity.None, Parity.Odd, Parity.Even, Parity.Mark, Parity.Space
+            };
 
             SPBaudRate = 9600;
             SPDataBits = 8;
-            SPStopBits = "One";
-            SPParity = "None";
+            SPStopBits = StopBits.One;
+            SPParity = Parity.None;
 
             SPBrush = Brushes.Red;
             OpenCloseSP = string.Format(cultureInfo, "打开串口");

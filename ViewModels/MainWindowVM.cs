@@ -457,8 +457,8 @@ namespace OSDA.ViewModels
                 SPserialPort.PortName = SerialPortModel.SPPort;
                 SPserialPort.BaudRate = SerialPortModel.SPBaudRate;
                 SPserialPort.DataBits = SerialPortModel.SPDataBits;
-                SPserialPort.StopBits = SerialPortModel.GetStopBits(SerialPortModel.SPStopBits.ToString(cultureInfo));
-                SPserialPort.Parity = SerialPortModel.GetParity(SerialPortModel.SPParity.ToString(cultureInfo));
+                SPserialPort.StopBits = SerialPortModel.SPStopBits;
+                SPserialPort.Parity = SerialPortModel.SPParity;
 
                 SPserialPort.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
                 SPserialPort.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
