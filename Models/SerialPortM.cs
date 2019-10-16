@@ -14,7 +14,7 @@ namespace OSDA.Models
         public Collection<Parity> SPParityItemsSource { get; set; }
 
         #region 串口配置区 - 串口属性
-        public string _SPPort;
+        private string _SPPort;
         public string SPPort
         {
             get
@@ -31,7 +31,7 @@ namespace OSDA.Models
             }
         }
 
-        public int _SPBaudRate;
+        private int _SPBaudRate;
         public int SPBaudRate
         {
             get
@@ -48,7 +48,7 @@ namespace OSDA.Models
             }
         }
 
-        public int _SPDataBits;
+        private int _SPDataBits;
         public int SPDataBits
         {
             get
@@ -65,7 +65,7 @@ namespace OSDA.Models
             }
         }
 
-        public StopBits _SPStopBits;
+        private StopBits _SPStopBits;
         public StopBits SPStopBits
         {
             get
@@ -82,7 +82,7 @@ namespace OSDA.Models
             }
         }
 
-        public Parity _SPParity;
+        private Parity _SPParity;
         public Parity SPParity
         {
             get
@@ -100,8 +100,8 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 串口配置区 - 红绿标识和打开/关闭按钮
-        public Brush _SPBrush;
+        #region 串口配置区 - 打开/关闭按钮
+        private Brush _SPBrush;
         public Brush SPBrush
         {
             get
@@ -118,7 +118,7 @@ namespace OSDA.Models
             }
         }
 
-        public string _OpenCloseSP;
+        private string _OpenCloseSP;
         public string OpenCloseSP
         {
             get
@@ -137,7 +137,7 @@ namespace OSDA.Models
         #endregion
 
         #region 串口属性控件 - 启用/不启用
-        public bool _SPPortEnable;
+        private bool _SPPortEnable;
         public bool SPPortEnable
         {
             get
@@ -154,7 +154,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _SPBaudRateEnable;
+        private bool _SPBaudRateEnable;
         public bool SPBaudRateEnable
         {
             get
@@ -171,7 +171,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _SPDataBitsEnable;
+        private bool _SPDataBitsEnable;
         public bool SPDataBitsEnable
         {
             get
@@ -188,7 +188,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _SPStopBitsEnable;
+        private bool _SPStopBitsEnable;
         public bool SPStopBitsEnable
         {
             get
@@ -205,7 +205,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _SPParityEnable;
+        private bool _SPParityEnable;
         public bool SPParityEnable
         {
             get
@@ -224,7 +224,7 @@ namespace OSDA.Models
         #endregion
 
         #region 菜单栏 - 选项 - 字节编码
-        public bool _ASCIIEnable;
+        private bool _ASCIIEnable;
         public bool ASCIIEnable
         {
             get
@@ -241,7 +241,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _UTF8Enable;
+        private bool _UTF8Enable;
         public bool UTF8Enable
         {
             get
@@ -258,7 +258,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _UTF16Enable;
+        private bool _UTF16Enable;
         public bool UTF16Enable
         {
             get
@@ -275,7 +275,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _UTF32Enable;
+        private bool _UTF32Enable;
         public bool UTF32Enable
         {
             get
@@ -294,7 +294,7 @@ namespace OSDA.Models
         #endregion
 
         #region 菜单栏 - 选项 - DTR/RTS
-        public bool _DtrEnable;
+        private bool _DtrEnable;
         public bool DtrEnable
         {
             get
@@ -311,7 +311,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _RtsEnable;
+        private bool _RtsEnable;
         public bool RtsEnable
         {
             get
@@ -330,7 +330,7 @@ namespace OSDA.Models
         #endregion
 
         #region 菜单栏 - 选项 - 流控制
-        public bool _NoneEnable;
+        private bool _NoneEnable;
         public bool NoneEnable
         {
             get
@@ -347,7 +347,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _RequestToSendEnable;
+        private bool _RequestToSendEnable;
         public bool RequestToSendEnable
         {
             get
@@ -364,7 +364,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _XOnXOffEnable;
+        private bool _XOnXOffEnable;
         public bool XOnXOffEnable
         {
             get
@@ -381,7 +381,7 @@ namespace OSDA.Models
             }
         }
 
-        public bool _RequestToSendXOnXOffEnable;
+        private bool _RequestToSendXOnXOffEnable;
         public bool RequestToSendXOnXOffEnable
         {
             get
@@ -400,7 +400,7 @@ namespace OSDA.Models
         #endregion
 
         #region 信号状态区 - 信号指示灯
-        public Brush _DcdBrush;
+        private Brush _DcdBrush;
         public Brush DcdBrush
         {
             get
@@ -417,7 +417,7 @@ namespace OSDA.Models
             }
         }
 
-        public Brush _CtsBrush;
+        private Brush _CtsBrush;
         public Brush CtsBrush
         {
             get
@@ -434,7 +434,7 @@ namespace OSDA.Models
             }
         }
 
-        public Brush _DsrBrush;
+        private Brush _DsrBrush;
         public Brush DsrBrush
         {
             get
@@ -448,49 +448,6 @@ namespace OSDA.Models
                     _DsrBrush = value;
                     RaisePropertyChanged(nameof(DsrBrush));
                 }
-            }
-        }
-        #endregion
-
-        #region 信号状态事件实现
-        public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
-        {
-            SerialPort _SerialPort = (SerialPort)sender;
-
-            switch (e.EventType)
-            {
-                case SerialPinChange.CDChanged:
-                    if (_SerialPort.CDHolding)
-                    {
-                        DcdBrush = Brushes.GreenYellow;
-                    }
-                    else
-                    {
-                        DcdBrush = Brushes.Black;
-                    }
-                    break;
-                case SerialPinChange.CtsChanged:
-                    if (_SerialPort.CtsHolding)
-                    {
-                        CtsBrush = Brushes.GreenYellow;
-                    }
-                    else
-                    {
-                        CtsBrush = Brushes.Black;
-                    }
-                    break;
-                case SerialPinChange.DsrChanged:
-                    if (_SerialPort.DsrHolding)
-                    {
-                        DsrBrush = Brushes.GreenYellow;
-                    }
-                    else
-                    {
-                        DsrBrush = Brushes.Black;
-                    }
-                    break;
-                default:
-                    break;
             }
         }
         #endregion

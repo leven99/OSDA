@@ -523,7 +523,7 @@ namespace OSDA.ViewModels
                 SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
 
                 /* 信号状态事件 */
-                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortModel.SerialPort_PinChanged);
+                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPort_PinChanged);
 
                 SPserialPort.Open();
 
@@ -635,7 +635,33 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 辅助区
-        public bool _HexSend;
+        private bool _SaveRecv;
+        public bool SaveRecv
+        {
+            get
+            {
+                return _SaveRecv;
+            }
+            set
+            {
+                if (_SaveRecv != value)
+                {
+                    _SaveRecv = value;
+                    RaisePropertyChanged(nameof(SaveRecv));
+                }
+
+                if (SaveRecv)
+                {
+                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
+                }
+                else
+                {
+                    DepictInfo = "串行端口调试助手";
+                }
+            }
+        }
+
+        private bool _HexSend;
         public bool HexSend
         {
             get
@@ -661,7 +687,7 @@ namespace OSDA.ViewModels
             }
         }
 
-        public bool _AutoSend;
+        private bool _AutoSend;
         public bool AutoSend
         {
             get
@@ -706,56 +732,30 @@ namespace OSDA.ViewModels
                 }
             }
         }
-
-        public bool _SaveRecv;
-        public bool SaveRecv
-        {
-            get
-            {
-                return _SaveRecv;
-            }
-            set
-            {
-                if (_SaveRecv != value)
-                {
-                    _SaveRecv = value;
-                    RaisePropertyChanged(nameof(SaveRecv));
-                }
-
-                if (SaveRecv)
-                {
-                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
-                }
-                else
-                {
-                    DepictInfo = "串行端口调试助手";
-                }
-            }
-        }
         #endregion
 
         #region 自动发送定时器实现
-        public DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer AutoSendDispatcherTimer = new DispatcherTimer();
 
-        public void InitAutoSendTimer()
+        private void InitAutoSendTimer()
         {
             AutoSendDispatcherTimer.IsEnabled = false;
             AutoSendDispatcherTimer.Tick += AutoSendDispatcherTimer_Tick;
         }
 
-        public async void AutoSendDispatcherTimer_Tick(object sender, EventArgs e)
+        private async void AutoSendDispatcherTimer_Tick(object sender, EventArgs e)
         {
             await SendAsync().ConfigureAwait(false);
         }
 
-        public void StartAutoSendTimer(int interval)
+        private void StartAutoSendTimer(int interval)
         {
             AutoSendDispatcherTimer.IsEnabled = true;
             AutoSendDispatcherTimer.Interval = TimeSpan.FromMilliseconds(interval);
             AutoSendDispatcherTimer.Start();
         }
 
-        public void StopAutoSendTimer()
+        private void StopAutoSendTimer()
         {
             AutoSendDispatcherTimer.IsEnabled = false;
             AutoSendDispatcherTimer.Stop();
@@ -1029,6 +1029,49 @@ namespace OSDA.ViewModels
         }
         #endregion
 
+        #region 信号状态事件实现
+        public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            SerialPort _SerialPort = (SerialPort)sender;
+
+            switch (e.EventType)
+            {
+                case SerialPinChange.CDChanged:
+                    if (_SerialPort.CDHolding)
+                    {
+                        SerialPortModel.DcdBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        SerialPortModel.DcdBrush = Brushes.Black;
+                    }
+                    break;
+                case SerialPinChange.CtsChanged:
+                    if (_SerialPort.CtsHolding)
+                    {
+                        SerialPortModel.CtsBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        SerialPortModel.CtsBrush = Brushes.Black;
+                    }
+                    break;
+                case SerialPinChange.DsrChanged:
+                    if (_SerialPort.DsrHolding)
+                    {
+                        SerialPortModel.DsrBrush = Brushes.GreenYellow;
+                    }
+                    else
+                    {
+                        SerialPortModel.DsrBrush = Brushes.Black;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+
         #region RecvTextBox Mouse Double Support
         public void Enable_Recv()
         {
@@ -1050,28 +1093,27 @@ namespace OSDA.ViewModels
 
         public MainWindowViewModel()
         {
-            HelpModel = new HelpModel();
-            HelpModel.HelpDataContext();
-
-            RecvModel = new RecvModel();
-            RecvModel.RecvDataContext();
+            SerialPortModel = new SerialPortModel();
+            SerialPortModel.SerialPortDataContext();
 
             SendModel = new SendModel();
             SendModel.SendDataContext();
 
-            SerialPortModel = new SerialPortModel();
-            SerialPortModel.SerialPortDataContext();
-
-            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+            RecvModel = new RecvModel();
+            RecvModel.RecvDataContext();
 
             TimerModel = new TimerModel();
             TimerModel.TimerDataContext();
 
+            HelpModel = new HelpModel();
+            HelpModel.HelpDataContext();
+
+            SaveRecv = false;
             HexSend = false;
             AutoSend = false;
             InitAutoSendTimer();
 
-            SaveRecv = false;
+            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
         }
 
         #region IDisposable Support
