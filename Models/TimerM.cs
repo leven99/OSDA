@@ -4,7 +4,7 @@ using System.Timers;
 
 namespace OSDA.Models
 {
-    public class TimerModel : MainWindowBase, IDisposable
+    internal class TimerModel : MainWindowBase, IDisposable
     {
         /// <summary>
         /// 状态栏 - 系统时间

@@ -30,7 +30,7 @@ namespace OSDA.Models
         }
     }
 
-    public class HelpModel : MainWindowBase
+    internal class HelpModel : MainWindowBase
     {
         /// <summary>
         /// 本地软件的版本号

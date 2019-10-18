@@ -15,7 +15,7 @@ using System.Windows.Threading;
 
 namespace OSDA.ViewModels
 {
-    public class MainWindowViewModel : MainWindowBase, IDisposable
+    internal class MainWindowViewModel : MainWindowBase, IDisposable
     {
         #region 字段
         private SerialPort SPserialPort = new SerialPort();
