@@ -15,15 +15,15 @@ using System.Windows.Threading;
 
 namespace OSDA.ViewModels
 {
-    class MainWindowViewModel : MainWindowBase, IDisposable
+    public class MainWindowViewModel : MainWindowBase, IDisposable
     {
         #region 字段
-        public SerialPort SPserialPort = new SerialPort();
+        private SerialPort SPserialPort = new SerialPort();
 
         private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
         private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
 
-        private string DataRecvPath = string.Empty;   /* 数据接收路径 */
+        private volatile string DataRecvPath = string.Empty;   /* 数据接收路径 */
 
         /// <summary>
         /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
@@ -55,6 +55,16 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 菜单栏
+
+        #region 文件
+        public void ExitWindow()
+        {
+            if ((SPserialPort != null) && SPserialPort.IsOpen)
+            {
+                CloseSP();
+            }
+        }
+        #endregion
 
         #region 选项
 
@@ -339,7 +349,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 视图
-        public void Reduced_Enable()
+        public void ReducedEnable()
         {
             HelpModel.ReducedEnable = !HelpModel.ReducedEnable;
 
@@ -520,10 +530,10 @@ namespace OSDA.ViewModels
                 }
 
                 /* 数据接收事件 */
-                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
+                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
 
                 /* 信号状态事件 */
-                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPort_PinChanged);
+                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortPinChanged);
 
                 SPserialPort.Open();
 
@@ -939,7 +949,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 数据接收事件实现
-        public async void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort _SerialPort = (SerialPort)sender;
 
@@ -1018,7 +1028,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 信号状态事件实现
-        public void SerialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        public void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
             SerialPort _SerialPort = (SerialPort)sender;
 
@@ -1061,7 +1071,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region RecvTextBox Mouse Double Support
-        public void Enable_Recv()
+        public void EnableRecv()
         {
             RecvModel.EnableRecv = !RecvModel.EnableRecv;
 

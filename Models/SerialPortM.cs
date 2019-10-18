@@ -5,9 +5,9 @@ using System.Windows.Media;
 
 namespace OSDA.Models
 {
-    class SerialPortModel : MainWindowBase
+    public class SerialPortModel : MainWindowBase
     {
-        public string[] SPPortItemsSource { get; set; }
+        public string[] SPPortItemsSource { get;set; }
         public Collection<int> SPBaudRateItemsSource { get; set; }
         public Collection<int> SPDataBitsItemsSource { get; set; }
         public Collection<StopBits> SPStopBitsItemsSource { get; set; }

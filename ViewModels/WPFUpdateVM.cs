@@ -2,7 +2,7 @@
 
 namespace OSDA.ViewModels
 {
-    class WPFUpdateViewModel : MainWindowBase
+    public class WPFUpdateViewModel : MainWindowBase
     {
         public HelpModel HelpModel { get; set; }
 

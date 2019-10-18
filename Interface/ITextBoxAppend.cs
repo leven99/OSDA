@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Text;
 
-/*
- * 关于ITextBoxAppend接口定义、接口实现以及MvvmTextBox封装实现（MainWindows.xaml.cs）的参考代码来源：
- * https://stackoverflow.com/questions/27892981/mvvm-how-to-make-a-function-call-on-a-control
- */
-
 namespace OSDA.Interfaces
 {
     public interface ITextBoxAppend
@@ -53,7 +48,7 @@ namespace OSDA.Interfaces
     }
 
     #region 接口实现
-    class IClassTextBoxAppend : ITextBoxAppend
+    public class IClassTextBoxAppend : ITextBoxAppend
     {
         readonly StringBuilder stringBuilder = new StringBuilder();
 

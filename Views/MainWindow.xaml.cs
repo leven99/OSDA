@@ -1,6 +1,5 @@
 ﻿using OSDA.Interfaces;
 using OSDA.ViewModels;
-using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,10 +47,7 @@ namespace OSDA.Views
         /// <param name="e"></param>
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if ((mainWindowViewModel.SPserialPort != null) && mainWindowViewModel.SPserialPort.IsOpen)
-            {
-                mainWindowViewModel.CloseSP();
-            }
+            mainWindowViewModel.ExitWindow();
 
             Close();
         }
@@ -167,7 +163,7 @@ namespace OSDA.Views
         /// <param name="e"></param>
         private void EveryMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.Reduced_Enable();
+            mainWindowViewModel.ReducedEnable();
         }
         #endregion
 
@@ -282,7 +278,7 @@ namespace OSDA.Views
         /// <param name="e"></param>
         private void RecvTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            mainWindowViewModel.Enable_Recv();
+            mainWindowViewModel.EnableRecv();
         }
 
         /// <summary>
