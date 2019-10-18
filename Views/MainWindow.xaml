@@ -190,7 +190,7 @@
                           Header="{Binding}"
                           HeaderTemplate="{StaticResource RecvGroupBoxHeader}"
                           Grid.Row="0"
-                          Margin="5,0,5,2"
+                          Margin="5,0,2.5,2"
                           BorderBrush="#FF007ACD">
                     <TextBox x:Name="RecvTextBox" local:MvvmTextBox.Buffer="{Binding RecvModel.RecvData}"
                              Style="{StaticResource RSTextBox}"
@@ -204,7 +204,7 @@
                           Header="{Binding}"
                           HeaderTemplate="{StaticResource SendGroupBoxHeader}"
                           Grid.Row="1"
-                          Margin="5,0,5,3"
+                          Margin="5,0,2.5,3"
                           BorderBrush="#FF007ACD">
                     <Grid x:Name="SendDataGrid">
                         <Grid.RowDefinitions>
@@ -239,7 +239,7 @@
 
                 <!--串口配置区-->
                 <GroupBox x:Name="ConfigGroupPort" Header="串口配置" Grid.Row="0"
-                          Margin="0,0,5,2"
+                          Margin="2.5,0,5,2"
                           BorderBrush="#FF007ACD"
                           Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="ConfigGrid">
@@ -302,7 +302,7 @@
 
                 <!--信号状态区-->
                 <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
-                          Margin="0,0,5,2"
+                          Margin="2.5,0,5,2"
                           BorderBrush="#FF007ACD"
                           Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="HoldingGrid">
@@ -331,7 +331,7 @@
 
                 <!--辅助区-->
                 <GroupBox x:Name="AssistGroupBox" Header="辅助" Grid.Row="2"
-                          Margin="0,0,5,3"
+                          Margin="2.5,0,5,3"
                           BorderBrush="#FF007ACD"
                           Visibility="{Binding HelpModel.ViewVisibility}">
                     <Grid x:Name="AssistGrid">
