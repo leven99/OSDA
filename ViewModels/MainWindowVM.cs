@@ -18,7 +18,7 @@ namespace OSDA.ViewModels
     internal class MainWindowViewModel : MainWindowBase, IDisposable
     {
         #region 字段
-        private SerialPort SPserialPort = new SerialPort();
+        private SerialPort SerialPortBase = new SerialPort();
 
         private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
         private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
@@ -59,7 +59,7 @@ namespace OSDA.ViewModels
         #region 文件
         public void ExitWindow()
         {
-            if ((SPserialPort != null) && SPserialPort.IsOpen)
+            if ((SerialPortBase != null) && SerialPortBase.IsOpen)
             {
                 CloseSP();
             }
@@ -81,7 +81,7 @@ namespace OSDA.ViewModels
             {
                 if(SerialPortModel.ASCIIEnable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.ASCII;
+                    SerialPortBase.Encoding = System.Text.Encoding.ASCII;
                 }
             }
             catch(ArgumentException e)
@@ -102,7 +102,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.UTF8Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.UTF8;
+                    SerialPortBase.Encoding = System.Text.Encoding.UTF8;
                 }
             }
             catch (ArgumentException e)
@@ -123,7 +123,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.UTF16Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.Unicode;
+                    SerialPortBase.Encoding = System.Text.Encoding.Unicode;
                 }
             }
             catch (ArgumentException e)
@@ -144,7 +144,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.UTF32Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.UTF32;
+                    SerialPortBase.Encoding = System.Text.Encoding.UTF32;
                 }
             }
             catch (ArgumentException e)
@@ -162,11 +162,11 @@ namespace OSDA.ViewModels
             {
                 if(SerialPortModel.RtsEnable)
                 {
-                    SPserialPort.RtsEnable = true;
+                    SerialPortBase.RtsEnable = true;
                 }
                 else
                 {
-                    SPserialPort.RtsEnable = false;
+                    SerialPortBase.RtsEnable = false;
                 }
             }
             catch(InvalidOperationException e)
@@ -188,11 +188,11 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.DtrEnable)
                 {
-                    SPserialPort.DtrEnable = true;
+                    SerialPortBase.DtrEnable = true;
                 }
                 else
                 {
-                    SPserialPort.DtrEnable = false;
+                    SerialPortBase.DtrEnable = false;
                 }
             }
             catch (InvalidOperationException e)
@@ -219,7 +219,7 @@ namespace OSDA.ViewModels
             {
                 if(SerialPortModel.NoneEnable)
                 {
-                    SPserialPort.Handshake = Handshake.None;
+                    SerialPortBase.Handshake = Handshake.None;
                 }
             }
             catch (IOException e)
@@ -244,7 +244,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.RequestToSendEnable)
                 {
-                    SPserialPort.Handshake = Handshake.RequestToSend;
+                    SerialPortBase.Handshake = Handshake.RequestToSend;
                 }
             }
             catch (IOException e)
@@ -269,7 +269,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.XOnXOffEnable)
                 {
-                    SPserialPort.Handshake = Handshake.XOnXOff;
+                    SerialPortBase.Handshake = Handshake.XOnXOff;
                 }
             }
             catch (IOException e)
@@ -294,7 +294,7 @@ namespace OSDA.ViewModels
             {
                 if (SerialPortModel.RequestToSendXOnXOffEnable)
                 {
-                    SPserialPort.Handshake = Handshake.RequestToSendXOnXOff;
+                    SerialPortBase.Handshake = Handshake.RequestToSendXOnXOff;
                 }
             }
             catch (IOException e)
@@ -462,93 +462,93 @@ namespace OSDA.ViewModels
         #region 打开/关闭串口
         public bool OpenSP()
         {
-            if (SPserialPort != null && SPserialPort.IsOpen)
+            if (SerialPortBase != null && SerialPortBase.IsOpen)
             {
                 return CloseSP();
             }
 
             try
             {
-                SPserialPort.PortName = SerialPortModel.SPPort;
-                SPserialPort.BaudRate = SerialPortModel.SPBaudRate;
-                SPserialPort.DataBits = SerialPortModel.SPDataBits;
-                SPserialPort.StopBits = SerialPortModel.SPStopBits;
-                SPserialPort.Parity = SerialPortModel.SPParity;
+                SerialPortBase.PortName = SerialPortModel.SPPort;
+                SerialPortBase.BaudRate = SerialPortModel.SPBaudRate;
+                SerialPortBase.DataBits = SerialPortModel.SPDataBits;
+                SerialPortBase.StopBits = SerialPortModel.SPStopBits;
+                SerialPortBase.Parity = SerialPortModel.SPParity;
 
-                SPserialPort.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
-                SPserialPort.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
+                SerialPortBase.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
+                SerialPortBase.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
 
                 /* 字节编码 */
                 if (SerialPortModel.ASCIIEnable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.ASCII;
+                    SerialPortBase.Encoding = System.Text.Encoding.ASCII;
                 }
                 else if (SerialPortModel.UTF8Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.UTF8;
+                    SerialPortBase.Encoding = System.Text.Encoding.UTF8;
                 }
                 else if (SerialPortModel.UTF16Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.Unicode;
+                    SerialPortBase.Encoding = System.Text.Encoding.Unicode;
                 }
                 else if (SerialPortModel.UTF32Enable)
                 {
-                    SPserialPort.Encoding = System.Text.Encoding.UTF32;
+                    SerialPortBase.Encoding = System.Text.Encoding.UTF32;
                 }
 
                 /* 发送请求（RTS）信号 */
                 if (SerialPortModel.RtsEnable)
                 {
-                    SPserialPort.RtsEnable = true;
+                    SerialPortBase.RtsEnable = true;
                 }
                 else
                 {
-                    SPserialPort.RtsEnable = false;
+                    SerialPortBase.RtsEnable = false;
                 }
 
                 /* 数据终端就绪（DTR）信号 */
                 if (SerialPortModel.DtrEnable)
                 {
-                    SPserialPort.DtrEnable = true;
+                    SerialPortBase.DtrEnable = true;
                 }
                 else
                 {
-                    SPserialPort.DtrEnable = false;
+                    SerialPortBase.DtrEnable = false;
                 }
 
                 /* 流控制 */
                 if (SerialPortModel.NoneEnable)
                 {
-                    SPserialPort.Handshake = Handshake.None;
+                    SerialPortBase.Handshake = Handshake.None;
                 }
                 else if (SerialPortModel.RequestToSendEnable)
                 {
-                    SPserialPort.Handshake = Handshake.RequestToSend;
+                    SerialPortBase.Handshake = Handshake.RequestToSend;
                 }
                 else if (SerialPortModel.XOnXOffEnable)
                 {
-                    SPserialPort.Handshake = Handshake.XOnXOff;
+                    SerialPortBase.Handshake = Handshake.XOnXOff;
                 }
                 else if (SerialPortModel.RequestToSendXOnXOffEnable)
                 {
-                    SPserialPort.Handshake = Handshake.RequestToSendXOnXOff;
+                    SerialPortBase.Handshake = Handshake.RequestToSendXOnXOff;
                 }
 
                 /* 数据接收事件 */
-                SPserialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
+                SerialPortBase.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
 
                 /* 信号状态事件 */
-                SPserialPort.PinChanged += new SerialPinChangedEventHandler(SerialPortPinChanged);
+                SerialPortBase.PinChanged += new SerialPinChangedEventHandler(SerialPortPinChanged);
 
-                SPserialPort.Open();
+                SerialPortBase.Open();
 
-                if (SPserialPort.IsOpen)
+                if (SerialPortBase.IsOpen)
                 {
                     SerialPortModel.SPBrush = Brushes.GreenYellow;
                     SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "关闭串口");
                     DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
-                        SPserialPort.PortName, SPserialPort.BaudRate.ToString(cultureInfo), SPserialPort.DataBits.ToString(cultureInfo),
-                        SPserialPort.StopBits.ToString(), SPserialPort.Parity.ToString());
+                        SerialPortBase.PortName, SerialPortBase.BaudRate.ToString(cultureInfo), SerialPortBase.DataBits.ToString(cultureInfo),
+                        SerialPortBase.StopBits.ToString(), SerialPortBase.Parity.ToString());
 
                     SerialPortModel.SPPortEnable = false;
                     SerialPortModel.SPBaudRateEnable = false;
@@ -610,9 +610,9 @@ namespace OSDA.ViewModels
         {
             try
             {
-                if (SPserialPort.IsOpen)
+                if (SerialPortBase.IsOpen)
                 {
-                    SPserialPort.Close();
+                    SerialPortBase.Close();
 
                     SerialPortModel.SPBrush = Brushes.Red;
                     SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "打开串口");
@@ -627,13 +627,13 @@ namespace OSDA.ViewModels
 
                     RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                    return SPserialPort.IsOpen;
+                    return SerialPortBase.IsOpen;
                 }
                 else
                 {
                     DepictInfo = string.Format(cultureInfo, "串行端口已关闭");
 
-                    return SPserialPort.IsOpen;
+                    return SerialPortBase.IsOpen;
                 }
             }
             catch(IOException e)
@@ -707,14 +707,14 @@ namespace OSDA.ViewModels
             }
             set
             {
-                if (SPserialPort == null)
+                if (SerialPortBase == null)
                 {
                     DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
 
                     return;
                 }
 
-                if (SPserialPort.IsOpen == false)
+                if (SerialPortBase.IsOpen == false)
                 {
                     DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -776,14 +776,14 @@ namespace OSDA.ViewModels
         #region 发送
         public async Task SendAsync()
         {
-            if (SPserialPort == null)
+            if (SerialPortBase == null)
             {
                 DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
 
                 return;
             }
 
-            if (SPserialPort.IsOpen == false)
+            if (SerialPortBase.IsOpen == false)
             {
                 DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -805,13 +805,13 @@ namespace OSDA.ViewModels
                         sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
                     }
 
-                    await SPserialPort.BaseStream.WriteAsync(sendData, 0, SendCount).ConfigureAwait(false);
+                    await SerialPortBase.BaseStream.WriteAsync(sendData, 0, SendCount).ConfigureAwait(false);
 
                 }
                 else
                 {
-                    SendCount = SPserialPort.Encoding.GetByteCount(SendModel.SendData);
-                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes(SendModel.SendData), 0, SendCount)
+                    SendCount = SerialPortBase.Encoding.GetByteCount(SendModel.SendData);
+                    await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes(SendModel.SendData), 0, SendCount)
                         .ConfigureAwait(false);
                 }
 
@@ -821,19 +821,19 @@ namespace OSDA.ViewModels
                 }
                 else if (SendModel.CrEnable)
                 {
-                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\r"), 0, 1)
+                    await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes("\r"), 0, 1)
                         .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 1);
                 }
                 else if (SendModel.LfEnable)
                 {
-                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\n"), 0, 1)
+                    await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes("\n"), 0, 1)
                         .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 1);
                 }
                 else if (SendModel.CrLfEnable)
                 {
-                    await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes("\r\n"), 0, 2)
+                    await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes("\r\n"), 0, 2)
                         .ConfigureAwait(false);
                     SendModel.SendDataCount += (SendCount + 2);
                 }
@@ -848,14 +848,14 @@ namespace OSDA.ViewModels
         #region 发送文件
         public async Task SendFileAsync()
         {
-            if (SPserialPort == null)
+            if (SerialPortBase == null)
             {
                 DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
 
                 return;
             }
 
-            if (SPserialPort.IsOpen == false)
+            if (SerialPortBase.IsOpen == false)
             {
                 DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -887,12 +887,12 @@ namespace OSDA.ViewModels
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         var fileContent = reader.ReadToEnd();
-                        var SendCount = SPserialPort.Encoding.GetByteCount(fileContent);
+                        var SendCount = SerialPortBase.Encoding.GetByteCount(fileContent);
 
                         DepictInfo = string.Format(cultureInfo, "文件正在发送......");
                         HelpModel.StatusBarProgressBarIsIndeterminate = true;
 
-                        await SPserialPort.BaseStream.WriteAsync(SPserialPort.Encoding.GetBytes(fileContent), 0, SendCount)
+                        await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes(fileContent), 0, SendCount)
                             .ConfigureAwait(false);
 
                         HelpModel.StatusBarProgressBarIsIndeterminate = false;
@@ -1147,8 +1147,8 @@ namespace OSDA.ViewModels
                     /* 释放托管资源（如果需要） */
                 }
 
-                SPserialPort.Dispose();
-                SPserialPort = null;
+                SerialPortBase.Dispose();
+                SerialPortBase = null;
 
                 disposedValue = true;
             }
