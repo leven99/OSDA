@@ -392,6 +392,11 @@ namespace OSDA.ViewModels
 
         protected async Task<T> DownloadJsonObjectAsync<T>(Uri address, DataContractJsonSerializer serializer, string git)
         {
+            if(serializer == null)
+            {
+                return default;
+            }
+
             try
             {
                 using (var _httpClient = new HttpClient())
@@ -951,6 +956,11 @@ namespace OSDA.ViewModels
         #region 数据接收事件实现
         public async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            if ((SerialPort)sender == null)
+            {
+                return;
+            }
+
             SerialPort _SerialPort = (SerialPort)sender;
 
             int _bytesToRead = _SerialPort.BytesToRead;
@@ -1030,6 +1040,16 @@ namespace OSDA.ViewModels
         #region 信号状态事件实现
         public void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
+            if((SerialPort)sender == null)
+            {
+                return;
+            }
+
+            if(e == null)
+            {
+                return;
+            }
+
             SerialPort _SerialPort = (SerialPort)sender;
 
             switch (e.EventType)
