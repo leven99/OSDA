@@ -16,38 +16,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <Style TargetType="HeaderedContentControl">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-                        <ContentPresenter ContentSource="Header"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <DataTemplate x:Key="RecvGroupBoxHeader">
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}接收区：已接收{0}字节，接收自动保存[{1}]，接收状态[{2}]">
-                        <Binding Path="RecvModel.RecvDataCount"/>
-                        <Binding Path="RecvModel.RecvAutoSave"/>
-                        <Binding Path="RecvModel.RecvEnable"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </DataTemplate>
-
-        <DataTemplate x:Key="SendGroupBoxHeader">
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}发送区：已发送{0}字节">
-                        <Binding Path="SendModel.SendDataCount"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </DataTemplate>
     </Window.Resources>
     
     <!--Root-->
@@ -61,12 +29,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
+            
             <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                    Margin="6,3,4,3" Width="18" Height="18"/>
             <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
                 <MenuItem x:Name="FileMenuItem" Header="文件(_F)" Style="{StaticResource MainMenuItem}">
                     <MenuItem x:Name="ExitMenuItem" Header="退出(_X)"
+                              InputGestureText="Alt+F4"
                               Click="ExitMenuItem_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="ToolMenuItem" Header="工具(_T)" Style="{StaticResource MainMenuItem}">
@@ -117,6 +86,7 @@
                 </MenuItem>
                 <MenuItem x:Name="ViewMenuItem" Header="视图(_V)" Style="{StaticResource MainMenuItem}">
                     <MenuItem x:Name="EveryMenuItem" Header="精简视图" IsChecked="{Binding HelpModel.ReducedEnable}"
+                              InputGestureText="Ctrl+V"
                               Click="EveryMenuItem_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="HelpMenuItem" Header="帮助(_H)" Style="{StaticResource MainMenuItem}">
@@ -172,7 +142,7 @@
         </Grid>
 
         <!--ALL工作区-->
-        <Grid x:Name="Grid">
+        <Grid x:Name="WorkGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -188,7 +158,7 @@
                 <!--接收区-->
                 <GroupBox x:Name="ReceDataGroupBox"
                           Header="{Binding}"
-                          HeaderTemplate="{StaticResource RecvGroupBoxHeader}"
+                          HeaderTemplate="{DynamicResource RecvGroupBoxHeaderData}"
                           Grid.Row="0"
                           Margin="5,0,2.5,2"
                           BorderBrush="#FF007ACD">
@@ -202,7 +172,7 @@
                 <!--发送区-->
                 <GroupBox x:Name="SendDataGroupBox"
                           Header="{Binding}"
-                          HeaderTemplate="{StaticResource SendGroupBoxHeader}"
+                          HeaderTemplate="{StaticResource SendGroupBoxHeaderData}"
                           Grid.Row="1"
                           Margin="5,0,2.5,3"
                           BorderBrush="#FF007ACD">

@@ -5,6 +5,43 @@
     <Application.Resources>
         <ResourceDictionary>
             
+            <!--GroupBox Header Style Template(Base)-->
+            <Style x:Key="GroupBoxHeaderStyle" TargetType="HeaderedContentControl">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                            <ContentPresenter ContentSource="Header"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <!--GroupBox Header Data Template[Recv]-->
+            <DataTemplate x:Key="RecvGroupBoxHeaderData">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}接收区：已接收{0}字节，接收自动保存[{1}]，接收状态[{2}]">
+                            <Binding Path="RecvModel.RecvDataCount"/>
+                            <Binding Path="RecvModel.RecvAutoSave"/>
+                            <Binding Path="RecvModel.RecvEnable"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DataTemplate>
+            
+            <!--GroupBox Header Data Template[Send]-->
+            <DataTemplate x:Key="SendGroupBoxHeaderData">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}发送区：已发送{0}字节">
+                            <Binding Path="SendModel.SendDataCount"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DataTemplate>
+            
             <!--MainWindows XAML - Menu style-->
             <Style TargetType="MenuItem" x:Key="MainMenuItem">
                 <Setter Property="Margin" Value="0,3,0,3"/>
