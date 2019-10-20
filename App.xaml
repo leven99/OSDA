@@ -74,13 +74,12 @@
             
             <!--MainWindows XAML - Config Block style-->
             <Style TargetType="TextBlock" x:Key="ConfigTextBlock">
-                <Setter Property="Margin" Value="3,0,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="ComboBox" x:Key="ConfigComboBox">
-                <Setter Property="Margin" Value="0,5,3,3"/>
-                <Setter Property="Padding" Value="6,6,0,6"/>
+                <Setter Property="Margin" Value="0,4,0,4"/>
+                <Setter Property="Padding" Value="6,6,6,6"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="ItemContainerStyle">
                     <Setter.Value>
@@ -96,7 +95,7 @@
                 <Setter Property="Height" Value="28"/>
             </Style>
             <Style TargetType="Button" x:Key="ConfigButton">
-                <Setter Property="Margin" Value="0,5,3,3"/>
+                <Setter Property="Margin" Value="0,5,0,3"/>
                 <Setter Property="Padding" Value="0,6,0,6"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="BorderBrush" Value="Black"/>
