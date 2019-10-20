@@ -29,6 +29,8 @@ namespace OSDA.ViewModels
         /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
         /// </summary>
         private volatile Int32 RecvDataDeleteCount = 1;
+
+        public GitRelease LatestRelease = new GitRelease();
         #endregion
 
         public SerialPortModel SerialPortModel { get; set; }
@@ -36,7 +38,6 @@ namespace OSDA.ViewModels
         public RecvModel RecvModel { get; set; }
         public TimerModel TimerModel { get; set; }
         public HelpModel HelpModel { get; set; }
-        public GitRelease LatestRelease { get; set; }
 
         #region 状态栏- 信息描述
         private string _DepictInfo;
@@ -1122,8 +1123,6 @@ namespace OSDA.ViewModels
 
             HelpModel = new HelpModel();
             HelpModel.HelpDataContext();
-
-            LatestRelease = new GitRelease();
 
             SaveRecv = false;
             HexSend = false;
