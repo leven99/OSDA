@@ -368,16 +368,16 @@ namespace OSDA.ViewModels
         public async void UpdateAsync()
         {
             var ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
-            
-            LatestRelease = await DownloadJsonObjectAsync<GitRelease>(github_cri, ReleaseDeserializer, "github")
-                .ConfigureAwait(false);
 
-            if(LatestRelease == default)
+            LatestRelease = await 
+                DownloadJsonObjectAsync<GitRelease>(github_cri, ReleaseDeserializer, "github").ConfigureAwait(false);
+
+            if (LatestRelease == default)
             {
                 DepictInfo = string.Format(cultureInfo, "更换服务器......请稍后");
 
-                LatestRelease = await DownloadJsonObjectAsync<GitRelease>(gitee_uri, ReleaseDeserializer, "gitee")
-                    .ConfigureAwait(false);
+                LatestRelease = await
+                    DownloadJsonObjectAsync<GitRelease>(gitee_uri, ReleaseDeserializer, "gitee").ConfigureAwait(false);
 
                 if (LatestRelease == default)
                 {
@@ -1122,6 +1122,8 @@ namespace OSDA.ViewModels
 
             HelpModel = new HelpModel();
             HelpModel.HelpDataContext();
+
+            LatestRelease = new GitRelease();
 
             SaveRecv = false;
             HexSend = false;

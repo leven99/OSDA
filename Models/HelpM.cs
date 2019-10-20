@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace OSDA.Models
 {
     [DataContract]
-    public sealed class GitRelease
+    sealed class GitRelease
     {
         private Version _version = null;
 
