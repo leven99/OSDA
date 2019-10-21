@@ -49,7 +49,7 @@
 
 #### For Windows
 
-下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。可以选择从 `Gitee` 或 `Github` 下载点下载。
+下载最新的 [OSDA 安装程序](https://leven9.gitee.io/osdaweb/download.html)。可以选择从 `Gitee` 或 `Github` 站点下载。
 
 ## 编译
 
