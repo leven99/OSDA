@@ -544,8 +544,11 @@ namespace OSDA.ViewModels
                     SerialPortModel.SPBrush = Brushes.GreenYellow;
                     SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "关闭串口");
                     DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
-                        SerialPortBase.PortName, SerialPortBase.BaudRate.ToString(cultureInfo), SerialPortBase.DataBits.ToString(cultureInfo),
-                        SerialPortBase.StopBits.ToString(), SerialPortBase.Parity.ToString());
+                        SerialPortBase.PortName, 
+                        SerialPortBase.BaudRate.ToString(cultureInfo), 
+                        SerialPortBase.DataBits.ToString(cultureInfo),
+                        SerialPortBase.StopBits.ToString(), 
+                        SerialPortBase.Parity.ToString());
 
                     SerialPortModel.SPPortEnable = false;
                     SerialPortModel.SPBaudRateEnable = false;
