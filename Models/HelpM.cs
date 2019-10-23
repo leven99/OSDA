@@ -5,9 +5,12 @@ using System.Runtime.Serialization;
 namespace OSDA.Models
 {
     [DataContract]
-    sealed class GitRelease
+    internal sealed class GitRelease
     {
         private Version _version = null;
+
+        public Uri GiteeURI { get; set; }
+        public Uri GithubURI { get; set; }
 
         [DataMember(Name = "tag_name")]
         public string TagName { get; set; }
@@ -27,6 +30,12 @@ namespace OSDA.Models
             }
 
             return (_version = Version.Parse(version));
+        }
+
+        public GitRelease()
+        {
+            GiteeURI = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
+            GithubURI = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
         }
     }
 

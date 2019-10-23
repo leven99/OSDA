@@ -19,9 +19,7 @@ namespace OSDA.ViewModels
     {
         #region 字段
         private SerialPort SerialPortBase = new SerialPort();
-
-        private readonly Uri gitee_uri = new Uri("https://gitee.com/api/v5/repos/leven9/OSDA/releases/latest");
-        private readonly Uri github_cri = new Uri("https://api.github.com/repos/leven99/OSDA/releases/latest");
+        private readonly GitRelease GitReleaseBase = new GitRelease();
 
         private volatile string DataRecvPath = string.Empty;   /* 数据接收路径 */
 
@@ -29,8 +27,6 @@ namespace OSDA.ViewModels
         /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
         /// </summary>
         private volatile Int32 RecvDataDeleteCount = 1;
-
-        public GitRelease LatestRelease = new GitRelease();
         #endregion
 
         public SerialPortModel SerialPortModel { get; set; }
@@ -368,19 +364,19 @@ namespace OSDA.ViewModels
         #region 帮助
         public async void UpdateAsync()
         {
-            var ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
+            var _ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
 
-            LatestRelease = await 
-                DownloadJsonObjectAsync<GitRelease>(github_cri, ReleaseDeserializer, "github").ConfigureAwait(false);
+            GitRelease _ReleaseGit = await
+                DownloadJsonObjectAsync<GitRelease>(GitReleaseBase.GithubURI, _ReleaseDeserializer, "github").ConfigureAwait(false);
 
-            if (LatestRelease == default)
+            if (_ReleaseGit == default)
             {
                 DepictInfo = string.Format(cultureInfo, "更换服务器......请稍后");
 
-                LatestRelease = await
-                    DownloadJsonObjectAsync<GitRelease>(gitee_uri, ReleaseDeserializer, "gitee").ConfigureAwait(false);
+                _ReleaseGit = await
+                    DownloadJsonObjectAsync<GitRelease>(GitReleaseBase.GiteeURI, _ReleaseDeserializer, "gitee").ConfigureAwait(false);
 
-                if (LatestRelease == default)
+                if (_ReleaseGit == default)
                 {
                     DepictInfo = string.Format(cultureInfo, "请检查网络或稍后再试！");
 
@@ -388,7 +384,7 @@ namespace OSDA.ViewModels
                 }
             }
 
-            UpdateVersionCompareTo(LatestRelease.GetVersion());
+            UpdateVersionCompareTo(_ReleaseGit.GetVersion());
         }
 
         protected async Task<T> DownloadJsonObjectAsync<T>(Uri address, DataContractJsonSerializer serializer, string git)
