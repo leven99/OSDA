@@ -1,5 +1,6 @@
 ﻿using OSDA.Interfaces;
 using OSDA.ViewModels;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,9 +8,9 @@ using System.Windows.Input;
 
 namespace OSDA.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
-        private readonly MainWindowViewModel mainWindowViewModel = null;
+        internal MainWindowViewModel mainWindowViewModel = null;
 
         public MainWindow()
         {
@@ -289,6 +290,42 @@ namespace OSDA.Views
         private void RecvTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             RecvTextBox.ScrollToEnd();
+        }
+        #endregion
+
+        #region IDisposable Support
+        private bool disposedValue = false;   /* 冗余检测 */
+
+        /// <summary>
+        /// 释放组件所使用的非托管资源，并且有选择的释放托管资源（可以看作是Dispose()的安全实现）
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            /* 检查是否已调用dispose */
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    /* 释放托管资源（如果需要） */
+
+                    /* 由于mainWindowViewModel对象拥有SerialPort，因此间接拥有SerialPort的非托管资源，所以需要实现IDisposable */
+                    mainWindowViewModel.Dispose();
+                }
+
+                /* 释放非托管资源（如果有的话） */
+
+                disposedValue = true;   /* 处理完毕 */
+            }
+        }
+
+        /// <summary>
+        /// 实现IDisposable，释放组件所使用的所有资源
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);/* this: OSDA.Views.MainWindow */
         }
         #endregion
     }

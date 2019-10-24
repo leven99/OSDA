@@ -4,8 +4,12 @@ using System.Timers;
 
 namespace OSDA.Models
 {
-    internal class TimerModel : MainWindowBase, IDisposable
+    internal class TimerModel : MainWindowBase
     {
+        #region 字段
+        private static Timer SystemTimer = null;   /* 该对象持续存在于整个应用程序运行期间 */
+        #endregion
+
         /// <summary>
         /// 状态栏 - 系统时间
         /// </summary>
@@ -26,8 +30,6 @@ namespace OSDA.Models
             }
         }
 
-        private static Timer SystemTimer = null;
-
         public void InitSystemClockTimer()
         {
             SystemTimer = new Timer
@@ -47,18 +49,15 @@ namespace OSDA.Models
 
         private string SystemTimeData()
         {
-            string SystemTime;
             DateTime systemTime = DateTime.Now;
 
-            SystemTime = string.Format(cultureInfo, "{0}年{1}月{2}日 {3}:{4}:{5}",
+            return string.Format(cultureInfo, "{0}年{1}月{2}日 {3}:{4}:{5}",
                 systemTime.Year.ToString("0000", cultureInfo),
                 systemTime.Month.ToString("00", cultureInfo),
                 systemTime.Day.ToString("00", cultureInfo),
                 systemTime.Hour.ToString("00", cultureInfo),
                 systemTime.Minute.ToString("00", cultureInfo),
                 systemTime.Second.ToString("00", cultureInfo));
-
-            return SystemTime;
         }
 
         public void TimerDataContext()
@@ -67,38 +66,5 @@ namespace OSDA.Models
 
             InitSystemClockTimer();
         }
-
-        #region IDisposable Support
-        private bool disposedValue = false;
-
-        /// <summary>
-        /// 受保护的 Dispose 方法实现
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    /* 释放托管资源（如果需要） */
-                }
-
-                SystemTimer.Dispose();
-                SystemTimer = null;
-
-                disposedValue = true;
-            }
-        }
-
-        /// <summary>
-        /// SerialPort 字段 IDisposable 接口的 Dispose 方法实现（无参数）
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
     }
 }

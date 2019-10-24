@@ -4,20 +4,20 @@ using System.Runtime.CompilerServices;
 
 namespace OSDA.ViewModels
 {
-    public class MainWindowBase : INotifyPropertyChanged
+    internal class MainWindowBase : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// 提供区域性信息
         /// </summary>
         internal CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// 提供属性更改事件的方法
         /// </summary>
         /// <param name="propertyName"></param>
-        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        internal void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
 

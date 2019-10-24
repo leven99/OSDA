@@ -18,10 +18,14 @@ namespace OSDA.ViewModels
     internal class MainWindowViewModel : MainWindowBase, IDisposable
     {
         #region 字段
-        private SerialPort SerialPortBase = new SerialPort();
-        private readonly GitRelease GitReleaseBase = new GitRelease();
+        internal SerialPort SerialPortBase = new SerialPort();
 
-        private volatile string DataRecvPath = string.Empty;   /* 数据接收路径 */
+        internal GitRelease GitReleaseBase = new GitRelease();
+
+        /// <summary>
+        /// 保存接收，数据保存路径
+        /// </summary>
+        private volatile string DataRecvPath = string.Empty;
 
         /// <summary>
         /// 用于接收区数据超过32MB时，自动清空接收控件中的数据
@@ -54,9 +58,10 @@ namespace OSDA.ViewModels
         #region 菜单栏
 
         #region 文件
-        public void ExitWindow()
+        internal void ExitWindow()
         {
-            if ((SerialPortBase != null) && SerialPortBase.IsOpen)
+            /* 仅当成功在SerialPort对象上调用Open()方法且最近一次没有调用Close()方法时，才返回True */
+            if (SerialPortBase.IsOpen)
             {
                 CloseSP();
             }
@@ -66,7 +71,7 @@ namespace OSDA.ViewModels
         #region 选项
 
         #region 字节编码
-        public void ASCIIEnable()
+        internal void ASCIIEnable()
         {
             SerialPortModel.UTF8Enable = false;
             SerialPortModel.UTF16Enable = false;
@@ -83,11 +88,11 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void UTF8Enable()
+        internal void UTF8Enable()
         {
             SerialPortModel.ASCIIEnable = false;
             SerialPortModel.UTF16Enable = false;
@@ -104,11 +109,11 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void UTF16Enable()
+        internal void UTF16Enable()
         {
             SerialPortModel.ASCIIEnable = false;
             SerialPortModel.UTF8Enable = false;
@@ -125,11 +130,11 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "设置字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void UTF32Enable()
+        internal void UTF32Enable()
         {
             SerialPortModel.ASCIIEnable = false;
             SerialPortModel.UTF8Enable = false;
@@ -146,12 +151,12 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "更改字节编码为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
         #endregion
 
-        public void RtsEnable()
+        internal void RtsEnable()
         {
             SerialPortModel.RtsEnable = !(SerialPortModel.RtsEnable);
 
@@ -168,16 +173,15 @@ namespace OSDA.ViewModels
             }
             catch(InvalidOperationException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]当设置为硬件流或硬软件流时，不允许设置RTS",
-                    e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
         }
 
-        public void DtrEnable()
+        internal void DtrEnable()
         {
             SerialPortModel.DtrEnable = !(SerialPortModel.DtrEnable);
 
@@ -194,17 +198,16 @@ namespace OSDA.ViewModels
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]当设置为硬件流或硬软件流时，不允许设置DTR",
-                    e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
         }
 
         #region 流控制
-        public void NoneEnable()
+        internal void NoneEnable()
         {
             SerialPortModel.XOnXOffEnable = false;
             SerialPortModel.RequestToSendEnable = false;
@@ -221,15 +224,15 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void RequestToSendEnable()
+        internal void RequestToSendEnable()
         {
             SerialPortModel.NoneEnable = false;
             SerialPortModel.XOnXOffEnable = false;
@@ -246,15 +249,15 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void XOnXOffEnable()
+        internal void XOnXOffEnable()
         {
             SerialPortModel.NoneEnable = false;
             SerialPortModel.RequestToSendEnable = false;
@@ -271,15 +274,15 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
 
-        public void RequestToSendXOnXOffEnable()
+        internal void RequestToSendXOnXOffEnable()
         {
             SerialPortModel.NoneEnable = false;
             SerialPortModel.XOnXOffEnable = false;
@@ -296,17 +299,17 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
+                DepictInfo = e.Message;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format(cultureInfo, "设置流控制为{0}是非法操作", e.ParamName);
+                DepictInfo = e.Message;
             }
         }
         #endregion
 
         #region 发送换行
-        public void NonesEnable()
+        internal void NonesEnable()
         {
             SendModel.CrEnable = false;
             SendModel.LfEnable = false;
@@ -315,7 +318,7 @@ namespace OSDA.ViewModels
             SendModel.NonesEnable = true;
         }
 
-        public void CrEnable()
+        internal void CrEnable()
         {
             SendModel.NonesEnable = false;
             SendModel.LfEnable = false;
@@ -324,7 +327,7 @@ namespace OSDA.ViewModels
             SendModel.CrEnable = true;
         }
 
-        public void  LfEnable()
+        internal void  LfEnable()
         {
             SendModel.NonesEnable = false;
             SendModel.CrEnable = false;
@@ -333,7 +336,7 @@ namespace OSDA.ViewModels
             SendModel.LfEnable = true;
         }
 
-        public void CrLfEnable()
+        internal void CrLfEnable()
         {
             SendModel.NonesEnable = false;
             SendModel.CrEnable = false;
@@ -346,7 +349,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 视图
-        public void ReducedEnable()
+        internal void ReducedEnable()
         {
             HelpModel.ReducedEnable = !HelpModel.ReducedEnable;
 
@@ -362,19 +365,19 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 帮助
-        public async void UpdateAsync()
+        internal async void UpdateAsync()
         {
             var _ReleaseDeserializer = new DataContractJsonSerializer(typeof(GitRelease));
 
-            GitRelease _ReleaseGit = await
-                DownloadJsonObjectAsync<GitRelease>(GitReleaseBase.GithubURI, _ReleaseDeserializer, "github").ConfigureAwait(false);
+            GitRelease _ReleaseGit = await DownloadJsonObjectAsync<GitRelease>(
+                GitReleaseBase.GithubURI, _ReleaseDeserializer, "github").ConfigureAwait(false);
 
             if (_ReleaseGit == default)
             {
                 DepictInfo = string.Format(cultureInfo, "更换服务器......请稍后");
 
-                _ReleaseGit = await
-                    DownloadJsonObjectAsync<GitRelease>(GitReleaseBase.GiteeURI, _ReleaseDeserializer, "gitee").ConfigureAwait(false);
+                _ReleaseGit = await DownloadJsonObjectAsync<GitRelease>(
+                    GitReleaseBase.GiteeURI, _ReleaseDeserializer, "gitee").ConfigureAwait(false);
 
                 if (_ReleaseGit == default)
                 {
@@ -387,7 +390,7 @@ namespace OSDA.ViewModels
             UpdateVersionCompareTo(_ReleaseGit.GetVersion());
         }
 
-        protected async Task<T> DownloadJsonObjectAsync<T>(Uri address, DataContractJsonSerializer serializer, string git)
+        private protected async Task<T> DownloadJsonObjectAsync<T>(Uri address, DataContractJsonSerializer serializer, string git)
         {
             if(serializer == null)
             {
@@ -421,8 +424,22 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch
+            catch(ArgumentException e)
             {
+                DepictInfo = e.Message;
+
+                return default;
+            }
+            catch(HttpRequestException e)
+            {
+                DepictInfo = e.Message;
+
+                return default;
+            }
+            catch(TaskCanceledException e)
+            {
+                DepictInfo = e.Message;
+
                 return default;
             }
         }
@@ -457,11 +474,13 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 打开/关闭串口
-        public bool OpenSP()
+        internal void OpenSP()
         {
-            if (SerialPortBase != null && SerialPortBase.IsOpen)
+            if (SerialPortBase.IsOpen)
             {
-                return CloseSP();
+                CloseSP();
+
+                return;
             }
 
             try
@@ -564,83 +583,60 @@ namespace OSDA.ViewModels
                     {
                         RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
                     }
-
-                    return true;
                 }
                 else
                 {
                     DepictInfo = string.Format(cultureInfo, "串行端口打开失败");
-
-                    return false;
                 }
             }
             catch (UnauthorizedAccessException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口访问被拒绝", e.HResult.ToString("X", cultureInfo));
-
-                return false;
+                DepictInfo = e.Message;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = string.Format(cultureInfo, "串口属性{0}是非法的", e.ParamName);
-
-                return false;
+                DepictInfo = e.Message;
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "串口{0}不支持", e.ParamName);
-
-                return false;
+                DepictInfo = string.Format(cultureInfo, "串行端口属性{0}为非法参数，请重新输入", e.ParamName);
             }
             catch (IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
-
-                return false;
+                DepictInfo = e.Message;
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]指定端口已经打开", e.HResult.ToString("X", cultureInfo));
-
-                return false;
+                DepictInfo = e.Message;
             }
         }
 
-        public bool CloseSP()
+        private void CloseSP()
         {
             try
             {
-                if (SerialPortBase.IsOpen)
-                {
-                    SerialPortBase.Close();
+                /* 
+                 * 该方法调用Component.Dispose()方法，同时还会
+                 * 调用disposing参数设置为True的受保护的SerialPort.Dispose(Boolean)方法
+                 */
+                SerialPortBase.Close();   /* 关闭SerialPort对象，并清除接收缓冲区和发送缓冲区 */
 
-                    SerialPortModel.SPBrush = Brushes.Red;
-                    SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "打开串口");
+                SerialPortModel.SPBrush = Brushes.Red;
+                SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "打开串口");
 
-                    DepictInfo = string.Format(cultureInfo, "串行端口关闭成功");
+                DepictInfo = string.Format(cultureInfo, "串行端口关闭成功");
 
-                    SerialPortModel.SPPortEnable = true;
-                    SerialPortModel.SPBaudRateEnable = true;
-                    SerialPortModel.SPDataBitsEnable = true;
-                    SerialPortModel.SPStopBitsEnable = true;
-                    SerialPortModel.SPParityEnable = true;
+                SerialPortModel.SPPortEnable = true;
+                SerialPortModel.SPBaudRateEnable = true;
+                SerialPortModel.SPDataBitsEnable = true;
+                SerialPortModel.SPStopBitsEnable = true;
+                SerialPortModel.SPParityEnable = true;
 
-                    RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
-
-                    return SerialPortBase.IsOpen;
-                }
-                else
-                {
-                    DepictInfo = string.Format(cultureInfo, "串行端口已关闭");
-
-                    return SerialPortBase.IsOpen;
-                }
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
             }
             catch(IOException e)
             {
-                DepictInfo = string.Format(cultureInfo, "[{0}]端口处于无效状态", e.HResult.ToString("X", cultureInfo));
-
-                return false;
+                DepictInfo = e.Message;
             }
         }
         #endregion
@@ -663,11 +659,11 @@ namespace OSDA.ViewModels
 
                 if (SaveRecv)
                 {
-                    DepictInfo = "接收数据默认保存在程序基目录，可以点击路径选择操作更换";
+                    DepictInfo = string.Format(cultureInfo, "接收数据默认保存在程序基目录，可以点击路径选择操作更换");
                 }
                 else
                 {
-                    DepictInfo = "串行端口调试助手";
+                    DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
                 }
             }
         }
@@ -707,14 +703,7 @@ namespace OSDA.ViewModels
             }
             set
             {
-                if (SerialPortBase == null)
-                {
-                    DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
-
-                    return;
-                }
-
-                if (SerialPortBase.IsOpen == false)
+                if (!SerialPortBase.IsOpen)
                 {
                     DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -774,16 +763,9 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 发送
-        public async Task SendAsync()
+        internal async Task SendAsync()
         {
-            if (SerialPortBase == null)
-            {
-                DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
-
-                return;
-            }
-
-            if (SerialPortBase.IsOpen == false)
+            if (!SerialPortBase.IsOpen)
             {
                 DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -838,24 +820,41 @@ namespace OSDA.ViewModels
                     SendModel.SendDataCount += (SendCount + 2);
                 }
             }
-            catch
+            catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "发送异常，请检查发送数据");
+                DepictInfo = e.Message;
+            }
+            catch (IOException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch (OutOfMemoryException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch (FormatException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+            }
+            catch (NotFiniteNumberException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch (ObjectDisposedException)
+            {
+                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
             }
         }
         #endregion
 
         #region 发送文件
-        public async Task SendFileAsync()
+        internal async Task SendFileAsync()
         {
-            if (SerialPortBase == null)
-            {
-                DepictInfo = string.Format(cultureInfo, "串行端口资源异常，建议重启计算机");
-
-                return;
-            }
-
-            if (SerialPortBase.IsOpen == false)
+            if (!SerialPortBase.IsOpen)
             {
                 DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
 
@@ -904,15 +903,39 @@ namespace OSDA.ViewModels
                     HelpModel.StatusBarProgressBarVisibility = "Collapsed";
                 }
             }
-            catch
+            catch(ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "文件发送失败，请重新尝试！");
+                DepictInfo = e.Message;
+            }
+            catch(IOException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch(OutOfMemoryException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch(FormatException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch(IndexOutOfRangeException)
+            {
+                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+            }
+            catch(NotFiniteNumberException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch(ObjectDisposedException)
+            {
+                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
             }
         }
         #endregion
 
         #region 路径选择
-        public void SaveRecvPath()
+        internal void SaveRecvPath()
         {
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
@@ -930,7 +953,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 清接收区
-        public void ClarReceData()
+        internal void ClarReceData()
         {
             RecvModel.RecvData.Delete();
 
@@ -939,14 +962,14 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 清发送区
-        public void ClearSendData()
+        internal void ClearSendData()
         {
             SendModel.SendData = string.Empty;
         }
         #endregion
 
         #region 清空计数
-        public void ClearCount()
+        internal void ClearCount()
         {
             RecvModel.RecvDataCount = 0;
             SendModel.SendDataCount = 0;
@@ -954,7 +977,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 数据接收事件实现
-        public async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
+        private async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if ((SerialPort)sender == null)
             {
@@ -1004,7 +1027,7 @@ namespace OSDA.ViewModels
             }
         }
 
-        public async void SaveRecvData(string ReceData)
+        private async void SaveRecvData(string ReceData)
         {
             try
             {
@@ -1028,17 +1051,67 @@ namespace OSDA.ViewModels
                     }
                 }
             }
-            catch
+            catch(IOException e)
             {
+                SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = string.Format(cultureInfo, "接收数据保存失败");
+                DepictInfo = e.Message;
+            }
+            catch(ArgumentException e)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = e.Message;
+            }
+            catch(UnauthorizedAccessException e)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = e.Message;
+            }
+            catch(NotSupportedException e)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = e.Message;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+            }
+            catch (ObjectDisposedException)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+            }
+            catch (AppDomainUnloadedException)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = string.Format(cultureInfo, "正在访问已卸载的应用程序域，请通过菜单栏<帮助>报告问题！");
+            }
+            catch(System.Security.SecurityException e)
+            {
+                SaveRecv = false;
+                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+
+                DepictInfo = e.Message;
             }
         }
         #endregion
 
         #region 信号状态事件实现
-        public void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
+        private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
             if((SerialPort)sender == null)
             {
@@ -1091,17 +1164,17 @@ namespace OSDA.ViewModels
         #endregion
 
         #region RecvTextBox Mouse Double Support
-        public void EnableRecv()
+        internal void EnableRecv()
         {
             RecvModel.EnableRecv = !RecvModel.EnableRecv;
 
             if(RecvModel.EnableRecv)
             {
-                RecvModel.RecvEnable = "允许";
+                RecvModel.RecvEnable = string.Format(cultureInfo, "允许");
             }
             else
             {
-                RecvModel.RecvEnable = "暂停";
+                RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
             }
         }
         #endregion
@@ -1132,35 +1205,40 @@ namespace OSDA.ViewModels
         }
 
         #region IDisposable Support
-        private bool disposedValue = false;
+        private bool disposedValue = false;   /* 冗余检测 */
 
         /// <summary>
-        /// 受保护的 Dispose 方法实现
+        /// 释放组件所使用的非托管资源，并且有选择的释放托管资源（可以看作是Dispose()的安全实现）
         /// </summary>
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
+            /* 检查是否已调用dispose */
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    /* 释放托管资源（如果需要） */
+                    /* 释放托管资源（如果需要的话） */
+
+                    /* SerialPort属于托管资源，但其本身却拥有非托管资源，所以需要实现IDisposable */
+                    SerialPortBase.DataReceived -= SerialPortDataReceived;
+                    SerialPortBase.PinChanged -= SerialPortPinChanged;
+                    SerialPortBase.Dispose();
                 }
 
-                SerialPortBase.Dispose();
-                SerialPortBase = null;
+                /* 释放非托管资源（如果有的话） */
 
-                disposedValue = true;
+                disposedValue = true;   /* 处理完毕 */
             }
         }
 
         /// <summary>
-        /// SerialPort 字段 IDisposable 接口的 Dispose 方法实现（无参数）
+        /// 实现IDisposable，释放组件所使用的所有资源
         /// </summary>
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);   /* this: OSDA.ViewModels.MainWindowViewmodel */
         }
         #endregion
     }

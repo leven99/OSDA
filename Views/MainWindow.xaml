@@ -140,7 +140,7 @@
                                Style="{StaticResource SBStatusBarItem}"/>
             </StatusBar>
         </Grid>
-
+        
         <!--ALL工作区-->
         <Grid x:Name="WorkGrid">
             <Grid.ColumnDefinitions>
