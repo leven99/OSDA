@@ -684,7 +684,7 @@ namespace OSDA.ViewModels
 
                     if (HexSend == true)
                     {
-                        DepictInfo = string.Format(cultureInfo, "请输入十六进制数据用空格隔开，比如A0 B1 C2 D3");
+                        DepictInfo = string.Format(cultureInfo, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
                     }
                     else
                     {
@@ -829,17 +829,21 @@ namespace OSDA.ViewModels
             {
                 DepictInfo = e.Message;
             }
+            catch(OverflowException)
+            {
+                DepictInfo = string.Format(cultureInfo, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
+            }
             catch (IndexOutOfRangeException)
             {
                 DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
             }
-            catch (NotFiniteNumberException e)
-            {
-                DepictInfo = e.Message;
-            }
             catch (ObjectDisposedException)
             {
                 DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+            }
+            catch (NotFiniteNumberException e)
+            {
+                DepictInfo = e.Message;
             }
         }
         #endregion
@@ -912,17 +916,21 @@ namespace OSDA.ViewModels
             {
                 DepictInfo = e.Message;
             }
-            catch(IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
                 DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
-            }
-            catch(NotFiniteNumberException e)
-            {
-                DepictInfo = e.Message;
             }
             catch(ObjectDisposedException)
             {
                 DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+            }
+            catch (NotFiniteNumberException e)
+            {
+                DepictInfo = e.Message;
+            }
+            catch (InvalidOperationException e)
+            {
+                DepictInfo = e.Message;
             }
         }
         #endregion
