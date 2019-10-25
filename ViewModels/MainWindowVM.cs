@@ -703,13 +703,6 @@ namespace OSDA.ViewModels
             }
             set
             {
-                if (!SerialPortBase.IsOpen)
-                {
-                    DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
-
-                    return;
-                }
-
                 if (_AutoSend != value)
                 {
                     _AutoSend = value;
@@ -1031,7 +1024,8 @@ namespace OSDA.ViewModels
         {
             try
             {
-                if (DataRecvPath == null)
+                /* 从路径的字符串长度判断路径是否合法（路径字符串长度小于1个必定不合法） */
+                if (DataRecvPath.Length < 1)
                 {
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
