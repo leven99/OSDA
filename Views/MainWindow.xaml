@@ -228,48 +228,48 @@
                         <TextBlock x:Name="ComTextBox" Text="端口：" Grid.Row="0" Grid.Column="0"
                                    Style="{StaticResource ConfigTextBlock}"/>
                         <ComboBox x:Name="ComComboBox" Grid.Row="0" Grid.Column="1"
-                                  ItemsSource="{Binding SerialPortModel.SPPortItemsSource}"
-                                  SelectedItem="{Binding SerialPortModel.SPPort}"
+                                  ItemsSource="{Binding SerialPortModel.PortItemsSource}"
+                                  SelectedItem="{Binding SerialPortModel.Port}"
                                   Style="{DynamicResource ConfigComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPPortEnable}"/>
+                                  IsEnabled="{Binding SerialPortModel.PortEnable}"/>
                         <TextBlock x:Name="BaudTextBox" Text="波特率：" Grid.Row="1" Grid.Column="0"
                                    Style="{StaticResource ConfigTextBlock}"/>
                         <ComboBox x:Name="BaudComboBox" Grid.Row="1" Grid.Column="1"
-                                  ItemsSource="{Binding SerialPortModel.SPBaudRateItemsSource}"
-                                  SelectedItem="{Binding SerialPortModel.SPBaudRate}"
+                                  ItemsSource="{Binding SerialPortModel.BaudRateItemsSource}"
+                                  SelectedItem="{Binding SerialPortModel.BaudRate}"
                                   Style="{DynamicResource ConfigComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPBaudRateEnable}"/>
+                                  IsEnabled="{Binding SerialPortModel.BaudRateEnable}"/>
                         <TextBlock x:Name="DataTextBox" Text="数据位：" Grid.Row="2" Grid.Column="0"
                                    Style="{StaticResource ConfigTextBlock}"/>
                         <ComboBox x:Name="DataComboBox" Grid.Row="2" Grid.Column="1"
-                                  ItemsSource="{Binding SerialPortModel.SPDataBitsItemsSource}"
-                                  SelectedItem="{Binding SerialPortModel.SPDataBits}"
+                                  ItemsSource="{Binding SerialPortModel.DataBitsItemsSource}"
+                                  SelectedItem="{Binding SerialPortModel.DataBits}"
                                   Style="{DynamicResource ConfigComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPDataBitsEnable}"/>
+                                  IsEnabled="{Binding SerialPortModel.DataBitsEnable}"/>
                         <TextBlock x:Name="StopTextBox" Text="停止位：" Grid.Row="3" Grid.Column="0"
                                    Style="{StaticResource ConfigTextBlock}"/>
                         <ComboBox x:Name="StopConboBox" Grid.Row="3" Grid.Column="1"
-                                  ItemsSource="{Binding SerialPortModel.SPStopBitsItemsSource}"
-                                  SelectedItem="{Binding SerialPortModel.SPStopBits}"
+                                  ItemsSource="{Binding SerialPortModel.StopBitsItemsSource}"
+                                  SelectedItem="{Binding SerialPortModel.StopBits}"
                                   Style="{DynamicResource ConfigComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPStopBitsEnable}"/>
+                                  IsEnabled="{Binding SerialPortModel.StopBitsEnable}"/>
                         <TextBlock x:Name="ParityTextBox" Text="校验位：" Grid.Row="4" Grid.Column="0"
                                    Style="{StaticResource ConfigTextBlock}"/>
                         <ComboBox x:Name="ParityComboBox" Grid.Row="4" Grid.Column="1"
-                                  ItemsSource="{Binding SerialPortModel.SPParityItemsSource}"
-                                  SelectedItem="{Binding SerialPortModel.SPParity}"
+                                  ItemsSource="{Binding SerialPortModel.ParityItemsSource}"
+                                  SelectedItem="{Binding SerialPortModel.Parity}"
                                   Style="{DynamicResource ConfigComboBox}"
-                                  IsEnabled="{Binding SerialPortModel.SPParityEnable}"/>
-                        <Ellipse x:Name="OnOffElipse" Fill="{Binding SerialPortModel.SPBrush}"
+                                  IsEnabled="{Binding SerialPortModel.ParityEnable}"/>
+                        <Ellipse x:Name="OnOffElipse" Fill="{Binding SerialPortModel.Brush}"
                                  Grid.Row="5" Grid.Column="0"
                                  Style="{StaticResource ConfigEilipse}"/>
-                        <Button x:Name="OnOffButton" Content="{Binding SerialPortModel.OpenCloseSP}"
+                        <Button x:Name="OnOffButton" Content="{Binding SerialPortModel.OpenClose}"
                                 Grid.Row="5" Grid.Column="1"
                                 Style="{DynamicResource ConfigButton}"
                                 Click="OpenCloseSP"/>
                     </Grid>
                 </GroupBox>
-
+                
                 <!--信号状态区-->
                 <GroupBox x:Name="HoldingGroupBox" Header="信号状态" Grid.Row="1"
                           Margin="2.5,0,5,2"

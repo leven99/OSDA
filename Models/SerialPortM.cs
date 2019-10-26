@@ -7,217 +7,217 @@ namespace OSDA.Models
 {
     internal class SerialPortModel : MainWindowBase
     {
-        public string[] SPPortItemsSource { get;set; }
-        public Collection<int> SPBaudRateItemsSource { get; set; }
-        public Collection<int> SPDataBitsItemsSource { get; set; }
-        public Collection<StopBits> SPStopBitsItemsSource { get; set; }
-        public Collection<Parity> SPParityItemsSource { get; set; }
+        public string[] PortItemsSource { get;set; }
+        public Collection<int> BaudRateItemsSource { get; set; }
+        public Collection<int> DataBitsItemsSource { get; set; }
+        public Collection<StopBits> StopBitsItemsSource { get; set; }
+        public Collection<Parity> ParityItemsSource { get; set; }
 
         #region 串口配置区 - 串口属性
-        private string _SPPort;
-        public string SPPort
+        private string _Port;
+        public string Port
         {
             get
             {
-                return _SPPort;
+                return _Port;
             }
             set
             {
-                if (_SPPort != value)
+                if (_Port != value)
                 {
-                    _SPPort = value;
-                    RaisePropertyChanged(nameof(SPPort));
+                    _Port = value;
+                    RaisePropertyChanged(nameof(Port));
                 }
             }
         }
 
-        private int _SPBaudRate;
-        public int SPBaudRate
+        private int _BaudRate;
+        public int BaudRate
         {
             get
             {
-                return _SPBaudRate;
+                return _BaudRate;
             }
             set
             {
-                if (_SPBaudRate != value)
+                if (_BaudRate != value)
                 {
-                    _SPBaudRate = value;
-                    RaisePropertyChanged(nameof(SPBaudRate));
+                    _BaudRate = value;
+                    RaisePropertyChanged(nameof(BaudRate));
                 }
             }
         }
 
-        private int _SPDataBits;
-        public int SPDataBits
+        private int _DataBits;
+        public int DataBits
         {
             get
             {
-                return _SPDataBits;
+                return _DataBits;
             }
             set
             {
-                if (_SPDataBits != value)
+                if (_DataBits != value)
                 {
-                    _SPDataBits = value;
-                    RaisePropertyChanged(nameof(SPDataBits));
+                    _DataBits = value;
+                    RaisePropertyChanged(nameof(DataBits));
                 }
             }
         }
 
-        private StopBits _SPStopBits;
-        public StopBits SPStopBits
+        private StopBits _StopBits;
+        public StopBits StopBits
         {
             get
             {
-                return _SPStopBits;
+                return _StopBits;
             }
             set
             {
-                if (_SPStopBits != value)
+                if (_StopBits != value)
                 {
-                    _SPStopBits = value;
-                    RaisePropertyChanged(nameof(SPStopBits));
+                    _StopBits = value;
+                    RaisePropertyChanged(nameof(StopBits));
                 }
             }
         }
 
-        private Parity _SPParity;
-        public Parity SPParity
+        private Parity _Parity;
+        public Parity Parity
         {
             get
             {
-                return _SPParity;
+                return _Parity;
             }
             set
             {
-                if (_SPParity != value)
+                if (_Parity != value)
                 {
-                    _SPParity = value;
-                    RaisePropertyChanged(nameof(SPParity));
+                    _Parity = value;
+                    RaisePropertyChanged(nameof(Parity));
                 }
             }
         }
         #endregion
 
         #region 串口配置区 - 打开/关闭按钮
-        private Brush _SPBrush;
-        public Brush SPBrush
+        private Brush _Brush;
+        public Brush Brush
         {
             get
             {
-                return _SPBrush;
+                return _Brush;
             }
             set
             {
-                if (_SPBrush != value)
+                if (_Brush != value)
                 {
-                    _SPBrush = value;
-                    RaisePropertyChanged(nameof(SPBrush));
+                    _Brush = value;
+                    RaisePropertyChanged(nameof(Brush));
                 }
             }
         }
 
-        private string _OpenCloseSP;
-        public string OpenCloseSP
+        private string _OpenClose;
+        public string OpenClose
         {
             get
             {
-                return _OpenCloseSP;
+                return _OpenClose;
             }
             set
             {
-                if (_OpenCloseSP != value)
+                if (_OpenClose != value)
                 {
-                    _OpenCloseSP = value;
-                    RaisePropertyChanged(nameof(OpenCloseSP));
+                    _OpenClose = value;
+                    RaisePropertyChanged(nameof(OpenClose));
                 }
             }
         }
         #endregion
 
         #region 串口属性控件 - 启用/不启用
-        private bool _SPPortEnable;
-        public bool SPPortEnable
+        private bool _PortEnable;
+        public bool PortEnable
         {
             get
             {
-                return _SPPortEnable;
+                return _PortEnable;
             }
             set
             {
-                if (_SPPortEnable != value)
+                if (_PortEnable != value)
                 {
-                    _SPPortEnable = value;
-                    RaisePropertyChanged(nameof(SPPortEnable));
+                    _PortEnable = value;
+                    RaisePropertyChanged(nameof(PortEnable));
                 }
             }
         }
 
-        private bool _SPBaudRateEnable;
-        public bool SPBaudRateEnable
+        private bool _BaudRateEnable;
+        public bool BaudRateEnable
         {
             get
             {
-                return _SPBaudRateEnable;
+                return _BaudRateEnable;
             }
             set
             {
-                if (_SPBaudRateEnable != value)
+                if (_BaudRateEnable != value)
                 {
-                    _SPBaudRateEnable = value;
-                    RaisePropertyChanged(nameof(SPBaudRateEnable));
+                    _BaudRateEnable = value;
+                    RaisePropertyChanged(nameof(BaudRateEnable));
                 }
             }
         }
 
-        private bool _SPDataBitsEnable;
-        public bool SPDataBitsEnable
+        private bool _DataBitsEnable;
+        public bool DataBitsEnable
         {
             get
             {
-                return _SPDataBitsEnable;
+                return _DataBitsEnable;
             }
             set
             {
-                if (_SPDataBitsEnable != value)
+                if (_DataBitsEnable != value)
                 {
-                    _SPDataBitsEnable = value;
-                    RaisePropertyChanged(nameof(SPDataBitsEnable));
+                    _DataBitsEnable = value;
+                    RaisePropertyChanged(nameof(DataBitsEnable));
                 }
             }
         }
 
-        private bool _SPStopBitsEnable;
-        public bool SPStopBitsEnable
+        private bool _StopBitsEnable;
+        public bool StopBitsEnable
         {
             get
             {
-                return _SPStopBitsEnable;
+                return _StopBitsEnable;
             }
             set
             {
-                if (_SPStopBitsEnable != value)
+                if (_StopBitsEnable != value)
                 {
-                    _SPStopBitsEnable = value;
-                    RaisePropertyChanged(nameof(SPStopBitsEnable));
+                    _StopBitsEnable = value;
+                    RaisePropertyChanged(nameof(StopBitsEnable));
                 }
             }
         }
 
-        private bool _SPParityEnable;
-        public bool SPParityEnable
+        private bool _ParityEnable;
+        public bool ParityEnable
         {
             get
             {
-                return _SPParityEnable;
+                return _ParityEnable;
             }
             set
             {
-                if (_SPParityEnable != value)
+                if (_ParityEnable != value)
                 {
-                    _SPParityEnable = value;
-                    RaisePropertyChanged(nameof(SPParityEnable));
+                    _ParityEnable = value;
+                    RaisePropertyChanged(nameof(ParityEnable));
                 }
             }
         }
@@ -454,38 +454,38 @@ namespace OSDA.Models
 
         public void SerialPortDataContext()
         {
-            SPPortItemsSource = SerialPort.GetPortNames();
-            SPBaudRateItemsSource = new Collection<int>
+            PortItemsSource = SerialPort.GetPortNames();
+            BaudRateItemsSource = new Collection<int>
             {
-                1200, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 230400
+                1200, 2400, 4800, 7200, 9600, 14400, 19200, 28800, 38400, 57600, 115200, 128000, 153600, 230400, 256000
             };
-            SPDataBitsItemsSource = new Collection<int>
+            DataBitsItemsSource = new Collection<int>
             {
                 5, 6, 7, 8
             };
-            SPStopBitsItemsSource = new Collection<StopBits>
+            StopBitsItemsSource = new Collection<StopBits>
             {
                 StopBits.One, StopBits.Two, StopBits.OnePointFive
             };
-            SPParityItemsSource = new Collection<Parity>
+            ParityItemsSource = new Collection<Parity>
             {
                 Parity.None, Parity.Odd, Parity.Even, Parity.Mark, Parity.Space
             };
 
-            SPBaudRate = 9600;
-            SPDataBits = 8;
-            SPStopBits = StopBits.One;
-            SPParity = Parity.None;
+            BaudRate = 9600;
+            DataBits = 8;
+            StopBits = StopBits.One;
+            Parity = Parity.None;
 
-            SPBrush = Brushes.Red;
-            OpenCloseSP = string.Format(cultureInfo, "打开串口");
+            Brush = Brushes.Red;
+            OpenClose = string.Format(cultureInfo, "打开串口");
 
             /* 串口属性控件 */
-            SPPortEnable = true;
-            SPBaudRateEnable = true;
-            SPDataBitsEnable = true;
-            SPStopBitsEnable = true;
-            SPParityEnable = true;
+            PortEnable = true;
+            BaudRateEnable = true;
+            DataBitsEnable = true;
+            StopBitsEnable = true;
+            ParityEnable = true;
 
             /* 字节编码 */
             ASCIIEnable = false;

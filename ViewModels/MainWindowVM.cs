@@ -485,11 +485,11 @@ namespace OSDA.ViewModels
 
             try
             {
-                SerialPortBase.PortName = SerialPortModel.SPPort;
-                SerialPortBase.BaudRate = SerialPortModel.SPBaudRate;
-                SerialPortBase.DataBits = SerialPortModel.SPDataBits;
-                SerialPortBase.StopBits = SerialPortModel.SPStopBits;
-                SerialPortBase.Parity = SerialPortModel.SPParity;
+                SerialPortBase.PortName = SerialPortModel.Port;
+                SerialPortBase.BaudRate = SerialPortModel.BaudRate;
+                SerialPortBase.DataBits = SerialPortModel.DataBits;
+                SerialPortBase.StopBits = SerialPortModel.StopBits;
+                SerialPortBase.Parity = SerialPortModel.Parity;
 
                 SerialPortBase.WriteBufferSize = 1048576;   /* 输出缓冲区的大小为1048576字节 = 1MB */
                 SerialPortBase.ReadBufferSize = 2097152;    /* 输入缓冲区的大小为2097152字节 = 2MB */
@@ -560,8 +560,8 @@ namespace OSDA.ViewModels
 
                 if (SerialPortBase.IsOpen)
                 {
-                    SerialPortModel.SPBrush = Brushes.GreenYellow;
-                    SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "关闭串口");
+                    SerialPortModel.Brush = Brushes.GreenYellow;
+                    SerialPortModel.OpenClose = string.Format(cultureInfo, "关闭串口");
                     DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
                         SerialPortBase.PortName, 
                         SerialPortBase.BaudRate.ToString(cultureInfo), 
@@ -569,11 +569,11 @@ namespace OSDA.ViewModels
                         SerialPortBase.StopBits.ToString(), 
                         SerialPortBase.Parity.ToString());
 
-                    SerialPortModel.SPPortEnable = false;
-                    SerialPortModel.SPBaudRateEnable = false;
-                    SerialPortModel.SPDataBitsEnable = false;
-                    SerialPortModel.SPStopBitsEnable = false;
-                    SerialPortModel.SPParityEnable = false;
+                    SerialPortModel.PortEnable = false;
+                    SerialPortModel.BaudRateEnable = false;
+                    SerialPortModel.DataBitsEnable = false;
+                    SerialPortModel.StopBitsEnable = false;
+                    SerialPortModel.ParityEnable = false;
 
                     if (RecvModel.EnableRecv)
                     {
@@ -621,16 +621,16 @@ namespace OSDA.ViewModels
                  */
                 SerialPortBase.Close();   /* 关闭SerialPort对象，并清除接收缓冲区和发送缓冲区 */
 
-                SerialPortModel.SPBrush = Brushes.Red;
-                SerialPortModel.OpenCloseSP = string.Format(cultureInfo, "打开串口");
+                SerialPortModel.Brush = Brushes.Red;
+                SerialPortModel.OpenClose = string.Format(cultureInfo, "打开串口");
 
                 DepictInfo = string.Format(cultureInfo, "串行端口关闭成功");
 
-                SerialPortModel.SPPortEnable = true;
-                SerialPortModel.SPBaudRateEnable = true;
-                SerialPortModel.SPDataBitsEnable = true;
-                SerialPortModel.SPStopBitsEnable = true;
-                SerialPortModel.SPParityEnable = true;
+                SerialPortModel.PortEnable = true;
+                SerialPortModel.BaudRateEnable = true;
+                SerialPortModel.DataBitsEnable = true;
+                SerialPortModel.StopBitsEnable = true;
+                SerialPortModel.ParityEnable = true;
 
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
             }
