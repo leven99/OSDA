@@ -1037,10 +1037,10 @@ namespace OSDA.ViewModels
                 {
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
-                    using (StreamWriter DefaultReceDataPath = new StreamWriter(
-                        AppDomain.CurrentDomain.BaseDirectory +
-                        "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt",
-                        true))
+                    DataRecvPath = AppDomain.CurrentDomain.BaseDirectory +
+                        "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt";
+
+                    using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecvPath, true))
                     {
                         await DefaultReceDataPath.WriteAsync(ReceData).ConfigureAwait(false);
                     }
