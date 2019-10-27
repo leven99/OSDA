@@ -44,8 +44,8 @@ namespace OSDA.Models
         /// <summary>
         /// 辅助区 - 自送发送的时间间隔
         /// </summary>
-        private int _AutoSendNum;
-        public int AutoSendNum
+        private string _AutoSendNum;
+        public string AutoSendNum
         {
             get
             {
@@ -136,7 +136,7 @@ namespace OSDA.Models
             SendData = string.Empty;
             SendDataCount = 0;
 
-            AutoSendNum = 1000;
+            AutoSendNum = "1000";
 
             /* 发送换行 */
             NonesEnable = true;

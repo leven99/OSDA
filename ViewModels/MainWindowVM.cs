@@ -711,13 +711,13 @@ namespace OSDA.ViewModels
 
                 if (AutoSend == true)
                 {
-                    if (SendModel.AutoSendNum <= 0)
+                    if (String.IsNullOrWhiteSpace(SendModel.AutoSendNum))
                     {
                         DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
                         return;
                     }
 
-                    StartAutoSendTimer(SendModel.AutoSendNum);
+                    StartAutoSendTimer(Convert.ToInt32(SendModel.AutoSendNum, cultureInfo));
                 }
                 else
                 {
