@@ -2,6 +2,7 @@
 using OSDA.ViewModels;
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -268,6 +269,20 @@ namespace OSDA.Views
         private void ClearCount(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.ClearCount();
+        }
+        #endregion
+
+        #region TextBox Support
+        /// <summary>
+        /// 只允许输入0-9的数字
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AutoSendNumTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex re = new Regex("[^0-9]+");
+
+            e.Handled = re.IsMatch(e.Text);
         }
         #endregion
 

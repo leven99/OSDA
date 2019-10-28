@@ -717,11 +717,20 @@ namespace OSDA.ViewModels
                         return;
                     }
 
-                    StartAutoSendTimer(Convert.ToInt32(SendModel.AutoSendNum, cultureInfo));
+                    var _AutoSendNum = Convert.ToInt32(SendModel.AutoSendNum, cultureInfo);
+
+                    if (_AutoSendNum <= 0)
+                    {
+                        DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
+                        return;
+                    }
+
+                    StartAutoSendTimer(_AutoSendNum);
                 }
                 else
                 {
                     StopAutoSendTimer();
+                    DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
                 }
             }
         }

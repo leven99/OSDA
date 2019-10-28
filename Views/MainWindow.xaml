@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSDA.Views"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         mc:Ignorable="d"
         Title="OSDA" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowChromeStyle}">
     
@@ -330,7 +331,9 @@
                                   IsChecked="{Binding AutoSend}"/>
                         <TextBox x:Name="AutoSendNumTextBox" Text="{Binding SendModel.AutoSendNum}" Grid.Row="1" Grid.Column="1"
                                  Style="{DynamicResource AutoSendNumTextBox}"
-                                 Margin="2.5,3,0,5"/>
+                                 Margin="2.5,3,0,5"
+                                 input:InputMethod.IsInputMethodEnabled="False"
+                                 PreviewTextInput="AutoSendNumTextBox_PreviewTextInput"/>
                         <CheckBox x:Name="SaveReceCheckBox" Content="保存接收" Grid.Row="2" Grid.Column="0"
                                   Style="{StaticResource AssistCheckBox}"
                                   Margin="0,3,2.5,5" 
