@@ -1004,7 +1004,7 @@ namespace OSDA.ViewModels
             int _BytesToRead = _SerialPort.BytesToRead;
             byte[] _RecvData = new byte[_BytesToRead];
 
-            _SerialPort.BaseStream.Read(_RecvData, 0, _BytesToRead);
+            _SerialPort.Read(_RecvData, 0, _BytesToRead);
 
             if (RecvModel.EnableRecv)
             {
