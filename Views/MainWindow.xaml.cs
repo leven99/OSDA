@@ -247,9 +247,9 @@ namespace OSDA.Views
         #endregion
 
         #region 清接收区
-        private void ClarReceData(object sender, RoutedEventArgs e)
+        private void ClearReceData(object sender, RoutedEventArgs e)
         {
-            mainWindowViewModel.ClarReceData();
+            mainWindowViewModel.ClearReceData();
         }
         #endregion
 

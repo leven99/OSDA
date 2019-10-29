@@ -968,7 +968,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 清接收区
-        internal void ClarReceData()
+        internal void ClearReceData()
         {
             RecvModel.RecvData.Delete();
 

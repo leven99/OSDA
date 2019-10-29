@@ -347,7 +347,7 @@
                         <Button x:Name="ClearReceButton" Content="清接收区"  Grid.Row="3" Grid.Column="0"
                                 Style="{StaticResource AssistButton}" 
                                 Margin="0,3,2.5,5"
-                                Click="ClarReceData"/>
+                                Click="ClearReceData"/>
                         <Button x:Name="ClearSendButton" Content="清发送区"  Grid.Row="3" Grid.Column="1"
                                 Style="{StaticResource AssistButton}" 
                                 Margin="2.5,3,0,5" 
