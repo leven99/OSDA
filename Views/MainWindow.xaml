@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <Image x:Name="IconImage" Grid.Column="0" Source="/OSDA;component/icon/favicon.ico"
                    Margin="6,3,4,3" Width="18" Height="18"/>
             <Menu x:Name="ItemMenu" Grid.Column="1" Background="White">
@@ -74,6 +74,8 @@
                                   Click="RequestToSendXOnXOffMenuItem_Click"/>
                     </MenuItem>
                     <Separator/>
+                    <MenuItem x:Name="TimeStampMenuItem" Header="时间戳" IsChecked="{Binding TimerModel.TimeStampEnable}"
+                              Click="TimeStampMenuItem_Click"/>
                     <MenuItem x:Name="LineMenuItem" Header="发送换行">
                         <MenuItem x:Name="NonesMenuItem" Header="None" IsChecked="{Binding SendModel.NonesEnable}"
                                   Click="NonesMenuItem_Click"/>
@@ -118,7 +120,7 @@
                 </WrapPanel>
             </Button>
         </Grid>
-
+        
         <!--状态栏-->
         <Grid x:Name="StatusBarGrid" DockPanel.Dock="Bottom" Background="#FF007ACD">
             <Grid.ColumnDefinitions>
@@ -169,7 +171,7 @@
                              TextChanged="RecvTextBox_TextChanged"
                              MouseDoubleClick="RecvTextBox_MouseDoubleClick"/>
                 </GroupBox>
-
+                
                 <!--发送区-->
                 <GroupBox x:Name="SendDataGroupBox"
                           Header="{Binding}"

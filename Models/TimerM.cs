@@ -11,6 +11,26 @@ namespace OSDA.Models
         #endregion
 
         /// <summary>
+        /// 菜单栏 - 时间戳
+        /// </summary>
+        private bool _TimeStampEnable;
+        public bool TimeStampEnable
+        {
+            get
+            {
+                return _TimeStampEnable;
+            }
+            set
+            {
+                if (_TimeStampEnable != value)
+                {
+                    _TimeStampEnable = value;
+                    RaisePropertyChanged(nameof(TimeStampEnable));
+                }
+            }
+        }
+
+        /// <summary>
         /// 状态栏 - 系统时间
         /// </summary>
         private string _SystemTime;
@@ -49,21 +69,22 @@ namespace OSDA.Models
 
         private string SystemTimeData()
         {
-            DateTime systemTime = DateTime.Now;
+            DateTime _DateTime = DateTime.Now;
 
             return string.Format(cultureInfo, "{0}年{1}月{2}日 {3}:{4}:{5}",
-                systemTime.Year.ToString("0000", cultureInfo),
-                systemTime.Month.ToString("00", cultureInfo),
-                systemTime.Day.ToString("00", cultureInfo),
-                systemTime.Hour.ToString("00", cultureInfo),
-                systemTime.Minute.ToString("00", cultureInfo),
-                systemTime.Second.ToString("00", cultureInfo));
+                _DateTime.Year.ToString("0000", cultureInfo),
+                _DateTime.Month.ToString("00", cultureInfo),
+                _DateTime.Day.ToString("00", cultureInfo),
+                _DateTime.Hour.ToString("00", cultureInfo),
+                _DateTime.Minute.ToString("00", cultureInfo),
+                _DateTime.Second.ToString("00", cultureInfo));
         }
 
         public void TimerDataContext()
         {
-            SystemTime = string.Format(cultureInfo, "2019年08月31日 12:13:15");
+            TimeStampEnable = false;
 
+            SystemTime = string.Format(cultureInfo, "2019年08月31日 12:13:15");
             InitSystemClockTimer();
         }
     }

@@ -91,21 +91,11 @@ namespace OSDA.Views
         }
         #endregion
 
-        /// <summary>
-        /// RtsEnable
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RtsEnableMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.RtsEnable();
         }
 
-        /// <summary>
-        /// DtrEnable
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DtrEnableMenuItem_Click(object sender, RoutedEventArgs e)
         {
             mainWindowViewModel.DtrEnable();
@@ -132,6 +122,11 @@ namespace OSDA.Views
             mainWindowViewModel.RequestToSendXOnXOffEnable();
         }
         #endregion
+
+        private void TimeStampMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.TimeStampEnable();
+        }
 
         #region 发送换行
         private void NonesMenuItem_Click(object sender, RoutedEventArgs e)

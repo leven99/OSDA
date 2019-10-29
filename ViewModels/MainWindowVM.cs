@@ -308,6 +308,11 @@ namespace OSDA.ViewModels
         }
         #endregion
 
+        internal void TimeStampEnable()
+        {
+            TimerModel.TimeStampEnable = !(TimerModel.TimeStampEnable);
+        }
+
         #region 发送换行
         internal void NonesEnable()
         {
@@ -987,7 +992,7 @@ namespace OSDA.ViewModels
         #endregion
 
         #region 数据接收事件实现
-        private async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if ((SerialPort)sender == null)
             {
@@ -996,23 +1001,34 @@ namespace OSDA.ViewModels
 
             SerialPort _SerialPort = (SerialPort)sender;
 
-            int _bytesToRead = _SerialPort.BytesToRead;
-            byte[] recvData = new byte[_bytesToRead];
+            int _BytesToRead = _SerialPort.BytesToRead;
+            byte[] _RecvData = new byte[_BytesToRead];
 
-            await _SerialPort.BaseStream.ReadAsync(recvData, 0, _bytesToRead).ConfigureAwait(false);
+            _SerialPort.BaseStream.Read(_RecvData, 0, _BytesToRead);
 
             if (RecvModel.EnableRecv)
             {
+                if (TimerModel.TimeStampEnable)
+                {
+                    DateTime _DateTime = DateTime.Now;
+                    RecvModel.RecvData.Append("[ " + _DateTime.ToString("yyyy/MM/dd HH:mm:ss:ffff", cultureInfo) + " ]");
+                }
+
                 if (RecvModel.HexRecv)
                 {
-                    foreach (var tmp in recvData)
+                    foreach (var tmp in _RecvData)
                     {
                         RecvModel.RecvData.Append(string.Format(cultureInfo, "{0:X2} ", tmp));
                     }
                 }
                 else
                 {
-                    RecvModel.RecvData.Append(_SerialPort.Encoding.GetString(recvData));
+                    RecvModel.RecvData.Append(_SerialPort.Encoding.GetString(_RecvData));
+                }
+
+                if (TimerModel.TimeStampEnable)
+                {
+                    RecvModel.RecvData.Append("\r\n");
                 }
             }
 
@@ -1020,14 +1036,14 @@ namespace OSDA.ViewModels
             {
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "保存中");
 
-                SaveRecvData(_SerialPort.Encoding.GetString(recvData));
+                SaveRecvData(_SerialPort.Encoding.GetString(_RecvData));
             }
             else
             {
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
             }
 
-            RecvModel.RecvDataCount += recvData.Length;
+            RecvModel.RecvDataCount += _RecvData.Length;
 
             if (RecvModel.RecvDataCount > (32768 * RecvDataDeleteCount))
             {

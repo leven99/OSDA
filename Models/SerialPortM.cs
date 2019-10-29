@@ -100,7 +100,7 @@ namespace OSDA.Models
         }
         #endregion
 
-        #region 串口配置区 - 打开/关闭按钮
+        #region 串口配置区 - 打开/关闭
         private Brush _Brush;
         public Brush Brush
         {
