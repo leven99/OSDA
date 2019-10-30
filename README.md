@@ -3,7 +3,7 @@
 <p align="left">
     <a href="#License" alt="License"><img src="https://img.shields.io/badge/License-MIT-green"/></a>
     <a href="#安装" alt="Platform"><img src="https://img.shields.io/badge/Platform-Windows-green"/></a>
-    <a alt="Version"><img src="https://img.shields.io/badge/Release-V3.4.0-green"/></a>
+    <a alt="Version"><img src="https://img.shields.io/badge/Release-V3.5.0-green"/></a>
 </p>
 
 ![OSDA](Docs/source/_images/osda.png)

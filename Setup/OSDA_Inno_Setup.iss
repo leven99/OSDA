@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "OSDA"
-#define MyAppVersion "3.4.0"
-#define MyVersionInfoVersion "3.4.0.5"
+#define MyAppVersion "3.5.0"
+#define MyVersionInfoVersion "3.5.0.29"
 #define MyAppExeName "OSDA.exe"
 #define MyAppCopyright "Copyright (C) 2019 Cao Liwen"
 #define MyAppPublisher "Cao Liwen"
