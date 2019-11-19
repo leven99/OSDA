@@ -88,7 +88,7 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -109,7 +109,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -130,7 +130,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -151,7 +151,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
@@ -173,11 +173,11 @@ namespace OSDA.ViewModels
             }
             catch(InvalidOperationException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -198,11 +198,11 @@ namespace OSDA.ViewModels
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -224,11 +224,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -249,11 +249,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -274,11 +274,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -299,11 +299,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
@@ -431,19 +431,19 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
 
                 return default;
             }
             catch(HttpRequestException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
 
                 return default;
             }
             catch(TaskCanceledException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
 
                 return default;
             }
@@ -596,11 +596,11 @@ namespace OSDA.ViewModels
             }
             catch (UnauthorizedAccessException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (ArgumentException e)
             {
@@ -608,11 +608,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
 
@@ -641,7 +641,7 @@ namespace OSDA.ViewModels
             }
             catch(IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
@@ -829,19 +829,19 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (OutOfMemoryException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (FormatException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(OverflowException)
             {
@@ -857,7 +857,7 @@ namespace OSDA.ViewModels
             }
             catch (NotFiniteNumberException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
@@ -916,19 +916,19 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(IOException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(OutOfMemoryException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(FormatException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (IndexOutOfRangeException)
             {
@@ -940,11 +940,11 @@ namespace OSDA.ViewModels
             }
             catch (NotFiniteNumberException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
@@ -1083,28 +1083,28 @@ namespace OSDA.ViewModels
                 SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(ArgumentException e)
             {
                 SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(UnauthorizedAccessException e)
             {
                 SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch(NotSupportedException e)
             {
                 SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
             catch (IndexOutOfRangeException)
             {
@@ -1132,7 +1132,7 @@ namespace OSDA.ViewModels
                 SaveRecv = false;
                 RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
 
-                DepictInfo = e.Message;
+                DepictInfo = e.Message.Replace("\r\n", "");
             }
         }
         #endregion
