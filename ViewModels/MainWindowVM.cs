@@ -88,7 +88,7 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -109,7 +109,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -130,7 +130,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -151,7 +151,7 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -173,11 +173,11 @@ namespace OSDA.ViewModels
             }
             catch(InvalidOperationException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -198,11 +198,11 @@ namespace OSDA.ViewModels
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -224,11 +224,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -249,11 +249,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -274,11 +274,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -299,11 +299,11 @@ namespace OSDA.ViewModels
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -379,14 +379,14 @@ namespace OSDA.ViewModels
 
             if (_ReleaseGit == default)
             {
-                DepictInfo = string.Format(cultureInfo, "更换服务器......请稍后");
+                DepictInfo = string.Format(CultureInfos, "更换服务器......请稍后");
 
                 _ReleaseGit = await DownloadJsonObjectAsync<GitRelease>(
                     GitReleaseBase.GiteeURI, _ReleaseDeserializer, "gitee").ConfigureAwait(false);
 
                 if (_ReleaseGit == default)
                 {
-                    DepictInfo = string.Format(cultureInfo, "请检查网络或稍后再试！");
+                    DepictInfo = string.Format(CultureInfos, "请检查网络或稍后再试！");
 
                     return;
                 }
@@ -411,11 +411,11 @@ namespace OSDA.ViewModels
 
                     if (git == "github")
                     {
-                        DepictInfo = string.Format(cultureInfo, "等待 GitHub.com 响应数据......");
+                        DepictInfo = string.Format(CultureInfos, "等待 GitHub.com 响应数据......");
                     }
                     else if (git == "gitee")
                     {
-                        DepictInfo = string.Format(cultureInfo, "等待 Gitee.com 响应数据......");
+                        DepictInfo = string.Format(CultureInfos, "等待 Gitee.com 响应数据......");
                     }
 
                     var _resPonse = await _httpClient.GetAsync(address).ConfigureAwait(false);
@@ -431,19 +431,19 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
 
                 return default;
             }
             catch(HttpRequestException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
 
                 return default;
             }
             catch(TaskCanceledException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
 
                 return default;
             }
@@ -462,13 +462,13 @@ namespace OSDA.ViewModels
             }
             else
             {
-                DepictInfo = string.Format(cultureInfo, "OSDA v" + HelpModel.VerInfoNumber + " 已经是最新版le......");
+                DepictInfo = string.Format(CultureInfos, "OSDA v" + HelpModel.VerInfoNumber + " 已经是最新版le......");
             }
         }
 
         private void ThreadStartingWPFUpdate()
         {
-            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+            DepictInfo = string.Format(CultureInfos, "串行端口调试助手");
 
             WPFUpdate wPFUpdate = new WPFUpdate();
             wPFUpdate.Show();
@@ -566,11 +566,11 @@ namespace OSDA.ViewModels
                 if (SerialPortBase.IsOpen)
                 {
                     SerialPortModel.Brush = Brushes.GreenYellow;
-                    SerialPortModel.OpenClose = string.Format(cultureInfo, "关闭串口");
-                    DepictInfo = string.Format(cultureInfo, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
+                    SerialPortModel.OpenClose = string.Format(CultureInfos, "关闭串口");
+                    DepictInfo = string.Format(CultureInfos, "成功打开串行端口{0}、波特率{1}、数据位{2}、停止位{3}、校验位{4}",
                         SerialPortBase.PortName, 
-                        SerialPortBase.BaudRate.ToString(cultureInfo), 
-                        SerialPortBase.DataBits.ToString(cultureInfo),
+                        SerialPortBase.BaudRate.ToString(CultureInfos), 
+                        SerialPortBase.DataBits.ToString(CultureInfos),
                         SerialPortBase.StopBits.ToString(), 
                         SerialPortBase.Parity.ToString());
 
@@ -582,37 +582,37 @@ namespace OSDA.ViewModels
 
                     if (RecvModel.EnableRecv)
                     {
-                        RecvModel.RecvEnable = string.Format(cultureInfo, "允许");
+                        RecvModel.RecvEnable = string.Format(CultureInfos, "允许");
                     }
                     else
                     {
-                        RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
+                        RecvModel.RecvEnable = string.Format(CultureInfos, "暂停");
                     }
                 }
                 else
                 {
-                    DepictInfo = string.Format(cultureInfo, "串行端口打开失败");
+                    DepictInfo = string.Format(CultureInfos, "串行端口打开失败");
                 }
             }
             catch (UnauthorizedAccessException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (ArgumentException e)
             {
-                DepictInfo = string.Format(cultureInfo, "串行端口属性{0}为非法参数，请重新输入", e.ParamName);
+                DepictInfo = string.Format(CultureInfos, "串行端口属性{0}为非法参数，请重新输入", e.ParamName);
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
 
@@ -627,9 +627,9 @@ namespace OSDA.ViewModels
                 SerialPortBase.Close();   /* 关闭SerialPort对象，并清除接收缓冲区和发送缓冲区 */
 
                 SerialPortModel.Brush = Brushes.Red;
-                SerialPortModel.OpenClose = string.Format(cultureInfo, "打开串口");
+                SerialPortModel.OpenClose = string.Format(CultureInfos, "打开串口");
 
-                DepictInfo = string.Format(cultureInfo, "串行端口关闭成功");
+                DepictInfo = string.Format(CultureInfos, "串行端口关闭成功");
 
                 SerialPortModel.PortEnable = true;
                 SerialPortModel.BaudRateEnable = true;
@@ -637,11 +637,11 @@ namespace OSDA.ViewModels
                 SerialPortModel.StopBitsEnable = true;
                 SerialPortModel.ParityEnable = true;
 
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
             }
             catch(IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -664,11 +664,11 @@ namespace OSDA.ViewModels
 
                 if (SaveRecv)
                 {
-                    DepictInfo = string.Format(cultureInfo, "接收数据默认保存在程序基目录，可以点击路径选择操作更换");
+                    DepictInfo = string.Format(CultureInfos, "接收数据默认保存在程序基目录，可以点击路径选择操作更换");
                 }
                 else
                 {
-                    DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+                    DepictInfo = string.Format(CultureInfos, "串行端口调试助手");
                 }
             }
         }
@@ -689,11 +689,11 @@ namespace OSDA.ViewModels
 
                     if (HexSend == true)
                     {
-                        DepictInfo = string.Format(cultureInfo, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
+                        DepictInfo = string.Format(CultureInfos, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
                     }
                     else
                     {
-                        DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+                        DepictInfo = string.Format(CultureInfos, "串行端口调试助手");
                     }
                 }
             }
@@ -718,15 +718,15 @@ namespace OSDA.ViewModels
                 {
                     if (String.IsNullOrWhiteSpace(SendModel.AutoSendNum))
                     {
-                        DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
+                        DepictInfo = string.Format(CultureInfos, "请输入正确的发送时间间隔");
                         return;
                     }
 
-                    var _AutoSendNum = Convert.ToInt32(SendModel.AutoSendNum, cultureInfo);
+                    var _AutoSendNum = Convert.ToInt32(SendModel.AutoSendNum, CultureInfos);
 
                     if (_AutoSendNum <= 0)
                     {
-                        DepictInfo = string.Format(cultureInfo, "请输入正确的发送时间间隔");
+                        DepictInfo = string.Format(CultureInfos, "请输入正确的发送时间间隔");
                         return;
                     }
 
@@ -735,7 +735,7 @@ namespace OSDA.ViewModels
                 else
                 {
                     StopAutoSendTimer();
-                    DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+                    DepictInfo = string.Format(CultureInfos, "串行端口调试助手");
                 }
             }
         }
@@ -774,7 +774,7 @@ namespace OSDA.ViewModels
         {
             if (!SerialPortBase.IsOpen)
             {
-                DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
+                DepictInfo = string.Format(CultureInfos, "请先打开串行端口");
 
                 return;
             }
@@ -791,7 +791,7 @@ namespace OSDA.ViewModels
 
                     foreach (var tmp in _sendData)
                     {
-                        sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, cultureInfo);
+                        sendData[SendCount++] = byte.Parse(tmp, NumberStyles.AllowHexSpecifier, CultureInfos);
                     }
 
                     await SerialPortBase.BaseStream.WriteAsync(sendData, 0, SendCount).ConfigureAwait(false);
@@ -829,35 +829,35 @@ namespace OSDA.ViewModels
             }
             catch (ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (OutOfMemoryException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (FormatException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(OverflowException)
             {
-                DepictInfo = string.Format(cultureInfo, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
+                DepictInfo = string.Format(CultureInfos, "请输入合法十六进制数据，且用空格隔开，比如A0 B1 C2 D3 E4 F5");
             }
             catch (IndexOutOfRangeException)
             {
-                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
             }
             catch (ObjectDisposedException)
             {
-                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
             }
             catch (NotFiniteNumberException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -867,7 +867,7 @@ namespace OSDA.ViewModels
         {
             if (!SerialPortBase.IsOpen)
             {
-                DepictInfo = string.Format(cultureInfo, "请先打开串行端口");
+                DepictInfo = string.Format(CultureInfos, "请先打开串行端口");
 
                 return;
             }
@@ -876,9 +876,9 @@ namespace OSDA.ViewModels
             {
                 OpenFileDialog SendDataOpenFileDialog = new OpenFileDialog
                 {
-                    Title = string.Format(cultureInfo, "选择发送数据"),
+                    Title = string.Format(CultureInfos, "选择发送数据"),
                     DefaultExt = "*.*",
-                    Filter = string.Format(cultureInfo, "所有类型|*.*")
+                    Filter = string.Format(CultureInfos, "所有类型|*.*")
                 };
 
                 if (SendDataOpenFileDialog.ShowDialog() == true)
@@ -899,14 +899,14 @@ namespace OSDA.ViewModels
                         var fileContent = reader.ReadToEnd();
                         var SendCount = SerialPortBase.Encoding.GetByteCount(fileContent);
 
-                        DepictInfo = string.Format(cultureInfo, "文件正在发送......");
+                        DepictInfo = string.Format(CultureInfos, "文件正在发送......");
                         HelpModel.StatusBarProgressBarIsIndeterminate = true;
 
                         await SerialPortBase.BaseStream.WriteAsync(SerialPortBase.Encoding.GetBytes(fileContent), 0, SendCount)
                             .ConfigureAwait(false);
 
                         HelpModel.StatusBarProgressBarIsIndeterminate = false;
-                        DepictInfo = string.Format(cultureInfo, "文件发送完毕");
+                        DepictInfo = string.Format(CultureInfos, "文件发送完毕");
 
                         SendModel.SendDataCount += SendCount;
                     }
@@ -916,35 +916,35 @@ namespace OSDA.ViewModels
             }
             catch(ArgumentException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(IOException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(OutOfMemoryException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(FormatException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (IndexOutOfRangeException)
             {
-                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
             }
             catch(ObjectDisposedException)
             {
-                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
             }
             catch (NotFiniteNumberException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (InvalidOperationException e)
             {
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -954,10 +954,10 @@ namespace OSDA.ViewModels
         {
             SaveFileDialog ReceDataSaveFileDialog = new SaveFileDialog
             {
-                Title = string.Format(cultureInfo, "接收数据保存"),
-                FileName = string.Format(cultureInfo, "{0}", DateTime.Now.ToString("yyyyMMdd", cultureInfo)),
+                Title = string.Format(CultureInfos, "接收数据保存"),
+                FileName = string.Format(CultureInfos, "{0}", DateTime.Now.ToString("yyyyMMdd", CultureInfos)),
                 DefaultExt = ".txt",
-                Filter = string.Format(cultureInfo, "文本文件|*.txt")
+                Filter = string.Format(CultureInfos, "文本文件|*.txt")
             };
 
             if (ReceDataSaveFileDialog.ShowDialog() == true)
@@ -1011,14 +1011,14 @@ namespace OSDA.ViewModels
                 if (TimerModel.TimeStampEnable)
                 {
                     DateTime _DateTime = DateTime.Now;
-                    RecvModel.RecvData.Append("[ " + _DateTime.ToString("yyyy/MM/dd HH:mm:ss:ffff", cultureInfo) + " ]");
+                    RecvModel.RecvData.Append("[ " + _DateTime.ToString("yyyy/MM/dd HH:mm:ss:ffff", CultureInfos) + " ]");
                 }
 
                 if (RecvModel.HexRecv)
                 {
                     foreach (var tmp in _RecvData)
                     {
-                        RecvModel.RecvData.Append(string.Format(cultureInfo, "{0:X2} ", tmp));
+                        RecvModel.RecvData.Append(string.Format(CultureInfos, "{0:X2} ", tmp));
                     }
                 }
                 else
@@ -1034,13 +1034,13 @@ namespace OSDA.ViewModels
 
             if (SaveRecv)
             {
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "保存中");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "保存中");
 
                 SaveRecvData(_SerialPort.Encoding.GetString(_RecvData));
             }
             else
             {
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
             }
 
             RecvModel.RecvDataCount += _RecvData.Length;
@@ -1063,7 +1063,7 @@ namespace OSDA.ViewModels
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\ReceData\\");
 
                     DataRecvPath = AppDomain.CurrentDomain.BaseDirectory +
-                        "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", cultureInfo) + ".txt";
+                        "\\ReceData\\" + DateTime.Now.ToString("yyyyMMdd", CultureInfos) + ".txt";
 
                     using (StreamWriter DefaultReceDataPath = new StreamWriter(DataRecvPath, true))
                     {
@@ -1081,58 +1081,58 @@ namespace OSDA.ViewModels
             catch(IOException e)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(ArgumentException e)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(UnauthorizedAccessException e)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch(NotSupportedException e)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
             catch (IndexOutOfRangeException)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = string.Format(cultureInfo, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在试图执行越界访问，请通过菜单栏<帮助>报告问题！");
             }
             catch (ObjectDisposedException)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = string.Format(cultureInfo, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在对已释放的对象执行操作，请通过菜单栏<帮助>报告问题！");
             }
             catch (AppDomainUnloadedException)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = string.Format(cultureInfo, "正在访问已卸载的应用程序域，请通过菜单栏<帮助>报告问题！");
+                DepictInfo = string.Format(CultureInfos, "正在访问已卸载的应用程序域，请通过菜单栏<帮助>报告问题！");
             }
             catch(System.Security.SecurityException e)
             {
                 SaveRecv = false;
-                RecvModel.RecvAutoSave = string.Format(cultureInfo, "已停止");
+                RecvModel.RecvAutoSave = string.Format(CultureInfos, "已停止");
 
-                DepictInfo = e.Message.Replace("\r\n", "", true, cultureInfo);
+                DepictInfo = e.Message.Replace("\r\n", "", true, CultureInfos);
             }
         }
         #endregion
@@ -1197,11 +1197,11 @@ namespace OSDA.ViewModels
 
             if(RecvModel.EnableRecv)
             {
-                RecvModel.RecvEnable = string.Format(cultureInfo, "允许");
+                RecvModel.RecvEnable = string.Format(CultureInfos, "允许");
             }
             else
             {
-                RecvModel.RecvEnable = string.Format(cultureInfo, "暂停");
+                RecvModel.RecvEnable = string.Format(CultureInfos, "暂停");
             }
         }
         #endregion
@@ -1228,7 +1228,7 @@ namespace OSDA.ViewModels
             AutoSend = false;
             InitAutoSendTimer();
 
-            DepictInfo = string.Format(cultureInfo, "串行端口调试助手");
+            DepictInfo = string.Format(CultureInfos, "串行端口调试助手");
         }
 
         #region IDisposable Support

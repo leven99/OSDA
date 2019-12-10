@@ -11,7 +11,7 @@ namespace OSDA.ViewModels
         /// <summary>
         /// 提供区域性信息
         /// </summary>
-        internal CultureInfo cultureInfo = new CultureInfo(CultureInfo.CurrentUICulture.Name);
+        internal CultureInfo CultureInfos = new CultureInfo(CultureInfo.CurrentUICulture.Name);
 
         /// <summary>
         /// 提供属性更改事件的方法

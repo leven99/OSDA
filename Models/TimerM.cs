@@ -71,20 +71,20 @@ namespace OSDA.Models
         {
             DateTime _DateTime = DateTime.Now;
 
-            return string.Format(cultureInfo, "{0}年{1}月{2}日 {3}:{4}:{5}",
-                _DateTime.Year.ToString("0000", cultureInfo),
-                _DateTime.Month.ToString("00", cultureInfo),
-                _DateTime.Day.ToString("00", cultureInfo),
-                _DateTime.Hour.ToString("00", cultureInfo),
-                _DateTime.Minute.ToString("00", cultureInfo),
-                _DateTime.Second.ToString("00", cultureInfo));
+            return string.Format(CultureInfos, "{0}年{1}月{2}日 {3}:{4}:{5}",
+                _DateTime.Year.ToString("0000", CultureInfos),
+                _DateTime.Month.ToString("00", CultureInfos),
+                _DateTime.Day.ToString("00", CultureInfos),
+                _DateTime.Hour.ToString("00", CultureInfos),
+                _DateTime.Minute.ToString("00", CultureInfos),
+                _DateTime.Second.ToString("00", CultureInfos));
         }
 
         public void TimerDataContext()
         {
             TimeStampEnable = false;
 
-            SystemTime = string.Format(cultureInfo, "2019年08月31日 12:13:15");
+            SystemTime = string.Format(CultureInfos, "2019年08月31日 12:13:15");
             InitSystemClockTimer();
         }
     }

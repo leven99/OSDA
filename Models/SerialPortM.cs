@@ -478,7 +478,7 @@ namespace OSDA.Models
             Parity = Parity.None;
 
             Brush = Brushes.Red;
-            OpenClose = string.Format(cultureInfo, "打开串口");
+            OpenClose = string.Format(CultureInfos, "打开串口");
 
             /* 串口属性控件 */
             PortEnable = true;

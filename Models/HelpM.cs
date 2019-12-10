@@ -171,7 +171,7 @@ namespace OSDA.Models
             VerInfoNumber = "3.5.0";
             VerInfo = "OSDA v" + VerInfoNumber;
 
-            UpdateInfo = string.Format(cultureInfo, "OSDA发现新版本le........");
+            UpdateInfo = string.Format(CultureInfos, "OSDA发现新版本le........");
 
             ReducedEnable = false;
             ViewVisibility = "Visible";

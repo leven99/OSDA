@@ -129,8 +129,8 @@ namespace OSDA.Models
             RecvData = new IClassTextBoxAppend();
 
             RecvDataCount = 0;
-            RecvAutoSave = string.Format(cultureInfo, "已停止");
-            RecvEnable = string.Format(cultureInfo, " 提示：双击文本框更改接收状态 ");
+            RecvAutoSave = string.Format(CultureInfos, "已停止");
+            RecvEnable = string.Format(CultureInfos, " 提示：双击文本框更改接收状态 ");
 
             EnableRecv = true;
             HexRecv = false;
